@@ -358,7 +358,7 @@
       "position":{
         "from_col":82,
         "to_col":239,
-        "from_row":121,
+        "from_row":141,
         "to_row":240
       },
       "data_source":{
@@ -395,8 +395,8 @@
       "position":{
         "from_col":82,
         "to_col":239,
-        "from_row":30,
-        "to_row":120
+        "from_row":61,
+        "to_row":140
       },
       "data_source":{
         "code":"shipping_order",
@@ -415,48 +415,56 @@
           "type":"container",
           "border_type":"none",
           "position":{
-            "from_col":81,
-            "to_col":240,
-            "from_row":30,
-            "to_row":120
+            "from_col":82,
+            "to_col":239,
+            "from_row":61,
+            "to_row":140
           },
           "sub_parts":[
             {
-              "code":"p_order_summary",
-              "label":"Order summary",
+              "code":"p_summary_1",
               "type":"form",
               "border_type":"none",
               "position":{
-                "from_col":81,
-                "to_col":240,
-                "from_row":30,
-                "to_row":120
+                "from_col":82,
+                "to_col":150,
+                "from_row":0,
+                "to_row":0
               },
               "data_source":{
                 "code":"shipping_order",
                 "fields":[
                   {
-                    "code":"shipment_date",
-                    "group":"dates",
-                    "width":"200"
-                  },
-                  {
                     "code":"customer"
+                  }
+                ],
+                "operations":[
+                  "select",
+                  "update"
+                ]
+              }
+            },
+            {
+              "code":"p_summary_2",
+              "type":"form",
+              "border_type":"none",
+              "position":{
+                "from_col":151,
+                "to_col":239,
+                "from_row":0,
+                "to_row":0
+              },
+              "data_source":{
+                "code":"shipping_order",
+                "fields":[
+                  {
+                    "code":"shipment_date"
                   },
                   {
-                    "code":"datetime_order_placed",
-                    "group":"dates",
-                    "width":"200"
+                    "code":"date_order_paid"
                   },
                   {
-                    "label":"Dates",
-                    "code":"dates",
-                    "type":"group"
-                  },
-                  {
-                    "code":"date_order_paid",
-                    "group":"dates",
-                    "width":"200"
+                    "code":"datetime_order_placed"
                   }
                 ],
                 "operations":[
@@ -473,20 +481,19 @@
           "type":"container",
           "border_type":"none",
           "position":{
-            "from_col":0,
-            "to_col":0,
-            "from_row":0,
-            "to_row":0
+            "from_col":82,
+            "to_col":239,
+            "from_row":61,
+            "to_row":140
           },
           "sub_parts":[
             {
-              "code":"p_order_customer",
-              "label":"Customer",
+              "code":"p_customer_1",
               "type":"form",
               "border_type":"none",
               "position":{
-                "from_col":0,
-                "to_col":0,
+                "from_col":82,
+                "to_col":150,
                 "from_row":0,
                 "to_row":0
               },
@@ -494,11 +501,42 @@
                 "code":"customer",
                 "fields":[
                   {
-                    "code":"name"
+                    "label":"Customer",
+                    "code":"fg_c",
+                    "type":"group"
                   },
                   {
-                    "code":"phone"
+                    "code":"name",
+                    "group":"fg_c"
                   },
+                  {
+                    "label":"Contacts",
+                    "code":"fg_p",
+                    "type":"group"
+                  },
+                  {
+                    "code":"phone",
+                    "group":"fg_p"
+                  }
+                ],
+                "operations":[
+                  "select"
+                ]
+              }
+            },
+            {
+              "code":"p_customer_2",
+              "type":"form",
+              "border_type":"none",
+              "position":{
+                "from_col":151,
+                "to_col":239,
+                "from_row":0,
+                "to_row":0
+              },
+              "data_source":{
+                "code":"customer",
+                "fields":[
                   {
                     "code":"address_line1"
                   },
@@ -522,24 +560,23 @@
           "type":"table",
           "border_type":"none",
           "position":{
-            "from_col":81,
-            "to_col":240,
-            "from_row":30,
-            "to_row":120
+            "from_col":82,
+            "to_col":239,
+            "from_row":61,
+            "to_row":140
           },
           "data_source":{
           },
           "sub_parts":[
             {
               "code":"p_order_comment",
-              "label":"Comment",
               "type":"text",
               "border_type":"none",
               "position":{
-                "from_col":81,
-                "to_col":240,
-                "from_row":30,
-                "to_row":240
+                "from_col":0,
+                "to_col":0,
+                "from_row":0,
+                "to_row":0
               },
               "data_source":{
                 "code":"shipping_order",
@@ -570,7 +607,7 @@
         "from_col":81,
         "to_col":240,
         "from_row":1,
-        "to_row":29
+        "to_row":60
       },
       "data_source":{
         "code":"shipping_order",
