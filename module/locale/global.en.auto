@@ -54,3 +54,16 @@ f:7ef019009008=Product
 f:7ef01900900a=Qnty
 --  Comment
 f:7ef01900900b=Comment
+
+// table View1
+t:7ef01900a000=View1
+--  Phone
+f:7ef01900a00b=Phone
+--  mobile
+f:7ef01900a00c=mobile
+--  Address line 1
+f:7ef01900a00d=Address line 1
+--  Address line 2
+f:7ef01900a00e=Address line 2
+--  Address line 3
+f:7ef01900a00f=Address line 3
