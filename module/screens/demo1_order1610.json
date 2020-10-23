@@ -1,8 +1,8 @@
 {
   "code":"demo1_order1610:scr@demo1_prvt",
-  "label":"Order1610",
+  "label":"$l{Order1610}l",
   "serverStatus":"r",
-  "subject":"Demo1",
+  "subject":"$l{Demo1}l",
   "grid":{
     "base":"screen",
     "cols":16,
@@ -28,10 +28,10 @@
             "data":{
               "action":"demo1_prvt.selectList",
               "args":{
-                "tablename":"Demo1_Prvt.Customer",
                 "filter":[
                   "${@ref_filter}"
-                ]
+                ],
+                "tablename":"Demo1_Prvt.Customer"
               },
               "fields":[
                 "id",
@@ -146,10 +146,10 @@
             "data":{
               "action":"demo1_prvt.selectList",
               "args":{
-                "tablename":"Demo1_Prvt.Product",
                 "filter":[
                   "${@ref_filter}"
-                ]
+                ],
+                "tablename":"Demo1_Prvt.Product"
               },
               "fields":[
                 "id",
@@ -173,10 +173,10 @@
             "data":{
               "action":"demo1_prvt.selectList",
               "args":{
-                "tablename":"Demo1_Prvt.Shipping_Order",
                 "filter":[
                   "${@ref_filter}"
-                ]
+                ],
+                "tablename":"Demo1_Prvt.Shipping_Order"
               },
               "fields":[
                 "id",
@@ -322,7 +322,7 @@
   "parts":[
     {
       "code":"p_list",
-      "label":"Order list",
+      "label":"$l{Order list}l",
       "type":"table",
       "border_type":"none",
       "position":{
@@ -358,7 +358,7 @@
     },
     {
       "code":"p_item",
-      "label":"Order items",
+      "label":"$l{Order items}l",
       "type":"table",
       "border_type":"none",
       "position":{
@@ -392,7 +392,7 @@
     },
     {
       "code":"t_details",
-      "label":"Odrer",
+      "label":"$l{Odrer}l",
       "type":"tabs",
       "border_type":"none",
       "position":{
@@ -414,7 +414,7 @@
       "sub_parts":[
         {
           "code":"c_summary",
-          "label":"Order summary",
+          "label":"$l{Order summary}l",
           "type":"container",
           "border_type":"none",
           "position":{
@@ -480,7 +480,7 @@
         },
         {
           "code":"c_customer",
-          "label":"Billing",
+          "label":"$l{Billing}l",
           "type":"container",
           "border_type":"none",
           "position":{
@@ -571,7 +571,7 @@
         },
         {
           "code":"c_comment",
-          "label":"Comment",
+          "label":"$l{Comment}l",
           "type":"table",
           "border_type":"none",
           "position":{
@@ -615,7 +615,7 @@
     },
     {
       "code":"p_header",
-      "label":"Order",
+      "label":"$l{Order}l",
       "type":"form",
       "border_type":"none",
       "position":{

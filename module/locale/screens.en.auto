@@ -3,13 +3,24 @@
 // -- for installed system: "locale" dir in Workspace (including subpath for global files or locale/<module>/ folder for module files)
 // -- for module developer project: "locale" dir in the Dolmen SDK project
 
+// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
+Billing=Billing
+// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
+Comment=Comment
+// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
+Demo1=Demo1
+// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
+Odrer=Odrer
+// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
+"Order items"=Order items
+// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
+"Order list"=Order list
+// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
+"Order summary"=Order summary
+// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
+Order=Order
+
+//-- demo1_order1610:scr@demo1_prvt --
+Order1610=Order1610
 
 //-- demo1_order:scr@demo1_prvt --
-Billing=Billing
-Comment=Comment
-Demo1=Demo1
-Odrer=Odrer
-"Order items"=Order items
-"Order list"=Order list
-"Order summary"=Order summary
-Order=Order
