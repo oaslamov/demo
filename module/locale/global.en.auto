@@ -11,6 +11,8 @@ t:7ef019006000=Customer
 f:7ef019006006=Name
 --  Phone
 f:7ef019006007=Phone
+--  Mobile
+f:7ef01900600b=Mobile
 --  Address Line1
 f:7ef019006008=Address Line1
 --  Address Line2
