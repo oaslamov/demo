@@ -7,7 +7,7 @@
 Billing=Billing
 // screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Comment=Comment
-// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_order1610:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_order1610:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt demo1_view1:scr@demo1_prvt
 Demo1=Demo1
 // screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Odrer=Odrer
@@ -34,3 +34,6 @@ Product=Product
 
 //-- demo1_shipping_order:scr@demo1_prvt --
 "Shipping Order"=Shipping Order
+
+//-- demo1_view1:scr@demo1_prvt --
+view1=view1
