@@ -1,0 +1,35 @@
+{
+  "code":"customer",
+  "fields":[
+    {
+      "code":"name",
+      "usage":"name",
+      "@":"6"
+    },
+    {
+      "code":"phone",
+      "@":"7"
+    },
+    {
+      "code":"address_line1",
+      "@":"8"
+    },
+    {
+      "code":"address_line2",
+      "@":"9"
+    },
+    {
+      "code":"address_line3",
+      "@":"10"
+    }
+  ],
+  "indexes":[
+    {
+      "fields":[
+        "name"
+      ]
+    }
+  ],
+  "@":"6",
+  "@e":"2kat_dd:3;6name:1;7phone:1;8address_line1:1;9address_line2:1;10address_line3:1"
+}

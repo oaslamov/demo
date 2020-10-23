@@ -1,0 +1,31 @@
+{
+  "code":"shipping_order",
+  "fields":[
+    {
+      "code":"customer",
+      "ref":"customer",
+      "refDelete":"error",
+      "@":"6:7"
+    },
+    {
+      "code":"datetime_order_placed",
+      "label":"Order placed at",
+      "type":"datetime",
+      "value":"now()",
+      "@":"8"
+    },
+    {
+      "code":"date_order_paid",
+      "label":"Order paid at",
+      "type":"plaindate",
+      "@":"9"
+    },
+    {
+      "code":"comment",
+      "type":"text",
+      "@":"10"
+    }
+  ],
+  "@":"8",
+  "@e":"2kat_dd:3;6customer:0;8datetime_order_placed:7;9date_order_paid:9;10comment:2"
+}

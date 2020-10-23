@@ -1,0 +1,6 @@
+/module.local.conf
+/src_generated/
+/.idea/
+/build/
+/out/
+/demo1.iml

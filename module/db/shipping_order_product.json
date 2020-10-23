@@ -1,0 +1,29 @@
+{
+  "code":"shipping_order_product",
+  "fields":[
+    {
+      "code":"shipping_order",
+      "ref":"shipping_order",
+      "refDelete":"delete",
+      "@":"6:7"
+    },
+    {
+      "code":"product",
+      "ref":"product",
+      "refDelete":"error",
+      "@":"8:9"
+    },
+    {
+      "code":"quantity",
+      "label":"Qnty",
+      "type":"integer",
+      "@":"10"
+    },
+    {
+      "code":"comment",
+      "@":"11"
+    }
+  ],
+  "@":"9",
+  "@e":"2kat_dd:3;6shipping_order:0;8product:0;10quantity:3;11comment:1"
+}
