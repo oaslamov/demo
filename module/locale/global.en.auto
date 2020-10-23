@@ -37,6 +37,8 @@ f:7ef019008006=Customer
 f:7ef019008008=Order placed at
 --  Order paid at
 f:7ef019008009=Order paid at
+--  Shipment Date
+f:7ef01900800b=Shipment Date
 --  Comment
 f:7ef01900800a=Comment
 
