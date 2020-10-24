@@ -6,6 +6,8 @@ import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
 import com.dolmen.util.Text
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 class MyModule : Demo1_PrvtModuleBase() {
 
@@ -34,7 +36,7 @@ class MyModule : Demo1_PrvtModuleBase() {
                     v.c_Address_Line1 = c.address_Line1
                     v.c_Address_Line2 = c.address_Line2
                     v.c_Address_Line3 = c.address_Line3
-                    v.total = sum
+                    v.total_Sum = BigDecimal(sum).setScale(2, RoundingMode.HALF_UP)
                 }
                 return v
             }
