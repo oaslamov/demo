@@ -43,4 +43,19 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
         return ViewIterator(f, this)
     }
+
+    override fun s_iterateView2(f: Formula): SelectedData<View2> {
+        class ViewIterator(f: Formula, m: MyModule) : View2.Data(f, m) {
+            override fun create(s: Shipping_Order_Product): View2 {
+                val v = super.create(s)
+                val p = selectFirst<Product>("id = ${s.product}")
+                if (p != null) {
+                    v.price = BigDecimal(p.price).setScale(2, RoundingMode.HALF_UP)
+                    v.sum = BigDecimal(s.quantity) * v.price
+                }
+                return v
+            }
+        }
+        return ViewIterator(f, this)
+    }
 }
