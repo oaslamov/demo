@@ -287,14 +287,13 @@
               "action":"demo1_prvt.selectList",
               "args":{
                 "filter":[
-                  "${@user_filter}",
-                  "${customer.id}=Customer"
+                  "id=${shipping_order.id}"
                 ],
                 "tablename":"demo1_prvt.view1"
               }
             },
             "dependencies":[
-              "customer.id"
+              "shipping_order.id"
             ]
           }
         }
