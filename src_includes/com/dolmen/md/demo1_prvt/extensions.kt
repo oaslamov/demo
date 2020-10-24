@@ -1,4 +1,4 @@
-package com.dolmen.md.ip_sm_prvt
+package com.dolmen.md.demo1_prvt
 import com.dolmen.serv.Module
 import com.dolmen.serv.Module.start
 import com.dolmen.serv.ModuleType
