@@ -573,15 +573,13 @@
         {
           "code":"c_comment",
           "label":"$l{Comment}l",
-          "type":"table",
+          "type":"container",
           "border_type":"none",
           "position":{
             "from_col":6,
             "to_col":16,
             "from_row":4,
             "to_row":9
-          },
-          "data_source":{
           },
           "sub_parts":[
             {
