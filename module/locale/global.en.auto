@@ -69,3 +69,10 @@ f:7ef01900a00e=Address line 2
 f:7ef01900a00f=Address line 3
 --  Order Total
 f:7ef01900a011=Order Total
+
+// table View2
+t:7ef01900b000=View2
+--  Price
+f:7ef01900b00a=Price
+--  Sum
+f:7ef01900b00b=Sum
