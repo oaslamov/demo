@@ -1,0 +1,22 @@
+{
+  "code":"view2",
+  "type":"abstract",
+  "extend":[
+    "shipping_order_product"
+  ],
+  "fields":[
+    {
+      "code":"price",
+      "type":"number",
+      "@":"10"
+    },
+    {
+      "code":"sum",
+      "type":"number",
+      "@":"11"
+    }
+  ],
+  "@":"11",
+  "@e":"10price:6;11sum:6",
+  "@x":"1id:0;2kat_dd:3;6shipping_order:0;7product:0;8quantity:3;9comment:1"
+}
