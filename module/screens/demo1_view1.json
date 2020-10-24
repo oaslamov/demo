@@ -92,6 +92,12 @@
           "label":"$l{f:7ef01900800b}l",
           "type":"plaindate",
           "hint":"$l{f:7ef01900800b:d}l"
+        },
+        {
+          "code":"total",
+          "label":"$l{f:7ef01900a010}l",
+          "type":"float64",
+          "hint":"$l{f:7ef01900a010:d}l"
         }
       ],
       "operations":{
@@ -126,6 +132,9 @@
         "code":"view1",
         "fields":[
           {
+            "code":"id"
+          },
+          {
             "code":"datetime_order_placed"
           },
           {
@@ -136,6 +145,9 @@
           },
           {
             "code":"shipment_date"
+          },
+          {
+            "code":"total"
           },
           {
             "code":"c_phone"

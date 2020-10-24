@@ -29,9 +29,14 @@
       "code":"c_address_line3",
       "label":"Address line 3",
       "@":"15"
+    },
+    {
+      "code":"total",
+      "type":"float64",
+      "@":"16"
     }
   ],
   "@":"10",
-  "@e":"11c_phone:1;12c_mobile:1;13c_address_line1:1;14c_address_line2:1;15c_address_line3:1",
+  "@e":"11c_phone:1;12c_mobile:1;13c_address_line1:1;14c_address_line2:1;15c_address_line3:1;16total:15",
   "@x":"1id:0;2kat_dd:3;6customer:0;7datetime_order_placed:7;8date_order_paid:9;9shipment_date:9;10comment:2"
 }
