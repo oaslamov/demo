@@ -125,71 +125,6 @@
       }
     },
     {
-      "code":"customer",
-      "table_name":"Demo1_Prvt.Customer",
-      "type":"table",
-      "fields":[
-        {
-          "code":"id",
-          "type":"string"
-        },
-        {
-          "code":"name",
-          "label":"$l{f:7ef019006006}l",
-          "type":"string",
-          "hint":"$l{f:7ef019006006:d}l"
-        },
-        {
-          "code":"address_line1",
-          "label":"$l{f:7ef019006008}l",
-          "type":"string",
-          "hint":"$l{f:7ef019006008:d}l"
-        },
-        {
-          "code":"address_line2",
-          "label":"$l{f:7ef019006009}l",
-          "type":"string",
-          "hint":"$l{f:7ef019006009:d}l"
-        },
-        {
-          "code":"address_line3",
-          "label":"$l{f:7ef01900600a}l",
-          "type":"string",
-          "hint":"$l{f:7ef01900600a:d}l"
-        },
-        {
-          "code":"phone",
-          "label":"$l{f:7ef019006007}l",
-          "type":"string",
-          "hint":"$l{f:7ef019006007:d}l"
-        },
-        {
-          "code":"mobile",
-          "label":"$l{f:7ef01900600b}l",
-          "type":"string",
-          "hint":"$l{f:7ef01900600b:d}l"
-        }
-      ],
-      "operations":{
-        "select":{
-          "request":{
-            "data":{
-              "action":"demo1_prvt.selectList",
-              "args":{
-                "filter":[
-                  "id=${shipping_order.customer}"
-                ],
-                "tablename":"demo1_prvt.customer"
-              }
-            },
-            "dependencies":[
-              "shipping_order.customer"
-            ]
-          }
-        }
-      }
-    },
-    {
       "code":"view1",
       "table_name":"Demo1_Prvt.View1",
       "type":"table",
@@ -293,7 +228,8 @@
               }
             },
             "dependencies":[
-              "shipping_order.id"
+              "shipping_order.id",
+              "shipping_order.customer"
             ]
           }
         }
@@ -591,17 +527,17 @@
                 "from_row":4,
                 "to_row":9
               },
-              "data_source":{
-                "code":"customer",
-                "fields":[
+              "data_source": {
+                "code": "view1",
+                "fields": [
                   {
-                    "label":"Customer",
-                    "code":"fg_c",
-                    "type":"group"
+                    "label": "Customer",
+                    "code": "fg_c",
+                    "type": "group"
                   },
                   {
-                    "code":"name",
-                    "group":"fg_c"
+                    "code": "customer",
+                    "group": "fg_c"
                   },
                   {
                     "label":"Contacts",
@@ -609,12 +545,12 @@
                     "type":"group"
                   },
                   {
-                    "code":"phone",
-                    "group":"fg_p"
+                    "code": "c_phone",
+                    "group": "fg_p"
                   },
                   {
-                    "code":"mobile",
-                    "group":"fg_p"
+                    "code": "c_mobile",
+                    "group": "fg_p"
                   }
                 ],
                 "operations":[
@@ -632,25 +568,25 @@
                 "from_row":4,
                 "to_row":9
               },
-              "data_source":{
-                "code":"customer",
-                "fields":[
+              "data_source": {
+                "code": "view1",
+                "fields": [
                   {
-                    "label":"Address",
-                    "code":"fg_a",
-                    "type":"group"
+                    "label": "Address",
+                    "code": "fg_a",
+                    "type": "group"
                   },
                   {
-                    "code":"address_line1",
-                    "group":"fg_a"
+                    "code": "c_address_line1",
+                    "group": "fg_a"
                   },
                   {
-                    "code":"address_line2",
-                    "group":"fg_a"
+                    "code": "c_address_line2",
+                    "group": "fg_a"
                   },
                   {
-                    "code":"address_line3",
-                    "group":"fg_a"
+                    "code": "c_address_line3",
+                    "group": "fg_a"
                   }
                 ],
                 "operations":[
