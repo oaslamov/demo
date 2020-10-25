@@ -40,6 +40,28 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("Done")
     }
 
+    @Description("Generate customers")
+    @Parameters("pathIn: String", "n: Int")
+    fun genCustomer(pathIn: String, n: Int): String {
+        val fileIn = File(pathIn)
+        fileIn.useLines { lines ->
+            var i = 1
+            for (l in lines) {
+                val rec = l.split(",").toTypedArray()
+                val c = Customer()
+                c.name = "${rec[1]}, ${rec[0]}"
+                c.phone = rec[6]
+                c.mobile = rec[7]
+                c.address_Line1 = rec[2]
+                c.address_Line2 = "${rec[3]}, ${rec[4]}"
+                c.address_Line3 = rec[5]
+                insert(c)
+                if (i == n) break
+                i++
+            }
+        }
+        return Text.F("Done")
+    }
 
     private fun Shipping_Order_Product.sum(): BigDecimal {
         return (this.price() * BigDecimal(this.quantity)).setScale(2, RoundingMode.HALF_UP)
