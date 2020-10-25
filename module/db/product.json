@@ -15,17 +15,17 @@
       "code":"product_type",
       "enum":[
         {
-          "label": "Toy",
-          "value": "T"
+          "label":"Toy",
+          "value":"T"
         },
         {
-          "label": "Book",
-          "value": "B"
+          "label":"Book",
+          "value":"B"
         },
         {
-          "default": true,
-          "label": "Grocery",
-          "value": "G"
+          "default":true,
+          "label":"Grocery",
+          "value":"G"
         }
       ],
       "@":"8"
