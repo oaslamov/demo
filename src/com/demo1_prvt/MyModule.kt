@@ -1,6 +1,5 @@
 package com.demo1_prvt
 
-import com.dolmen.md.demo1_prvt.Demo1_PrvtModuleBase
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.anno.*
 import com.dolmen.serv.conn.SelectedData
@@ -11,7 +10,6 @@ import java.lang.Math.random
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.math.round
-import kotlin.random.Random
 
 class MyModule : Demo1_PrvtModuleBase() {
 
