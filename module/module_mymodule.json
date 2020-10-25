@@ -1,8 +1,8 @@
 {
-  "code":"demo1_prvt",
-  "mainClass":"com.demo1_prvt.MyModule",
-  "privateIID":8319001,
-  "version":1,
-  "@v":"1+13",
-  "@e":"6customer;7product;8shipping_order;9shipping_order_product;10view1:50;11view2:50"
+  "code": "demo1_prvt",
+  "mainClass": "com.demo1_prvt.MyModule",
+  "privateIID": 8319001,
+  "version": 1,
+  "@v": "1+14",
+  "@e": "6customer;7product;8shipping_order;9shipping_order_product;10view1:50;11view2:50"
 }

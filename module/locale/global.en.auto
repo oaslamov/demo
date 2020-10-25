@@ -30,6 +30,7 @@ f:7ef019007007=Price
 f:7ef019007008=Product Type
 e:7ef019007008.T=Toy
 e:7ef019007008.B=Book
+e:7ef019007008.G=Grocery
 
 // table Shipping Order
 t:7ef019008000=Shipping Order
