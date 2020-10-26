@@ -1,7 +1,8 @@
 package com.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
-import com.dolmen.serv.anno.*
+import com.dolmen.serv.anno.Description
+import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
 import com.dolmen.util.Text
@@ -9,6 +10,8 @@ import java.io.File
 import java.lang.Math.random
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.time.LocalDate
+import java.time.OffsetDateTime
 import kotlin.math.round
 
 class MyModule : Demo1_PrvtModuleBase() {
@@ -56,6 +59,32 @@ class MyModule : Demo1_PrvtModuleBase() {
                 insert(c)
                 if (i == n) break
                 i++
+            }
+        }
+        return Text.F("Done")
+    }
+
+    @Description("Generate orders")
+    @Parameters("n: Int")
+    fun genOrder(n: Int): String {
+        val placedDaysAgoMax = 300
+        val paidAfterMax = 30
+        val shipmentAfterMax = 45
+
+        for (i in 1..n) {
+            val o = Shipping_Order()
+            val c = selectFirst<Customer>("name 'Daleo, Norah'")
+            if (c != null) {
+                val placedDaysAgo = (random() * placedDaysAgoMax).toLong()
+                val paidDaysAgo = (placedDaysAgo - (random() * paidAfterMax)).coerceAtLeast(0.0).toLong()
+                val shipmentDaysAgo = placedDaysAgo - (random() * shipmentAfterMax).toLong()
+
+                o.customer = c.id
+                o.datetime_Order_Placed =
+                        OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes((random() * 3600).toLong())
+                o.date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
+                o.shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
+                insert(o)
             }
         }
         return Text.F("Done")
