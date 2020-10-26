@@ -31,6 +31,14 @@
       "@":"10"
     }
   ],
+  "indexes":[
+    {
+      "fields":[
+        "customer"
+      ]
+    }
+  ],
   "@":"8",
-  "@e":"2kat_dd:3;6customer:0;8datetime_order_placed:7;9date_order_paid:9;10comment:2;11shipment_date:9"
+  "@e":"2kat_dd:3;6customer:0;8datetime_order_placed:7;9date_order_paid:9;10comment:2;11shipment_date:9",
+  "@d":"12deleteme:1"
 }

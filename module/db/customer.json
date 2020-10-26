@@ -4,26 +4,44 @@
     {
       "code":"name",
       "usage":"name",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"6"
     },
     {
       "code":"phone",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"7"
     },
     {
       "code":"mobile",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"11"
     },
     {
       "code":"address_line1",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"8"
     },
     {
       "code":"address_line2",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"9"
     },
     {
       "code":"address_line3",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"10"
     }
   ],
