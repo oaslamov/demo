@@ -79,10 +79,12 @@ class MyModule : Demo1_PrvtModuleBase() {
         var next = (random() * step + 1).toInt()
         //Txt.info("mc = ${mc}, step = ${step}, next = ${next}").msg()
         var i = 0
+        var k = 0
         iterate<Customer>("") { c ->
             i++
-            if (i == next) {
+            if ((i == next) and (k < n)) {
                 next += step
+                k++
                 val o = Shipping_Order()
                 val placedDaysAgo = (random() * placedDaysAgoMax).toLong()
                 val paidDaysAgo = (placedDaysAgo - (random() * paidAfterMax)).coerceAtLeast(0.0).toLong()
@@ -108,10 +110,12 @@ class MyModule : Demo1_PrvtModuleBase() {
         var next = (random() * step + 1).toInt()
 //        Txt.info("mp = ${mp}, n = ${n}, step = ${step}, next = ${next}").msg()
         var i = 0
+        var k = 0
         iterate<Product>("") { p ->
             i++
-            if (i == next) {
+            if ((i == next) and (k < n)) {
                 next += step
+                k++
                 val item = Shipping_Order_Product()
                 item.shipping_Order = this.id
                 item.product = p.id
