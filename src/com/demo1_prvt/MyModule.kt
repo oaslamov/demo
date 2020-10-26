@@ -28,7 +28,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             for (l in lines) {
                 val p = Product()
                 p.name = l.trim()
-                p.price = round((random() * 3000)) / 100
+                p.price = round((random() * 3000) + 1) / 100
                 p.product_Type = Product.PRODUCT_TYPE.GROCERY
                 insert(p)
                 if (i == n) break
