@@ -1,6 +1,7 @@
 package com.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.conn.SelectedData
@@ -70,11 +71,17 @@ class MyModule : Demo1_PrvtModuleBase() {
         val placedDaysAgoMax = 300
         val paidAfterMax = 30
         val shipmentAfterMax = 45
+        val itemsMin = 3
+        val itemsMax = 10
+        val mc = count(Customer::class, "")
+        val mp = count(Product::class, "")
+        Txt.info("mc = ${mc}, mp = ${mp}").msg()
 
-        for (i in 1..n) {
-            val o = Shipping_Order()
-            val c = selectFirst<Customer>("name 'Daleo, Norah'")
-            if (c != null) {
+        var i = 0
+        iterate<Customer>("") { c ->
+            i++
+            if (i <= n) {
+                val o = Shipping_Order()
                 val placedDaysAgo = (random() * placedDaysAgoMax).toLong()
                 val paidDaysAgo = (placedDaysAgo - (random() * paidAfterMax)).coerceAtLeast(0.0).toLong()
                 val shipmentDaysAgo = placedDaysAgo - (random() * shipmentAfterMax).toLong()
