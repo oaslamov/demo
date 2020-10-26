@@ -66,7 +66,6 @@ class MyModule : Demo1_PrvtModuleBase() {
     }
 
 
-
     @Description("Generate orders")
     @Parameters("n: Int")
     fun genOrder(n: Int): String {
@@ -78,12 +77,11 @@ class MyModule : Demo1_PrvtModuleBase() {
         val mc = count(Customer::class, "")
         val step = (mc / n).toInt()
         var next = (random() * step + 1).toInt()
-        Txt.info("mc = ${mc}, step = ${step}, next = ${next}").msg()
+        //Txt.info("mc = ${mc}, step = ${step}, next = ${next}").msg()
         var i = 0
         iterate<Customer>("") { c ->
             i++
             if (i == next) {
-                Txt.info("${i}").msg()
                 next += step
                 val o = Shipping_Order()
                 val placedDaysAgo = (random() * placedDaysAgoMax).toLong()
@@ -95,16 +93,33 @@ class MyModule : Demo1_PrvtModuleBase() {
                 o.date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
                 o.shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
                 insert(o)
-                o.genItems(itemsMin, itemsMax)
+                o.genItems(itemsMin, itemsMax, 15)
+                //Txt.info(
+                //        "Customer ${i}, ${c.name}, placed ${o.datetime_Order_Placed}, paid ${o.date_Order_Paid}, shipment ${o.shipment_Date}").msg()
             }
         }
         return Text.F("Done")
     }
 
-    private fun Shipping_Order.genItems(min: Int, max: Int) {
+    private fun Shipping_Order.genItems(min: Int, max: Int, mQ: Int) {
         val mp = count(Product::class, "")
-        //Txt.info("mp = ${mp}").msg()
-
+        val n = (random() * (max - min) + min).toInt()
+        val step = (mp / n).toInt()
+        var next = (random() * step + 1).toInt()
+//        Txt.info("mp = ${mp}, n = ${n}, step = ${step}, next = ${next}").msg()
+        var i = 0
+        iterate<Product>("") { p ->
+            i++
+            if (i == next) {
+                next += step
+                val item = Shipping_Order_Product()
+                item.shipping_Order = this.id
+                item.product = p.id
+                item.quantity = (random() * mQ + 1).toInt()
+                insert(item)
+//                Txt.info("\tproduct: ${i}, ${p.name}, ${item.quantity}").msg()
+            }
+        }
     }
 
     private fun Shipping_Order_Product.sum(): BigDecimal {
