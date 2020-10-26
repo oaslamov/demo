@@ -65,6 +65,8 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("Done")
     }
 
+
+
     @Description("Generate orders")
     @Parameters("n: Int")
     fun genOrder(n: Int): String {
@@ -74,27 +76,35 @@ class MyModule : Demo1_PrvtModuleBase() {
         val itemsMin = 3
         val itemsMax = 10
         val mc = count(Customer::class, "")
-        val mp = count(Product::class, "")
-        Txt.info("mc = ${mc}, mp = ${mp}").msg()
-
+        val step = (mc / n).toInt()
+        var next = (random() * step + 1).toInt()
+        Txt.info("mc = ${mc}, step = ${step}, next = ${next}").msg()
         var i = 0
         iterate<Customer>("") { c ->
             i++
-            if (i <= n) {
+            if (i == next) {
+                Txt.info("${i}").msg()
+                next += step
                 val o = Shipping_Order()
                 val placedDaysAgo = (random() * placedDaysAgoMax).toLong()
                 val paidDaysAgo = (placedDaysAgo - (random() * paidAfterMax)).coerceAtLeast(0.0).toLong()
                 val shipmentDaysAgo = placedDaysAgo - (random() * shipmentAfterMax).toLong()
-
                 o.customer = c.id
                 o.datetime_Order_Placed =
                         OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes((random() * 3600).toLong())
                 o.date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
                 o.shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
                 insert(o)
+                o.genItems(itemsMin, itemsMax)
             }
         }
         return Text.F("Done")
+    }
+
+    private fun Shipping_Order.genItems(min: Int, max: Int) {
+        val mp = count(Product::class, "")
+        //Txt.info("mp = ${mp}").msg()
+
     }
 
     private fun Shipping_Order_Product.sum(): BigDecimal {
