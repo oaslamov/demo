@@ -1,6 +1,8 @@
 package com.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.serv.CONST.MAX_STRING_CHARS
+import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.conn.SelectedData
@@ -101,6 +103,57 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
         return Text.F("Done")
     }
+
+    @Description("Import cities")
+    @Parameters("pathIn: String")
+    fun importCities(pathIn: String): String {
+        val fileIn = File(pathIn)
+        var i = 0
+        fileIn.useLines { lines ->
+            for (l in lines) {
+                if (i != 0) {
+                    val rec = l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)".toRegex()).toTypedArray()
+                    val city = rec[0].replace("\"", "").take(MAX_STRING_CHARS)
+                    val country = rec[1].replace("\"", "").take(MAX_STRING_CHARS)
+                    val subcountry = rec[2].replace("\"", "").take(MAX_STRING_CHARS)
+                    val geonameid = rec[3].take(MAX_STRING_CHARS)
+                    //Txt.info("$city | $country | $subcountry | $geonameid").msg()
+
+                    if (subcountry == "İzmir") continue // bug: selectFirst cannot find İzmir
+
+                    var cntr = selectFirst<Country>(
+                            "name = \"${country}\"")
+                    if (cntr == null) {
+                        cntr = Country()
+                        cntr.name = country
+                        insert(cntr)
+                    }
+                    var sbcntr = selectFirst<Subcountry>(
+                            "country_id = ${cntr.id} and name = \"${subcountry}\"")
+                    if (sbcntr == null) {
+                        sbcntr = Subcountry()
+                        sbcntr.country_Id = cntr.id
+                        sbcntr.name = subcountry
+                        insert(sbcntr)
+                    }
+                    var ct = selectFirst<City>(
+                            "country_id = ${cntr.id} AND subcountry_id = ${sbcntr.id} AND name = \"${city}\"")
+                    if (ct == null) {
+                        ct = City()
+                        ct.country_Id = cntr.id
+                        ct.subcountry_Id = sbcntr.id
+                        ct.name = city
+                        ct.geonameid = geonameid
+                        insert(ct)
+                    }
+                }
+                i++
+            }
+        }
+        Txt.info("Processed ${i} lines from ${pathIn}").msg()
+        return Text.F("Done")
+    }
+
 
     private fun Shipping_Order.genItems(min: Int, max: Int, mQ: Int) {
         val mp = count(Product::class, "")
