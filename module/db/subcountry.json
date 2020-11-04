@@ -1,0 +1,35 @@
+{
+  "code":"subcountry",
+  "fields":[
+    {
+      "code":"country_id",
+      "label":"Country",
+      "ref":"country",
+      "@":"6:7"
+    },
+    {
+      "code":"name",
+      "usage":"name",
+      "etc":{
+        "ignoreCase":true
+      },
+      "@":"8"
+    }
+  ],
+  "indexes":[
+    {
+      "fields":[
+        "name"
+      ]
+    },
+    {
+      "fields":[
+        "country_id",
+        "name"
+      ],
+      "type":"unique"
+    }
+  ],
+  "@":"14",
+  "@e":"2kat_dd:3;6country_id:0;8name:1"
+}

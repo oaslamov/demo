@@ -1,0 +1,23 @@
+{
+  "code":"country",
+  "fields":[
+    {
+      "code":"name",
+      "usage":"name",
+      "etc":{
+        "ignoreCase":true
+      },
+      "@":"6"
+    }
+  ],
+  "indexes":[
+    {
+      "fields":[
+        "name"
+      ],
+      "type":"unique"
+    }
+  ],
+  "@":"13",
+  "@e":"2kat_dd:3;6name:1"
+}

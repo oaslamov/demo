@@ -5,6 +5,22 @@
 
 m:7ef019000000=Demo1 Prvt
 
+// table City
+t:7ef01900c000=City
+--  Country
+f:7ef01900c006=Country
+--  Subcountry
+f:7ef01900c008=Subcountry
+--  Name
+f:7ef01900c00a=Name
+--  Geonameid
+f:7ef01900c00b=Geonameid
+
+// table Country
+t:7ef01900d000=Country
+--  Name
+f:7ef01900d006=Name
+
 // table Customer
 t:7ef019006000=Customer
 --  Name
@@ -55,6 +71,13 @@ f:7ef019009008=Product
 f:7ef01900900a=Qnty
 --  Comment
 f:7ef01900900b=Comment
+
+// table Subcountry
+t:7ef01900e000=Subcountry
+--  Country
+f:7ef01900e006=Country
+--  Name
+f:7ef01900e008=Name
 
 // table View1
 t:7ef01900a000=View1
