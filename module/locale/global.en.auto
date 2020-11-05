@@ -35,6 +35,12 @@ f:7ef019006008=Address Line1
 f:7ef019006009=Address Line2
 --  Address Line3
 f:7ef01900600a=Address Line3
+--  Country
+f:7ef01900600c=Country
+--  Subcountry
+f:7ef01900600e=Subcountry
+--  City
+f:7ef019006010=City
 
 // table Product
 t:7ef019007000=Product
