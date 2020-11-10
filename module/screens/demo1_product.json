@@ -42,6 +42,10 @@
             {
               "label":"$l{e:7ef019007008.B}l",
               "value":"B"
+            },
+            {
+              "label":"$l{e:7ef019007008.G}l",
+              "value":"G"
             }
           ],
           "hint":"$l{f:7ef019007008:d}l"
@@ -122,13 +126,16 @@
         "code":"product",
         "fields":[
           {
-            "code":"name"
+            "code":"name",
+            "width":"30%"
           },
           {
-            "code":"price"
+            "code":"price",
+            "width":"10%"
           },
           {
-            "code":"product_type"
+            "code":"product_type",
+            "width":"10%"
           }
         ],
         "order":[

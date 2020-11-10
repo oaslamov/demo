@@ -1,10 +1,9 @@
 {
-  "code":"demo1_order_sums:scr@demo1_prvt",
-  "label":"$l{Order sums}l",
+  "code":"sc_order:scr@demo1_prvt",
+  "label":"$l{Orders}l",
   "serverStatus":"r",
   "subject":"$l{Demo1}l",
-  "title":"Order ${shipping_order.id}",
-  "show_in_menu":false,
+  "title":"Order # ${shipping_order.id}",
   "grid":{
     "base":"screen",
     "cols":16,
@@ -126,139 +125,8 @@
       }
     },
     {
-      "code":"view1",
-      "table_name":"Demo1_Prvt.View1",
-      "type":"table",
-      "fields":[
-        {
-          "code":"c_address_line1",
-          "label":"$l{f:7ef01900a00d}l",
-          "type":"string",
-          "hint":"$l{f:7ef01900a00d:d}l"
-        },
-        {
-          "code":"c_address_line2",
-          "label":"$l{f:7ef01900a00e}l",
-          "type":"string",
-          "hint":"$l{f:7ef01900a00e:d}l"
-        },
-        {
-          "code":"c_address_line3",
-          "label":"$l{f:7ef01900a00f}l",
-          "type":"string",
-          "hint":"$l{f:7ef01900a00f:d}l"
-        },
-        {
-          "code":"c_mobile",
-          "label":"$l{f:7ef01900a00c}l",
-          "type":"string",
-          "hint":"$l{f:7ef01900a00c:d}l"
-        },
-        {
-          "code":"c_phone",
-          "label":"$l{f:7ef01900a00b}l",
-          "type":"string",
-          "hint":"$l{f:7ef01900a00b:d}l"
-        },
-        {
-          "code":"comment",
-          "label":"$l{f:7ef01900800a}l",
-          "type":"text",
-          "hint":"$l{f:7ef01900800a:d}l"
-        },
-        {
-          "code":"customer",
-          "label":"$l{f:7ef019008006}l",
-          "type":"ref",
-          "ref":{
-            "data":{
-              "action":"demo1_prvt.selectList",
-              "args":{
-                "filter":[
-                  "${@ref_filter}"
-                ],
-                "tablename":"Demo1_Prvt.Customer"
-              },
-              "fields":[
-                "id",
-                "@name"
-              ]
-            }
-          },
-          "hint":"$l{f:7ef019008006:d}l"
-        },
-        {
-          "code":"date_order_paid",
-          "label":"$l{f:7ef019008009}l",
-          "type":"plaindate",
-          "hint":"$l{f:7ef019008009:d}l"
-        },
-        {
-          "code":"datetime_order_placed",
-          "label":"$l{f:7ef019008008}l",
-          "type":"datetime",
-          "hint":"$l{f:7ef019008008:d}l"
-        },
-        {
-          "code":"id",
-          "type":"string"
-        },
-        {
-          "code":"shipment_date",
-          "label":"$l{f:7ef01900800b}l",
-          "type":"plaindate",
-          "hint":"$l{f:7ef01900800b:d}l"
-        },
-        {
-          "code":"total_sum",
-          "label":"$l{f:7ef01900a011}l",
-          "type":"number",
-          "format":"###,###.##",
-          "hint":"$l{f:7ef01900a011:d}l"
-        }
-      ],
-      "operations":{
-        "select":{
-          "request":{
-            "data":{
-              "action":"demo1_prvt.selectList",
-              "args":{
-                "filter":[
-                  "id=${shipping_order.id}"
-                ],
-                "tablename":"demo1_prvt.view1"
-              }
-            },
-            "dependencies":[
-              "shipping_order.id",
-              "shipping_order.customer"
-            ]
-          }
-        }
-      },
-      "actions":[
-        {
-          "code":"go_c_details",
-          "label":"$l{Details}l",
-          "data_scope":"row",
-          "request":{
-            "data":{
-              "action":"gui.goScreen",
-              "args":{
-                "screenId":"demo1_cd:scr@demo1_prvt",
-                "args":{
-                  "id":"${customer}"
-                },
-                "mode":""
-              }
-            }
-          }
-        }
-      ]
-    },
-    {
-      "code":"view2",
-      "table_name":"Demo1_Prvt.View2",
+      "code":"shipping_order_product",
+      "table_name":"Demo1_Prvt.Shipping_Order_Product",
       "type":"table",
       "fields":[
         {
@@ -270,13 +138,6 @@
         {
           "code":"id",
           "type":"string"
-        },
-        {
-          "code":"price",
-          "label":"$l{f:7ef01900b00a}l",
-          "type":"number",
-          "edit_condition":"false",
-          "hint":"$l{f:7ef01900b00a:d}l"
         },
         {
           "code":"product",
@@ -325,13 +186,6 @@
             }
           },
           "hint":"$l{f:7ef019009006:d}l"
-        },
-        {
-          "code":"sum",
-          "label":"$l{f:7ef01900b00b}l",
-          "type":"number",
-          "edit_condition":"false",
-          "hint":"$l{f:7ef01900b00b:d}l"
         }
       ],
       "operations":{
@@ -340,7 +194,7 @@
             "data":{
               "action":"demo1_prvt.new",
               "args":{
-                "tablename":"demo1_prvt.view2",
+                "tablename":"demo1_prvt.shipping_order_product",
                 "fields":{
                   "Shipping_Order":"${shipping_order.id}"
                 }
@@ -354,10 +208,9 @@
               "action":"demo1_prvt.selectList",
               "args":{
                 "filter":[
-                  "${@user_filter}",
                   "${shipping_order.id}=Shipping_Order"
                 ],
-                "tablename":"demo1_prvt.view2"
+                "tablename":"demo1_prvt.shipping_order_product"
               }
             },
             "dependencies":[
@@ -370,7 +223,7 @@
             "data":{
               "action":"demo1_prvt.insert",
               "args":{
-                "tablename":"demo1_prvt.view2",
+                "tablename":"demo1_prvt.shipping_order_product",
                 "fields":"${@all_fields}"
               }
             }
@@ -381,7 +234,7 @@
             "data":{
               "action":"demo1_prvt.update",
               "args":{
-                "tablename":"demo1_prvt.view2",
+                "tablename":"demo1_prvt.shipping_order_product",
                 "fields":"${@all_fields}"
               }
             }
@@ -393,12 +246,97 @@
               "action":"demo1_prvt.deleteById",
               "args":{
                 "id":"${id}",
-                "tablename":"demo1_prvt.view2"
+                "tablename":"demo1_prvt.shipping_order_product"
               }
             }
           }
         }
       }
+    },
+    {
+      "code":"customer",
+      "table_name":"Demo1_Prvt.Customer",
+      "type":"table",
+      "fields":[
+        {
+          "code":"address_line1",
+          "label":"$l{f:7ef019006008}l",
+          "type":"string",
+          "hint":"$l{f:7ef019006008:d}l"
+        },
+        {
+          "code":"address_line2",
+          "label":"$l{f:7ef019006009}l",
+          "type":"string",
+          "hint":"$l{f:7ef019006009:d}l"
+        },
+        {
+          "code":"address_line3",
+          "label":"$l{f:7ef01900600a}l",
+          "type":"string",
+          "hint":"$l{f:7ef01900600a:d}l"
+        },
+        {
+          "code":"id",
+          "type":"string"
+        },
+        {
+          "code":"mobile",
+          "label":"$l{f:7ef01900600b}l",
+          "type":"string",
+          "hint":"$l{f:7ef01900600b:d}l"
+        },
+        {
+          "code":"name",
+          "label":"$l{f:7ef019006006}l",
+          "type":"string",
+          "hint":"$l{f:7ef019006006:d}l"
+        },
+        {
+          "code":"phone",
+          "label":"$l{f:7ef019006007}l",
+          "type":"string",
+          "hint":"$l{f:7ef019006007:d}l"
+        }
+      ],
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "filter":[
+                  "id=${shipping_order.customer}"
+                ],
+                "tablename":"demo1_prvt.customer"
+              }
+            },
+            "dependencies":[
+              "shipping_order.customer"
+            ]
+          }
+        }
+      },
+      "actions":[
+        {
+          "code":"ac_c_det",
+          "label":"$l{Details}l",
+          "data_scope":"row",
+          "icon":"fas fa-user-edit",
+          "request":{
+            "data":{
+              "action":"gui.goScreen",
+              "args":{
+                "screenId":"demo1_c_details:scr@demo1_prvt",
+                "args":{
+                  "id":"${customer.id}"
+                },
+                "mode":""
+              }
+            }
+          }
+        }
+      ]
     }
   ],
   "parts":[
@@ -430,17 +368,79 @@
           }
         ],
         "operations":[
+          "new",
           "select",
           "insert",
           "update",
-          "delete",
-          "new"
+          "delete"
+        ]
+      }
+    },
+    {
+      "code":"p_header",
+      "label":"$l{Order # ${shipping_order.id}}l",
+      "type":"form",
+      "border_type":"none",
+      "position":{
+        "from_col":6,
+        "to_col":16,
+        "from_row":1,
+        "to_row":3
+      },
+      "data_source":{
+        "code":"shipping_order",
+        "fields":[
+          {
+            "code":"shipment_date"
+          },
+          {
+            "code":"customer"
+          }
+        ],
+        "operations":[
+          "select"
+        ]
+      }
+    },
+    {
+      "code":"p_item",
+      "label":"$l{Order items}l",
+      "type":"table",
+      "border_type":"none",
+      "position":{
+        "from_col":6,
+        "to_col":16,
+        "from_row":10,
+        "to_row":15
+      },
+      "data_source":{
+        "code":"shipping_order_product",
+        "fields":[
+          {
+            "code":"product",
+            "query":false,
+            "width":"30%"
+          },
+          {
+            "code":"quantity",
+            "query":false
+          },
+          {
+            "code":"comment",
+            "query":false
+          }
+        ],
+        "operations":[
+          "new",
+          "select",
+          "insert",
+          "update",
+          "delete"
         ]
       }
     },
     {
       "code":"t_details",
-      "label":"$l{Odrer}l",
       "type":"tabs",
       "border_type":"none",
       "position":{
@@ -450,14 +450,6 @@
         "to_row":9
       },
       "data_source":{
-        "code":"shipping_order",
-        "operations":[
-          "new",
-          "select",
-          "insert",
-          "update",
-          "delete"
-        ]
       },
       "sub_parts":[
         {
@@ -549,7 +541,7 @@
                 "to_row":9
               },
               "data_source":{
-                "code":"view1",
+                "code":"customer",
                 "fields":[
                   {
                     "label":"Customer",
@@ -557,7 +549,7 @@
                     "type":"group"
                   },
                   {
-                    "code":"customer",
+                    "code":"name",
                     "group":"fg_c"
                   },
                   {
@@ -566,11 +558,11 @@
                     "type":"group"
                   },
                   {
-                    "code":"c_phone",
+                    "code":"phone",
                     "group":"fg_p"
                   },
                   {
-                    "code":"c_mobile",
+                    "code":"mobile",
                     "group":"fg_p"
                   }
                 ],
@@ -578,7 +570,7 @@
                   "select"
                 ],
                 "actions":[
-                  "go_c_details"
+                  "ac_c_det"
                 ]
               }
             },
@@ -593,7 +585,7 @@
                 "to_row":9
               },
               "data_source":{
-                "code":"view1",
+                "code":"customer",
                 "fields":[
                   {
                     "label":"Address",
@@ -601,15 +593,15 @@
                     "type":"group"
                   },
                   {
-                    "code":"c_address_line1",
+                    "code":"address_line1",
                     "group":"fg_a"
                   },
                   {
-                    "code":"c_address_line2",
+                    "code":"address_line2",
                     "group":"fg_a"
                   },
                   {
-                    "code":"c_address_line3",
+                    "code":"address_line3",
                     "group":"fg_a"
                   }
                 ],
@@ -650,107 +642,14 @@
                   }
                 ],
                 "operations":[
-                  "new",
                   "select",
-                  "insert",
-                  "update",
-                  "delete"
+                  "update"
                 ]
               }
             }
           ]
         }
       ]
-    },
-    {
-      "code":"p_header",
-      "label":"$l{Order ${shipping_order.id}}l",
-      "type":"form",
-      "border_type":"none",
-      "position":{
-        "from_col":6,
-        "to_col":16,
-        "from_row":1,
-        "to_row":3
-      },
-      "data_source":{
-        "code":"shipping_order",
-        "fields":[
-          {
-            "code":"shipment_date"
-          },
-          {
-            "code":"customer"
-          }
-        ],
-        "operations":[
-          "select"
-        ]
-      }
-    },
-    {
-      "code":"p_footer",
-      "label":"$l{Order total: ${view1.total_sum}}l",
-      "type":"form",
-      "border_type":"none",
-      "position":{
-        "from_col":6,
-        "to_col":16,
-        "from_row":16,
-        "to_row":16
-      },
-      "data_source":{
-        "code":"view1",
-        "fields":[
-          {
-            "code":"total_sum",
-            "view_condition":"false"
-          }
-        ],
-        "operations":[
-          "select"
-        ]
-      }
-    },
-    {
-      "code":"p_item",
-      "label":"$l{Order Items}l",
-      "type":"table",
-      "border_type":"none",
-      "position":{
-        "from_col":6,
-        "to_col":16,
-        "from_row":10,
-        "to_row":15
-      },
-      "data_source":{
-        "code":"view2",
-        "fields":[
-          {
-            "code":"product",
-            "width":"30%"
-          },
-          {
-            "code":"quantity"
-          },
-          {
-            "code":"price"
-          },
-          {
-            "code":"sum"
-          },
-          {
-            "code":"comment"
-          }
-        ],
-        "operations":[
-          "new",
-          "select",
-          "insert",
-          "update",
-          "delete"
-        ]
-      }
     }
   ]
 }
