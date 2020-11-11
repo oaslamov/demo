@@ -28,6 +28,11 @@
         "name"
       ],
       "type":"unique"
+    },
+    {
+      "fields":[
+        "country_id"
+      ]
     }
   ],
   "@":"14",
