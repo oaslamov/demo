@@ -4,6 +4,7 @@
   "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "title":"Order ${shipping_order.id}",
+  "show_in_menu":false,
   "grid":{
     "base":"screen",
     "cols":16,

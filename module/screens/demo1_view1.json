@@ -3,6 +3,7 @@
   "label":"$l{view1}l",
   "serverStatus":"r",
   "subject":"$l{Demo1}l",
+  "show_in_menu":false,
   "grid":{
     "base":"screen",
     "cols":4,
@@ -85,7 +86,7 @@
         },
         {
           "code":"id",
-          "type":"bigint"
+          "type":"string"
         },
         {
           "code":"shipment_date",
@@ -94,10 +95,10 @@
           "hint":"$l{f:7ef01900800b:d}l"
         },
         {
-          "code":"total",
-          "label":"$l{f:7ef01900a010}l",
-          "type":"float64",
-          "hint":"$l{f:7ef01900a010:d}l"
+          "code":"total_sum",
+          "label":"$l{f:7ef01900a011}l",
+          "type":"number",
+          "hint":"$l{f:7ef01900a011:d}l"
         }
       ],
       "operations":{
@@ -132,7 +133,8 @@
         "code":"view1",
         "fields":[
           {
-            "code":"id"
+            "code":"id",
+            "query":false
           },
           {
             "code":"datetime_order_placed"
@@ -147,7 +149,7 @@
             "code":"shipment_date"
           },
           {
-            "code":"total"
+            "code":"total_sum"
           },
           {
             "code":"c_phone"
