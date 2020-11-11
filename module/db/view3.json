@@ -1,0 +1,13 @@
+{
+  "code":"view3",
+  "type":"abstract",
+  "idtype":"bigint",
+  "fields":[
+    {
+      "code":"search",
+      "@":"6"
+    }
+  ],
+  "@":"15",
+  "@e":"2kat_dd:3;6search:1"
+}

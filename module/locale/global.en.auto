@@ -42,6 +42,11 @@ f:7ef01900600e=Subcountry
 --  City
 f:7ef019006010=City
 
+// table Flt
+t:7ef019010000=Flt
+--  Search
+f:7ef019010006=Search
+
 // table Product
 t:7ef019007000=Product
 --  Name
@@ -106,3 +111,8 @@ t:7ef01900b000=View2
 f:7ef01900b00a=Price
 --  Sum
 f:7ef01900b00b=Sum
+
+// table View3
+t:7ef01900f000=View3
+--  Search
+f:7ef01900f006=Search
