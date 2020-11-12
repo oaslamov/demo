@@ -1,0 +1,19 @@
+{
+  "code":"view4",
+  "type":"abstract",
+  "extend":[
+    "city"
+  ],
+  "fields":[
+    {
+      "code":"list_name",
+      "etc":{
+        "ignoreCase":true
+      },
+      "@":"10"
+    }
+  ],
+  "@":"17",
+  "@e":"10list_name:1",
+  "@x":"1id:0;2kat_dd:3;6country_id:0;7subcountry_id:0;8name:1;9geonameid:1;11list_nm:1"
+}

@@ -24,6 +24,14 @@
     {
       "code":"geonameid",
       "@":"11"
+    },
+    {
+      "code":"list_nm",
+      "usage":"name",
+      "etc":{
+        "ignoreCase":true
+      },
+      "@":"12"
     }
   ],
   "indexes":[
@@ -39,6 +47,11 @@
     },
     {
       "fields":[
+        "list_nm"
+      ]
+    },
+    {
+      "fields":[
         "subcountry_id"
       ]
     },
@@ -50,5 +63,5 @@
     }
   ],
   "@":"12",
-  "@e":"2kat_dd:3;6country_id:0;8subcountry_id:0;10name:1;11geonameid:1"
+  "@e":"2kat_dd:3;6country_id:0;8subcountry_id:0;10name:1;11geonameid:1;12list_nm:1"
 }
