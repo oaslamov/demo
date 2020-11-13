@@ -7,6 +7,7 @@ import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
+import com.dolmen.serv.table.ITopTable
 import com.dolmen.util.Text
 import java.io.File
 import java.lang.Math.random
@@ -253,4 +254,20 @@ class MyModule : Demo1_PrvtModuleBase() {
         val cntr = select(Country(), city.country_Id)
         city.list_Nm = "${city.name}, ${sbcntr.name}, ${cntr.name}"
     }
+
+
+    override fun beforeUpdate(t: ITopTable?) {
+        super.beforeUpdate(t)
+        if (t is Customer) {
+            if (t.city != null) {
+                val ct = select(City(), t.city)
+                if (ct != null) {
+                    t.country = ct.country_Id
+                    t.subcountry = ct.subcountry_Id
+                    t.city = ct.id
+                }
+            }
+        }
+    }
+
 }
