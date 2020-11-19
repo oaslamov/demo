@@ -3,6 +3,8 @@
   "label":"$l{Product}l",
   "serverStatus":"r",
   "subject":"$l{Demo1}l",
+  "title":"*** PRODUCT ***",
+  "sort_order":"Z50",
   "grid":{
     "base":"screen",
     "cols":240,
