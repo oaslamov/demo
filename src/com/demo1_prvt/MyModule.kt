@@ -204,11 +204,18 @@ class MyModule : Demo1_PrvtModuleBase() {
                 v.total_Sum = s.getTotal()
                 if (s.customer != null) {
                     val c = select(Customer(), s.customer)
+                    v.c_Name = c.name
                     v.c_Phone = c.phone
                     v.c_Mobile = c.mobile
                     v.c_Address_Line1 = c.address_Line1
                     v.c_Address_Line2 = c.address_Line2
                     v.c_Address_Line3 = c.address_Line3
+//                    if (c.city != null) {
+//                        val ct = select(City(), c.city)
+//                        if (ct != null) {
+//                            v.c_City = "${ct.name}"
+//                        }
+//                    }
                 }
                 return v
             }

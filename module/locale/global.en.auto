@@ -94,6 +94,8 @@ f:7ef01900e008=Name
 
 // table View1
 t:7ef01900a000=View1
+--  Customer name
+f:7ef01900a012=Customer name
 --  Phone
 f:7ef01900a00b=Phone
 --  mobile
