@@ -8,31 +8,49 @@
     {
       "code":"c_name",
       "label":"Customer name",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"18"
     },
     {
       "code":"c_phone",
       "label":"Phone",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"11"
     },
     {
       "code":"c_mobile",
       "label":"mobile",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"12"
     },
     {
       "code":"c_address_line1",
       "label":"Address line 1",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"13"
     },
     {
       "code":"c_address_line2",
       "label":"Address line 2",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"14"
     },
     {
       "code":"c_address_line3",
       "label":"Address line 3",
+      "etc":{
+        "ignoreCase":true
+      },
       "@":"15"
     },
     {
