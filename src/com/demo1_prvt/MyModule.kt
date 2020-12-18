@@ -1,6 +1,7 @@
 package com.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.mod.GuiModule
 import com.dolmen.serv.Action
 import com.dolmen.serv.CONST.MAX_STRING_CHARS
 import com.dolmen.serv.ThreadResources
@@ -281,16 +282,16 @@ class MyModule : Demo1_PrvtModuleBase() {
     }
 
     @Description("Inserts a new record and navigates to the specified screen")
-    @Parameters("tableCode: table code", "screenCode: screen code", "linkID: id code (null = 'id')", "fields: optional map of table field values (default null)")
+    @Parameters("tableCode: table code", "screenCode: screen code", "mode: screen opening mode",
+            "linkID: id code (null = 'id')", "fields: optional map of table field values (default null)")
     @ActionType("insert")
-    fun insertAndGo(tableCode: String, screenCode: String, linkID: String?, fields: Map<String, Any>?):ITopTable {
-        val table=newTable(tableCode, fields) as ITopTable
+    fun insertAndGo(tableCode: String, screenCode: String, mode: String?, linkID: String?,
+                    fields: Map<String, Any>?): ITopTable {
+        val table = newTable(tableCode, fields) as ITopTable
         insert(table)
-        val navCmd= Action.ExternalCommand("gui.goScreen")
-        val args=HashMap<String, Any>()
-        if (linkID == null) args["id"]=table.id else args[linkID]=table.id
-        navCmd.set("screenId", screenCode).set("args", args)
-        ThreadResources.get().addExternalCommand(navCmd)
+        val args = HashMap<String, Any>()
+        if (linkID == null) args["id"] = table.id else args[linkID] = table.id
+        GuiModule.goScreen(screenCode, args, mode)
         return table
     }
 }
