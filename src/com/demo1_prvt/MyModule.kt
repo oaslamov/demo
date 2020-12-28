@@ -29,6 +29,28 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("\n-------------\nTest OK (input: $0)\n--------------", input)
     }
 
+    @Description("Show customers' orders summary")
+    @Parameters("customerFilter: String")
+    fun action1(customerFilter: String): String {
+        var n = 0
+        iterate<Customer>(customerFilter) { c ->
+            n++
+            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
+            var m = 0
+            iterate<Shipping_Order>("customer=${c.id}") { o ->
+                m++
+                var sum = BigDecimal.ZERO
+                iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
+                    val p = select(Product(), item.product)
+                    sum += (p.price * item.quantity).toBigDecimal()
+                }
+                Txt.info("Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}, total sum = $sum").msg()
+            }
+            if (m == 0) Txt.info("No orders for ${c.name}").msg()
+        }
+        return Text.F("Done")
+    }
+
     @Description("Generate products")
     @Parameters("pathIn: String", "n: Int")
     fun genProduct(pathIn: String, n: Int): String {
