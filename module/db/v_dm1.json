@@ -3,10 +3,11 @@
   "type":"abstract",
   "extend":[
     "shipping_order",
-    "customer"
+    "customer",
+    "city"
   ],
   "fields":[
   ],
   "@":"18",
-  "@x":"1id:0;2kat_dd:3;6customer:0;7datetime_order_placed:7;8date_order_paid:9;9shipment_date:9;10comment:2;11id_of_customer:0;12kat_dd_of_customer:3;13name:1;14phone:1;15mobile:1;16address_line1:1;17address_line2:1;18address_line3:1;19country:0;20subcountry:0;21city:0"
+  "@x":"1id:0;2kat_dd:3;6customer:0;7datetime_order_placed:7;8date_order_paid:9;9shipment_date:9;10comment:2;11id_of_customer:0;12kat_dd_of_customer:3;13name:1;14phone:1;15mobile:1;16address_line1:1;17address_line2:1;18address_line3:1;19country:0;20subcountry:0;21city:0;22id_of_city:0;23kat_dd_of_city:3;24country_id:0;25subcountry_id:0;26name_of_city:1;27geonameid:1;28list_nm:1"
 }
