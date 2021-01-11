@@ -4,6 +4,7 @@ import com.dolmen.md.demo1_prvt.*
 import com.dolmen.mod.GuiModule
 import com.dolmen.serv.Action
 import com.dolmen.serv.CONST.MAX_STRING_CHARS
+import com.dolmen.serv.Module
 import com.dolmen.serv.ThreadResources
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.ActionType
@@ -39,12 +40,14 @@ class MyModule : Demo1_PrvtModuleBase() {
             var m = 0
             iterate<Shipping_Order>("customer=${c.id}") { o ->
                 m++
-                var sum = BigDecimal.ZERO
+                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
+                var k = 0
                 iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
+                    k++
                     val p = select(Product(), item.product)
-                    sum += (p.price * item.quantity).toBigDecimal()
+                    val pn = selectObjectName(item, Shipping_Order_Product.fProduct)
+                    Txt.info("$n.$m.$k. '$pn', Product = ${p.name} (${xtrLabel(Product.fProduct_Type.enumed.getByValue(p.product_Type))}), qnty = ${item.quantity}").msg()
                 }
-                Txt.info("Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}, total sum = $sum").msg()
             }
             if (m == 0) Txt.info("No orders for ${c.name}").msg()
         }
