@@ -1,7 +1,10 @@
-/module.local.conf
-/src_generated/
-/.idea/
-/build/
+.*
+*.class
+*.iml
+*.local.conf
+dolmen-module-*.zip
+/classes/
 /out/
-/demo1.iml
-/dolmen-module-demo1_prvt*.zip
+/bin/
+/build/
+/src_generated/
