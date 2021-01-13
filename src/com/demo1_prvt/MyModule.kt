@@ -2,10 +2,7 @@ package com.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.mod.GuiModule
-import com.dolmen.serv.Action
 import com.dolmen.serv.CONST.MAX_STRING_CHARS
-import com.dolmen.serv.Module
-import com.dolmen.serv.ThreadResources
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.ActionType
 import com.dolmen.serv.anno.Description
@@ -45,11 +42,24 @@ class MyModule : Demo1_PrvtModuleBase() {
                 iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
                     k++
                     val p = select(Product(), item.product)
-                    val pn = selectObjectName(item, Shipping_Order_Product.fProduct)
-                    Txt.info("$n.$m.$k. '$pn', Product = ${p.name} (${xtrLabel(Product.fProduct_Type.enumed.getByValue(p.product_Type))}), qnty = ${item.quantity}").msg()
+//                    val pn = selectObjectName(item, Shipping_Order_Product.fProduct)
+//                    Txt.info("$n.$m.$k. '$pn', Product = ${p.name} (${xtrLabel(Product.fProduct_Type.enumed.getByValue(p.product_Type))}), qnty = ${item.quantity}").msg()
+                    Txt.info("$n.$m.$k. Product = ${p.name}, qnty = ${item.quantity}").msg()
+
                 }
             }
             if (m == 0) Txt.info("No orders for ${c.name}").msg()
+        }
+        return Text.F("Done")
+    }
+
+    @Description("Go through products")
+    @Parameters("productFilter: String")
+    fun action2(productFilter: String): String {
+        var n = 0
+        iterate<Product>(productFilter) { p ->
+            n++
+            Txt.info("${n}. Product = '${p.name}', type = '${xtrLabel(Product.fProduct_Type.enumed.getByValue(p.product_Type))}'")
         }
         return Text.F("Done")
     }
