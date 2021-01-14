@@ -59,7 +59,7 @@ class MyModule : Demo1_PrvtModuleBase() {
         var n = 0
         iterate<Product>(productFilter) { p ->
             n++
-            Txt.info("${n}. Product = '${p.name}', type = '${xtrLabel(Product.fProduct_Type.enumed.getByValue(p.product_Type))}'")
+            Txt.info("${n}. Product = '${p.name}', type = '${xtrLabel(Product.fProduct_Type.enumed.getByValue(p.product_Type))}'").msg()
         }
         return Text.F("Done")
     }
