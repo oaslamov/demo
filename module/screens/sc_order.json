@@ -4,6 +4,7 @@
   "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "title":"Order # ${shipping_order.id}",
+  "sort_order":"Z10",
   "grid":{
     "base":"screen",
     "cols":16,
@@ -322,7 +323,6 @@
           "code":"ac_c_det",
           "label":"$l{Details}l",
           "data_scope":"row",
-          "icon":"fas fa-user-edit",
           "request":{
             "data":{
               "action":"gui.goScreen",
@@ -331,7 +331,7 @@
                 "args":{
                   "id":"${customer.id}"
                 },
-                "mode":""
+                "mode":"popup"
               }
             }
           }
@@ -418,16 +418,13 @@
         "fields":[
           {
             "code":"product",
-            "query":false,
             "width":"30%"
           },
           {
-            "code":"quantity",
-            "query":false
+            "code":"quantity"
           },
           {
-            "code":"comment",
-            "query":false
+            "code":"comment"
           }
         ],
         "operations":[
@@ -544,8 +541,8 @@
                 "code":"customer",
                 "fields":[
                   {
-                    "label":"Customer",
                     "code":"fg_c",
+                    "label":"Customer",
                     "type":"group"
                   },
                   {
@@ -553,8 +550,8 @@
                     "group":"fg_c"
                   },
                   {
-                    "label":"Contacts",
                     "code":"fg_p",
+                    "label":"Contacts",
                     "type":"group"
                   },
                   {
@@ -588,8 +585,8 @@
                 "code":"customer",
                 "fields":[
                   {
-                    "label":"Address",
                     "code":"fg_a",
+                    "label":"Address",
                     "type":"group"
                   },
                   {
