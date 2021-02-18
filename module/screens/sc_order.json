@@ -542,7 +542,7 @@
                 "fields":[
                   {
                     "code":"fg_c",
-                    "label":"Customer",
+                    "label":"$l{Customer}l",
                     "type":"group"
                   },
                   {
@@ -551,7 +551,7 @@
                   },
                   {
                     "code":"fg_p",
-                    "label":"Contacts",
+                    "label":"$l{Contacts}l",
                     "type":"group"
                   },
                   {
@@ -586,7 +586,7 @@
                 "fields":[
                   {
                     "code":"fg_a",
-                    "label":"Address",
+                    "label":"$l{Address}l",
                     "type":"group"
                   },
                   {

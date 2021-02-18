@@ -506,8 +506,8 @@
                 "code":"customer",
                 "fields":[
                   {
-                    "label":"Customer",
                     "code":"fg_c",
+                    "label":"$l{Customer}l",
                     "type":"group"
                   },
                   {
@@ -515,8 +515,8 @@
                     "group":"fg_c"
                   },
                   {
-                    "label":"Contacts",
                     "code":"fg_p",
+                    "label":"$l{Contacts}l",
                     "type":"group"
                   },
                   {
@@ -547,8 +547,8 @@
                 "code":"customer",
                 "fields":[
                   {
-                    "label":"Address",
                     "code":"fg_a",
+                    "label":"$l{Address}l",
                     "type":"group"
                   },
                   {
