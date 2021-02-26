@@ -10,6 +10,7 @@ import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
 import com.dolmen.serv.table.ITopTable
+import com.dolmen.serv.table.RowID
 import com.dolmen.util.Text
 import java.io.File
 import java.lang.Math.random
@@ -72,6 +73,26 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("Done")
     }
 
+    @Description("Search, update and delete")
+    @Parameters("customerId: RowID", "productSubstring: String")
+    fun action4(customerId: RowID, productSubstring: String): String {
+        val c = select(Customer(), customerId)
+        c.name = c.name?.toUpperCase()
+        update(c)
+        val p = selectFirst<Product>("name like '%${productSubstring}%'")
+        if (p != null) {
+            p.name = p.name?.toLowerCase()
+            update(p)
+        }
+        val o = selectFirst<Shipping_Order>("customer = ${customerId}")
+        if (o != null) {
+            Txt.info("Deleting Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
+            delete(o)
+        } else {
+            Txt.info("No orders found for customer id = ${customerId}").msg()
+        }
+        return Text.F("Done")
+    }
 
 
     @Description("Generate products")
