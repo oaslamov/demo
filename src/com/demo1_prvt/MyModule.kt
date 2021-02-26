@@ -42,10 +42,7 @@ class MyModule : Demo1_PrvtModuleBase() {
                 iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
                     k++
                     val p = select(Product(), item.product)
-//                    val pn = selectObjectName(item, Shipping_Order_Product.fProduct)
-//                    Txt.info("$n.$m.$k. '$pn', Product = ${p.name} (${xtrLabel(Product.fProduct_Type.enumed.getByValue(p.product_Type))}), qnty = ${item.quantity}").msg()
                     Txt.info("$n.$m.$k. Product = ${p.name}, qnty = ${item.quantity}").msg()
-
                 }
             }
             if (m == 0) Txt.info("No orders for ${c.name}").msg()
@@ -63,6 +60,19 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
         return Text.F("Done")
     }
+
+    @Description("Create a customer")
+    @Parameters("name: String", "phone: String", "mobile: String")
+    fun action3(name: String, phone: String, mobile: String): String {
+        val c = Customer()
+        c.name = name
+        c.phone = phone
+        c.mobile = mobile
+        insert(c)
+        return Text.F("Done")
+    }
+
+
 
     @Description("Generate products")
     @Parameters("pathIn: String", "n: Int")
