@@ -30,7 +30,7 @@ class MyModule : Demo1_PrvtModuleBase() {
 
     @Description("Show customers' orders summary")
     @Parameters("customerFilter: String")
-    fun action1(customerFilter: String): String {
+    fun action1(customerFilter: String) {
         var n = 0
         iterate<Customer>(customerFilter) { c ->
             n++
@@ -48,35 +48,50 @@ class MyModule : Demo1_PrvtModuleBase() {
             }
             if (m == 0) Txt.info("No orders for ${c.name}").msg()
         }
-        return Text.F("Done")
+    }
+
+
+    @Description("Create a customer")
+    @Parameters("name: String", "phone: String", "mobile: String")
+    fun action2(name: String, phone: String, mobile: String) {
+        val c = Customer()
+        c.name = name
+        c.phone = phone
+        c.mobile = mobile
+        insert(c)
+        Txt.info("Created: ${c.name}, ph. = ${c.phone}, mob. = ${c.mobile}").msg()
+    }
+
+    @Description("Search, update and delete")
+    @Parameters("customerId: RowID", "productSubstring: String")
+    fun action3(customerId: RowID, productSubstring: String) {
+        val c = select(Customer(), customerId)
+        c.name = c.name?.toUpperCase()
+        update(c)
+        val p = selectFirst<Product>("name like '%${productSubstring}%'")
+        if (p != null) {
+            p.name = p.name?.toLowerCase()
+            update(p)
+        }
+        val o = selectFirst<Shipping_Order>("customer = ${customerId}")
+        if (o != null) {
+            Txt.info("Deleting Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
+            delete(o)
+        } else {
+            Txt.info("No orders found for customer id = ${customerId}").msg()
+        }
+        Txt.info("Done").msg()
     }
 
     @Description("Go through products")
     @Parameters("productFilter: String")
-    fun action2(productFilter: String): String {
+    fun action100(productFilter: String) {
         var n = 0
         iterate<Product>(productFilter) { p ->
             n++
             Txt.info("${n}. Product = '${p.name}', type = '${xtrLabel(Product.fProduct_Type.enumed.getByValue(p.product_Type))}'").msg()
         }
-        return Text.F("Done")
-    }
-
-    @Description("Create a customer")
-    @Parameters("name: String", "phone: String", "mobile: String")
-    fun action3(name: String, phone: String, mobile: String) {
-        if (!exists(Customer::class, "name='${name}' and phone='${phone}' and mobile='${mobile}'")) {
-            val c = Customer()
-            c.name = name
-            c.phone = phone
-            c.mobile = mobile
-            insert(c)
-            if (!validateCustomer(c.id)) {
-                Txt.error("Customer ${name} has been created with errors").msg()
-            }
-        } else {
-            Txt.error("Customer ${name} already exists!").msg()
-        }
+        Txt.info("Done").msg()
     }
 
     @Description("Validates customer data")
@@ -98,29 +113,6 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
         return r
     }
-
-
-    @Description("Search, update and delete")
-    @Parameters("customerId: RowID", "productSubstring: String")
-    fun action4(customerId: RowID, productSubstring: String) {
-        val c = select(Customer(), customerId)
-        c.name = c.name?.toUpperCase()
-        update(c)
-        val p = selectFirst<Product>("name like '%${productSubstring}%'")
-        if (p != null) {
-            p.name = p.name?.toLowerCase()
-            update(p)
-        }
-        val o = selectFirst<Shipping_Order>("customer = ${customerId}")
-        if (o != null) {
-            Txt.info("Deleting Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
-            delete(o)
-        } else {
-            Txt.info("No orders found for customer id = ${customerId}").msg()
-        }
-        Txt.info("Done").msg()
-    }
-
 
     @Description("Generate products")
     @Parameters("pathIn: String", "n: Int")
