@@ -4,6 +4,7 @@ import com.dolmen.serv.Module.start
 import com.dolmen.serv.ModuleType
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
+import com.dolmen.serv.table.RowID
 import com.dolmen.serv.table.TopTable
 import kotlin.reflect.KClass
 
@@ -53,6 +54,10 @@ inline fun <reified Tbl: TopTable> Module.exists(filter: String): Boolean {
 
 inline fun <reified Tbl: TopTable> Module.selectFirst(filter: String): Tbl? {
     return selectFirst(Tbl::class, filter)
+}
+
+inline fun <reified Tbl: TopTable> Module.select(id: RowID): Tbl {
+    return select(Tbl::class.java.getDeclaredConstructor().newInstance(), id)
 }
 
 inline fun <reified Tbl: TopTable> Module.iterate(formula: Formula, noinline body: (rec:Tbl)->Unit) {

@@ -64,18 +64,45 @@ class MyModule : Demo1_PrvtModuleBase() {
 
     @Description("Create a customer")
     @Parameters("name: String", "phone: String", "mobile: String")
-    fun action3(name: String, phone: String, mobile: String): String {
-        val c = Customer()
-        c.name = name
-        c.phone = phone
-        c.mobile = mobile
-        insert(c)
-        return Text.F("Done")
+    fun action3(name: String, phone: String, mobile: String) {
+        if (!exists(Customer::class, "name='${name}' and phone='${phone}' and mobile='${mobile}'")) {
+            val c = Customer()
+            c.name = name
+            c.phone = phone
+            c.mobile = mobile
+            insert(c)
+            if (!validateCustomer(c.id)) {
+                Txt.error("Customer ${name} has been created with errors").msg()
+            }
+        } else {
+            Txt.error("Customer ${name} already exists!").msg()
+        }
     }
+
+    @Description("Validates customer data")
+    @Parameters("customerId: RowID")
+    fun validateCustomer(customerId: RowID): Boolean {
+        var r = true
+        val c = select(Customer(), customerId)
+        if (c.name.isNullOrBlank()) {
+            Txt.error("Missing customer name").msg()
+            r = false
+        }
+        val orderNum = count(Shipping_Order::class, "customer = ${customerId}")
+        if (orderNum == 0L) {
+            Txt.warn("No orders for customer ${c.name}").msg()
+        }
+        if (orderNum > 2) {
+            Txt.warn("Too much orders for customer ${c.name}").msg()
+            r = false
+        }
+        return r
+    }
+
 
     @Description("Search, update and delete")
     @Parameters("customerId: RowID", "productSubstring: String")
-    fun action4(customerId: RowID, productSubstring: String): String {
+    fun action4(customerId: RowID, productSubstring: String) {
         val c = select(Customer(), customerId)
         c.name = c.name?.toUpperCase()
         update(c)
@@ -91,7 +118,7 @@ class MyModule : Demo1_PrvtModuleBase() {
         } else {
             Txt.info("No orders found for customer id = ${customerId}").msg()
         }
-        return Text.F("Done")
+        Txt.info("Done").msg()
     }
 
 
