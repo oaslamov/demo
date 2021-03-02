@@ -86,37 +86,6 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
     }
 
-    @Description("Go through products")
-    @Parameters("productFilter: String")
-    fun action100(productFilter: String) {
-        var n = 0
-        iterate<Product>(productFilter) { p ->
-            n++
-            Txt.info("${n}. Product = '${p.name}', type = '${xtrLabel(Product.fProduct_Type.enumed.getByValue(p.product_Type))}'").msg()
-        }
-        Txt.info("Done").msg()
-    }
-
-    @Description("Validates customer data")
-    @Parameters("customerId: RowID")
-    fun validateCustomer(customerId: RowID): Boolean {
-        var r = true
-        val c = select(Customer(), customerId)
-        if (c.name.isNullOrBlank()) {
-            Txt.error("Missing customer name").msg()
-            r = false
-        }
-        val orderNum = count(Shipping_Order::class, "customer = ${customerId}")
-        if (orderNum == 0L) {
-            Txt.warn("No orders for customer ${c.name}").msg()
-        }
-        if (orderNum > 2) {
-            Txt.warn("Too much orders for customer ${c.name}").msg()
-            r = false
-        }
-        return r
-    }
-
     @Description("Generate products")
     @Parameters("pathIn: String", "n: Int")
     fun genProduct(pathIn: String, n: Int): String {
