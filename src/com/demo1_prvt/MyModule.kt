@@ -66,12 +66,16 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Parameters("customerId: RowID", "productSubstring: String")
     fun action3(customerId: RowID, productSubstring: String) {
         val c = select(Customer(), customerId)
-        c.name = c.name?.toUpperCase()
+        val cName = c.name
+        c.name = cName?.toUpperCase()
         update(c)
+        Txt.info("Customer #${customerId}. Changed name from '${cName}' to '${c.name}'").msg()
         val p = selectFirst<Product>("name like '%${productSubstring}%'")
         if (p != null) {
-            p.name = p.name?.toLowerCase()
+            val pName = p.name
+            p.name = pName?.toLowerCase()
             update(p)
+            Txt.info("Changed product name from '${pName}' to '${p.name}'").msg()
         }
         val o = selectFirst<Shipping_Order>("customer = ${customerId}")
         if (o != null) {
@@ -80,7 +84,6 @@ class MyModule : Demo1_PrvtModuleBase() {
         } else {
             Txt.info("No orders found for customer id = ${customerId}").msg()
         }
-        Txt.info("Done").msg()
     }
 
     @Description("Go through products")
