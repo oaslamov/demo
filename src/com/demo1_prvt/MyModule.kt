@@ -86,6 +86,13 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
     }
 
+    @Description("Delete list")
+    @Parameters("customerId: RowId")
+    fun action4(customerId: RowID) {
+        Txt.info("Deleting orders for customer ID = ${customerId}").msg()
+        deleteList("demo1_prvt.shipping_order", "customer=${customerId}")
+    }
+
     @Description("Generate products")
     @Parameters("pathIn: String", "n: Int")
     fun genProduct(pathIn: String, n: Int): String {
