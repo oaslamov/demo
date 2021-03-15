@@ -105,7 +105,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             n++
             Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
             var m = 0
-            order.filterValues { it.customer == c.id }.forEach() { oID, o ->
+            order.filterValues { it.customer == c.id }.forEach() { (_, o) ->
                 m++
                 Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
                 var k = 0
