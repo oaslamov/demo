@@ -51,6 +51,10 @@ inline fun <reified Tbl: TopTable> Module.exists(filter: String): Boolean {
     return exists(Tbl::class, filter)
 }
 
+inline fun <reified Tbl: TopTable> Module.count(filter: String): Long {
+    return count(Tbl::class, filter)
+}
+
 inline fun <reified Tbl: TopTable> Module.selectFirst(filter: String): Tbl? {
     return selectFirst(Tbl::class, filter)
 }

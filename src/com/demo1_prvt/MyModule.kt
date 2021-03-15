@@ -93,6 +93,33 @@ class MyModule : Demo1_PrvtModuleBase() {
         deleteList("demo1_prvt.shipping_order", "customer=${customerId}")
     }
 
+    @Description("Show customers' orders summary - selectMap() version")
+    @Parameters("customerFilter: String")
+    fun action91(customerFilter: String) {
+        val customer = selectMap(Customer.fId, customerFilter)
+        val order = selectMap(Shipping_Order.fId, "")
+        val orderProduct = selectMap(Shipping_Order_Product.fId, "")
+        val product = selectMap(Product.fId, "")
+        var n = 0
+        customer.forEach() { (_, c) ->
+            n++
+            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
+            var m = 0
+            order.filterValues { it.customer == c.id }.forEach() { oID, o ->
+                m++
+                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
+                var k = 0
+                orderProduct.filterValues { it.shipping_Order == o.id }.forEach() { (_, item) ->
+                    k++
+                    val p = product[item.product]
+                    Txt.info("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}").msg()
+                }
+            }
+            if (m == 0) Txt.info("No orders for ${c.name}").msg()
+        }
+        Txt.info("Finish").msg()
+    }
+
     @Description("Generate products")
     @Parameters("pathIn: String", "n: Int")
     fun genProduct(pathIn: String, n: Int): String {
@@ -359,3 +386,4 @@ class MyModule : Demo1_PrvtModuleBase() {
         return table
     }
 }
+
