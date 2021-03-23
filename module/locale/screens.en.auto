@@ -34,6 +34,7 @@ Order=Order
 "Customer details"=Customer details
 
 //-- demo1_customer:scr@demo1_prvt --
+Summary=Summary
 
 //-- demo1_order1610:scr@demo1_prvt --
 Order1610=Order1610

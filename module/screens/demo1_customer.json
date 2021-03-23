@@ -112,7 +112,23 @@
             }
           }
         }
-      }
+      },
+      "actions":[
+        {
+          "code":"act1",
+          "label":"$l{Summary}l",
+          "data_scope":"row",
+          "confirm":true,
+          "request":{
+            "data":{
+              "action":"demo1_prvt.action1",
+              "args":{
+                "customerFilter":"id=${id}"
+              }
+            }
+          }
+        }
+      ]
     }
   ],
   "parts":[
@@ -160,6 +176,9 @@
           "insert",
           "update",
           "delete"
+        ],
+        "actions":[
+          "act1>"
         ]
       }
     }
