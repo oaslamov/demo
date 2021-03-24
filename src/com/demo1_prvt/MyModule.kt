@@ -385,5 +385,14 @@ class MyModule : Demo1_PrvtModuleBase() {
         GuiModule.goScreen(screenCode, args, mode)
         return table
     }
+
+    companion object {
+        init {
+            T.registerFieldFiller(Shipping_Order_Product.IShipping_Order_Product::class.java, Shipping_Order_ProductFiller::class.java)
+        }
+        fun start(): MyModule {
+            return com.dolmen.serv.Module.start(MyModule::class.java)
+        }
+    }
 }
 

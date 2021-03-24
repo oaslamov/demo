@@ -20,6 +20,20 @@
       "@":"10"
     },
     {
+      "code":"i_price",
+      "label":"Price",
+      "type":"number",
+      "metatype":"function",
+      "@":"15"
+    },
+    {
+      "code":"i_sum",
+      "label":"Sum",
+      "type":"number",
+      "metatype":"function",
+      "@":"16"
+    },
+    {
       "code":"comment",
       "@":"11"
     }
@@ -32,6 +46,6 @@
     }
   ],
   "@":"9",
-  "@e":"2kat_dd:3;6shipping_order:0;8product:0;10quantity:3;11comment:1",
-  "@d":"12deleteme:1"
+  "@e":"2kat_dd:3;6shipping_order:0;8product:0;10quantity:3;11comment:1;15i_price:6;16i_sum:6",
+  "@d":"13item_price:1;14item_sum:1;12deleteme:1"
 }

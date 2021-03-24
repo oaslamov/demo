@@ -82,6 +82,10 @@ f:7ef019009006=Shipping Order
 f:7ef019009008=Product
 --  Qnty
 f:7ef01900900a=Qnty
+--  Price
+f:7ef01900900f=Price
+--  Sum
+f:7ef019009010=Sum
 --  Comment
 f:7ef01900900b=Comment
 
