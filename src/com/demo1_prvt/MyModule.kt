@@ -274,29 +274,10 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
     }
 
-    private fun Shipping_Order_Product.getSum(): BigDecimal {
-        return (this.getPrice() * BigDecimal(this.quantity)).setScale(2, RoundingMode.HALF_UP)
-    }
-
-    private fun Shipping_Order_Product.getPrice(): BigDecimal {
-        val p = selectFirst<Product>("id = ${this.product}")
-        return if (p == null) BigDecimal.ZERO else BigDecimal(p.price).setScale(2, RoundingMode.HALF_UP)
-    }
-
-    private fun Shipping_Order.getTotal(): BigDecimal {
-        var sum: BigDecimal = BigDecimal.ZERO
-        iterate<Shipping_Order_Product>("shipping_order = ${this.id}") { item ->
-            sum += item.getSum()
-        }
-        return sum
-    }
-
-
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
         class ViewIterator(f: Formula, m: MyModule) : View1.Data(f, m) {
             override fun create(s: Shipping_Order): View1 {
                 val v = super.create(s)
-                v.total_Sum = s.getTotal()
                 if (s.customer != null) {
                     val c = select(Customer(), s.customer)
                     v.c_Name = c.name
@@ -312,18 +293,6 @@ class MyModule : Demo1_PrvtModuleBase() {
 //                        }
 //                    }
                 }
-                return v
-            }
-        }
-        return ViewIterator(f, this)
-    }
-
-    override fun s_iterateView2(f: Formula): SelectedData<View2> {
-        class ViewIterator(f: Formula, m: MyModule) : View2.Data(f, m) {
-            override fun create(s: Shipping_Order_Product): View2 {
-                val v = super.create(s)
-                v.price = s.getPrice()
-                v.sum = s.getSum()
                 return v
             }
         }
@@ -391,6 +360,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             T.registerFieldFiller(Shipping_Order_Product.IShipping_Order_Product::class.java, ShippingOrderProductFiller::class.java)
             T.registerFieldFiller(Shipping_Order.IShipping_Order::class.java, ShippingOrderFiller::class.java)
         }
+
         fun start(): MyModule {
             return com.dolmen.serv.Module.start(MyModule::class.java)
         }
