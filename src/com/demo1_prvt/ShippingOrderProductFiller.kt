@@ -9,17 +9,20 @@ import java.math.BigDecimal.ZERO
 import java.math.RoundingMode
 
 class ShippingOrderProductFiller : Shipping_Order_Product.IShipping_Order_Product {
-    override fun getInstance(): ITableFieldFiller = ShippingOrderProductFiller()
+    override fun getInstance() = ShippingOrderProductFiller()
 
-    private val db get() = MyModule.start()
-//    var item: Shipping_Order_Product? = null
-//
-//    private fun item(itemRec: DocTable): Doc = item ?: run { Doc(docRec, db) }
+    private val db by lazy { MyModule.start() }
+
+    private var p: Product? = null
+    private fun getP(table: Shipping_Order_Product?): Product? {
+        if (p == null) p = db.select(Product(), table?.product)
+        return p
+    }
 
     override fun getI_Price(table: Shipping_Order_Product?): BigDecimal {
         if (table == null) return ZERO
-        val p = db.select(Product(), table.product)
-        return p.price.toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+        val price = getP(table)?.price ?: 0.0
+        return price.toBigDecimal().setScale(2, RoundingMode.HALF_UP)
     }
 
     override fun setI_Price(table: Shipping_Order_Product?, value: BigDecimal?) {}
