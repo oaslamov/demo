@@ -1,3 +1,7 @@
+<!--dolmen
+label=Пример установки production
+-->
+
 % Пример установки production среды Дольмен
 
 ## Общие сведения
@@ -52,7 +56,7 @@ netsh advfirewall firewall add rule name="postgres5432" dir=in action=allow prot
 и в файле `C:\Program Files\PostgreSQL\11\data\pg_hba.conf`
 
 ~~~
-host	all				all				10.23.45.11/32			md5
+host    all    all    10.23.45.11/32    md5
 ~~~
 
 Создать пользователя для сервера Дольмен и схему

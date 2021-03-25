@@ -2,7 +2,7 @@
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title></title>
+  <title>Пример установки production</title>
   <link rel="stylesheet" type="text/css" href="../common/dolmendoc.css">
   <link rel="shortcut icon" type="image/*" href="../common/dolmen32.png"/>
   
@@ -12,7 +12,7 @@
 <div id="mySidenav" class="sidenav">
 <ul class="c_ul">
 
-<li><a href="DolmenProdInstall.html">DolmenProdInstall</a></li>
+<li><a href="DolmenProdInstall.html">Пример установки production</a></li>
 </ul></div>
 <script>
 var toggler = document.getElementsByClassName("c_clo");
@@ -75,6 +75,9 @@ if (currTheme) {
 </script>
 </div>
 
+<!--dolmen
+label=Пример установки production
+-->
 <p>% Пример установки production среды Дольмен</p>
 <h2 id="общиесведения">Общие сведения</h2>
 <p>В этом примере устанавливаем <em>Dolmen Application Server</em> и <em>Dolmen Web Server</em> на один сервер, а <em>PostgreSQL</em> на другой. Будет настроен доступ по <em>https</em> и аутентификация пользователей через <em>Active Directory.</em></p>
@@ -116,7 +119,7 @@ if (currTheme) {
 <pre><code>netsh advfirewall firewall add rule name=&quot;postgres5432&quot; dir=in action=allow protocol=TCP localport=5432 remoteip=10.23.45.11
 </code></pre>
 <p>и в файле <code>C:\Program Files\PostgreSQL\11\data\pg_hba.conf</code></p>
-<pre><code>host	all				all				10.23.45.11/32			md5
+<pre><code>host    all    all    10.23.45.11/32    md5
 </code></pre>
 <p>Создать пользователя для сервера Дольмен и схему</p>
 <pre><code>set PGPASSWORD=pgPw0rd
