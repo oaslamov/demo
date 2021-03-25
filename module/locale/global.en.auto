@@ -71,6 +71,8 @@ f:7ef019008008=Order placed at
 f:7ef019008009=Order paid at
 --  Shipment Date
 f:7ef01900800b=Shipment Date
+--  Order Total
+f:7ef01900800d=Order Total
 --  Comment
 f:7ef01900800a=Comment
 

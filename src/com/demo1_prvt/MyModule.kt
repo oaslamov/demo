@@ -388,7 +388,8 @@ class MyModule : Demo1_PrvtModuleBase() {
 
     companion object {
         init {
-            T.registerFieldFiller(Shipping_Order_Product.IShipping_Order_Product::class.java, Shipping_Order_ProductFiller::class.java)
+            T.registerFieldFiller(Shipping_Order_Product.IShipping_Order_Product::class.java, ShippingOrderProductFiller::class.java)
+            T.registerFieldFiller(Shipping_Order.IShipping_Order::class.java, ShippingOrderFiller::class.java)
         }
         fun start(): MyModule {
             return com.dolmen.serv.Module.start(MyModule::class.java)

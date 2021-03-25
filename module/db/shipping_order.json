@@ -26,6 +26,12 @@
       "@":"11"
     },
     {
+      "code":"order_total",
+      "type":"number",
+      "metatype":"function",
+      "@":"13"
+    },
+    {
       "code":"comment",
       "type":"text",
       "@":"10"
@@ -39,6 +45,6 @@
     }
   ],
   "@":"8",
-  "@e":"2kat_dd:3;6customer:0;8datetime_order_placed:7;9date_order_paid:9;10comment:2;11shipment_date:9",
+  "@e":"2kat_dd:3;6customer:0;8datetime_order_placed:7;9date_order_paid:9;10comment:2;11shipment_date:9;13order_total:6",
   "@d":"12deleteme:1"
 }

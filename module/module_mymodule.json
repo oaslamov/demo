@@ -3,7 +3,7 @@
   "mainClass":"com.demo1_prvt.MyModule",
   "privateIID":8319001,
   "version":1,
-  "@v":"1+77",
+  "@v":"1+78",
   "@e":"6customer;7product;8shipping_order;9shipping_order_product;10view1:50;11view2:50;12city;13country;14subcountry;15view3:50;16flt;17view4:50;18v_dm1:50;19v_dm2:50",
   "@sh":"3f4dcc9c9"
 }
