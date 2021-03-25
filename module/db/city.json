@@ -27,6 +27,8 @@
     },
     {
       "code":"list_nm",
+      "label":"List Name",
+      "metatype":"function",
       "usage":"name",
       "etc":{
         "ignoreCase":true

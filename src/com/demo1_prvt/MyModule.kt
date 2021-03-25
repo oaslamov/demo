@@ -162,7 +162,6 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("Done")
     }
 
-
     @Description("Generate orders")
     @Parameters("n: Int")
     fun genOrder(n: Int): String {
@@ -299,34 +298,6 @@ class MyModule : Demo1_PrvtModuleBase() {
         return ViewIterator(f, this)
     }
 
-    override fun s_iterateView4(f: Formula): SelectedData<View4> {
-        class ViewIterator(f: Formula, m: MyModule) : View4.Data(f, m) {
-            override fun create(s: City): View4 {
-                val v = super.create(s)
-                val sbcntr = select(Subcountry(), s.subcountry_Id)
-                val cntr = select(Country(), s.country_Id)
-                v.list_Name = "${s.name}, ${sbcntr.name}, ${cntr.name}"
-                return v
-            }
-        }
-        return ViewIterator(f, this)
-    }
-
-    @Description("Refresh All Cities")
-    fun refreshAllCities() {
-        iterate<City>("") { c ->
-            refreshCity(c)
-            update(c)
-        }
-    }
-
-    fun refreshCity(city: City) {
-        val sbcntr = select(Subcountry(), city.subcountry_Id)
-        val cntr = select(Country(), city.country_Id)
-        city.list_Nm = "${city.name}, ${sbcntr.name}, ${cntr.name}"
-    }
-
-
     override fun beforeUpdate(t: ITopTable?) {
         super.beforeUpdate(t)
         if (t is Customer) {
@@ -359,6 +330,7 @@ class MyModule : Demo1_PrvtModuleBase() {
         init {
             T.registerFieldFiller(Shipping_Order_Product.IShipping_Order_Product::class.java, ShippingOrderProductFiller::class.java)
             T.registerFieldFiller(Shipping_Order.IShipping_Order::class.java, ShippingOrderFiller::class.java)
+            T.registerFieldFiller(City.ICity::class.java, CityFiller::class.java)
         }
 
         fun start(): MyModule {

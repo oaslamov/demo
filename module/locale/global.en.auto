@@ -15,8 +15,8 @@ f:7ef01900c008=Subcountry
 f:7ef01900c00a=Name
 --  Geonameid
 f:7ef01900c00b=Geonameid
---  List Nm
-f:7ef01900c00c=List Nm
+--  List Name
+f:7ef01900c00c=List Name
 
 // table Country
 t:7ef01900d000=Country
@@ -117,11 +117,6 @@ f:7ef01900a00f=Address line 3
 t:7ef01900f000=View3
 --  Search
 f:7ef01900f006=Search
-
-// table View4
-t:7ef019011000=View4
---  List Name
-f:7ef01901100a=List Name
 
 // table V Dm1
 t:7ef019012000=V Dm1
