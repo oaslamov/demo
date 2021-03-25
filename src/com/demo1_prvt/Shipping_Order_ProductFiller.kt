@@ -18,13 +18,17 @@ class Shipping_Order_ProductFiller : Shipping_Order_Product.IShipping_Order_Prod
 
     override fun getI_Price(table: Shipping_Order_Product?): BigDecimal {
         val p = db.select(Product(), table?.product)
-        return p.price.toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+        val itemPrice = p.price.toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+        return itemPrice
     }
 
     override fun setI_Price(table: Shipping_Order_Product?, value: BigDecimal?) {}
 
     override fun getI_Sum(table: Shipping_Order_Product?): BigDecimal {
-        return ((table?.i_Price ?: ZERO) * (table?.quantity ?: 0).toBigDecimal()).setScale(2, RoundingMode.HALF_UP)
+        val itemPrice = table?.i_Price ?: ZERO
+        val itemQnty = table?.quantity ?: 0
+        val itemSum = (itemPrice * itemQnty.toBigDecimal()).setScale(2, RoundingMode.HALF_UP)
+        return itemSum
     }
 
     override fun setI_Sum(table: Shipping_Order_Product?, value: BigDecimal?) {}
