@@ -3,29 +3,29 @@
 // -- for installed system: "locale" dir in Workspace (including subpath for global files or locale/<module>/ folder for module files)
 // -- for module developer project: "locale" dir in the Dolmen SDK project
 
-// screens: demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Address=Address
-// screens: demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Billing=Billing
-// screens: demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Comment=Comment
-// screens: demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Contacts=Contacts
-// screens: demo1_customer:scr@demo1_prvt demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Customer=Customer
-// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt demo1_view1:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt demo1_view1:scr@demo1_prvt
 Demo1=Demo1
-// screens: demo1_order_sums:scr@demo1_prvt sc_order:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Details=Details
-// screens: demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Odrer=Odrer
-// screens: demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt
-"Order ${shipping_order.id}"=Order ${shipping_order.id}
-// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
+"Order # ${shipping_order.id}"=Order # ${shipping_order.id}
+// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 "Order items"=Order items
-// screens: demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 "Order list"=Order list
-// screens: demo1_order1610:scr@demo1_prvt demo1_order_sums:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 "Order summary"=Order summary
 // screens: demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Order=Order
@@ -37,14 +37,10 @@ Order=Order
 Summary=Summary
 
 //-- demo1_order1610:scr@demo1_prvt --
+"Order ${shipping_order.id}"=Order ${shipping_order.id}
 Order1610=Order1610
 
 //-- demo1_order:scr@demo1_prvt --
-
-//-- demo1_order_sums:scr@demo1_prvt --
-"Order Items"=Order Items
-"Order sums"=Order sums
-"Order total: ${view1.total_sum}"=Order total: ${view1.total_sum}
 
 //-- demo1_product:scr@demo1_prvt --
 Product=Product
@@ -56,5 +52,8 @@ Product=Product
 view1=view1
 
 //-- sc_order:scr@demo1_prvt --
-"Order # ${shipping_order.id}"=Order # ${shipping_order.id}
 Orders=Orders
+
+//-- sc_order_n:scr@demo1_prvt --
+"Order total: ${shipping_order.order_total}"=Order total: ${shipping_order.order_total}
+"Orders N"=Orders N
