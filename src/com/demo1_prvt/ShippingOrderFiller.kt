@@ -5,10 +5,9 @@ import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
 
 class ShippingOrderFiller : Shipping_Order.IShipping_Order {
-    private val db get() = MyModule.start()
+    private val db by lazy { MyModule.start() }
 
-    override fun getOrder_Total(table: Shipping_Order?): BigDecimal {
-        if (table == null) return ZERO
+    override fun getOrder_Total(table: Shipping_Order): BigDecimal {
         var sum = ZERO
         db.iterate<Shipping_Order_Product>("shipping_order = ${table.id}") { item ->
             sum += item.i_Sum ?: ZERO
@@ -16,5 +15,5 @@ class ShippingOrderFiller : Shipping_Order.IShipping_Order {
         return sum
     }
 
-    override fun setOrder_Total(table: Shipping_Order?, value: BigDecimal?) {}
+    override fun setOrder_Total(table: Shipping_Order, value: BigDecimal?) {}
 }
