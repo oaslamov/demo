@@ -71,8 +71,8 @@ f:7ef019008008=Order placed at
 f:7ef019008009=Order paid at
 --  Shipment Date
 f:7ef01900800b=Shipment Date
---  Order Total
-f:7ef01900800d=Order Total
+--  Total
+f:7ef01900800e=Total
 --  Comment
 f:7ef01900800a=Comment
 
@@ -85,9 +85,9 @@ f:7ef019009008=Product
 --  Qnty
 f:7ef01900900a=Qnty
 --  Price
-f:7ef01900900f=Price
+f:7ef019009011=Price
 --  Sum
-f:7ef019009010=Sum
+f:7ef019009012=Sum
 --  Comment
 f:7ef01900900b=Comment
 
@@ -117,12 +117,3 @@ f:7ef01900a00f=Address line 3
 t:7ef01900f000=View3
 --  Search
 f:7ef01900f006=Search
-
-// table V Dm1
-t:7ef019012000=V Dm1
-
-// table V Dm2
-t:7ef019013000=V Dm2
-
-// table V Dm3
-t:7ef019014000=V Dm3

@@ -59,5 +59,4 @@ view1=view1
 Orders=Orders
 
 //-- sc_order_n:scr@demo1_prvt --
-"Order total: ${shipping_order.order_total}"=Order total: ${shipping_order.order_total}
 "Orders N"=Orders N

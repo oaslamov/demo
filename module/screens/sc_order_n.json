@@ -66,11 +66,11 @@
           "hint":"$l{f:7ef01900800b:d}l"
         },
         {
-          "code":"order_total",
-          "label":"$l{f:7ef01900800d}l",
+          "code":"total",
+          "label":"$l{f:7ef01900800e}l",
           "type":"number",
-          "format":"#,##0.00",
-          "hint":"$l{f:7ef01900800d:d}l"
+          "edit_condition":"false",
+          "hint":"$l{f:7ef01900800e:d}l"
         }
       ],
       "operations":{
@@ -196,16 +196,16 @@
           "hint":"$l{f:7ef019009006:d}l"
         },
         {
-          "code":"i_price",
-          "label":"$l{f:7ef01900900f}l",
+          "code":"price",
+          "label":"$l{f:7ef019009011}l",
           "type":"number",
-          "hint":"$l{f:7ef01900900f:d}l"
+          "hint":"$l{f:7ef019009011:d}l"
         },
         {
-          "code":"i_sum",
-          "label":"$l{f:7ef019009010}l",
+          "code":"sum",
+          "label":"$l{f:7ef019009012}l",
           "type":"number",
-          "hint":"$l{f:7ef019009010:d}l"
+          "hint":"$l{f:7ef019009012:d}l"
         }
       ],
       "operations":{
@@ -443,10 +443,10 @@
             "code":"quantity"
           },
           {
-            "code":"i_price"
+            "code":"price"
           },
           {
-            "code":"i_sum"
+            "code":"sum"
           },
           {
             "code":"comment"
@@ -500,18 +500,15 @@
                 "code":"shipping_order",
                 "fields":[
                   {
-                    "code":"customer",
-                    "actions":[
-                      "update",
-                      "select",
-                      "new"
-                    ]
+                    "code":"customer"
+                  },
+                  {
+                    "code":"total"
                   }
                 ],
                 "operations":[
                   "select",
-                  "update",
-                  "new"
+                  "update"
                 ]
               }
             },
@@ -678,29 +675,6 @@
           ]
         }
       ]
-    },
-    {
-      "code":"p_footer",
-      "label":"$l{Order total: ${shipping_order.order_total}}l",
-      "type":"form",
-      "border_type":"none",
-      "position":{
-        "from_col":6,
-        "to_col":16,
-        "from_row":16,
-        "to_row":16
-      },
-      "data_source":{
-        "code":"shipping_order",
-        "fields":[
-          {
-            "code":"order_total"
-          }
-        ],
-        "operations":[
-          "select"
-        ]
-      }
     }
   ]
 }

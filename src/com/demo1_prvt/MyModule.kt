@@ -199,6 +199,27 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("Done")
     }
 
+    @Description("Updates all orders sums")
+    fun updateAllOrders() {
+        val product = selectMap(Product.fId, "")
+        iterate<Shipping_Order>("") { o ->
+            var total = BigDecimal.ZERO
+            iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
+                val p = product[item.product]
+                if (p!=null) {
+                    val itemPrice = p.price.toBigDecimal()
+                    item.price = itemPrice.setScale(2, RoundingMode.HALF_UP)
+                    item.sum = (itemPrice * item.quantity.toBigDecimal()).setScale(2, RoundingMode.HALF_UP)
+                    update(item)
+                }
+                total += item.sum ?:BigDecimal.ZERO
+            }
+            o.total = total
+            update(o)
+            Txt.info("Updated order # ${o.id}, total = ${o.total}").msg()
+        }
+    }
+
     @Description("Import cities")
     @Parameters("pathIn: String")
     fun importCities(pathIn: String): String {
@@ -285,12 +306,6 @@ class MyModule : Demo1_PrvtModuleBase() {
                     v.c_Address_Line1 = c.address_Line1
                     v.c_Address_Line2 = c.address_Line2
                     v.c_Address_Line3 = c.address_Line3
-//                    if (c.city != null) {
-//                        val ct = select(City(), c.city)
-//                        if (ct != null) {
-//                            v.c_City = "${ct.name}"
-//                        }
-//                    }
                 }
                 return v
             }
@@ -328,8 +343,6 @@ class MyModule : Demo1_PrvtModuleBase() {
 
     companion object {
         init {
-            T.registerFieldFiller(Shipping_Order_Product.IShipping_Order_Product::class.java, ShippingOrderProductFiller::class.java)
-            T.registerFieldFiller(Shipping_Order.IShipping_Order::class.java, ShippingOrderFiller::class.java)
             T.registerFieldFiller(City.ICity::class.java, CityFiller::class.java)
         }
 

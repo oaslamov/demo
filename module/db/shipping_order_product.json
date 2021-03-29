@@ -20,18 +20,14 @@
       "@":"10"
     },
     {
-      "code":"i_price",
-      "label":"Price",
+      "code":"price",
       "type":"number",
-      "metatype":"function",
-      "@":"15"
+      "@":"17"
     },
     {
-      "code":"i_sum",
-      "label":"Sum",
+      "code":"sum",
       "type":"number",
-      "metatype":"function",
-      "@":"16"
+      "@":"18"
     },
     {
       "code":"comment",
@@ -46,6 +42,6 @@
     }
   ],
   "@":"9",
-  "@e":"2kat_dd:3;6shipping_order:0;8product:0;10quantity:3;11comment:1;15i_price:6;16i_sum:6",
-  "@d":"13item_price:1;14item_sum:1;12deleteme:1"
+  "@e":"2kat_dd:3;6shipping_order:0;8product:0;10quantity:3;11comment:1;17price:6;18sum:6",
+  "@d":"15i_price:6;16i_sum:6;13item_price:1;14item_sum:1;12deleteme:1"
 }
