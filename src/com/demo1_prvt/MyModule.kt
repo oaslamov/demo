@@ -19,6 +19,7 @@ import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import kotlin.math.round
+import kotlin.random.Random
 
 class MyModule : Demo1_PrvtModuleBase() {
 
@@ -170,30 +171,29 @@ class MyModule : Demo1_PrvtModuleBase() {
         val shipmentAfterMax = 45
         val itemsMin = 3
         val itemsMax = 10
-        val mc = count(Customer::class, "")
-        val step = (mc / n).toInt()
-        var next = (random() * step + 1).toInt()
-        //Txt.info("mc = ${mc}, step = ${step}, next = ${next}").msg()
-        var i = 0
-        var k = 0
-        iterate<Customer>("") { c ->
-            i++
-            if ((i == next) and (k < n)) {
-                next += step
-                k++
-                val o = Shipping_Order()
-                val placedDaysAgo = (random() * placedDaysAgoMax).toLong()
-                val paidDaysAgo = (placedDaysAgo - (random() * paidAfterMax)).coerceAtLeast(0.0).toLong()
-                val shipmentDaysAgo = placedDaysAgo - (random() * shipmentAfterMax).toLong()
-                o.customer = c.id
-                o.datetime_Order_Placed =
-                        OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes((random() * 3600).toLong())
-                o.date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
-                o.shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
-                insert(o)
-                o.genItems(itemsMin, itemsMax, 15)
-                //Txt.info(
-                //        "Customer ${i}, ${c.name}, placed ${o.datetime_Order_Placed}, paid ${o.date_Order_Paid}, shipment ${o.shipment_Date}").msg()
+        val mQ = 15
+        val customer = selectMap(Customer.fId, "").toList()
+        val mCustomer = customer.size
+        val product = selectMap(Product.fId, "").toList()
+        val mProduct = product.size
+        for (i in 1..n) {
+            val o = Shipping_Order()
+            val placedDaysAgo = (random() * placedDaysAgoMax).toLong()
+            val paidDaysAgo = (placedDaysAgo - (random() * paidAfterMax)).coerceAtLeast(0.0).toLong()
+            val shipmentDaysAgo = placedDaysAgo - (random() * shipmentAfterMax).toLong()
+            o.customer = customer.elementAt(Random.nextInt(1, mCustomer)).first
+            o.datetime_Order_Placed =
+                    OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes((random() * 3600).toLong())
+            o.date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
+            o.shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
+            insert(o)
+            val k = Random.nextInt(itemsMin, itemsMax)
+            for (j in 1..k) {
+                val item = Shipping_Order_Product()
+                item.shipping_Order = o.id
+                item.product = product.elementAt(Random.nextInt(1, mProduct)).first
+                item.quantity = Random.nextInt(1,mQ)
+                insert(item)
             }
         }
         return Text.F("Done")
@@ -206,13 +206,13 @@ class MyModule : Demo1_PrvtModuleBase() {
             var total = BigDecimal.ZERO
             iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
                 val p = product[item.product]
-                if (p!=null) {
+                if (p != null) {
                     val itemPrice = p.price.toBigDecimal()
                     item.price = itemPrice.setScale(2, RoundingMode.HALF_UP)
                     item.sum = (itemPrice * item.quantity.toBigDecimal()).setScale(2, RoundingMode.HALF_UP)
                     update(item)
                 }
-                total += item.sum ?:BigDecimal.ZERO
+                total += item.sum ?: BigDecimal.ZERO
             }
             o.total = total
             update(o)
@@ -270,29 +270,6 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("Done")
     }
 
-
-    private fun Shipping_Order.genItems(min: Int, max: Int, mQ: Int) {
-        val mp = count(Product::class, "")
-        val n = (random() * (max - min) + min).toInt()
-        val step = (mp / n).toInt()
-        var next = (random() * step + 1).toInt()
-//        Txt.info("mp = ${mp}, n = ${n}, step = ${step}, next = ${next}").msg()
-        var i = 0
-        var k = 0
-        iterate<Product>("") { p ->
-            i++
-            if ((i == next) and (k < n)) {
-                next += step
-                k++
-                val item = Shipping_Order_Product()
-                item.shipping_Order = this.id
-                item.product = p.id
-                item.quantity = (random() * mQ + 1).toInt()
-                insert(item)
-//                Txt.info("\tproduct: ${i}, ${p.name}, ${item.quantity}").msg()
-            }
-        }
-    }
 
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
         class ViewIterator(f: Formula, m: MyModule) : View1.Data(f, m) {
