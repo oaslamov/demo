@@ -99,19 +99,15 @@ f:7ef01900e006=Country
 f:7ef01900e008=Name
 
 // table View1
-t:7ef01900a000=View1
+t:7ef019017000=View1
 --  Customer name
-f:7ef01900a012=Customer name
+f:7ef01901700c=Customer name
 --  Phone
-f:7ef01900a00b=Phone
+f:7ef01901700d=Phone
 --  mobile
-f:7ef01900a00c=mobile
---  Address line 1
-f:7ef01900a00d=Address line 1
---  Address line 2
-f:7ef01900a00e=Address line 2
---  Address line 3
-f:7ef01900a00f=Address line 3
+f:7ef01901700e=mobile
+--  address
+f:7ef01901700f=address
 
 // table View3
 t:7ef01900f000=View3

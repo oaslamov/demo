@@ -289,13 +289,13 @@ class MyModule : Demo1_PrvtModuleBase() {
             override fun create(s: Shipping_Order): View1 {
                 val v = super.create(s)
                 if (s.customer != null) {
-                    val c = select(Customer(), s.customer)
-                    v.c_Name = c.name
-                    v.c_Phone = c.phone
-                    v.c_Mobile = c.mobile
-                    v.c_Address_Line1 = c.address_Line1
-                    v.c_Address_Line2 = c.address_Line2
-                    v.c_Address_Line3 = c.address_Line3
+                    val c = selectFirst<Customer>("id=${s.customer}")
+                    if (c != null) {
+                        v.c_Name = c.name
+                        v.c_Phone = c.phone
+                        v.c_Mobile = c.mobile
+                        v.c_Address = listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()
+                    }
                 }
                 return v
             }
