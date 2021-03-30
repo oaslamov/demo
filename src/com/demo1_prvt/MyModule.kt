@@ -164,7 +164,7 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Generate orders")
     @Parameters("n: Int")
     fun genOrder(n: Int): String {
-        val maxPlacedDaysAgo = 300
+        val maxPlacedDaysAgo = 365
         val maxPaidAfter = 30
         val maxShipmentAfter = 45
         val minItems = 3
