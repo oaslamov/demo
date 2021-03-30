@@ -303,6 +303,27 @@ class MyModule : Demo1_PrvtModuleBase() {
         return ViewIterator(f, this)
     }
 
+    override fun s_iterateV_Dm5(f: Formula): SelectedData<V_Dm5> {
+        class ViewIterator(f: Formula, m: MyModule) : V_Dm5.Data(f, m) {
+            var customers: Map<RowID, Customer> = selectMap(Customer.fId, "")
+            override fun create(s: Shipping_Order): V_Dm5 {
+                val v = super.create(s)
+                if (s.customer != null) {
+                    val c = customers[s.customer]
+                    if (c != null) {
+                        v.c_Name = c.name
+                        v.c_Phone = c.phone
+                        v.c_Mobile = c.mobile
+                        v.c_Address = listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()
+                    }
+                }
+                return v
+            }
+        }
+        return ViewIterator(f, this)
+    }
+
+
     override fun beforeUpdate(t: ITopTable?) {
         super.beforeUpdate(t)
         if (t is Customer) {

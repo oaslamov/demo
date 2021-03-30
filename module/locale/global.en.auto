@@ -109,7 +109,13 @@ f:7ef01901700e=Customer mobile
 --  Customer address
 f:7ef01901700f=Customer address
 
-// table View3
-t:7ef01900f000=View3
---  Search
-f:7ef01900f006=Search
+// table V Dm5
+t:7ef019018000=V Dm5
+--  Customer name
+f:7ef01901800c=Customer name
+--  Customer phone
+f:7ef01901800d=Customer phone
+--  Customer mobile
+f:7ef01901800e=Customer mobile
+--  Customer address
+f:7ef01901800f=Customer address
