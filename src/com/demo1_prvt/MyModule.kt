@@ -13,12 +13,10 @@ import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
 import com.dolmen.util.Text
 import java.io.File
-import java.lang.Math.random
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.OffsetDateTime
-import kotlin.math.round
 import kotlin.random.Random
 
 class MyModule : Demo1_PrvtModuleBase() {
@@ -130,7 +128,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             for (l in lines) {
                 val p = Product()
                 p.name = l.trim()
-                p.price = round((random() * 3000) + 1) / 100
+                p.price = (Random.nextInt(3000) + 1) / 100.0
                 p.product_Type = Product.PRODUCT_TYPE.GROCERY
                 insert(p)
                 if (i == n) break
@@ -166,35 +164,48 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Generate orders")
     @Parameters("n: Int")
     fun genOrder(n: Int): String {
-        val placedDaysAgoMax = 300
-        val paidAfterMax = 30
-        val shipmentAfterMax = 45
-        val itemsMin = 3
-        val itemsMax = 10
-        val mQ = 15
+        val maxPlacedDaysAgo = 300
+        val maxPaidAfter = 30
+        val maxShipmentAfter = 45
+        val minItems = 3
+        val maxItems = 10
+        val maxQuantity = 15
+        val minutesInDay = 3600
         val customer = selectMap(Customer.fId, "").toList()
-        val mCustomer = customer.size
+        val maxCustomer = customer.size
         val product = selectMap(Product.fId, "").toList()
-        val mProduct = product.size
+        val maxProduct = product.size
         for (i in 1..n) {
             val o = Shipping_Order()
-            val placedDaysAgo = (random() * placedDaysAgoMax).toLong()
-            val paidDaysAgo = (placedDaysAgo - (random() * paidAfterMax)).coerceAtLeast(0.0).toLong()
-            val shipmentDaysAgo = placedDaysAgo - (random() * shipmentAfterMax).toLong()
-            o.customer = customer.elementAt(Random.nextInt(1, mCustomer)).first
+            val placedDaysAgo = Random.nextInt(maxPlacedDaysAgo + 1).toLong()
+            val paidDaysAgo = (placedDaysAgo - Random.nextInt(maxPaidAfter + 1)).coerceAtLeast(0)
+            val shipmentDaysAgo = placedDaysAgo - Random.nextInt(maxShipmentAfter + 1).toLong()
+            o.customer = customer[Random.nextInt(maxCustomer)].first
             o.datetime_Order_Placed =
-                    OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes((random() * 3600).toLong())
+                    OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
             o.date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
             o.shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
             insert(o)
-            val k = Random.nextInt(itemsMin, itemsMax)
+            val k = Random.nextInt(minItems, maxItems + 1)
+            var total = BigDecimal.ZERO
             for (j in 1..k) {
                 val item = Shipping_Order_Product()
+                val p = product[Random.nextInt(maxProduct)].second
                 item.shipping_Order = o.id
-                item.product = product.elementAt(Random.nextInt(1, mProduct)).first
-                item.quantity = Random.nextInt(1,mQ)
+                item.product = p.id
+                item.quantity = Random.nextInt(maxQuantity) + 1
+                val pr = p.price.toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+                val s = item.quantity.toBigDecimal() * pr
+                item.price = pr
+                item.sum = s
                 insert(item)
+                total += s
             }
+            if (total != BigDecimal.ZERO) {
+                o.total = total
+                update(o)
+            }
+            if (i % 100 == 0) Txt.info("Generated $i orders").msg()
         }
         return Text.F("Done")
     }
@@ -202,7 +213,9 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Updates all orders sums")
     fun updateAllOrders() {
         val product = selectMap(Product.fId, "")
+        var i = 0
         iterate<Shipping_Order>("") { o ->
+            i++
             var total = BigDecimal.ZERO
             iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
                 val p = product[item.product]
@@ -216,7 +229,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             }
             o.total = total
             update(o)
-            Txt.info("Updated order # ${o.id}, total = ${o.total}").msg()
+            Txt.info("${i}. Updated order # ${o.id}, total = ${o.total}").msg()
         }
     }
 
