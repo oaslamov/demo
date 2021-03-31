@@ -305,7 +305,8 @@ class MyModule : Demo1_PrvtModuleBase() {
 
     override fun s_iterateV_Dm5(f: Formula): SelectedData<V_Dm5> {
         class ViewIterator(f: Formula, m: MyModule) : V_Dm5.Data(f, m) {
-            var customers: Map<RowID, Customer> = selectMap(Customer.fId, "")
+            val customers: Map<RowID, Customer> = selectMap(Customer.fId, "")
+            var addresses = mutableMapOf<RowID,String?>()
             override fun create(s: Shipping_Order): V_Dm5 {
                 val v = super.create(s)
                 if (s.customer != null) {
@@ -314,7 +315,11 @@ class MyModule : Demo1_PrvtModuleBase() {
                         v.c_Name = c.name
                         v.c_Phone = c.phone
                         v.c_Mobile = c.mobile
-                        v.c_Address = listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()
+                        if (addresses[c.id] == null) {
+                            addresses[c.id] = listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()
+                        }
+                        v.c_Address = addresses[c.id]
+//                        v.c_Address = listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()
                     }
                 }
                 return v
