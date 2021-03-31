@@ -30,22 +30,24 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Show customers' orders summary")
     @Parameters("customerFilter: String")
     fun action1(customerFilter: String) {
+        val product = selectMap(Product.fId, "")
         var n = 0
         iterate<Customer>(customerFilter) { c ->
             n++
-            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
+//            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
             var m = 0
             iterate<Shipping_Order>("customer=${c.id}") { o ->
                 m++
-                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
+//                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
                 var k = 0
                 iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
                     k++
-                    val p = select(Product(), item.product)
-                    Txt.info("$n.$m.$k. Product = ${p.name}, qnty = ${item.quantity}").msg()
+//                    val p = select(Product(), item.product)
+                    val p = product[item.product]
+//                    Txt.info("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}").msg()
                 }
             }
-            if (m == 0) Txt.info("No orders for ${c.name}").msg()
+//            if (m == 0) Txt.info("No orders for ${c.name}").msg()
         }
     }
 
@@ -92,30 +94,45 @@ class MyModule : Demo1_PrvtModuleBase() {
         deleteList("demo1_prvt.shipping_order", "customer=${customerId}")
     }
 
-    @Description("Show customers' orders summary - selectMap() version")
+    @Description("Shows customers' orders summary - selectMap() version")
     @Parameters("customerFilter: String")
     fun action91(customerFilter: String) {
-        val customer = selectMap(Customer.fId, customerFilter)
+//        val customer = selectMap(Customer.fId, customerFilter)
         val order = selectMap(Shipping_Order.fId, "")
         val orderProduct = selectMap(Shipping_Order_Product.fId, "")
         val product = selectMap(Product.fId, "")
+
+        // customer id, order id, order item id
+        var customerOrder = mutableMapOf<RowID, MutableMap<RowID, MutableList<RowID>>>()
+
+        val ord = order.values
+        val grOrd = ord.groupBy { it.customer }
+
+        val item = orderProduct.values
+        val grItem = item.groupBy { it.shipping_Order }
+
         var n = 0
-        customer.forEach() { (_, c) ->
+//        customer.forEach{(_,c)->
+        iterate<Customer>(customerFilter) { c ->
             n++
-            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
+//            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
             var m = 0
-            order.filterValues { it.customer == c.id }.forEach() { (_, o) ->
+            val oo = grOrd[c.id]
+            oo?.forEach { o ->
                 m++
-                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
+//                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
                 var k = 0
-                orderProduct.filterValues { it.shipping_Order == o.id }.forEach() { (_, item) ->
+                val ii = grItem[o.id]
+                ii?.forEach { item ->
                     k++
                     val p = product[item.product]
-                    Txt.info("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}").msg()
+//                    Txt.info("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}").msg()
                 }
             }
-            if (m == 0) Txt.info("No orders for ${c.name}").msg()
+//            if (m == 0) Txt.info("No orders for ${c.name}").msg()
         }
+
+
         Txt.info("Finish").msg()
     }
 
@@ -286,10 +303,12 @@ class MyModule : Demo1_PrvtModuleBase() {
 
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
         class ViewIterator(f: Formula, m: MyModule) : View1.Data(f, m) {
+            val customers: Map<RowID, Customer> = selectMap(Customer.fId, "")
             override fun create(s: Shipping_Order): View1 {
                 val v = super.create(s)
                 if (s.customer != null) {
-                    val c = selectFirst<Customer>("id=${s.customer}")
+//                    val c = selectFirst<Customer>("id=${s.customer}")
+                    val c = customers[s.customer]
                     if (c != null) {
                         v.c_Name = c.name
                         v.c_Phone = c.phone
@@ -302,32 +321,6 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
         return ViewIterator(f, this)
     }
-
-    override fun s_iterateV_Dm5(f: Formula): SelectedData<V_Dm5> {
-        class ViewIterator(f: Formula, m: MyModule) : V_Dm5.Data(f, m) {
-            val customers: Map<RowID, Customer> = selectMap(Customer.fId, "")
-            var addresses = mutableMapOf<RowID,String?>()
-            override fun create(s: Shipping_Order): V_Dm5 {
-                val v = super.create(s)
-                if (s.customer != null) {
-                    val c = customers[s.customer]
-                    if (c != null) {
-                        v.c_Name = c.name
-                        v.c_Phone = c.phone
-                        v.c_Mobile = c.mobile
-                        if (addresses[c.id] == null) {
-                            addresses[c.id] = listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()
-                        }
-                        v.c_Address = addresses[c.id]
-//                        v.c_Address = listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()
-                    }
-                }
-                return v
-            }
-        }
-        return ViewIterator(f, this)
-    }
-
 
     override fun beforeUpdate(t: ITopTable?) {
         super.beforeUpdate(t)
