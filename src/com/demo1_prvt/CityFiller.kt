@@ -10,7 +10,7 @@ class CityFiller : City.ICity {
     override fun getList_Nm(table: City): String {
         val sbcntr = db.select(Subcountry(), table.subcountry_Id)
         val cntr = db.select(Country(), table.country_Id)
-        return "${table.name}, ${sbcntr.name}, ${cntr.name}"
+        return listOfNotNull(table.name, sbcntr.name, cntr.name).joinToString()
     }
 
     override fun setList_Nm(table: City, value: String?) {}
