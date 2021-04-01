@@ -3,7 +3,7 @@
 // -- for installed system: "locale" dir in Workspace (including subpath for global files or locale/<module>/ folder for module files)
 // -- for module developer project: "locale" dir in the Dolmen SDK project
 
-m:7ef019000000=Demo1 Prvt
+m:7ef019000000=Demo module #1
 
 // table City
 t:7ef01900c000=City
