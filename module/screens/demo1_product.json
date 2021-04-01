@@ -28,9 +28,9 @@
         },
         {
           "code":"price",
-          "label":"$l{f:7ef019007007}l",
-          "type":"float64",
-          "hint":"$l{f:7ef019007007:d}l"
+          "label":"$l{f:7ef019007009}l",
+          "type":"number",
+          "hint":"$l{f:7ef019007009:d}l"
         },
         {
           "code":"product_type",

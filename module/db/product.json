@@ -11,8 +11,8 @@
     },
     {
       "code":"price",
-      "type":"float64",
-      "@":"7"
+      "type":"number",
+      "@":"9"
     },
     {
       "code":"product_type",
@@ -48,5 +48,6 @@
     }
   ],
   "@":"7",
-  "@e":"2kat_dd:3;6name:1;7price:15;8product_type:1"
+  "@e":"2kat_dd:3;6name:1;8product_type:1;9price:6",
+  "@d":"7price:6"
 }

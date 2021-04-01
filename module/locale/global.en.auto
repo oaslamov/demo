@@ -54,7 +54,7 @@ t:7ef019007000=Product
 --  Name
 f:7ef019007006=Name
 --  Price
-f:7ef019007007=Price
+f:7ef019007009=Price
 --  Product Type
 f:7ef019007008=Product Type
 e:7ef019007008.T=Toy

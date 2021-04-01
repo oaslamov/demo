@@ -28,7 +28,7 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("\n-------------\nTest OK (input: $0)\n--------------", input)
     }
 
-    @Description("Show customers' orders summary")
+    @Description("Shows customers' orders summary")
     @Parameters("customerFilter: String")
     fun action1(customerFilter: String) {
         val product = selectMap(Product.fId, "")
@@ -53,7 +53,7 @@ class MyModule : Demo1_PrvtModuleBase() {
     }
 
 
-    @Description("Create a customer")
+    @Description("Creates a customer")
     @Parameters("name: String", "phone: String", "mobile: String")
     fun action2(name: String, phone: String, mobile: String) {
         val c = Customer()
@@ -64,7 +64,7 @@ class MyModule : Demo1_PrvtModuleBase() {
         Txt.info("Created: ${c.name}, ph. = ${c.phone}, mob. = ${c.mobile}").msg()
     }
 
-    @Description("Search, update and delete")
+    @Description("Searches, updates and deletes")
     @Parameters("customerId: RowID", "productSubstring: String")
     fun action3(customerId: RowID, productSubstring: String) {
         val c = select(Customer(), customerId)
@@ -88,7 +88,7 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
     }
 
-    @Description("Delete list")
+    @Description("Deletes list")
     @Parameters("customerId: RowId")
     fun action4(customerId: RowID) {
         Txt.info("Deleting orders for customer ID = ${customerId}").msg()
@@ -141,16 +141,16 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
     }
 
-    @Description("Generate products")
-    @Parameters("pathIn: String", "n: Int")
-    fun genProduct(pathIn: String, n: Int): String {
+    @Description("Imports products from file")
+    @Parameters("pathIn: example file in {project}/dataset/grocery.csv", "n: Int")
+    fun importProducts(pathIn: String, n: Int): String {
         val fileIn = File(pathIn)
         fileIn.useLines { lines ->
             var i = 1
             for (l in lines) {
                 val p = Product()
                 p.name = l.trim()
-                p.price = (Random.nextInt(3000) + 1) / 100.0
+                p.price = ((Random.nextInt(3000) + 1) / 100.0).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
                 p.product_Type = Product.PRODUCT_TYPE.GROCERY
                 insert(p)
                 if (i == n) break
@@ -160,9 +160,9 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("Done")
     }
 
-    @Description("Generate customers")
-    @Parameters("pathIn: String", "n: Int")
-    fun genCustomer(pathIn: String, n: Int): String {
+    @Description("Imports customers from file")
+    @Parameters("pathIn: example file in  {project}/dataset/customer.csv ", "n: Int")
+    fun importCustomers(pathIn: String, n: Int): String {
         val fileIn = File(pathIn)
         fileIn.useLines { lines ->
             var i = 1
@@ -183,9 +183,9 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("Done")
     }
 
-    @Description("Generate orders")
+    @Description("Generates random orders")
     @Parameters("n: Int")
-    fun genOrder(n: Int): String {
+    fun genOrders(n: Int): String {
         val maxPlacedDaysAgo = 365
         val maxPaidAfter = 30
         val maxShipmentAfter = 45
@@ -216,7 +216,7 @@ class MyModule : Demo1_PrvtModuleBase() {
                 item.shipping_Order = o.id
                 item.product = p.id
                 item.quantity = Random.nextInt(maxQuantity) + 1
-                val pr = p.price.toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+                val pr = p.price ?: BigDecimal.ZERO
                 val s = item.quantity.toBigDecimal() * pr
                 item.price = pr
                 item.sum = s
@@ -242,9 +242,9 @@ class MyModule : Demo1_PrvtModuleBase() {
             iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
                 val p = product[item.product]
                 if (p != null) {
-                    val itemPrice = p.price.toBigDecimal()
-                    item.price = itemPrice.setScale(2, RoundingMode.HALF_UP)
-                    item.sum = (itemPrice * item.quantity.toBigDecimal()).setScale(2, RoundingMode.HALF_UP)
+                    val itemPrice = p.price?: BigDecimal.ZERO
+                    item.price = itemPrice
+                    item.sum = (itemPrice * item.quantity.toBigDecimal())
                     update(item)
                 }
                 total += item.sum ?: BigDecimal.ZERO
@@ -255,8 +255,8 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
     }
 
-    @Description("Import cities")
-    @Parameters("pathIn: String")
+    @Description("Imports cities from file")
+    @Parameters("pathIn: example file in {project}/dataset/world-cities_csv.txt")
     fun importCities(pathIn: String): String {
         val fileIn = File(pathIn)
         var i = 0
@@ -304,7 +304,6 @@ class MyModule : Demo1_PrvtModuleBase() {
         Txt.info("Processed ${i} lines from ${pathIn}").msg()
         return Text.F("Done")
     }
-
 
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
         class ViewIterator(f: Formula, m: MyModule) : View1.Data(f, m) {
