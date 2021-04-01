@@ -15,6 +15,7 @@ import com.dolmen.util.Text
 import java.io.File
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.time.Duration
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import kotlin.random.Random
@@ -34,20 +35,20 @@ class MyModule : Demo1_PrvtModuleBase() {
         var n = 0
         iterate<Customer>(customerFilter) { c ->
             n++
-//            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
+            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
             var m = 0
             iterate<Shipping_Order>("customer=${c.id}") { o ->
                 m++
-//                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
+                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
                 var k = 0
                 iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
                     k++
 //                    val p = select(Product(), item.product)
                     val p = product[item.product]
-//                    Txt.info("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}").msg()
+                    Txt.info("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}").msg()
                 }
             }
-//            if (m == 0) Txt.info("No orders for ${c.name}").msg()
+            if (m == 0) Txt.info("No orders for ${c.name}").msg()
         }
     }
 
@@ -97,43 +98,47 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Shows customers' orders summary - selectMap() version")
     @Parameters("customerFilter: String")
     fun action91(customerFilter: String) {
-//        val customer = selectMap(Customer.fId, customerFilter)
-        val order = selectMap(Shipping_Order.fId, "")
-        val orderProduct = selectMap(Shipping_Order_Product.fId, "")
-        val product = selectMap(Product.fId, "")
-
-        // customer id, order id, order item id
-        var customerOrder = mutableMapOf<RowID, MutableMap<RowID, MutableList<RowID>>>()
-
-        val ord = order.values
-        val grOrd = ord.groupBy { it.customer }
-
-        val item = orderProduct.values
-        val grItem = item.groupBy { it.shipping_Order }
-
-        var n = 0
-//        customer.forEach{(_,c)->
-        iterate<Customer>(customerFilter) { c ->
-            n++
-//            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
-            var m = 0
-            val oo = grOrd[c.id]
-            oo?.forEach { o ->
-                m++
-//                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
-                var k = 0
-                val ii = grItem[o.id]
-                ii?.forEach { item ->
-                    k++
-                    val p = product[item.product]
-//                    Txt.info("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}").msg()
+        val outFile = File("C:/dolmen/tmp/demo1.txt")
+        outFile.bufferedWriter().use { out ->
+            val start = OffsetDateTime.now()
+            out.write("Started at $start\n")
+            val customer = selectMap(Customer.fId, customerFilter).values.sortedBy { it.name }
+            var finish = OffsetDateTime.now()
+            out.write("Query customer finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
+            val order = selectMap(Shipping_Order.fId, "").values.groupBy { it.customer }
+            finish = OffsetDateTime.now()
+            out.write("Query order finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
+            val orderProduct = selectMap(Shipping_Order_Product.fId, "").values.groupBy { it.shipping_Order }
+            finish = OffsetDateTime.now()
+            out.write("Query orderProduct finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
+            val product = selectMap(Product.fId, "")
+            finish = OffsetDateTime.now()
+            out.write("Query product finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
+            var n = 0
+            customer.forEach { c ->
+                n++
+                out.write("${n}. Name = ${c.name}, Phone = ${c.phone}\n")
+                var m = 0
+                order[c.id]?.sortedBy { it.datetime_Order_Placed }?.forEach { o ->
+                    m++
+                    out.write("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}\n")
+                    var k = 0
+                    orderProduct[o.id]?.sortedBy { product[it.product]?.name }?.forEach { item ->
+                        k++
+                        val p = product[item.product]
+                        out.write("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}\n")
+                    }
                 }
+                if (m == 0) out.write("No orders for ${c.name}\n")
             }
-//            if (m == 0) Txt.info("No orders for ${c.name}").msg()
+            finish = OffsetDateTime.now()
+            out.write("Finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
         }
-
-
-        Txt.info("Finish").msg()
     }
 
     @Description("Generate products")
@@ -188,16 +193,16 @@ class MyModule : Demo1_PrvtModuleBase() {
         val maxItems = 10
         val maxQuantity = 15
         val minutesInDay = 3600
-        val customer = selectMap(Customer.fId, "").toList()
+        val customer = selectMap(Customer.fId, "").values.toList()
         val maxCustomer = customer.size
-        val product = selectMap(Product.fId, "").toList()
+        val product = selectMap(Product.fId, "").values.toList()
         val maxProduct = product.size
         for (i in 1..n) {
             val o = Shipping_Order()
             val placedDaysAgo = Random.nextInt(maxPlacedDaysAgo + 1).toLong()
             val paidDaysAgo = (placedDaysAgo - Random.nextInt(maxPaidAfter + 1)).coerceAtLeast(0)
             val shipmentDaysAgo = placedDaysAgo - Random.nextInt(maxShipmentAfter + 1).toLong()
-            o.customer = customer[Random.nextInt(maxCustomer)].first
+            o.customer = customer[Random.nextInt(maxCustomer)].id
             o.datetime_Order_Placed =
                     OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
             o.date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
@@ -207,7 +212,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             var total = BigDecimal.ZERO
             for (j in 1..k) {
                 val item = Shipping_Order_Product()
-                val p = product[Random.nextInt(maxProduct)].second
+                val p = product[Random.nextInt(maxProduct)]
                 item.shipping_Order = o.id
                 item.product = p.id
                 item.quantity = Random.nextInt(maxQuantity) + 1
