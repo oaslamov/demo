@@ -1,0 +1,13 @@
+{
+  "code":"v_dm7",
+  "type":"abstract",
+  "extend":[
+    "shipping_order_product",
+    "shipping_order",
+    "product"
+  ],
+  "fields":[
+  ],
+  "@":"26",
+  "@x":"1id:0;2kat_dd:3;6shipping_order:0;7product:0;8quantity:3;9price:6;10sum:6;11comment:1;12id_of_shipping_order:0;13kat_dd_of_shipping_order:3;14customer_of_shipping_order:0;15datetime_order_placed_of_shipping_order:7;16date_order_paid_of_shipping_order:9;17shipment_date_of_shipping_order:9;18total_of_shipping_order:6;19comment_of_shipping_order:2;20id_of_product:0;21kat_dd_of_product:3;22name_of_product:1;23price_of_product:6;24product_type_of_product:1"
+}

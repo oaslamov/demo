@@ -39,6 +39,26 @@
       "fields":[
         "shipping_order"
       ]
+    },
+    {
+      "fields":[
+        "quantity"
+      ]
+    },
+    {
+      "fields":[
+        "price"
+      ]
+    },
+    {
+      "fields":[
+        "sum"
+      ]
+    },
+    {
+      "fields":[
+        "product"
+      ]
     }
   ],
   "@":"9",
