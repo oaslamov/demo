@@ -296,6 +296,22 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Text.F("Done")
     }
 
+    @Description("Performs complex order item search")
+    @Parameters("itemFilter", "productFilter", "orderFilter", "customerFilter")
+    fun search(itemFilter: String?, productFilter: String?, orderFilter: String?,
+               customerFilter: String?): List<ITopTable> {
+        val count = 1000
+        var item = selectMap(Shipping_Order_Product.fId, itemFilter)
+        val product = selectMap(Product.fId, productFilter)
+        var order = selectMap(Shipping_Order.fId, orderFilter)
+        val customer = selectMap(Customer.fId, customerFilter)
+
+        order = order.filterValues { it.customer in customer }
+        item = item.filterValues { (it.product in product) and (it.shipping_Order in order) }
+        val resL = item.values.take(count).toList()
+        return resL
+    }
+
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
         class ViewIterator(f: Formula, m: MyModule) : View1.Data(f, m) {
             val customers: Map<RowID, Customer> = selectMap(Customer.fId, "")
