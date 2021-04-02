@@ -19,7 +19,6 @@ import java.time.Duration
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import kotlin.random.Random
-import kotlinx.coroutines.*
 
 class MyModule : Demo1_PrvtModuleBase() {
 
@@ -103,49 +102,33 @@ class MyModule : Demo1_PrvtModuleBase() {
         outFile.bufferedWriter().use { out ->
             val start = OffsetDateTime.now()
             out.write("Started at $start\n")
-            val dCustomer = GlobalScope.async {
-                selectMap(Customer.fId, customerFilter).values.sortedBy { it.name }
-            }
-            val dOrder = GlobalScope.async {
-                selectMap(Shipping_Order.fId, "").values.groupBy { it.customer }
-            }
-            val dOrderProduct = GlobalScope.async {
-                selectMap(Shipping_Order_Product.fId, "").values.groupBy { it.shipping_Order }
-            }
-            val dProduct = GlobalScope.async {
-                selectMap(Product.fId, "")
-            }
-
-            runBlocking {
-                val customer = dCustomer.await()
-                val order = dOrder.await()
-                val orderProduct = dOrderProduct.await()
-                val product = dProduct.await()
-                var finish = OffsetDateTime.now()
-                out.write("Query finished at $finish\n")
-                out.write("Runtime ${Duration.between(start, finish)}\n")
-
-                var n = 0
-                customer.forEach { c ->
-                    n++
-                    out.write("${n}. Name = ${c.name}, Phone = ${c.phone}\n")
-                    var m = 0
-                    order[c.id]?.sortedBy { it.datetime_Order_Placed }?.forEach { o ->
-                        m++
-                        out.write("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}\n")
-                        var k = 0
-                        orderProduct[o.id]?.sortedBy { product[it.product]?.name }?.forEach { item ->
-                            k++
-                            val p = product[item.product]
-                            out.write("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}\n")
-                        }
+            val customer = selectMap(Customer.fId, customerFilter).values.sortedBy { it.name }
+            val order = selectMap(Shipping_Order.fId, "").values.groupBy { it.customer }
+            val orderProduct = selectMap(Shipping_Order_Product.fId, "").values.groupBy { it.shipping_Order }
+            val product = selectMap(Product.fId, "")
+            var finish = OffsetDateTime.now()
+            out.write("Query finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
+            var n = 0
+            customer.forEach { c ->
+                n++
+                out.write("${n}. Name = ${c.name}, Phone = ${c.phone}\n")
+                var m = 0
+                order[c.id]?.sortedBy { it.datetime_Order_Placed }?.forEach { o ->
+                    m++
+                    out.write("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}\n")
+                    var k = 0
+                    orderProduct[o.id]?.sortedBy { product[it.product]?.name }?.forEach { item ->
+                        k++
+                        val p = product[item.product]
+                        out.write("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}\n")
                     }
-                    if (m == 0) out.write("No orders for ${c.name}\n")
                 }
-                finish = OffsetDateTime.now()
-                out.write("Finished at $finish\n")
-                out.write("Runtime ${Duration.between(start, finish)}\n")
+                if (m == 0) out.write("No orders for ${c.name}\n")
             }
+            finish = OffsetDateTime.now()
+            out.write("Finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
         }
     }
 
