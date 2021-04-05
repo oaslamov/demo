@@ -18,13 +18,13 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef01900800a}l",
+          "label":"$l{f:7ef07d00800a}l",
           "type":"text",
-          "hint":"$l{f:7ef01900800a:d}l"
+          "hint":"$l{f:7ef07d00800a:d}l"
         },
         {
           "code":"customer",
-          "label":"$l{f:7ef019008006}l",
+          "label":"$l{f:7ef07d008006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -41,19 +41,19 @@
               ]
             }
           },
-          "hint":"$l{f:7ef019008006:d}l"
+          "hint":"$l{f:7ef07d008006:d}l"
         },
         {
           "code":"date_order_paid",
-          "label":"$l{f:7ef019008009}l",
+          "label":"$l{f:7ef07d008009}l",
           "type":"plaindate",
-          "hint":"$l{f:7ef019008009:d}l"
+          "hint":"$l{f:7ef07d008009:d}l"
         },
         {
           "code":"datetime_order_placed",
-          "label":"$l{f:7ef019008008}l",
+          "label":"$l{f:7ef07d008008}l",
           "type":"datetime",
-          "hint":"$l{f:7ef019008008:d}l"
+          "hint":"$l{f:7ef07d008008:d}l"
         },
         {
           "code":"id",
@@ -61,9 +61,9 @@
         },
         {
           "code":"shipment_date",
-          "label":"$l{f:7ef01900800b}l",
+          "label":"$l{f:7ef07d00800b}l",
           "type":"plaindate",
-          "hint":"$l{f:7ef01900800b:d}l"
+          "hint":"$l{f:7ef07d00800b:d}l"
         }
       ],
       "operations":{
@@ -132,9 +132,9 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef01900900b}l",
+          "label":"$l{f:7ef07d00900b}l",
           "type":"string",
-          "hint":"$l{f:7ef01900900b:d}l"
+          "hint":"$l{f:7ef07d00900b:d}l"
         },
         {
           "code":"id",
@@ -142,7 +142,7 @@
         },
         {
           "code":"product",
-          "label":"$l{f:7ef019009008}l",
+          "label":"$l{f:7ef07d009008}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -159,17 +159,17 @@
               ]
             }
           },
-          "hint":"$l{f:7ef019009008:d}l"
+          "hint":"$l{f:7ef07d009008:d}l"
         },
         {
           "code":"quantity",
-          "label":"$l{f:7ef01900900a}l",
+          "label":"$l{f:7ef07d00900a}l",
           "type":"integer",
-          "hint":"$l{f:7ef01900900a:d}l"
+          "hint":"$l{f:7ef07d00900a:d}l"
         },
         {
           "code":"shipping_order",
-          "label":"$l{f:7ef019009006}l",
+          "label":"$l{f:7ef07d009006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -186,7 +186,7 @@
               ]
             }
           },
-          "hint":"$l{f:7ef019009006:d}l"
+          "hint":"$l{f:7ef07d009006:d}l"
         }
       ],
       "operations":{
@@ -266,39 +266,39 @@
         },
         {
           "code":"name",
-          "label":"$l{f:7ef019006006}l",
+          "label":"$l{f:7ef07d006006}l",
           "type":"string",
-          "hint":"$l{f:7ef019006006:d}l"
+          "hint":"$l{f:7ef07d006006:d}l"
         },
         {
           "code":"address_line1",
-          "label":"$l{f:7ef019006008}l",
+          "label":"$l{f:7ef07d006008}l",
           "type":"string",
-          "hint":"$l{f:7ef019006008:d}l"
+          "hint":"$l{f:7ef07d006008:d}l"
         },
         {
           "code":"address_line2",
-          "label":"$l{f:7ef019006009}l",
+          "label":"$l{f:7ef07d006009}l",
           "type":"string",
-          "hint":"$l{f:7ef019006009:d}l"
+          "hint":"$l{f:7ef07d006009:d}l"
         },
         {
           "code":"address_line3",
-          "label":"$l{f:7ef01900600a}l",
+          "label":"$l{f:7ef07d00600a}l",
           "type":"string",
-          "hint":"$l{f:7ef01900600a:d}l"
+          "hint":"$l{f:7ef07d00600a:d}l"
         },
         {
           "code":"phone",
-          "label":"$l{f:7ef019006007}l",
+          "label":"$l{f:7ef07d006007}l",
           "type":"string",
-          "hint":"$l{f:7ef019006007:d}l"
+          "hint":"$l{f:7ef07d006007:d}l"
         },
         {
           "code":"mobile",
-          "label":"$l{f:7ef01900600b}l",
+          "label":"$l{f:7ef07d00600b}l",
           "type":"string",
-          "hint":"$l{f:7ef01900600b:d}l"
+          "hint":"$l{f:7ef07d00600b:d}l"
         }
       ],
       "operations":{

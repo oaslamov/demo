@@ -20,43 +20,43 @@
         },
         {
           "code":"name",
-          "label":"$l{f:7ef019006006}l",
+          "label":"$l{f:7ef07d006006}l",
           "type":"string",
-          "hint":"$l{f:7ef019006006:d}l"
+          "hint":"$l{f:7ef07d006006:d}l"
         },
         {
           "code":"address_line1",
-          "label":"$l{f:7ef019006008}l",
+          "label":"$l{f:7ef07d006008}l",
           "type":"string",
-          "hint":"$l{f:7ef019006008:d}l"
+          "hint":"$l{f:7ef07d006008:d}l"
         },
         {
           "code":"address_line2",
-          "label":"$l{f:7ef019006009}l",
+          "label":"$l{f:7ef07d006009}l",
           "type":"string",
-          "hint":"$l{f:7ef019006009:d}l"
+          "hint":"$l{f:7ef07d006009:d}l"
         },
         {
           "code":"address_line3",
-          "label":"$l{f:7ef01900600a}l",
+          "label":"$l{f:7ef07d00600a}l",
           "type":"string",
-          "hint":"$l{f:7ef01900600a:d}l"
+          "hint":"$l{f:7ef07d00600a:d}l"
         },
         {
           "code":"phone",
-          "label":"$l{f:7ef019006007}l",
+          "label":"$l{f:7ef07d006007}l",
           "type":"string",
-          "hint":"$l{f:7ef019006007:d}l"
+          "hint":"$l{f:7ef07d006007:d}l"
         },
         {
           "code":"mobile",
-          "label":"$l{f:7ef01900600b}l",
+          "label":"$l{f:7ef07d00600b}l",
           "type":"string",
-          "hint":"$l{f:7ef01900600b:d}l"
+          "hint":"$l{f:7ef07d00600b:d}l"
         },
         {
           "code":"city",
-          "label":"$l{f:7ef019006010}l",
+          "label":"$l{f:7ef07d006010}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -73,11 +73,11 @@
               ]
             }
           },
-          "hint":"$l{f:7ef019006010:d}l"
+          "hint":"$l{f:7ef07d006010:d}l"
         },
         {
           "code":"country",
-          "label":"$l{f:7ef01900600c}l",
+          "label":"$l{f:7ef07d00600c}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -94,11 +94,11 @@
               ]
             }
           },
-          "hint":"$l{f:7ef01900600c:d}l"
+          "hint":"$l{f:7ef07d00600c:d}l"
         },
         {
           "code":"subcountry",
-          "label":"$l{f:7ef01900600e}l",
+          "label":"$l{f:7ef07d00600e}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -115,7 +115,7 @@
               ]
             }
           },
-          "hint":"$l{f:7ef01900600e:d}l"
+          "hint":"$l{f:7ef07d00600e:d}l"
         }
       ],
       "operations":{

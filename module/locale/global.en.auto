@@ -3,111 +3,111 @@
 // -- for installed system: "locale" dir in Workspace (including subpath for global files or locale/<module>/ folder for module files)
 // -- for module developer project: "locale" dir in the Dolmen SDK project
 
-m:7ef019000000=Demo module #1
+m:7ef07d000000=Demo module #1
 
 // table City
-t:7ef01900c000=City
+t:7ef07d00c000=City
 --  Country
-f:7ef01900c006=Country
+f:7ef07d00c006=Country
 --  Subcountry
-f:7ef01900c008=Subcountry
+f:7ef07d00c008=Subcountry
 --  Name
-f:7ef01900c00a=Name
+f:7ef07d00c00a=Name
 --  Geonameid
-f:7ef01900c00b=Geonameid
+f:7ef07d00c00b=Geonameid
 --  List Name
-f:7ef01900c00c=List Name
+f:7ef07d00c00c=List Name
 
 // table Country
-t:7ef01900d000=Country
+t:7ef07d00d000=Country
 --  Name
-f:7ef01900d006=Name
+f:7ef07d00d006=Name
 
 // table Customer
-t:7ef019006000=Customer
+t:7ef07d006000=Customer
 --  Name
-f:7ef019006006=Name
+f:7ef07d006006=Name
 --  Phone
-f:7ef019006007=Phone
+f:7ef07d006007=Phone
 --  Mobile
-f:7ef01900600b=Mobile
+f:7ef07d00600b=Mobile
 --  Address Line1
-f:7ef019006008=Address Line1
+f:7ef07d006008=Address Line1
 --  Address Line2
-f:7ef019006009=Address Line2
+f:7ef07d006009=Address Line2
 --  Address Line3
-f:7ef01900600a=Address Line3
+f:7ef07d00600a=Address Line3
 --  Country
-f:7ef01900600c=Country
+f:7ef07d00600c=Country
 --  Subcountry
-f:7ef01900600e=Subcountry
+f:7ef07d00600e=Subcountry
 --  City
-f:7ef019006010=City
+f:7ef07d006010=City
 
 // table Flt
-t:7ef019010000=Flt
+t:7ef07d010000=Flt
 --  Search
-f:7ef019010006=Search
+f:7ef07d010006=Search
 
 // table Product
-t:7ef019007000=Product
+t:7ef07d007000=Product
 --  Name
-f:7ef019007006=Name
+f:7ef07d007006=Name
 --  Price
-f:7ef019007009=Price
+f:7ef07d007009=Price
 --  Product Type
-f:7ef019007008=Product Type
-e:7ef019007008.T=Toy
-e:7ef019007008.B=Book
-e:7ef019007008.G=Grocery
+f:7ef07d007008=Product Type
+e:7ef07d007008.T=Toy
+e:7ef07d007008.B=Book
+e:7ef07d007008.G=Grocery
 
 // table Shipping Order
-t:7ef019008000=Shipping Order
+t:7ef07d008000=Shipping Order
 --  Customer
-f:7ef019008006=Customer
+f:7ef07d008006=Customer
 --  Order placed at
-f:7ef019008008=Order placed at
+f:7ef07d008008=Order placed at
 --  Order paid at
-f:7ef019008009=Order paid at
+f:7ef07d008009=Order paid at
 --  Shipment Date
-f:7ef01900800b=Shipment Date
+f:7ef07d00800b=Shipment Date
 --  Total
-f:7ef01900800e=Total
+f:7ef07d00800e=Total
 --  Comment
-f:7ef01900800a=Comment
+f:7ef07d00800a=Comment
 
 // table Shipping Order Product
-t:7ef019009000=Shipping Order Product
+t:7ef07d009000=Shipping Order Product
 --  Shipping Order
-f:7ef019009006=Shipping Order
+f:7ef07d009006=Shipping Order
 --  Product
-f:7ef019009008=Product
+f:7ef07d009008=Product
 --  Qnty
-f:7ef01900900a=Qnty
+f:7ef07d00900a=Qnty
 --  Price
-f:7ef019009011=Price
+f:7ef07d009011=Price
 --  Sum
-f:7ef019009012=Sum
+f:7ef07d009012=Sum
 --  Comment
-f:7ef01900900b=Comment
+f:7ef07d00900b=Comment
 
 // table Subcountry
-t:7ef01900e000=Subcountry
+t:7ef07d00e000=Subcountry
 --  Country
-f:7ef01900e006=Country
+f:7ef07d00e006=Country
 --  Name
-f:7ef01900e008=Name
+f:7ef07d00e008=Name
 
 // table View1
-t:7ef019017000=View1
+t:7ef07d017000=View1
 --  Customer name
-f:7ef01901700c=Customer name
+f:7ef07d01700c=Customer name
 --  Customer phone
-f:7ef01901700d=Customer phone
+f:7ef07d01700d=Customer phone
 --  Customer mobile
-f:7ef01901700e=Customer mobile
+f:7ef07d01700e=Customer mobile
 --  Customer address
-f:7ef01901700f=Customer address
+f:7ef07d01700f=Customer address
 
 // table V Dm7
-t:7ef01901a000=V Dm7
+t:7ef07d01a000=V Dm7
