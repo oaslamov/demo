@@ -242,7 +242,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             }
             o.total = total
             update(o)
-            Txt.info("${i}. Updated order # ${o.id}, total = ${o.total}").msg()
+            if (i % 100 == 0) Txt.info("${i}. Updated order # ${o.id}, total = ${o.total}").msg()
         }
     }
 
