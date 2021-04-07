@@ -132,6 +132,90 @@ class MyModule : Demo1_PrvtModuleBase() {
         }
     }
 
+    @Description("Shows customers' orders summary - selectMap() version")
+    @Parameters("customerFilter: String")
+    fun action92(customerFilter: String) {
+        val outFile = File("C:/dolmen/tmp/demo1.txt")
+        outFile.bufferedWriter().use { out ->
+            val start = OffsetDateTime.now()
+            out.write("Started at $start\n")
+            //val customer = selectMap(Customer.fId, customerFilter).values.sortedBy { it.name }
+            val product = selectMap(Product.fId, "")
+            var finish = OffsetDateTime.now()
+            out.write("Query finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
+            var n = 0
+            //customer.forEach { c ->
+            iterate<Customer>(customerFilter) { c ->
+                n++
+                out.write("${n}. Name = ${c.name}, Phone = ${c.phone}\n")
+                var m = 0
+                //val order = selectMap(Shipping_Order.fId, "customer=${c.id}").values
+                //order.sortedBy { it.datetime_Order_Placed }.forEach { o ->
+                iterate<Shipping_Order>("customer=${c.id}") { o ->
+                    m++
+                    out.write("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}\n")
+                    var k = 0
+                    //val orderProduct = selectMap(Shipping_Order_Product.fId, "shipping_order=${o.id}").values
+                    //orderProduct.sortedBy { product[it.product]?.name }.forEach { item ->
+                    iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
+                        k++
+                        val p = product[item.product]
+                        out.write("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}\n")
+                    }
+                }
+                if (m == 0) out.write("No orders for ${c.name}\n")
+            }
+            finish = OffsetDateTime.now()
+            out.write("Finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
+        }
+    }
+
+    @Description("Shows customers' orders summary - selectMap() version")
+    @Parameters("customerFilter: String")
+    fun action93(customerFilter: String) {
+        val outFile = File("C:/dolmen/tmp/demo1.txt")
+        outFile.bufferedWriter().use { out ->
+            val start = OffsetDateTime.now()
+            out.write("Started at $start\n")
+            val customerMap = selectMap(Customer.fId, customerFilter)
+            val customer = customerMap.values.sortedBy { it.name }
+            val orderFilter = "customer in (${customerMap.keys.take(150).joinToString()})"
+            val orderMap = selectMap(Shipping_Order.fId, orderFilter)
+            val order = orderMap.values.groupBy { it.customer }
+            // max elements to use index search 153? or filter length?
+            val orderProductFilter = "shipping_order in (${orderMap.keys.take(150).joinToString(",")})"
+            val orderProductMap = selectMap(Shipping_Order_Product.fId, orderProductFilter)
+            val orderProduct = orderProductMap.values.groupBy { it.shipping_Order }
+            val product = selectMap(Product.fId, "")
+            var finish = OffsetDateTime.now()
+            out.write("Query finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
+            var n = 0
+            customer.forEach { c ->
+                n++
+                out.write("${n}. Name = ${c.name}, Phone = ${c.phone}\n")
+                var m = 0
+                order[c.id]?.sortedBy { it.datetime_Order_Placed }?.forEach { o ->
+                    m++
+                    out.write("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}\n")
+                    var k = 0
+                    orderProduct[o.id]?.sortedBy { product[it.product]?.name }?.forEach { item ->
+                        k++
+                        val p = product[item.product]
+                        out.write("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}\n")
+                    }
+                }
+                if (m == 0) out.write("No orders for ${c.name}\n")
+            }
+            finish = OffsetDateTime.now()
+            out.write("Finished at $finish\n")
+            out.write("Runtime ${Duration.between(start, finish)}\n")
+        }
+    }
+
+
     @Description("Imports products from file")
     @Parameters("pathIn: example file in {project}/dataset/grocery.csv", "n: Int")
     fun importProducts(pathIn: String, n: Int): String {
