@@ -61,6 +61,13 @@ e:7ef07d007008.T=Toy
 e:7ef07d007008.B=Book
 e:7ef07d007008.G=Grocery
 
+// table Product Abc
+t:7ef07d01d000=Product Abc
+--  Quantity
+f:7ef07d01d00a=Quantity
+--  Sum
+f:7ef07d01d009=Sum
+
 // table Shipping Order
 t:7ef07d008000=Shipping Order
 --  Customer

@@ -1,0 +1,22 @@
+{
+  "code":"product_abc",
+  "type":"abstract",
+  "extend":[
+    "product"
+  ],
+  "fields":[
+    {
+      "code":"quantity",
+      "type":"integer",
+      "@":"10"
+    },
+    {
+      "code":"sum",
+      "type":"number",
+      "@":"9"
+    }
+  ],
+  "@":"29",
+  "@e":"10quantity:3;9sum:6",
+  "@x":"1id:0;2kat_dd:3;11name:1;12price:6;13product_type:1"
+}

@@ -428,6 +428,27 @@ class MyModule : Demo1_PrvtModuleBase() {
         return ViewIterator(f, this)
     }
 
+    override fun s_iterateProduct_Abc(f: Formula): SelectedData<Product_Abc> {
+        val items = selectMap(Shipping_Order_Product.fId, "").values
+                .groupingBy { it.product }
+                .aggregate { _, acc: Pair<Int, BigDecimal>?, item, _ ->
+                    Pair(
+                            (acc?.first ?: 0) + (item.quantity ?: 0),
+                            (acc?.second ?: BigDecimal.ZERO) + (item.sum ?: BigDecimal.ZERO)
+                    )
+                }
+
+        class ViewIterator(f: Formula, m: MyModule) : Product_Abc.Data(f, m) {
+            override fun create(s: Product): Product_Abc {
+                val v = super.create(s)
+                v.quantity = items[s.id]?.first?:0
+                v.sum = items[s.id]?.second
+                return v
+            }
+        }
+        return ViewIterator(f, this)
+    }
+
     override fun beforeUpdate(t: ITopTable?) {
         super.beforeUpdate(t)
         if (t is Customer) {
