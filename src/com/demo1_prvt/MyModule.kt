@@ -176,17 +176,28 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Parameters("customerFilter: String")
     fun action93(customerFilter: String) {
         val outFile = File("C:/dolmen/tmp/demo1.txt")
+        val queryChunkSize = 150
         outFile.bufferedWriter().use { out ->
             val start = OffsetDateTime.now()
             out.write("Started at $start\n")
             val customerMap = selectMap(Customer.fId, customerFilter)
             val customer = customerMap.values.sortedBy { it.name }
-            val orderFilter = "customer in (${customerMap.keys.take(150).joinToString()})"
-            val orderMap = selectMap(Shipping_Order.fId, orderFilter)
+            val customerChunks = customerMap.keys.chunked(queryChunkSize)
+            var orderMap = mapOf<RowID, Shipping_Order>()
+            run {//forEach
+                val chunk = customerChunks[0]
+                val orderFilter = "customer in (${chunk.joinToString(",")})"
+                orderMap = orderMap + selectMap(Shipping_Order.fId, orderFilter)
+            }
             val order = orderMap.values.groupBy { it.customer }
             // max elements to use index search 153? or filter length?
-            val orderProductFilter = "shipping_order in (${orderMap.keys.take(150).joinToString(",")})"
-            val orderProductMap = selectMap(Shipping_Order_Product.fId, orderProductFilter)
+            val orderChunks = orderMap.keys.chunked(queryChunkSize)
+            var orderProductMap = mapOf<RowID, Shipping_Order_Product>()
+            run {//forEach
+                val chunk = orderChunks[0]
+                val orderProductFilter = "shipping_order in (${chunk.joinToString(",")})"
+                orderProductMap = orderProductMap + selectMap(Shipping_Order_Product.fId, orderProductFilter)
+            }
             val orderProduct = orderProductMap.values.groupBy { it.shipping_Order }
             val product = selectMap(Product.fId, "")
             var finish = OffsetDateTime.now()
