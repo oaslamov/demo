@@ -272,7 +272,8 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Generates random orders")
     @Parameters("n: Int")
     fun genOrders(n: Int): String {
-        val maxPlacedDaysAgo = 365
+        val rnd = java.util.Random()
+        val maxPlacedDaysAgo = 365 * 3
         val maxPaidAfter = 30
         val maxShipmentAfter = 45
         val minItems = 3
@@ -298,7 +299,10 @@ class MyModule : Demo1_PrvtModuleBase() {
             var total = BigDecimal.ZERO
             for (j in 1..k) {
                 val item = Shipping_Order_Product()
-                val p = product[Random.nextInt(maxProduct)]
+                //val m = Random.nextInt(maxProduct)
+                val m = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt()
+                        .coerceAtLeast(0).coerceAtMost(maxProduct - 1)
+                val p = product[m] // Normal distribution (for ABC analysis graph)
                 item.shipping_Order = o.id
                 item.product = p.id
                 item.quantity = Random.nextInt(maxQuantity) + 1
@@ -457,7 +461,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             stat.avg_Price = aggr.second / aggr.first.toBigDecimal()
             cuSum += aggr.second
             stat.cusum = cuSum
-            stat.cuperc = cuSum / grandTotal * 100.toBigDecimal()
+            stat.cuperc = (cuSum.setScale(4) / grandTotal) * 100.toBigDecimal()
             insert(stat)
         }
     }
