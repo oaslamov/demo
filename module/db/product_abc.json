@@ -41,6 +41,25 @@
       "label":"Cumulative percentage",
       "type":"number",
       "@":"13"
+    },
+    {
+      "code":"abc_class",
+      "label":"ABC class",
+      "enum":[
+        {
+          "label":"A",
+          "value":"A"
+        },
+        {
+          "label":"B",
+          "value":"B"
+        },
+        {
+          "label":"C",
+          "value":"C"
+        }
+      ],
+      "@":"14"
     }
   ],
   "indexes":[
@@ -51,5 +70,5 @@
     }
   ],
   "@":"30",
-  "@e":"2kat_dd:3;6name:1;7avg_price:6;8quantity:3;9sum:6;10product:0;12cusum:6;13cuperc:6"
+  "@e":"2kat_dd:3;6name:1;7avg_price:6;8quantity:3;9sum:6;10product:0;12cusum:6;13cuperc:6;14abc_class:1"
 }

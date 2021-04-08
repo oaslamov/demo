@@ -433,8 +433,8 @@ class MyModule : Demo1_PrvtModuleBase() {
     }
 
     @Description("Calculates sales statistics for a given period of time")
-    @Parameters("start", "finish")
-    fun makeStats(start: LocalDate?, finish: LocalDate?) {
+    @Parameters("start", "finish", "abLimit: AB threshhold default(65)", "bcLimit: BC threshhold default(90)")
+    fun makeStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int) {
         val statsTableName = "demo1_prvt.product_abc"
         deleteList(statsTableName, "")
         val products = selectMap(Product.fId, "")
@@ -461,7 +461,13 @@ class MyModule : Demo1_PrvtModuleBase() {
             stat.avg_Price = aggr.second / aggr.first.toBigDecimal()
             cuSum += aggr.second
             stat.cusum = cuSum
-            stat.cuperc = (cuSum.setScale(4) / grandTotal) * 100.toBigDecimal()
+            val cuPerc = (cuSum.setScale(4) / grandTotal) * 100.toBigDecimal()
+            stat.cuperc = cuPerc
+            stat.abc_Class = when {
+                cuPerc < abLimit.toBigDecimal() -> Product_Abc.ABC_CLASS.A
+                cuPerc < bcLimit.toBigDecimal() -> Product_Abc.ABC_CLASS.B
+                else -> Product_Abc.ABC_CLASS.C
+            }
             insert(stat)
         }
     }
