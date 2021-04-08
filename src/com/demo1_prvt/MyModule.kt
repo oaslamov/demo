@@ -428,25 +428,38 @@ class MyModule : Demo1_PrvtModuleBase() {
         return ViewIterator(f, this)
     }
 
-    override fun s_iterateProduct_Abc(f: Formula): SelectedData<Product_Abc> {
-        val items = selectMap(Shipping_Order_Product.fId, "").values
+    @Description("Calculates sales statistics for a given period of time")
+    @Parameters("start", "finish")
+    fun makeStats(start: LocalDate?, finish: LocalDate?) {
+        val statsTableName = "demo1_prvt.product_abc"
+        deleteList(statsTableName, "")
+        val products = selectMap(Product.fId, "")
+        val items = selectMap(Shipping_Order_Product.fId, "")
+                .values
                 .groupingBy { it.product }
                 .aggregate { _, acc: Pair<Int, BigDecimal>?, item, _ ->
                     Pair(
-                            (acc?.first ?: 0) + (item.quantity ?: 0),
+                            (acc?.first ?: 0) + item.quantity,
                             (acc?.second ?: BigDecimal.ZERO) + (item.sum ?: BigDecimal.ZERO)
                     )
                 }
-
-        class ViewIterator(f: Formula, m: MyModule) : Product_Abc.Data(f, m) {
-            override fun create(s: Product): Product_Abc {
-                val v = super.create(s)
-                v.quantity = items[s.id]?.first?:0
-                v.sum = items[s.id]?.second
-                return v
-            }
+                .toList()
+                .sortedByDescending { (_, value) -> value.second }
+                .toMap()
+        val grandTotal = items.values.sumOf { it.second }
+        var cuSum = BigDecimal.ZERO
+        items.forEach { (id, aggr) ->
+            val stat = Product_Abc()
+            stat.product = id
+            stat.name = products[id]?.name
+            stat.quantity = aggr.first
+            stat.sum = aggr.second
+            stat.avg_Price = aggr.second / aggr.first.toBigDecimal()
+            cuSum += aggr.second
+            stat.cusum = cuSum
+            stat.cuperc = cuSum / grandTotal * 100.toBigDecimal()
+            insert(stat)
         }
-        return ViewIterator(f, this)
     }
 
     override fun beforeUpdate(t: ITopTable?) {

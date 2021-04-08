@@ -62,11 +62,21 @@ e:7ef07d007008.B=Book
 e:7ef07d007008.G=Grocery
 
 // table Product Abc
-t:7ef07d01d000=Product Abc
+t:7ef07d01e000=Product Abc
+--  Product
+f:7ef07d01e00a=Product
+--  Name
+f:7ef07d01e006=Name
+--  Average price
+f:7ef07d01e007=Average price
 --  Quantity
-f:7ef07d01d00a=Quantity
+f:7ef07d01e008=Quantity
 --  Sum
-f:7ef07d01d009=Sum
+f:7ef07d01e009=Sum
+--  Cumulative sum
+f:7ef07d01e00c=Cumulative sum
+--  Cumulative percentage
+f:7ef07d01e00d=Cumulative percentage
 
 // table Shipping Order
 t:7ef07d008000=Shipping Order

@@ -1,22 +1,55 @@
 {
   "code":"product_abc",
-  "type":"abstract",
-  "extend":[
-    "product"
-  ],
   "fields":[
+    {
+      "code":"product",
+      "ref":"product",
+      "@":"10:11"
+    },
+    {
+      "code":"name",
+      "usage":"name",
+      "etc":{
+        "ignoreCase":true
+      },
+      "@":"6"
+    },
+    {
+      "code":"avg_price",
+      "label":"Average price",
+      "type":"number",
+      "@":"7"
+    },
     {
       "code":"quantity",
       "type":"integer",
-      "@":"10"
+      "@":"8"
     },
     {
       "code":"sum",
       "type":"number",
       "@":"9"
+    },
+    {
+      "code":"cusum",
+      "label":"Cumulative sum",
+      "type":"number",
+      "@":"12"
+    },
+    {
+      "code":"cuperc",
+      "label":"Cumulative percentage",
+      "type":"number",
+      "@":"13"
     }
   ],
-  "@":"29",
-  "@e":"10quantity:3;9sum:6",
-  "@x":"1id:0;2kat_dd:3;11name:1;12price:6;13product_type:1"
+  "indexes":[
+    {
+      "fields":[
+        "name"
+      ]
+    }
+  ],
+  "@":"30",
+  "@e":"2kat_dd:3;6name:1;7avg_price:6;8quantity:3;9sum:6;10product:0;12cusum:6;13cuperc:6"
 }
