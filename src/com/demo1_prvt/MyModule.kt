@@ -11,6 +11,7 @@ import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
+import com.dolmen.ui.screen.ChartData
 import com.dolmen.util.Text
 import java.io.File
 import java.math.BigDecimal
@@ -470,6 +471,25 @@ class MyModule : Demo1_PrvtModuleBase() {
             }
             insert(stat)
         }
+    }
+
+    @Description("Prepares JSON for spline chart")
+    fun getChartSpline(): String {
+        val c = Chart()
+        c.legends.add(Legend("x", "% items", "number"))
+        c.legends.add(Legend("y1", "% turnover", "number")) //, "#00876c"))
+
+        val products = selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
+        val maxProduct = products.size
+
+        c.data.add(mapOf("x" to "0", "y1" to "0"))
+        products.forEachIndexed { i, p ->
+            val x = (i + 1).toFloat() / maxProduct * 100
+            val y = p.cuperc
+            c.data.add(mapOf("x" to x.toString(), "y1" to y.toString()))
+        }
+
+        return c.getJSON()
     }
 
     override fun beforeUpdate(t: ITopTable?) {

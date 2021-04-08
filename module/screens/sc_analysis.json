@@ -1,0 +1,47 @@
+{
+  "code":"sc_analysis:scr@demo1_prvt",
+  "label":"$l{Data analysis}l",
+  "serverStatus":"r",
+  "subject":"$l{Demo1}l",
+  "grid":{
+    "base":"screen",
+    "cols":16,
+    "rows":16
+  },
+  "data_sources":[
+    {
+      "code":"ds_chart1",
+      "type":"chart",
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.getChartSpline"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "parts":[
+    {
+      "code":"p_ch1",
+      "label":"$l{ABC}l",
+      "type":"chart",
+      "chart_type":"spline",
+      "border_type":"none",
+      "position":{
+        "from_col":1,
+        "to_col":16,
+        "from_row":1,
+        "to_row":16
+      },
+      "data_source":{
+        "code":"ds_chart1",
+        "operations":[
+          "select"
+        ]
+      }
+    }
+  ]
+}
