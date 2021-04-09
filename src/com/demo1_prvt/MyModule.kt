@@ -11,7 +11,6 @@ import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
-import com.dolmen.ui.screen.ChartData
 import com.dolmen.util.Text
 import java.io.File
 import java.math.BigDecimal
@@ -290,7 +289,10 @@ class MyModule : Demo1_PrvtModuleBase() {
             val placedDaysAgo = Random.nextInt(maxPlacedDaysAgo + 1).toLong()
             val paidDaysAgo = (placedDaysAgo - Random.nextInt(maxPaidAfter + 1)).coerceAtLeast(0)
             val shipmentDaysAgo = placedDaysAgo - Random.nextInt(maxShipmentAfter + 1).toLong()
-            o.customer = customer[Random.nextInt(maxCustomer)].id
+            //val m1 = Random.nextInt(maxCustomer)
+            val m1 = ((0.15 * rnd.nextGaussian() + 0.5) * maxCustomer).toInt()
+                    .coerceAtLeast(0).coerceAtMost(maxCustomer - 1)
+            o.customer = customer[m1].id
             o.datetime_Order_Placed =
                     OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
             o.date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
@@ -300,10 +302,10 @@ class MyModule : Demo1_PrvtModuleBase() {
             var total = BigDecimal.ZERO
             for (j in 1..k) {
                 val item = Shipping_Order_Product()
-                //val m = Random.nextInt(maxProduct)
-                val m = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt()
+                //val m2 = Random.nextInt(maxProduct)
+                val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt()
                         .coerceAtLeast(0).coerceAtMost(maxProduct - 1)
-                val p = product[m] // Normal distribution (for ABC analysis graph)
+                val p = product[m2] // Normal distribution (for ABC analysis graph)
                 item.shipping_Order = o.id
                 item.product = p.id
                 item.quantity = Random.nextInt(maxQuantity) + 1
@@ -436,41 +438,7 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Calculates sales statistics for a given period of time")
     @Parameters("start", "finish", "abLimit: AB threshhold default(65)", "bcLimit: BC threshhold default(90)")
     fun makeStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int) {
-        val statsTableName = "demo1_prvt.product_abc"
-        deleteList(statsTableName, "")
-        val products = selectMap(Product.fId, "")
-        val items = selectMap(Shipping_Order_Product.fId, "")
-                .values
-                .groupingBy { it.product }
-                .aggregate { _, acc: Pair<Int, BigDecimal>?, item, _ ->
-                    Pair(
-                            (acc?.first ?: 0) + item.quantity,
-                            (acc?.second ?: BigDecimal.ZERO) + (item.sum ?: BigDecimal.ZERO)
-                    )
-                }
-                .toList()
-                .sortedByDescending { (_, value) -> value.second }
-                .toMap()
-        val grandTotal = items.values.sumOf { it.second }
-        var cuSum = BigDecimal.ZERO
-        items.forEach { (id, aggr) ->
-            val stat = Product_Abc()
-            stat.product = id
-            stat.name = products[id]?.name
-            stat.quantity = aggr.first
-            stat.sum = aggr.second
-            stat.avg_Price = aggr.second / aggr.first.toBigDecimal()
-            cuSum += aggr.second
-            stat.cusum = cuSum
-            val cuPerc = (cuSum.setScale(4) / grandTotal) * 100.toBigDecimal()
-            stat.cuperc = cuPerc
-            stat.abc_Class = when {
-                cuPerc < abLimit.toBigDecimal() -> Product_Abc.ABC_CLASS.A
-                cuPerc < bcLimit.toBigDecimal() -> Product_Abc.ABC_CLASS.B
-                else -> Product_Abc.ABC_CLASS.C
-            }
-            insert(stat)
-        }
+        return Stats(this).makeStats(start, finish, abLimit, bcLimit)
     }
 
     @Description("Prepares JSON for spline chart")
