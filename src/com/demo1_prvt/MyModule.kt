@@ -467,6 +467,38 @@ class MyModule : Demo1_PrvtModuleBase() {
         return c.getJSON()
     }
 
+    @Description("Prepares JSON for piechart")
+    fun getChartPie(): String {
+        val limits: List<Int> = listOf(400, 800, 1200, 1600)
+        val totals = selectMap(Shipping_Order.fId, "").values
+                .map {
+                    val total = it.total ?: BigDecimal.ZERO
+                    var group: Int = limits.size
+                    for (i in 0 until limits.size) {
+                        if (total.compareTo(BigDecimal(limits[i])) == -1) {
+                            group = i
+                            break
+                        }
+                    }
+                    Pair(group, total)
+                }
+                .groupBy { it.first }
+                .mapValues { it.value.size }
+
+        val c = Chart()
+        c.legends.add(Legend(code = "x", name = "Order total", type = "string"))
+        c.legends.add(Legend("y1", "Percentage", "number"))
+        for (i in 0..limits.size) {
+            val x = when {
+                i == 0 -> "<${limits[0]}.00"
+                i < limits.size -> "${limits[i - 1]}.00-${limits[i]}.00"
+                else -> ">${limits.last()}.00"
+            }
+            c.data.add(mapOf("x" to x, "y1" to "${totals[i]}"))
+        }
+        return c.getJSON()
+    }
+
     override fun beforeUpdate(t: ITopTable?) {
         super.beforeUpdate(t)
         if (t is Customer) {
