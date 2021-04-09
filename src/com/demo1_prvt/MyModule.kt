@@ -445,14 +445,30 @@ class MyModule : Demo1_PrvtModuleBase() {
         c.legends.add(Legend(code = "x", name = "% items", type = "number"))
         c.legends.add(Legend("y1", "% product turnover", "number"))
         c.legends.add(Legend("y2", "% customer turnover", "number"))
+        c.legends.add(Legend("y3", "product AB threshold", "number", "#91a3b2"))
+        c.legends.add(Legend("y4", "product BC threshold", "number", "#b9c2ca"))
 
         val products = selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
         val maxProduct = products.size
         c.data.add(mapOf("x" to "0", "y1" to "0"))
+        var class0 = "A"
+        var class1 = ""
         products.forEachIndexed { i, p ->
             val x = (i + 1).toFloat() / maxProduct * 100
             val y = p.cuperc
             c.data.add(mapOf("x" to x.toString(), "y1" to y.toString()))
+            class1 = p.abc_Class.toString()
+            if ((class0 == "A") and (class1 == "B")) {
+                c.data.add(mapOf("x" to "0", "y3" to y.toString()))
+                c.data.add(mapOf("x" to x.toString(), "y3" to y.toString()))
+                c.data.add(mapOf("x" to x.toString(), "y3" to "0"))
+            }
+            if ((class0 == "B") and (class1 == "C")) {
+                c.data.add(mapOf("x" to "0", "y4" to y.toString()))
+                c.data.add(mapOf("x" to x.toString(), "y4" to y.toString()))
+                c.data.add(mapOf("x" to x.toString(), "y4" to "0"))
+            }
+            class0 = class1
         }
 
         val customers = selectMap(Customer_Abc.fId, "").values.sortedByDescending { it.sum }
@@ -463,7 +479,6 @@ class MyModule : Demo1_PrvtModuleBase() {
             val y = p.cuperc
             c.data.add(mapOf("x" to x.toString(), "y2" to y.toString()))
         }
-
         return c.getJSON()
     }
 
