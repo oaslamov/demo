@@ -2,7 +2,7 @@ package com.demo1_prvt
 
 import com.dolmen.util.JSONManager
 
-data class Legend(val code: String, val name: String, val type: String, val color: String = "")
+data class Legend(val code: String, val name: String, val type: String)
 
 class Chart() {
     val legends: MutableList<Legend> = mutableListOf<Legend>()
