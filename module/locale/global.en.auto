@@ -44,6 +44,24 @@ f:7ef07d00600e=Subcountry
 --  City
 f:7ef07d006010=City
 
+// table Customer Abc
+t:7ef07d01f000=Customer Abc
+--  Customer
+f:7ef07d01f006=Customer
+--  Name
+f:7ef07d01f008=Name
+--  Sum
+f:7ef07d01f009=Sum
+--  Cumulative sum
+f:7ef07d01f00a=Cumulative sum
+--  Cumulative percentage
+f:7ef07d01f00b=Cumulative percentage
+--  ABC class
+f:7ef07d01f00c=ABC class
+e:7ef07d01f00c.A=A
+e:7ef07d01f00c.B=B
+e:7ef07d01f00c.C=C
+
 // table Flt
 t:7ef07d010000=Flt
 --  Search

@@ -1,27 +1,16 @@
 {
-  "code":"product_abc",
+  "code":"customer_abc",
   "fields":[
     {
-      "code":"product",
-      "ref":"product",
-      "@":"10:11"
+      "code":"customer",
+      "ref":"customer",
+      "@":"6:7"
     },
     {
       "code":"name",
       "etc":{
         "ignoreCase":true
       },
-      "@":"6"
-    },
-    {
-      "code":"avg_price",
-      "label":"Average price",
-      "type":"number",
-      "@":"7"
-    },
-    {
-      "code":"quantity",
-      "type":"integer",
       "@":"8"
     },
     {
@@ -33,13 +22,13 @@
       "code":"cusum",
       "label":"Cumulative sum",
       "type":"number",
-      "@":"12"
+      "@":"10"
     },
     {
       "code":"cuperc",
       "label":"Cumulative percentage",
       "type":"number",
-      "@":"13"
+      "@":"11"
     },
     {
       "code":"abc_class",
@@ -58,7 +47,7 @@
           "value":"C"
         }
       ],
-      "@":"14"
+      "@":"12"
     }
   ],
   "indexes":[
@@ -68,6 +57,6 @@
       ]
     }
   ],
-  "@":"30",
-  "@e":"2kat_dd:3;6name:1;7avg_price:6;8quantity:3;9sum:6;10product:0;12cusum:6;13cuperc:6;14abc_class:1"
+  "@":"31",
+  "@e":"2kat_dd:3;6customer:0;8name:1;9sum:6;10cusum:6;11cuperc:6;12abc_class:1"
 }

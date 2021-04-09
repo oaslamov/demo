@@ -9,6 +9,7 @@ import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
+import com.dolmen.serv.table.Field
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
 import com.dolmen.util.Text
@@ -444,17 +445,35 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Prepares JSON for spline chart")
     fun getChartSpline(): String {
         val c = Chart()
-        c.legends.add(Legend("x", "% items", "number"))
-        c.legends.add(Legend("y1", "% turnover", "number")) //, "#00876c"))
+        c.legends.add(Legend(code = "x", name = "% items", type = "number"))
+        c.legends.add(Legend("y1", "% product turnover", "number")) //, "#00876c"))
+        c.legends.add(Legend("y2", "% customer turnover", "number")) //, "#00876c"))
 
         val products = selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
         val maxProduct = products.size
+
+        //data class yLine(val code: String, val name: String, val field: Field)
+        //
+        //for (yL in listOf(yLine("y1", "% product turnover", Product_Abc.fId),
+        //        yLine("y2", "% customer turnover"))) {
+        //
+        //}
 
         c.data.add(mapOf("x" to "0", "y1" to "0"))
         products.forEachIndexed { i, p ->
             val x = (i + 1).toFloat() / maxProduct * 100
             val y = p.cuperc
             c.data.add(mapOf("x" to x.toString(), "y1" to y.toString()))
+        }
+
+        val customers = selectMap(Customer_Abc.fId, "").values.sortedByDescending { it.sum }
+        val maxCustomer = customers.size
+
+        c.data.add(mapOf("x" to "0", "y2" to "0"))
+        customers.forEachIndexed { i, p ->
+            val x = (i + 1).toFloat() / maxCustomer * 100
+            val y = p.cuperc
+            c.data.add(mapOf("x" to x.toString(), "y2" to y.toString()))
         }
 
         return c.getJSON()
