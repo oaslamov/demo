@@ -302,7 +302,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             for (j in 1..k) {
                 val item = Shipping_Order_Product()
                 //val m2 = Random.nextInt(maxProduct)
-                val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProdut).toInt().coerceIn(0, maxProduct - 1)
+                val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt().coerceIn(0, maxProduct - 1)
                 val p = product[m2] // Normal distribution (for ABC analysis graph)c
                 item.shipping_Order = o.id
                 item.product = p.id
