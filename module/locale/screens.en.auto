@@ -13,7 +13,7 @@ Comment=Comment
 Contacts=Contacts
 // screens: demo1_customer:scr@demo1_prvt demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Customer=Customer
-// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_order1610:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_order1610:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Demo1=Demo1
 // screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Details=Details
@@ -53,8 +53,16 @@ Product=Product
 "Shipping Order"=Shipping Order
 
 //-- sc_analysis:scr@demo1_prvt --
+"ABC Graph"=ABC Graph
 ABC=ABC
+"Customers ABC"=Customers ABC
 "Data analysis"=Data analysis
+"Products ABC"=Products ABC
+
+//-- sc_chart:scr@demo1_prvt --
+"ABC analysis graph"=ABC analysis graph
+Charts=Charts
+"Order total distribution"=Order total distribution
 
 //-- sc_order:scr@demo1_prvt --
 Orders=Orders
