@@ -485,28 +485,28 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Prepares JSON for piechart")
     fun getChartPie(): String {
         val limits: List<Int> = listOf(400, 800, 1200, 1600)
-        val totals = selectMap(Shipping_Order.fId, "").values
-                .map {
-                    val total = it.total ?: BigDecimal.ZERO
-                    var group: Int = limits.size
-                    for (i in 0 until limits.size) {
-                        if (total.compareTo(BigDecimal(limits[i])) == -1) {
-                            group = i
-                            break
-                        }
-                    }
-                    Pair(group, total)
+        val limitsSize = limits.size
+        if (limitsSize == 0) return ""
+        val sums = selectMap(Shipping_Order.fId, "").map { it.value.total ?: BigDecimal.ZERO }
+        val totals = mutableMapOf<Int, Int>()
+        sums.forEach { total ->
+            var group: Int = limitsSize
+            for (i in 0 until limitsSize) {
+                if (total.compareTo(BigDecimal(limits[i])) == -1) {
+                    group = i
+                    break
                 }
-                .groupBy { it.first }
-                .mapValues { it.value.size }
+            }
+            totals[group] = totals.getOrDefault(group, 0) + 1
+        }
 
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "Order total", type = "string"))
         c.legends.add(Legend("y1", "Percentage", "number"))
-        for (i in 0..limits.size) {
+        for (i in 0..limitsSize) {
             val x = when {
                 i == 0 -> "<${limits[0]}.00"
-                i < limits.size -> "${limits[i - 1]}.00-${limits[i]}.00"
+                i < limitsSize -> "${limits[i - 1]}.00-${limits[i]}.00"
                 else -> ">${limits.last()}.00"
             }
             c.data.add(mapOf("x" to x, "y1" to "${totals[i]}"))
