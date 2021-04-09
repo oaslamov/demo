@@ -443,8 +443,8 @@ class MyModule : Demo1_PrvtModuleBase() {
     fun getChartSpline(): String {
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "% items", type = "number"))
-        c.legends.add(Legend("y1", "% product turnover", "number")) //, "#00876c"))
-        c.legends.add(Legend("y2", "% customer turnover", "number")) //, "#00876c"))
+        c.legends.add(Legend("y1", "% product turnover", "number"))
+        c.legends.add(Legend("y2", "% customer turnover", "number"))
 
         val products = selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
         val maxProduct = products.size
