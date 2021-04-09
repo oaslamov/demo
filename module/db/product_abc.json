@@ -3,6 +3,7 @@
   "fields":[
     {
       "code":"product",
+      "usage":"name",
       "ref":"product",
       "@":"10:11"
     },

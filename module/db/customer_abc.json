@@ -3,6 +3,7 @@
   "fields":[
     {
       "code":"customer",
+      "usage":"name",
       "ref":"customer",
       "@":"6:7"
     },
