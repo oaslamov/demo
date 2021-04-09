@@ -42,7 +42,7 @@ class Stats(val m: MyModule) {
             stat.avg_Price = aggr.sum/ aggr.qnty.toBigDecimal()
             cuSum += aggr.sum
             stat.cusum = cuSum
-            val cuPerc = (cuSum.setScale(4) / grandTotal) * 100.toBigDecimal()
+            val cuPerc = (cuSum.setScale(4) / grandTotal) * BigDecimal(100)
             stat.cuperc = cuPerc
             stat.abc_Class = abcClass(cuPerc, abLimit, bcLimit)
             m.insert(stat)
@@ -76,7 +76,7 @@ class Stats(val m: MyModule) {
             stat.sum = aggr.sum
             cuSum += aggr.sum
             stat.cusum = cuSum
-            val cuPerc = (cuSum.setScale(4) / grandTotal) * 100.toBigDecimal()
+            val cuPerc = (cuSum.setScale(4) / grandTotal) * BigDecimal(100)
             stat.cuperc = cuPerc
             stat.abc_Class = abcClass(cuPerc, abLimit, bcLimit)
             m.insert(stat)
