@@ -9,9 +9,7 @@ import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
-import com.dolmen.serv.table.Field
-import com.dolmen.serv.table.ITopTable
-import com.dolmen.serv.table.RowID
+import com.dolmen.serv.table.*
 import com.dolmen.util.Text
 import java.io.File
 import java.math.BigDecimal
@@ -304,9 +302,8 @@ class MyModule : Demo1_PrvtModuleBase() {
             for (j in 1..k) {
                 val item = Shipping_Order_Product()
                 //val m2 = Random.nextInt(maxProduct)
-                val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt()
-                        .coerceAtLeast(0).coerceAtMost(maxProduct - 1)
-                val p = product[m2] // Normal distribution (for ABC analysis graph)
+                val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProdut).toInt().coerceIn(0, maxProduct - 1)
+                val p = product[m2] // Normal distribution (for ABC analysis graph)c
                 item.shipping_Order = o.id
                 item.product = p.id
                 item.quantity = Random.nextInt(maxQuantity) + 1
@@ -451,14 +448,6 @@ class MyModule : Demo1_PrvtModuleBase() {
 
         val products = selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
         val maxProduct = products.size
-
-        //data class yLine(val code: String, val name: String, val field: Field)
-        //
-        //for (yL in listOf(yLine("y1", "% product turnover", Product_Abc.fId),
-        //        yLine("y2", "% customer turnover"))) {
-        //
-        //}
-
         c.data.add(mapOf("x" to "0", "y1" to "0"))
         products.forEachIndexed { i, p ->
             val x = (i + 1).toFloat() / maxProduct * 100
@@ -468,7 +457,6 @@ class MyModule : Demo1_PrvtModuleBase() {
 
         val customers = selectMap(Customer_Abc.fId, "").values.sortedByDescending { it.sum }
         val maxCustomer = customers.size
-
         c.data.add(mapOf("x" to "0", "y2" to "0"))
         customers.forEachIndexed { i, p ->
             val x = (i + 1).toFloat() / maxCustomer * 100
