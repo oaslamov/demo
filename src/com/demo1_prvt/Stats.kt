@@ -12,6 +12,8 @@ class Stats(val m: MyModule) {
         makeCustomerStats(start, finish, abLimit, bcLimit, itemQuery)
     }
 
+    private data class Accum(val qnty: Int, val sum: BigDecimal)
+
     fun makeProductStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int,
                          itemQuery: Map<RowID, Shipping_Order_Product>) {
         val statsTableName = "demo1_prvt.product_abc"
@@ -20,25 +22,25 @@ class Stats(val m: MyModule) {
         val items = itemQuery
                 .values
                 .groupingBy { it.product }
-                .aggregate { _, acc: Pair<Int, BigDecimal>?, item, _ ->
-                    Pair(
-                            (acc?.first ?: 0) + item.quantity,
-                            (acc?.second ?: BigDecimal.ZERO) + (item.sum ?: BigDecimal.ZERO)
+                .aggregate { _, acc: Accum?, item, _ ->
+                    Accum(
+                            (acc?.qnty ?: 0) + item.quantity,
+                            (acc?.sum ?: BigDecimal.ZERO) + (item.sum ?: BigDecimal.ZERO)
                     )
                 }
                 .toList()
-                .sortedByDescending { (_, value) -> value.second }
+                .sortedByDescending { (_, value) -> value.sum }
                 .toMap()
-        val grandTotal = items.values.sumOf { it.second }
+        val grandTotal = items.values.sumOf { it.sum }
         var cuSum = BigDecimal.ZERO
         items.forEach { (id, aggr) ->
             val stat = Product_Abc()
             stat.product = id
             stat.name = products[id]?.name
-            stat.quantity = aggr.first
-            stat.sum = aggr.second
-            stat.avg_Price = aggr.second / aggr.first.toBigDecimal()
-            cuSum += aggr.second
+            stat.quantity = aggr.qnty
+            stat.sum = aggr.sum
+            stat.avg_Price = aggr.sum/ aggr.qnty.toBigDecimal()
+            cuSum += aggr.sum
             stat.cusum = cuSum
             val cuPerc = (cuSum.setScale(4) / grandTotal) * 100.toBigDecimal()
             stat.cuperc = cuPerc
@@ -56,23 +58,23 @@ class Stats(val m: MyModule) {
         val items = itemQuery
                 .values
                 .groupingBy { orders[it.shipping_Order]?.customer }
-                .aggregate { _, acc: Pair<Int, BigDecimal>?, item, _ ->
-                    Pair(
-                            (acc?.first ?: 0) + item.quantity,
-                            (acc?.second ?: BigDecimal.ZERO) + (item.sum ?: BigDecimal.ZERO)
+                .aggregate { _, acc: Accum?, item, _ ->
+                    Accum(
+                            (acc?.qnty ?: 0) + item.quantity,
+                            (acc?.sum ?: BigDecimal.ZERO) + (item.sum ?: BigDecimal.ZERO)
                     )
                 }
                 .toList()
-                .sortedByDescending { (_, value) -> value.second }
+                .sortedByDescending { (_, value) -> value.sum }
                 .toMap()
-        val grandTotal = items.values.sumOf { it.second }
+        val grandTotal = items.values.sumOf { it.sum }
         var cuSum = BigDecimal.ZERO
         items.forEach { (id, aggr) ->
             val stat = Customer_Abc()
             stat.customer = id
             stat.name = customers[id]?.name
-            stat.sum = aggr.second
-            cuSum += aggr.second
+            stat.sum = aggr.sum
+            cuSum += aggr.sum
             stat.cusum = cuSum
             val cuPerc = (cuSum.setScale(4) / grandTotal) * 100.toBigDecimal()
             stat.cuperc = cuPerc
