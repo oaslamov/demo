@@ -290,7 +290,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             val shipmentDaysAgo = placedDaysAgo - Random.nextInt(maxShipmentAfter + 1).toLong()
             //val m1 = Random.nextInt(maxCustomer)
             val m1 = ((0.15 * rnd.nextGaussian() + 0.5) * maxCustomer).toInt()
-                    .coerceAtLeast(0).coerceAtMost(maxCustomer - 1)
+                    .coerceIn(0, maxCustomer - 1)
             o.customer = customer[m1].id
             o.datetime_Order_Placed =
                     OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
@@ -452,7 +452,7 @@ class MyModule : Demo1_PrvtModuleBase() {
         val maxProduct = products.size
         c.data.add(mapOf("x" to "0", "y1" to "0"))
         var class0 = "A"
-        var class1 = ""
+        var class1: String
         products.forEachIndexed { i, p ->
             val x = (i + 1).toFloat() / maxProduct * 100
             val y = p.cuperc
