@@ -487,29 +487,28 @@ class MyModule : Demo1_PrvtModuleBase() {
         val limits: List<Int> = listOf(400, 800, 1200, 1600)
         val limitsSize = limits.size
         if (limitsSize == 0) return ""
-        val sums = selectMap(Shipping_Order.fId, "").map { it.value.total ?: BigDecimal.ZERO }
-        val totals = MutableList(limitsSize + 1) { 0 }
-        sums.forEach { total ->
-            var group = limitsSize
-            for ((i, limit) in limits.withIndex()) {
-                if (total.compareTo(BigDecimal(limit)) == -1) {
-                    group = i
-                    break
-                }
-            }
-            totals[group]++
-        }
 
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "Order total", type = "string"))
         c.legends.add(Legend("y1", "Percentage", "number"))
         for (i in 0..limitsSize) {
-            val x = when {
-                i == 0 -> "<${limits[0]}.00"
-                i < limitsSize -> "${limits[i - 1]}.00-${limits[i]}.00"
-                else -> ">${limits.last()}.00"
+            var x: String
+            var y: String
+            when {
+                i == 0 -> {
+                    x = "<${limits[0]}.00"
+                    y = count(Shipping_Order::class, "total<${limits[0]}").toString()
+                }
+                i < limitsSize -> {
+                    x = "${limits[i - 1]}.00-${limits[i]}.00"
+                    y = count(Shipping_Order::class, "total>=${limits[i - 1]} and total<${limits[i]}").toString()
+                }
+                else -> {
+                    x = ">${limits.last()}.00"
+                    y = count(Shipping_Order::class, "total>=${limits.last()}").toString()
+                }
             }
-            c.data.add(mapOf("x" to x, "y1" to "${totals[i]}"))
+            c.data.add(mapOf("x" to x, "y1" to y))
         }
         return c.getJSON()
     }
