@@ -19,6 +19,7 @@ import java.time.LocalDate
 import java.time.OffsetDateTime
 import kotlin.random.Random
 
+
 class MyModule : Demo1_PrvtModuleBase() {
 
     @Description("My Action")
@@ -491,7 +492,7 @@ class MyModule : Demo1_PrvtModuleBase() {
 
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "Order total", type = "string"))
-        c.legends.add(Legend("y1", "Percentage", "number"))
+        c.legends.add(Legend("y1", "Count", "number"))
         for (i in 0..limitsSize) {
             var x: String
             var y: String
@@ -510,6 +511,37 @@ class MyModule : Demo1_PrvtModuleBase() {
                 }
             }
             c.data.add(mapOf("x" to x, "y1" to y))
+        }
+        return c.getJSON()
+    }
+
+    @Description("Prepares JSON for bar chart")
+    fun getChartBar(): String {
+        data class Accum(val count: Int, val sum: BigDecimal)
+
+        val months = listOf("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
+        val orders = selectMap(Shipping_Order.fId, "").values
+                .groupingBy { o ->
+                    val d = o.date_Order_Paid
+                    Pair(d?.year ?: -1, d?.monthValue ?: -1)
+                }
+                .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
+                    Accum(
+                            acc.count + 1,
+                            acc.sum + (e.total ?: BigDecimal.ZERO))
+                }
+                .filterKeys { it.first + it.second > 0 }
+                .toSortedMap(compareBy<Pair<Int, Int>> { it.first }.thenBy { it.second })
+                .map { "${months[it.key.second - 1]}-${it.key.first}" to it.value }
+
+        val c = Chart()
+        c.legends.add(Legend(code = "x", name = "Period", type = "string"))
+        c.legends.add(Legend("y1", "Value", "number"))
+        c.legends.add(Legend("y2", "Count", "number"))
+        orders.forEach { (m, total) ->
+            c.data.add(mapOf("x" to m,
+                    "y1" to total.sum.toString(),
+                    "y2" to total.count.toString()))
         }
         return c.getJSON()
     }
