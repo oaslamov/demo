@@ -483,8 +483,9 @@ class MyModule : Demo1_PrvtModuleBase() {
     }
 
     @Description("Prepares JSON for piechart")
-    fun getChartPie(): String {
-        val limits: List<Int> = listOf(400, 800, 1200, 1600)
+    @Parameters("points: Groups limits")
+    fun getChartPie(points: String): String {
+        val limits = points.split(",").map { it.trim().toInt() }.distinct().sorted()
         val limitsSize = limits.size
         if (limitsSize == 0) return ""
 

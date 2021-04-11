@@ -29,7 +29,10 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartPie"
+              "action":"demo1_prvt.getChartPie",
+              "args":{
+                "points":"1200, 400,400, 1600,800"
+              }
             }
           }
         }
