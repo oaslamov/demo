@@ -488,16 +488,16 @@ class MyModule : Demo1_PrvtModuleBase() {
         val limitsSize = limits.size
         if (limitsSize == 0) return ""
         val sums = selectMap(Shipping_Order.fId, "").map { it.value.total ?: BigDecimal.ZERO }
-        val totals = mutableMapOf<Int, Int>()
+        val totals = MutableList(limitsSize + 1) { 0 }
         sums.forEach { total ->
-            var group: Int = limitsSize
-            for (i in 0 until limitsSize) {
-                if (total.compareTo(BigDecimal(limits[i])) == -1) {
+            var group = limitsSize
+            for ((i, limit) in limits.withIndex()) {
+                if (total.compareTo(BigDecimal(limit)) == -1) {
                     group = i
                     break
                 }
             }
-            totals[group] = totals.getOrDefault(group, 0) + 1
+            totals[group]++
         }
 
         val c = Chart()
