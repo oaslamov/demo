@@ -5,8 +5,8 @@
   "subject":"$l{Demo1}l",
   "grid":{
     "base":"screen",
-    "cols":16,
-    "rows":16
+    "cols":12,
+    "rows":12
   },
   "data_sources":[
     {
@@ -16,7 +16,7 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartSpline"
+              "action":"demo1_prvt.getChartExample"
             }
           }
         }
@@ -29,10 +29,7 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartPie",
-              "args":{
-                "points":"1200, 400,400, 1600,800"
-              }
+              "action":"demo1_prvt.getChartExample"
             }
           }
         }
@@ -45,7 +42,7 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartBar"
+              "action":"demo1_prvt.getChartExample"
             }
           }
         }
@@ -58,7 +55,20 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartBarStacked"
+              "action":"demo1_prvt.getChartExample"
+            }
+          }
+        }
+      }
+    },
+    {
+      "code":"ds_ch5",
+      "type":"chart",
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.getChartExample"
             }
           }
         }
@@ -68,15 +78,15 @@
   "parts":[
     {
       "code":"p1",
-      "label":"$l{ABC analysis graph}l",
+      "label":"$l{Line Chart}l",
       "type":"chart",
       "chart_type":"line",
       "border_type":"none",
       "position":{
         "from_col":1,
-        "to_col":8,
+        "to_col":6,
         "from_row":1,
-        "to_row":8
+        "to_row":6
       },
       "data_source":{
         "code":"ds_ch1",
@@ -87,31 +97,34 @@
     },
     {
       "code":"p2",
-      "label":"$l{Order total distribution}l",
+      "label":"$l{Spline Chart}l",
       "type":"chart",
-      "chart_type":"pie",
+      "chart_type":"spline",
       "border_type":"none",
       "position":{
-        "from_col":9,
-        "to_col":16,
+        "from_col":7,
+        "to_col":12,
         "from_row":1,
-        "to_row":8
+        "to_row":6
       },
       "data_source":{
-        "code":"ds_ch2"
+        "code":"ds_ch2",
+        "operations":[
+          "select"
+        ]
       }
     },
     {
       "code":"p3",
-      "label":"$l{BAr}l",
+      "label":"$l{Pie Chart}l",
       "type":"chart",
-      "chart_type":"bar",
+      "chart_type":"pie",
       "border_type":"none",
       "position":{
         "from_col":1,
-        "to_col":8,
-        "from_row":9,
-        "to_row":16
+        "to_col":4,
+        "from_row":7,
+        "to_row":12
       },
       "data_source":{
         "code":"ds_ch3",
@@ -122,21 +135,37 @@
     },
     {
       "code":"p4",
-      "label":"$l{Stacked Bar}l",
+      "label":"$l{Bar Chart}l",
       "type":"chart",
-      "chart_type":"stackedbar",
+      "chart_type":"bar",
       "border_type":"none",
       "position":{
-        "from_col":9,
-        "to_col":16,
-        "from_row":9,
-        "to_row":16
+        "from_col":5,
+        "to_col":8,
+        "from_row":7,
+        "to_row":12
       },
       "data_source":{
         "code":"ds_ch4",
         "operations":[
           "select"
         ]
+      }
+    },
+    {
+      "code":"p5",
+      "label":"$l{Stacked Bar Chart}l",
+      "type":"chart",
+      "chart_type":"stackedbar",
+      "border_type":"none",
+      "position":{
+        "from_col":9,
+        "to_col":12,
+        "from_row":7,
+        "to_row":12
+      },
+      "data_source":{
+        "code":"ds_ch5"
       }
     }
   ]

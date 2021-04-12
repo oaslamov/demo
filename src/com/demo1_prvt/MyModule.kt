@@ -448,6 +448,25 @@ class MyModule : Demo1_PrvtModuleBase() {
         return Stats(this).makeStats(start, finish, abLimit, bcLimit)
     }
 
+    @Description("Prepares JSON for charts example")
+    fun getChartExample(): String {
+        val c = Chart()
+        c.legends.addAll(listOf(
+                Legend("x", "year", "string"),
+                Legend("y1", "west", "number"),
+                Legend("y2", "east", "number")
+        ))
+        c.data.addAll(listOf(
+                mapOf("x" to "2016", "y1" to "4000", "y2" to "800"),
+                mapOf("x" to "2017", "y1" to "5000", "y2" to "700"),
+                mapOf("x" to "2018", "y1" to "2500", "y2" to "1300"),
+                mapOf("x" to "2019", "y1" to "1200", "y2" to "2000"),
+                mapOf("x" to "2020", "y1" to "3365", "y2" to "1000"),
+                mapOf("x" to "2021", "y1" to "4345", "y2" to "2000"),
+        ))
+        return c.getJSON()
+    }
+
     @Description("Prepares JSON for spline chart")
     fun getChartSpline(): String {
         val c = Chart()

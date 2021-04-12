@@ -31,8 +31,6 @@ Odrer=Odrer
 "Order summary"=Order summary
 // screens: demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Order=Order
-// screens: sc_analysis:scr@demo1_prvt sc_chart:scr@demo1_prvt
-"Stacked Bar"=Stacked Bar
 // screens: demo1_customer:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt
 Summary=Summary
 
@@ -63,11 +61,14 @@ Bar=Bar
 "Data analysis"=Data analysis
 Pie=Pie
 "Products ABC"=Products ABC
+"Stacked Bar"=Stacked Bar
 
 //-- sc_chart:scr@demo1_prvt --
-"ABC analysis graph"=ABC analysis graph
-BAr=BAr
-"Order total distribution"=Order total distribution
+"Bar Chart"=Bar Chart
+"Line Chart"=Line Chart
+"Pie Chart"=Pie Chart
+"Spline Chart"=Spline Chart
+"Stacked Bar Chart"=Stacked Bar Chart
 
 //-- sc_order:scr@demo1_prvt --
 Orders=Orders
