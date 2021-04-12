@@ -7,6 +7,8 @@
 Address=Address
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Billing=Billing
+// screens: sc_analysis:scr@demo1_prvt sc_chart:scr@demo1_prvt
+Charts=Charts
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Comment=Comment
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
@@ -29,6 +31,8 @@ Odrer=Odrer
 "Order summary"=Order summary
 // screens: demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Order=Order
+// screens: sc_analysis:scr@demo1_prvt sc_chart:scr@demo1_prvt
+"Stacked Bar"=Stacked Bar
 // screens: demo1_customer:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt
 Summary=Summary
 
@@ -53,15 +57,16 @@ Product=Product
 "Shipping Order"=Shipping Order
 
 //-- sc_analysis:scr@demo1_prvt --
-"ABC Graph"=ABC Graph
 ABC=ABC
+Bar=Bar
 "Customers ABC"=Customers ABC
 "Data analysis"=Data analysis
+Pie=Pie
 "Products ABC"=Products ABC
 
 //-- sc_chart:scr@demo1_prvt --
 "ABC analysis graph"=ABC analysis graph
-Charts=Charts
+BAr=BAr
 "Order total distribution"=Order total distribution
 
 //-- sc_order:scr@demo1_prvt --

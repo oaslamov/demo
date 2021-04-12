@@ -37,6 +37,32 @@
           }
         }
       }
+    },
+    {
+      "code":"ds_ch3",
+      "type":"chart",
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.getChartBar"
+            }
+          }
+        }
+      }
+    },
+    {
+      "code":"ds_ch4",
+      "type":"chart",
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.getChartBarStacked"
+            }
+          }
+        }
+      }
     }
   ],
   "parts":[
@@ -73,6 +99,44 @@
       },
       "data_source":{
         "code":"ds_ch2"
+      }
+    },
+    {
+      "code":"p3",
+      "label":"$l{BAr}l",
+      "type":"chart",
+      "chart_type":"bar",
+      "border_type":"none",
+      "position":{
+        "from_col":1,
+        "to_col":8,
+        "from_row":9,
+        "to_row":16
+      },
+      "data_source":{
+        "code":"ds_ch3",
+        "operations":[
+          "select"
+        ]
+      }
+    },
+    {
+      "code":"p4",
+      "label":"$l{Stacked Bar}l",
+      "type":"chart",
+      "chart_type":"stackedbar",
+      "border_type":"none",
+      "position":{
+        "from_col":9,
+        "to_col":16,
+        "from_row":9,
+        "to_row":16
+      },
+      "data_source":{
+        "code":"ds_ch4",
+        "operations":[
+          "select"
+        ]
       }
     }
   ]

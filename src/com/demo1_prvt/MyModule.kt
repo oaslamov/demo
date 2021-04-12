@@ -1,6 +1,5 @@
 package com.demo1_prvt
 
-import com.dolmen.call.Row
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.mod.GuiModule
 import com.dolmen.serv.CONST.MAX_STRING_CHARS
@@ -495,6 +494,7 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Prepares JSON for piechart")
     @Parameters("points: Groups limits")
     fun getChartPie(points: String): String {
+        if (points.isBlank()) return ""
         val limits = points.split(",").map { it.trim().toInt() }.distinct().sorted()
         val limitsSize = limits.size
         if (limitsSize == 0) return ""
@@ -547,13 +547,50 @@ class MyModule : Demo1_PrvtModuleBase() {
         val ct = orders.map { it.key.country }.distinct()
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "Period", type = "string"))
-        c.legends.addAll(ct.map {Legend(it, it, "number")})
+        c.legends.addAll(ct.map { Legend(it, it, "number") })
         c.data.addAll(orders.map { o ->
             mapOf("x" to o.key.period,
                     o.key.country to o.value.sum.toString())
         })
         return c.getJSON()
     }
+
+    @Description("Prepares JSON for stacked bar chart")
+    fun getChartBarStacked(): String {
+        data class Accum(val count: Int, val sum: BigDecimal)
+        data class Group(val period: String, val country: String)
+
+        val customers = selectMap(Customer.fId, "")
+        val countries = selectMap(Country.fId, "")
+        val orders = selectMap(Shipping_Order.fId, "").values
+                .groupingBy { o ->
+                    val d = o.date_Order_Paid
+                    val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
+                    if (d != null)
+                        Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
+                    else Group("-1", c)
+                }
+                .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
+                    Accum(acc.count + 1, acc.sum + (e.total ?: BigDecimal.ZERO))
+                }
+                .filterKeys { it.period != "-1" }
+                .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
+        val periodSums = orders.toList()
+                .groupingBy { it.first.period }
+                .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
+                    Accum(acc.count + 1, acc.sum + e.second.sum)
+                }
+        val ct = orders.map { it.key.country }.distinct()
+        val c = Chart()
+        c.legends.add(Legend(code = "x", name = "Period", type = "string"))
+        c.legends.addAll(ct.map { Legend(it, it, "number") })
+        c.data.addAll(orders.map { o ->
+            mapOf("x" to o.key.period,
+                    o.key.country to (BigDecimal(100) * o.value.sum / periodSums[o.key.period]?.sum!!).toString())
+        })
+        return c.getJSON()
+    }
+
 
     override fun beforeUpdate(t: ITopTable?) {
         super.beforeUpdate(t)

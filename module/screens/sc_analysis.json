@@ -219,6 +219,48 @@
           }
         }
       }
+    },
+    {
+      "code":"ds_chart2",
+      "type":"chart",
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.getChartPie",
+              "args":{
+                "points":"800,400,1200,1600"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "code":"ds_chart3",
+      "type":"chart",
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.getChartBar"
+            }
+          }
+        }
+      }
+    },
+    {
+      "code":"ds_chart4",
+      "type":"chart",
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.getChartBarStacked"
+            }
+          }
+        }
+      }
     }
   ],
   "parts":[
@@ -351,7 +393,7 @@
         },
         {
           "code":"c13",
-          "label":"$l{ABC Graph}l",
+          "label":"$l{Charts}l",
           "type":"container",
           "border_type":"none",
           "position":{
@@ -369,12 +411,69 @@
               "border_type":"none",
               "position":{
                 "from_col":1,
-                "to_col":16,
+                "to_col":8,
                 "from_row":1,
-                "to_row":16
+                "to_row":8
               },
               "data_source":{
                 "code":"ds_chart1",
+                "operations":[
+                  "select"
+                ]
+              }
+            },
+            {
+              "code":"p_ch2",
+              "label":"$l{Pie}l",
+              "type":"chart",
+              "chart_type":"pie",
+              "border_type":"none",
+              "position":{
+                "from_col":9,
+                "to_col":16,
+                "from_row":1,
+                "to_row":8
+              },
+              "data_source":{
+                "code":"ds_chart2",
+                "operations":[
+                  "select"
+                ]
+              }
+            },
+            {
+              "code":"p_ch3",
+              "label":"$l{Bar}l",
+              "type":"chart",
+              "chart_type":"bar",
+              "border_type":"none",
+              "position":{
+                "from_col":1,
+                "to_col":8,
+                "from_row":9,
+                "to_row":16
+              },
+              "data_source":{
+                "code":"ds_chart3",
+                "operations":[
+                  "select"
+                ]
+              }
+            },
+            {
+              "code":"p_ch4",
+              "label":"$l{Stacked Bar}l",
+              "type":"chart",
+              "chart_type":"stackedbar",
+              "border_type":"none",
+              "position":{
+                "from_col":9,
+                "to_col":16,
+                "from_row":9,
+                "to_row":16
+              },
+              "data_source":{
+                "code":"ds_chart4",
                 "operations":[
                   "select"
                 ]
