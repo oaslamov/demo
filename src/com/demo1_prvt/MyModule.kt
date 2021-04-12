@@ -1,5 +1,6 @@
 package com.demo1_prvt
 
+import com.dolmen.call.Row
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.mod.GuiModule
 import com.dolmen.serv.CONST.MAX_STRING_CHARS
@@ -251,6 +252,12 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Parameters("pathIn: example file in  {project}/dataset/customer.csv ", "n: Int")
     fun importCustomers(pathIn: String, n: Int): String {
         val fileIn = File(pathIn)
+        val countries = listOf(
+                selectFirst<Country>("name='Australia'")?.id,
+                selectFirst<Country>("name='Canada'")?.id,
+                selectFirst<Country>("name='United Kingdom'")?.id,
+                selectFirst<Country>("name='United States'")?.id
+        )
         fileIn.useLines { lines ->
             var i = 1
             for (l in lines) {
@@ -262,6 +269,7 @@ class MyModule : Demo1_PrvtModuleBase() {
                 c.address_Line1 = rec[2]
                 c.address_Line2 = "${rec[3]}, ${rec[4]}"
                 c.address_Line3 = rec[5]
+                c.country = countries[(i - 1) / 500]
                 insert(c)
                 if (i == n) break
                 i++
@@ -519,28 +527,39 @@ class MyModule : Demo1_PrvtModuleBase() {
     @Description("Prepares JSON for bar chart")
     fun getChartBar(): String {
         data class Accum(val count: Int, val sum: BigDecimal)
+        data class Group(val period: String, val country: String)
 
-        val months = listOf("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
+        val customers = selectMap(Customer.fId, "")
+        val countries = selectMap(Country.fId, "")
         val orders = selectMap(Shipping_Order.fId, "").values
                 .groupingBy { o ->
                     val d = o.date_Order_Paid
-                    if (d != null) "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}" else "-1"
+                    val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
+                    if (d != null)
+                        Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
+                    else Group("-1", c)
                 }
                 .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
                     Accum(acc.count + 1, acc.sum + (e.total ?: BigDecimal.ZERO))
                 }
-                .filterKeys { it != "-1" }
-                .toSortedMap()
+                .filterKeys { it.period != "-1" }
+                .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
+        val ct = orders.map { it.key.country }.distinct()
 
         val c = Chart()
-        c.legends.addAll(listOf(
-                Legend(code = "x", name = "Period", type = "string"),
-                Legend("y1", "Value", "number"),
-                Legend("y2", "Count", "number")))
+        c.legends.add(Legend(code = "x", name = "Period", type = "string"))
+        c.legends.addAll(ct.mapIndexed { idx, value ->
+            //Legend("y${idx}", value, "number")
+            Legend(value, value, "number")
+        })
+        //c.data.addAll(listOf(
+        //        mapOf("x" to "2018 Q1",
+        //                "y0" to "1234",
+        //                "y1" to "5678")))
+
         c.data.addAll(orders.map { o ->
-            mapOf("x" to o.key,
-                    "y1" to o.value.sum.toString(),
-                    "y2" to (o.value.sum / BigDecimal(4)).toString())
+            mapOf("x" to o.key.period,
+                    o.key.country to o.value.sum.toString())
         })
         return c.getJSON()
     }
