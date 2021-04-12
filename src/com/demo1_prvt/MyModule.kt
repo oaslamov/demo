@@ -17,6 +17,7 @@ import java.math.RoundingMode
 import java.time.Duration
 import java.time.LocalDate
 import java.time.OffsetDateTime
+import java.time.temporal.IsoFields
 import kotlin.random.Random
 
 
@@ -523,26 +524,24 @@ class MyModule : Demo1_PrvtModuleBase() {
         val orders = selectMap(Shipping_Order.fId, "").values
                 .groupingBy { o ->
                     val d = o.date_Order_Paid
-                    Pair(d?.year ?: -1, d?.monthValue ?: -1)
+                    if (d != null) "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}" else "-1"
                 }
                 .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
-                    Accum(
-                            acc.count + 1,
-                            acc.sum + (e.total ?: BigDecimal.ZERO))
+                    Accum(acc.count + 1, acc.sum + (e.total ?: BigDecimal.ZERO))
                 }
-                .filterKeys { it.first + it.second > 0 }
-                .toSortedMap(compareBy<Pair<Int, Int>> { it.first }.thenBy { it.second })
-                .map { "${months[it.key.second - 1]}-${it.key.first}" to it.value }
+                .filterKeys { it != "-1" }
+                .toSortedMap()
 
         val c = Chart()
-        c.legends.add(Legend(code = "x", name = "Period", type = "string"))
-        c.legends.add(Legend("y1", "Value", "number"))
-        c.legends.add(Legend("y2", "Count", "number"))
-        orders.forEach { (m, total) ->
-            c.data.add(mapOf("x" to m,
-                    "y1" to total.sum.toString(),
-                    "y2" to total.count.toString()))
-        }
+        c.legends.addAll(listOf(
+                Legend(code = "x", name = "Period", type = "string"),
+                Legend("y1", "Value", "number"),
+                Legend("y2", "Count", "number")))
+        c.data.addAll(orders.map { o ->
+            mapOf("x" to o.key,
+                    "y1" to o.value.sum.toString(),
+                    "y2" to (o.value.sum / BigDecimal(4)).toString())
+        })
         return c.getJSON()
     }
 
