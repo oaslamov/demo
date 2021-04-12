@@ -289,7 +289,7 @@ class MyModule : Demo1_PrvtModuleBase() {
         val maxItems = 10
         val maxQuantity = 15
         val minutesInDay = 3600
-        val customer = selectMap(Customer.fId, "").values.toList()
+        val customer = selectMap(Customer.fId, "").values.toList().shuffled()
         val maxCustomer = customer.size
         val product = selectMap(Product.fId, "").values.toList()
         val maxProduct = product.size
