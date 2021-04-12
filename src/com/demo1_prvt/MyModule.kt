@@ -545,18 +545,9 @@ class MyModule : Demo1_PrvtModuleBase() {
                 .filterKeys { it.period != "-1" }
                 .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
         val ct = orders.map { it.key.country }.distinct()
-
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "Period", type = "string"))
-        c.legends.addAll(ct.mapIndexed { idx, value ->
-            //Legend("y${idx}", value, "number")
-            Legend(value, value, "number")
-        })
-        //c.data.addAll(listOf(
-        //        mapOf("x" to "2018 Q1",
-        //                "y0" to "1234",
-        //                "y1" to "5678")))
-
+        c.legends.addAll(ct.map {Legend(it, it, "number")})
         c.data.addAll(orders.map { o ->
             mapOf("x" to o.key.period,
                     o.key.country to o.value.sum.toString())
