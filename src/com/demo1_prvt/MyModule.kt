@@ -471,8 +471,8 @@ class MyModule : Demo1_PrvtModuleBase() {
     fun getChartABC(): String {
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "% items", type = "number"))
-        c.legends.add(Legend("y1", "% product turnover", "number"))
-        c.legends.add(Legend("y2", "% customer turnover", "number"))
+        c.legends.add(Legend("y1", "% product revenue", "number"))
+        c.legends.add(Legend("y2", "% customer revenue", "number"))
         c.legends.add(Legend("y3", "product AB threshold", "number", "#91a3b2"))
         c.legends.add(Legend("y4", "product BC threshold", "number", "#b9c2ca"))
 
