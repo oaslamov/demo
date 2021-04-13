@@ -467,8 +467,8 @@ class MyModule : Demo1_PrvtModuleBase() {
         return c.getJSON()
     }
 
-    @Description("Prepares JSON for spline chart")
-    fun getChartSpline(): String {
+    @Description("Prepares JSON for ABC analysis graph")
+    fun getChartABC(): String {
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "% items", type = "number"))
         c.legends.add(Legend("y1", "% product turnover", "number"))
@@ -510,9 +510,9 @@ class MyModule : Demo1_PrvtModuleBase() {
         return c.getJSON()
     }
 
-    @Description("Prepares JSON for piechart")
+    @Description("Prepares JSON for Order totals chart")
     @Parameters("points: Groups limits")
-    fun getChartPie(points: String): String {
+    fun getChartOrderTotals(points: String): String {
         if (points.isBlank()) return ""
         val limits = points.split(",").map { it.trim().toInt() }.distinct().sorted()
         val limitsSize = limits.size
@@ -543,8 +543,8 @@ class MyModule : Demo1_PrvtModuleBase() {
         return c.getJSON()
     }
 
-    @Description("Prepares JSON for bar chart")
-    fun getChartBar(): String {
+    @Description("Prepares JSON for Sales by country chart")
+    fun getChartSalesByCountry(): String {
         data class Accum(val count: Int, val sum: BigDecimal)
         data class Group(val period: String, val country: String)
 
@@ -574,8 +574,8 @@ class MyModule : Demo1_PrvtModuleBase() {
         return c.getJSON()
     }
 
-    @Description("Prepares JSON for stacked bar chart")
-    fun getChartBarStacked(): String {
+    @Description("Prepares JSON for Percentage of sales by country chart")
+    fun getChartSalesPercentageByCountry(): String {
         data class Accum(val count: Int, val sum: BigDecimal)
         data class Group(val period: String, val country: String)
 

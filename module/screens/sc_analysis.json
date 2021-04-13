@@ -16,7 +16,7 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartSpline"
+              "action":"demo1_prvt.getChartABC"
             }
           }
         }
@@ -227,7 +227,7 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartPie",
+              "action":"demo1_prvt.getChartOrderTotals",
               "args":{
                 "points":"800,400,1200,1600"
               }
@@ -243,7 +243,7 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartBar"
+              "action":"demo1_prvt.getChartSalesByCountry"
             }
           }
         }
@@ -256,7 +256,7 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartBarStacked"
+              "action":"demo1_prvt.getChartSalesPercentageByCountry"
             }
           }
         }
