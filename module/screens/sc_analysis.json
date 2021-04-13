@@ -405,7 +405,7 @@
           "sub_parts":[
             {
               "code":"p_ch1",
-              "label":"$l{ABC}l",
+              "label":"$l{ABC analysis graph}l",
               "type":"chart",
               "chart_type":"spline",
               "border_type":"none",
@@ -424,7 +424,7 @@
             },
             {
               "code":"p_ch2",
-              "label":"$l{Pie}l",
+              "label":"$l{Number of shipping orders by order totals}l",
               "type":"chart",
               "chart_type":"pie",
               "border_type":"none",
@@ -443,7 +443,7 @@
             },
             {
               "code":"p_ch3",
-              "label":"$l{Bar}l",
+              "label":"$l{Sales by country}l",
               "type":"chart",
               "chart_type":"bar",
               "border_type":"none",
@@ -462,7 +462,7 @@
             },
             {
               "code":"p_ch4",
-              "label":"$l{Stacked Bar}l",
+              "label":"$l{Percentage of sales by country}l",
               "type":"chart",
               "chart_type":"stackedbar",
               "border_type":"none",

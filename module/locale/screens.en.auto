@@ -55,13 +55,13 @@ Product=Product
 "Shipping Order"=Shipping Order
 
 //-- sc_analysis:scr@demo1_prvt --
-ABC=ABC
-Bar=Bar
+"ABC analysis graph"=ABC analysis graph
 "Customers ABC"=Customers ABC
 "Data analysis"=Data analysis
-Pie=Pie
+"Number of shipping orders by order totals"=Number of shipping orders by order totals
+"Percentage of sales by country"=Percentage of sales by country
 "Products ABC"=Products ABC
-"Stacked Bar"=Stacked Bar
+"Sales by country"=Sales by country
 
 //-- sc_chart:scr@demo1_prvt --
 "Bar Chart"=Bar Chart
