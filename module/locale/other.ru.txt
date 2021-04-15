@@ -1,4 +1,3 @@
-"% product revenue"=Товары, % выручки
-"% customer revenue"=Заказчики, % выручки
-label_AB_t=Товары, граница AB
-"product BC threshold"=Товары, граница BC
+label_p_revenue=Товары, % выручки
+label_c_revenue=Заказчики, % выручки
+label_p_threshold=Товары, граница $0
