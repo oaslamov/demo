@@ -298,8 +298,7 @@ class MyModule : Demo1_PrvtModuleBase() {
             val paidDaysAgo = (placedDaysAgo - Random.nextInt(maxPaidAfter + 1)).coerceAtLeast(0)
             val shipmentDaysAgo = placedDaysAgo - Random.nextInt(maxShipmentAfter + 1).toLong()
             //val m1 = Random.nextInt(maxCustomer)
-            val m1 = ((0.15 * rnd.nextGaussian() + 0.5) * maxCustomer).toInt()
-                    .coerceIn(0, maxCustomer - 1)
+            val m1 = ((0.15 * rnd.nextGaussian() + 0.5) * maxCustomer).toInt().coerceIn(0, maxCustomer - 1)
             o.customer = customer[m1].id
             o.datetime_Order_Placed =
                     OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
