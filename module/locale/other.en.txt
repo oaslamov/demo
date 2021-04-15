@@ -1,1 +1,3 @@
-label_AB_t=product AB threshold
+label_p_revenue=% product revenue
+label_c_revenue=% customer revenue
+label_p_threshold=product $0 threshold
