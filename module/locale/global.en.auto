@@ -62,11 +62,6 @@ e:7ef07d01f00c.A=A
 e:7ef07d01f00c.B=B
 e:7ef07d01f00c.C=C
 
-// table Flt
-t:7ef07d010000=Flt
---  Search
-f:7ef07d010006=Search
-
 // table Product
 t:7ef07d007000=Product
 --  Name

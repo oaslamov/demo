@@ -1,0 +1,4 @@
+"% product revenue"=Товары, % выручки
+"% customer revenue"=Заказчики, % выручки
+label_AB_t=Товары, граница AB
+"product BC threshold"=Товары, граница BC

@@ -470,10 +470,10 @@ class MyModule : Demo1_PrvtModuleBase() {
     fun getChartABC(): String {
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "% items", type = "number"))
-        c.legends.add(Legend("y1", "% product revenue", "number"))
-        c.legends.add(Legend("y2", "% customer revenue", "number"))
-        c.legends.add(Legend("y3", "product AB threshold", "number", "#91a3b2"))
-        c.legends.add(Legend("y4", "product BC threshold", "number", "#b9c2ca"))
+        c.legends.add(Legend("y1", xtr("% product revenue"), "number"))
+        c.legends.add(Legend("y2", xtr("% customer revenue"), "number"))
+        c.legends.add(Legend("y3", xtr("label_AB_t"), "number", "#91a3b2"))
+        c.legends.add(Legend("y4", xtr("product BC threshold"), "number", "#b9c2ca"))
 
         val products = selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
         val maxProduct = products.size
