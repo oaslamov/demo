@@ -2,3 +2,6 @@ label_p_revenue=Товары, % выручки
 label_c_revenue=Заказчики, % выручки
 label_p_threshold=Товары, граница $0
 act1_c_header=$0. Имя = $1, Телефон = $2
+act1_o_header=$0.$1. Заказ #$2 размещен $3
+act1_p_header=$0.$1.$2. Товар = $3, количество = $4
+act1_no_orders=Нет заказов для $0

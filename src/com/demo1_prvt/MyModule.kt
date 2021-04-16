@@ -36,20 +36,20 @@ class MyModule : Demo1_PrvtModuleBase() {
         var n = 0
         iterate<Customer>(customerFilter) { c ->
             n++
-            Txt.info("${n}. Name = ${c.name}, Phone = ${c.phone}").msg()
+            Txt.info(xtr("act1_c_header", n, c.name, c.phone)).msg()
             var m = 0
             iterate<Shipping_Order>("customer=${c.id}") { o ->
                 m++
-                Txt.info("$n.$m. Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
+                Txt.info(xtr("act1_o_header", n, m, o.id, o.datetime_Order_Placed?.toLocalDate())).msg()
                 var k = 0
                 iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
                     k++
 //                    val p = select(Product(), item.product)
                     val p = product[item.product]
-                    Txt.info("$n.$m.$k. Product = ${p?.name}, qnty = ${item.quantity}").msg()
+                    Txt.info(xtr("act1_p_header", n, m, k, p?.name, item.quantity)).msg()
                 }
             }
-            if (m == 0) Txt.info("No orders for ${c.name}").msg()
+            if (m == 0) Txt.info(xtr("act1_no_orders", c.name)).msg()
         }
     }
 
