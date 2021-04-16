@@ -1,3 +1,4 @@
 label_p_revenue=Товары, % выручки
 label_c_revenue=Заказчики, % выручки
 label_p_threshold=Товары, граница $0
+act1_c_header=$0. Имя = $1, Телефон = $2
