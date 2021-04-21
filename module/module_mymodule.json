@@ -2,7 +2,7 @@
   "code":"demo1_prvt",
   "label":"Demo module #1",
   "desc":"Dolmen Platform. Introduction",
-  "mainClass":"com.demo1_prvt.MyModule",
+  "mainClass":"com.demo1_prvt.Demo1",
   "privateIID":8319101,
   "version":1,
   "details":{

@@ -21,7 +21,7 @@ import java.time.temporal.IsoFields
 import kotlin.random.Random
 
 
-class MyModule : Demo1_PrvtModuleBase() {
+class Demo1 : Demo1_PrvtModuleBase() {
 
     @Description("My Action")
     @Parameters("input: String")
@@ -421,7 +421,7 @@ class MyModule : Demo1_PrvtModuleBase() {
     }
 
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
-        class ViewIterator(f: Formula, m: MyModule) : View1.Data(f, m) {
+        class ViewIterator(f: Formula, m: Demo1) : View1.Data(f, m) {
             val customers: Map<RowID, Customer> = selectMap(Customer.fId, "")
             override fun create(s: Shipping_Order): View1 {
                 val v = super.create(s)
@@ -643,8 +643,8 @@ class MyModule : Demo1_PrvtModuleBase() {
             T.registerFieldFiller(City.ICity::class.java, CityFiller::class.java)
         }
 
-        fun start(): MyModule {
-            return com.dolmen.serv.Module.start(MyModule::class.java)
+        fun start(): Demo1 {
+            return com.dolmen.serv.Module.start(Demo1::class.java)
         }
     }
 }

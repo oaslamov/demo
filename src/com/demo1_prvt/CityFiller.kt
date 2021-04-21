@@ -5,7 +5,7 @@ import com.dolmen.md.demo1_prvt.Country
 import com.dolmen.md.demo1_prvt.Subcountry
 
 class CityFiller : City.ICity {
-    private val db by lazy { MyModule.start() }
+    private val db by lazy { Demo1.start() }
 
     override fun getList_Nm(table: City): String {
         val sbcntr = db.select(Subcountry(), table.subcountry_Id)

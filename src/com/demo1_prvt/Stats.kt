@@ -5,7 +5,7 @@ import com.dolmen.serv.table.RowID
 import java.math.BigDecimal
 import java.time.LocalDate
 
-class Stats(val m: MyModule) {
+class Stats(val m: Demo1) {
     val itemQuery: Map<RowID, Shipping_Order_Product> = m.selectMap(Shipping_Order_Product.fId, "")
     fun makeStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int) {
         makeProductStats(start, finish, abLimit, bcLimit, itemQuery)
