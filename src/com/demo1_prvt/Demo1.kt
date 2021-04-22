@@ -651,7 +651,7 @@ class Demo1 : Demo1_PrvtModuleBase() {
         val kerbPrefs = KerberosPrefs()
         //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")
         //kerbPrefs.setPassword("Pass123456")
-            kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")
+        kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")
         //    kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab")
         //kerbPrefs.setPrincipal("dolmensrv_user2@CORP.EXAMPLE.COM")
         kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab")
