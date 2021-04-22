@@ -1,5 +1,8 @@
 package com.demo1_prvt
 
+import com.dolmen.call.ActionBase
+import com.dolmen.call.Http
+import com.dolmen.call.JSONManagerBase
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.mod.GuiModule
 import com.dolmen.serv.CONST.MAX_STRING_CHARS
@@ -9,8 +12,10 @@ import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
-import com.dolmen.serv.table.*
+import com.dolmen.serv.table.ITopTable
+import com.dolmen.serv.table.RowID
 import com.dolmen.util.Text
+import org.mpru.security.KerberosPrefs
 import java.io.File
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -637,6 +642,29 @@ class Demo1 : Demo1_PrvtModuleBase() {
         GuiModule.goScreen(screenCode, args, mode)
         return table
     }
+
+    @Description("Calls dolmen server (HTTP)")
+    fun httpCallDolmenExample(): String {
+        var res = ""
+        val url = "http://dolmensystem.corp.example.com/dolmen/"
+        val http = Http(url)
+        val kerbPrefs = KerberosPrefs()
+        kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")
+        kerbPrefs.setPassword("Pass123456")
+        kerbPrefs.setSpn("HTTP/dolmensystem.corp.example.com")
+        http.setKerberosClient(kerbPrefs)
+        http.setLog(this.l)
+        val ac = ActionBase.create("demo1_prvt.selectlist", "demo1_prvt.customer",
+                "name like '%val%' order by name").setTag("myTag1")
+        var ar = http.action(ac)
+        while (ar != null) {
+            res += JSONManagerBase.getJson(ar, false) + '\n'
+            ar = ar.next
+        }
+        res += "\nRC == ${http.rc()}"
+        return res
+    }
+
 
     companion object {
         init {
