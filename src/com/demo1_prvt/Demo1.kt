@@ -646,14 +646,12 @@ class Demo1 : Demo1_PrvtModuleBase() {
     @Description("Calls dolmen server (HTTP)")
     fun httpCallDolmenExample(): String {
         var res = ""
-        val url = "http://dolmensystem.corp.example.com/dolmen/"
+        val url = "https://dolmensystem.corp.example.com/dolmen"
         val http = Http(url)
         val kerbPrefs = KerberosPrefs()
         //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")
         //kerbPrefs.setPassword("Pass123456")
         kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")
-        //    kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab")
-        //kerbPrefs.setPrincipal("dolmensrv_user2@CORP.EXAMPLE.COM")
         kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab")
         kerbPrefs.setSpn("HTTP/dolmensystem.corp.example.com")
         http.setKerberosClient(kerbPrefs)
@@ -666,6 +664,31 @@ class Demo1 : Demo1_PrvtModuleBase() {
             ar = ar.next
         }
         res += "\nRC == ${http.rc()}"
+        return res
+    }
+
+    @Description("Calls dolmen server (HTTP, XML)")
+    fun xmlCallDolmenExample(): String {
+        var res = ""
+        val url = "https://dolmensystem.corp.example.com/dolmen"
+        val http = Http(url)
+        val kerbPrefs = KerberosPrefs()
+        //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")
+        //kerbPrefs.setPassword("Pass123456")
+        kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")
+        kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab")
+        kerbPrefs.setSpn("HTTP/dolmensystem.corp.example.com")
+        http.setKerberosClient(kerbPrefs)
+        http.setLog(this.l)
+        res = http.sendPost("""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <dolmen version="1">
+            <a a="demo1_prvt.action1">
+                <arg name="customerFilter">name like '%val%'</arg>
+            </a>
+            </dolmen>
+        """.trimIndent())
+        res += "\nRC == ${http.rc()}\n"
         return res
     }
 
