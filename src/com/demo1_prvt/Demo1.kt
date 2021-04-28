@@ -643,8 +643,8 @@ class Demo1 : Demo1_PrvtModuleBase() {
         return table
     }
 
-    @Description("Calls dolmen server (HTTP)")
-    fun httpCallDolmenExample(): String {
+    @Description("Calls dolmen server (JSON)")
+    fun callDolmenJson(): String {
         var res = ""
         val url = "https://dolmensystem.corp.example.com/dolmen"
         val http = Http(url)
@@ -667,9 +667,8 @@ class Demo1 : Demo1_PrvtModuleBase() {
         return res
     }
 
-    @Description("Calls dolmen server (HTTP, XML)")
-    fun xmlCallDolmenExample(): String {
-        var res = ""
+    @Description("Calls dolmen server (XML)")
+    fun callDolmenXml(): String {
         val url = "https://dolmensystem.corp.example.com/dolmen"
         val http = Http(url)
         val kerbPrefs = KerberosPrefs()
@@ -680,7 +679,7 @@ class Demo1 : Demo1_PrvtModuleBase() {
         kerbPrefs.setSpn("HTTP/dolmensystem.corp.example.com")
         http.setKerberosClient(kerbPrefs)
         http.setLog(this.l)
-        res = http.sendPost("""
+        var res = http.sendPost("""
             <?xml version="1.0" encoding="UTF-8"?>
             <dolmen version="1">
             <a a="demo1_prvt.action1">
