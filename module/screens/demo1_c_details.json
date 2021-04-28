@@ -51,7 +51,6 @@
                   "${@ref_filter}",
                   "country_id=${ds_c.country}"
                 ],
-                "count":"10000",
                 "tablename":"Demo1_Prvt.City"
               },
               "fields":[
