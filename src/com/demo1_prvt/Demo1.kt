@@ -647,6 +647,7 @@ class Demo1 : Demo1_PrvtModuleBase() {
     fun callDolmenJson(): String {
         var res = ""
         val url = "https://dolmensystem.corp.example.com/dolmen"
+        //val spn = "^https*:\/\/(.*)\/.*".toRegex().replace(url, "HTTP/$1")
         val http = Http(url)
         val kerbPrefs = KerberosPrefs()
         //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")
