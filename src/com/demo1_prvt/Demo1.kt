@@ -647,14 +647,14 @@ class Demo1 : Demo1_PrvtModuleBase() {
     fun callDolmenJson(): String {
         var res = ""
         val url = "https://dolmensystem.corp.example.com/dolmen"
-        //val spn = "^https*:\/\/(.*)\/.*".toRegex().replace(url, "HTTP/$1")
+        val spn = url.replace(Regex(".*//(.*)/.*"), "HTTP/$1")
         val http = Http(url)
         val kerbPrefs = KerberosPrefs()
         //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")
         //kerbPrefs.setPassword("Pass123456")
         kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")
         kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab")
-        kerbPrefs.setSpn("HTTP/dolmensystem.corp.example.com")
+        kerbPrefs.setSpn(spn)
         http.setKerberosClient(kerbPrefs)
         http.setLog(this.l)
         val ac = ActionBase.create("demo1_prvt.selectlist", "demo1_prvt.customer",
@@ -672,12 +672,13 @@ class Demo1 : Demo1_PrvtModuleBase() {
     fun callDolmenXml(): String {
         val url = "https://dolmensystem.corp.example.com/dolmen"
         val http = Http(url)
+        val spn = url.replace(Regex(".*//(.*)/.*"), "HTTP/$1")
         val kerbPrefs = KerberosPrefs()
         //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")
         //kerbPrefs.setPassword("Pass123456")
         kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")
         kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab")
-        kerbPrefs.setSpn("HTTP/dolmensystem.corp.example.com")
+        kerbPrefs.setSpn(spn)
         http.setKerberosClient(kerbPrefs)
         http.setLog(this.l)
         var res = http.sendPost("""
