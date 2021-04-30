@@ -256,8 +256,7 @@ class Demo1 : Demo1_PrvtModuleBase() {
     @Parameters("pathIn: example file in  {project}/dataset/customer.csv ", "n: Int")
     fun importCustomers(pathIn: String, n: Int): String {
         val fileIn = File(pathIn)
-        val countries = listOf("Australia", "Canada", "United Kingdom", "United States")
-                                .map{ selectFirst<Country>("name='$it'")?.id }
+        val countries = selectMap(Country.fId, "name in ('Australia', 'Canada', 'United Kingdom', 'United States') order by name").keys
         fileIn.useLines { lines ->
             var i = 1
             for (l in lines) {
