@@ -233,12 +233,12 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
 
-    @Description("Imports products from file")
-    @Parameters("pathIn: example file in {project}/dataset/grocery.csv")
-    fun importProducts(pathIn: String) {
+    @Description("Creates products")
+    fun importProducts() {
+        //val pathIn = "/product.csv"
         val maxPrice = 30
-        val lines = File(pathIn).readLines()
-        lines.forEach { l ->
+        //val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        PRODUCT_DATASET.forEach { l ->
             Product().apply {
                 name = l.trim()
                 price = ((Random.nextInt(maxPrice * 100) + 1) / 100.0).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
@@ -246,18 +246,18 @@ class Demo1 : Demo1_PrvtModuleBase() {
                 insert(this)
             }
         }
-        Txt.info("Imported ${lines.size} products from $pathIn").msg()
+        Txt.info("Created ${PRODUCT_DATASET.size} products").msg()
     }
 
-    @Description("Imports customers from file")
-    @Parameters("pathIn: example file in  {project}/dataset/customer.csv")
-    fun importCustomers(pathIn: String) {
+    @Description("Creates customers")
+    fun importCustomers() {
+        //val pathIn = "/customer.csv"
         val customersPerCountry = 500
         val countries = selectMap(
                 Country.fId, "name in ('Australia', 'Canada', 'United Kingdom', 'United States') order by name")
                 .toList().sortedBy { it.second.name }
-        val lines = File(pathIn).readLines()
-        lines.forEachIndexed() { i, l ->
+        //val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        CUSTOMER_DATASET.forEachIndexed { i, l ->
             val rec = l.split(",").toTypedArray()
             Customer().apply {
                 name = "${rec[1]}, ${rec[0]}"
@@ -270,7 +270,49 @@ class Demo1 : Demo1_PrvtModuleBase() {
                 insert(this)
             }
         }
-        Txt.info("Imported ${lines.size} customers from $pathIn").msg()
+        Txt.info("Created ${CUSTOMER_DATASET.size} customers").msg()
+    }
+
+    @Description("Creates countries, subcountries and cities")
+    fun importCities() {
+        data class Rec(val city: String, val country: String, val subcountry: String, val geonameid: String)
+
+        //val pathIn = "/world-cities.csv"
+        //val recs = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        val recs = CITY_DATASET
+                .map { l ->
+                    val rec = l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)".toRegex()).toList()
+                    Rec(city = rec[0].replace("\"", "").take(MAX_STRING_CHARS),
+                            country = rec[1].replace("\"", "").take(MAX_STRING_CHARS),
+                            subcountry = rec[2].replace("\"", "").take(MAX_STRING_CHARS),
+                            geonameid = rec[3].take(MAX_STRING_CHARS))
+                }
+                .groupBy { it.country }
+                .mapValues { it.value.groupBy { it.subcountry } }
+        var n = 0
+        recs.forEach { cntr ->
+            val c = Country()
+            c.name = cntr.key
+            insert(c)
+            Txt.info("Loading ${c.name}").msg()
+            cntr.value.forEach { sbcntr ->
+                val sc = Subcountry()
+                sc.name = sbcntr.key
+                sc.country_Id = c.id
+                insert(sc)
+                sbcntr.value.forEach { rec ->
+                    City().apply {
+                        name = rec.city
+                        country_Id = c.id
+                        subcountry_Id = sc.id
+                        geonameid = rec.geonameid
+                        insert(this)
+                        n++
+                    }
+                }
+            }
+        }
+        Txt.info("Created $n cities").msg()
     }
 
     @Description("Generates random orders")
@@ -350,46 +392,6 @@ class Demo1 : Demo1_PrvtModuleBase() {
         }
     }
 
-    @Description("Imports cities from file")
-    @Parameters("pathIn: example file in {project}/dataset/world-cities_csv.txt")
-    fun importCities(pathIn: String) {
-        data class Rec(val city: String, val country: String, val subcountry: String, val geonameid: String)
-
-        val recs = File(pathIn).readLines().drop(1)
-                .map { l ->
-                    val rec = l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)".toRegex()).toList()
-                    Rec(city = rec[0].replace("\"", "").take(MAX_STRING_CHARS),
-                            country = rec[1].replace("\"", "").take(MAX_STRING_CHARS),
-                            subcountry = rec[2].replace("\"", "").take(MAX_STRING_CHARS),
-                            geonameid = rec[3].take(MAX_STRING_CHARS))
-                }
-                .groupBy { it.country }
-                .mapValues { it.value.groupBy { it.subcountry } }
-        var n = 0
-        recs.forEach { cntr ->
-            val c = Country()
-            c.name = cntr.key
-            insert(c)
-            Txt.info("Loading ${c.name}").msg()
-            cntr.value.forEach { sbcntr ->
-                val sc = Subcountry()
-                sc.name = sbcntr.key
-                sc.country_Id = c.id
-                insert(sc)
-                sbcntr.value.forEach { rec ->
-                    City().apply {
-                        name = rec.city
-                        country_Id = c.id
-                        subcountry_Id = sc.id
-                        geonameid = rec.geonameid
-                        insert(this)
-                        n++
-                    }
-                }
-            }
-        }
-        Txt.info("Finish. Processed $n lines from $pathIn").msg()
-    }
 
     @Description("Performs complex order item search")
     @Parameters("itemFilter", "productFilter", "orderFilter", "customerFilter")
