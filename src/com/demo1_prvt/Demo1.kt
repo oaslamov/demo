@@ -234,47 +234,43 @@ class Demo1 : Demo1_PrvtModuleBase() {
 
 
     @Description("Imports products from file")
-    @Parameters("pathIn: example file in {project}/dataset/grocery.csv", "n: Int")
-    fun importProducts(pathIn: String, n: Int): String {
-        val fileIn = File(pathIn)
-        fileIn.useLines { lines ->
-            var i = 1
-            for (l in lines) {
-                val p = Product()
-                p.name = l.trim()
-                p.price = ((Random.nextInt(3000) + 1) / 100.0).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
-                p.product_Type = Product.PRODUCT_TYPE.GROCERY
-                insert(p)
-                if (i == n) break
-                i++
+    @Parameters("pathIn: example file in {project}/dataset/grocery.csv")
+    fun importProducts(pathIn: String) {
+        val maxPrice = 30
+        val lines = File(pathIn).readLines()
+        lines.forEach { l ->
+            Product().apply {
+                name = l.trim()
+                price = ((Random.nextInt(maxPrice * 100) + 1) / 100.0).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+                product_Type = Product.PRODUCT_TYPE.GROCERY
+                insert(this)
             }
         }
-        return Text.F("Done")
+        Txt.info("Imported ${lines.size} products from $pathIn").msg()
     }
 
     @Description("Imports customers from file")
-    @Parameters("pathIn: example file in  {project}/dataset/customer.csv ", "n: Int")
-    fun importCustomers(pathIn: String, n: Int): String {
-        val fileIn = File(pathIn)
-        val countries = selectMap(Country.fId, "name in ('Australia', 'Canada', 'United Kingdom', 'United States') order by name").keys
-        fileIn.useLines { lines ->
-            var i = 1
-            for (l in lines) {
-                val rec = l.split(",").toTypedArray()
-                val c = Customer()
-                c.name = "${rec[1]}, ${rec[0]}"
-                c.phone = rec[6]
-                c.mobile = rec[7]
-                c.address_Line1 = rec[2]
-                c.address_Line2 = "${rec[3]}, ${rec[4]}"
-                c.address_Line3 = rec[5]
-                c.country = countries[(i - 1) / 500]
-                insert(c)
-                if (i == n) break
-                i++
+    @Parameters("pathIn: example file in  {project}/dataset/customer.csv")
+    fun importCustomers(pathIn: String) {
+        val customersPerCountry = 500
+        val countries = selectMap(
+                Country.fId, "name in ('Australia', 'Canada', 'United Kingdom', 'United States') order by name")
+                .toList().sortedBy { it.second.name }
+        val lines = File(pathIn).readLines()
+        lines.forEachIndexed() { i, l ->
+            val rec = l.split(",").toTypedArray()
+            Customer().apply {
+                name = "${rec[1]}, ${rec[0]}"
+                phone = rec[6]
+                mobile = rec[7]
+                address_Line1 = rec[2]
+                address_Line2 = "${rec[3]}, ${rec[4]}"
+                address_Line3 = rec[5]
+                country = countries[(i - 1) / customersPerCountry].first
+                insert(this)
             }
         }
-        return Text.F("Done")
+        Txt.info("Imported ${lines.size} customers from $pathIn").msg()
     }
 
     @Description("Generates random orders")
