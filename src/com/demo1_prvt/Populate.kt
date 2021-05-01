@@ -3,6 +3,7 @@ package com.demo1_prvt
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.CONST
 import com.dolmen.serv.Txt
+import com.dolmen.serv.aggregate.Count
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.util.Text
@@ -12,13 +13,20 @@ import java.time.LocalDate
 import java.time.OffsetDateTime
 import kotlin.random.Random
 
-class Populate(val m: Demo1)  {
-    fun loadSampleData(){
-        createCities()
-        createCustomers()
-        createProducts()
-        genOrders(1000)
-        Stats(m).makeStats(abLimit = 65, bcLimit = 90)
+class Populate(val m: Demo1) {
+    fun loadSampleData() {
+        val hasData = m.exists<Country>("") || m.exists<Subcountry>("") || m.exists<City>("")
+                || m.exists<Product>("") || m.exists<Customer>("")
+        if (hasData) {
+            Txt.info("Data already exist. Skipping loading sample data...").msg()
+        } else {
+            Txt.info("Loading sample data...").msg()
+            createCities()
+            createCustomers()
+            createProducts()
+            genOrders(1000)
+            Stats(m).makeStats(abLimit = 65, bcLimit = 90)
+        }
     }
 
     @Description("Creates products")

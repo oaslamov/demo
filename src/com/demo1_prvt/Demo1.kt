@@ -546,6 +546,10 @@ class Demo1 : Demo1_PrvtModuleBase() {
         return res
     }
 
+    override fun x_installed(modulePreviousVersionId: Int) {
+        super.x_installed(modulePreviousVersionId)
+        Populate(this).loadSampleData()
+    }
 
     companion object {
         init {
