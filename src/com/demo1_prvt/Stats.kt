@@ -1,15 +1,17 @@
 package com.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.serv.Txt
 import com.dolmen.serv.table.RowID
 import java.math.BigDecimal
 import java.time.LocalDate
 
 class Stats(val m: Demo1) {
     val itemQuery: Map<RowID, Shipping_Order_Product> = m.selectMap(Shipping_Order_Product.fId, "")
-    fun makeStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int) {
+    fun makeStats(start: LocalDate? = null, finish: LocalDate? = null, abLimit: Int, bcLimit: Int) {
         makeProductStats(start, finish, abLimit, bcLimit, itemQuery)
         makeCustomerStats(start, finish, abLimit, bcLimit, itemQuery)
+        Txt.info("Performed data analysis").msg()
     }
 
     private data class Accum(val qnty: Int, val sum: BigDecimal)
@@ -34,18 +36,19 @@ class Stats(val m: Demo1) {
         val grandTotal = items.values.sumOf { it.sum }
         var cuSum = BigDecimal.ZERO
         items.forEach { (id, aggr) ->
-            val stat = Product_Abc()
-            stat.product = id
-            stat.name = products[id]?.name
-            stat.quantity = aggr.qnty
-            stat.sum = aggr.sum
-            stat.avg_Price = aggr.sum/ aggr.qnty.toBigDecimal()
-            cuSum += aggr.sum
-            stat.cusum = cuSum
-            val cuPerc = (cuSum.setScale(4) / grandTotal) * BigDecimal(100)
-            stat.cuperc = cuPerc
-            stat.abc_Class = abcClass(cuPerc, abLimit, bcLimit)
-            m.insert(stat)
+            Product_Abc().apply {
+                product = id
+                name = products[id]?.name
+                quantity = aggr.qnty
+                sum = aggr.sum
+                avg_Price = aggr.sum / aggr.qnty.toBigDecimal()
+                cuSum += aggr.sum
+                cusum = cuSum
+                val cuPerc = (cuSum.setScale(4) / grandTotal) * BigDecimal(100)
+                cuperc = cuPerc
+                abc_Class = abcClass(cuPerc, abLimit, bcLimit)
+                m.insert(this)
+            }
         }
     }
 
@@ -70,24 +73,24 @@ class Stats(val m: Demo1) {
         val grandTotal = items.values.sumOf { it.sum }
         var cuSum = BigDecimal.ZERO
         items.forEach { (id, aggr) ->
-            val stat = Customer_Abc()
-            stat.customer = id
-            stat.name = customers[id]?.name
-            stat.sum = aggr.sum
-            cuSum += aggr.sum
-            stat.cusum = cuSum
-            val cuPerc = (cuSum.setScale(4) / grandTotal) * BigDecimal(100)
-            stat.cuperc = cuPerc
-            stat.abc_Class = abcClass(cuPerc, abLimit, bcLimit)
-            m.insert(stat)
+            Customer_Abc().apply {
+                customer = id
+                name = customers[id]?.name
+                sum = aggr.sum
+                cuSum += aggr.sum
+                cusum = cuSum
+                val cuPerc = (cuSum.setScale(4) / grandTotal) * BigDecimal(100)
+                cuperc = cuPerc
+                abc_Class = abcClass(cuPerc, abLimit, bcLimit)
+                m.insert(this)
+            }
         }
     }
 
-    private fun abcClass(cuPerc: BigDecimal, abLimit: Int, bcLimit: Int): String {
-        return when {
-            cuPerc < abLimit.toBigDecimal() -> "A"
-            cuPerc < bcLimit.toBigDecimal() -> "B"
-            else -> "C"
-        }
-    }
+    private fun abcClass(cuPerc: BigDecimal, abLimit: Int, bcLimit: Int): String =
+            when {
+                cuPerc < abLimit.toBigDecimal() -> "A"
+                cuPerc < bcLimit.toBigDecimal() -> "B"
+                else -> "C"
+            }
 }
