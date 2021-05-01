@@ -352,52 +352,43 @@ class Demo1 : Demo1_PrvtModuleBase() {
 
     @Description("Imports cities from file")
     @Parameters("pathIn: example file in {project}/dataset/world-cities_csv.txt")
-    fun importCities(pathIn: String): String {
-        val fileIn = File(pathIn)
-        var i = 0
-        fileIn.useLines { lines ->
-            for (l in lines) {
-                if (i != 0) {
-                    val rec = l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)".toRegex()).toTypedArray()
-                    val city = rec[0].replace("\"", "").take(MAX_STRING_CHARS)
-                    val country = rec[1].replace("\"", "").take(MAX_STRING_CHARS)
-                    val subcountry = rec[2].replace("\"", "").take(MAX_STRING_CHARS)
-                    val geonameid = rec[3].take(MAX_STRING_CHARS)
-                    //Txt.info("$city | $country | $subcountry | $geonameid").msg()
+    fun importCities(pathIn: String) {
+        data class Rec(val city: String, val country: String, val subcountry: String, val geonameid: String)
 
-                    if (subcountry == "İzmir") continue // bug: selectFirst cannot find İzmir
-
-                    var cntr = selectFirst<Country>(
-                            "name = \"${country}\"")
-                    if (cntr == null) {
-                        cntr = Country()
-                        cntr.name = country
-                        insert(cntr)
-                    }
-                    var sbcntr = selectFirst<Subcountry>(
-                            "country_id = ${cntr.id} and name = \"${subcountry}\"")
-                    if (sbcntr == null) {
-                        sbcntr = Subcountry()
-                        sbcntr.country_Id = cntr.id
-                        sbcntr.name = subcountry
-                        insert(sbcntr)
-                    }
-                    var ct = selectFirst<City>(
-                            "country_id = ${cntr.id} AND subcountry_id = ${sbcntr.id} AND name = \"${city}\"")
-                    if (ct == null) {
-                        ct = City()
-                        ct.country_Id = cntr.id
-                        ct.subcountry_Id = sbcntr.id
-                        ct.name = city
-                        ct.geonameid = geonameid
-                        insert(ct)
+        val recs = File(pathIn).readLines().drop(1)
+                .map { l ->
+                    val rec = l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)".toRegex()).toList()
+                    Rec(city = rec[0].replace("\"", "").take(MAX_STRING_CHARS),
+                            country = rec[1].replace("\"", "").take(MAX_STRING_CHARS),
+                            subcountry = rec[2].replace("\"", "").take(MAX_STRING_CHARS),
+                            geonameid = rec[3].take(MAX_STRING_CHARS))
+                }
+                .groupBy { it.country }
+                .mapValues { it.value.groupBy { it.subcountry } }
+        var n = 0
+        recs.forEach { cntr ->
+            val c = Country()
+            c.name = cntr.key
+            insert(c)
+            Txt.info("Loading ${c.name}").msg()
+            cntr.value.forEach { sbcntr ->
+                val sc = Subcountry()
+                sc.name = sbcntr.key
+                sc.country_Id = c.id
+                insert(sc)
+                sbcntr.value.forEach { rec ->
+                    City().apply {
+                        name = rec.city
+                        country_Id = c.id
+                        subcountry_Id = sc.id
+                        geonameid = rec.geonameid
+                        insert(this)
+                        n++
                     }
                 }
-                i++
             }
         }
-        Txt.info("Processed ${i} lines from ${pathIn}").msg()
-        return Text.F("Done")
+        Txt.info("Finish. Processed $n lines from $pathIn").msg()
     }
 
     @Description("Performs complex order item search")
