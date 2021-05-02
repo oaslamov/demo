@@ -5,7 +5,6 @@ import com.dolmen.call.Http
 import com.dolmen.call.JSONManagerBase
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.mod.GuiModule
-import com.dolmen.serv.CONST.MAX_STRING_CHARS
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.ActionType
 import com.dolmen.serv.anno.Description
@@ -18,12 +17,10 @@ import com.dolmen.util.Text
 import org.mpru.security.KerberosPrefs
 import java.io.File
 import java.math.BigDecimal
-import java.math.RoundingMode
 import java.time.Duration
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.temporal.IsoFields
-import kotlin.random.Random
 
 
 class Demo1 : Demo1_PrvtModuleBase() {
@@ -85,19 +82,19 @@ class Demo1 : Demo1_PrvtModuleBase() {
             update(p)
             Txt.info("Changed product name from '${pName}' to '${p.name}'").msg()
         }
-        val o = selectFirst<Shipping_Order>("customer = ${customerId}")
+        val o = selectFirst<Shipping_Order>("customer = $customerId")
         if (o != null) {
             Txt.info("Deleting Order #${o.id} placed ${o.datetime_Order_Placed?.toLocalDate()}").msg()
             delete(o)
         } else {
-            Txt.info("No orders found for customer id = ${customerId}").msg()
+            Txt.info("No orders found for customer id = $customerId").msg()
         }
     }
 
     @Description("Deletes list")
     @Parameters("customerId: RowId")
     fun action4(customerId: RowID) {
-        Txt.info("Deleting orders for customer ID = ${customerId}").msg()
+        Txt.info("Deleting orders for customer ID = $customerId").msg()
         deleteList("demo1_prvt.shipping_order", "customer=${customerId}")
     }
 
@@ -274,8 +271,7 @@ class Demo1 : Demo1_PrvtModuleBase() {
 
         order = order.filterValues { it.customer in customer }
         item = item.filterValues { (it.product in product) and (it.shipping_Order in order) }
-        val resL = item.values.take(count).toList()
-        return resL
+        return item.values.take(count).toList()
     }
 
     override fun s_iterateView1(f: Formula): SelectedData<View1> {

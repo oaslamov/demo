@@ -3,7 +3,6 @@ package com.demo1_prvt
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.CONST
 import com.dolmen.serv.Txt
-import com.dolmen.serv.aggregate.Count
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.util.Text
@@ -84,7 +83,7 @@ class Populate(val m: Demo1) {
                             geonameid = rec[3].take(CONST.MAX_STRING_CHARS))
                 }
                 .groupBy { it.country }
-                .mapValues { it.value.groupBy { it.subcountry } }
+                .mapValues { r -> r.value.groupBy { it.subcountry } }
         var n = 0
         recs.forEach { cntr ->
             val c = Country()
