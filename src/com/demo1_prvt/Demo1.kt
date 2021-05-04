@@ -230,7 +230,6 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
 
-
     @Description("Updates all orders sums")
     fun updateAllOrders() {
         val product = selectMap(Product.fId, "")
@@ -255,7 +254,7 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     @Description("Loads sample data")
-    fun loadSampleData(){
+    fun loadSampleData() {
         return Populate(this).loadSampleData()
     }
 
@@ -467,9 +466,8 @@ class Demo1 : Demo1_PrvtModuleBase() {
     override fun beforeUpdate(t: ITopTable?) {
         super.beforeUpdate(t)
         if (t is Customer) {
-            if (t.city != null) {
-                val ct = select(City(), t.city)
-                if (ct != null) {
+            t.city?.let {
+                selectFirst<City>("id=${t.city}")?.let { ct ->
                     t.country = ct.country_Id
                     t.subcountry = ct.subcountry_Id
                     t.city = ct.id
