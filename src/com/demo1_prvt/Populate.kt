@@ -85,21 +85,25 @@ class Populate(val m: Demo1) {
                 .groupBy { it.country }
                 .mapValues { r -> r.value.groupBy { it.subcountry } }
         var n = 0
-        recs.forEach { cntr ->
-            val c = Country()
-            c.name = cntr.key
-            m.insert(c)
-            Txt.info("Loading ${c.name}").msg()
-            cntr.value.forEach { sbcntr ->
-                val sc = Subcountry()
-                sc.name = sbcntr.key
-                sc.country_Id = c.id
-                m.insert(sc)
-                sbcntr.value.forEach { rec ->
-                    City().apply {
+        recs.forEach { countryMap ->
+            val countryId = Country().run { // Create a country and get its Id
+                name = countryMap.key
+                m.insert(this)
+                Txt.info("Loading ${name}").msg()
+                id
+            }
+            countryMap.value.forEach { subcountryMap ->
+                val subcountryId = Subcountry().run { // Create a subcountry and get its Id
+                    name = subcountryMap.key
+                    country_Id = countryId
+                    m.insert(this)
+                    id
+                }
+                subcountryMap.value.forEach { rec ->
+                    City().apply { // Create a city
                         name = rec.city
-                        country_Id = c.id
-                        subcountry_Id = sc.id
+                        country_Id = countryId
+                        subcountry_Id = subcountryId
                         geonameid = rec.geonameid
                         m.insert(this)
                         n++
@@ -121,45 +125,40 @@ class Populate(val m: Demo1) {
         val maxItems = 10
         val maxQuantity = 15
         val minutesInDay = 3600
-        val customer = m.selectMap(Customer.fId, "").values.toList().shuffled()
-        val maxCustomer = customer.size
-        val product = m.selectMap(Product.fId, "").values.toList()
-        val maxProduct = product.size
-        for (i in 1..n) {
-            val o = Shipping_Order()
+        val customers = m.selectMap(Customer.fId, "").values.toList().shuffled()
+        val maxCustomer = customers.size
+        val products = m.selectMap(Product.fId, "").values.toList().shuffled()
+        val maxProduct = products.size
+        repeat(n) { i ->
             val placedDaysAgo = Random.nextInt(maxPlacedDaysAgo + 1).toLong()
             val paidDaysAgo = (placedDaysAgo - Random.nextInt(maxPaidAfter + 1)).coerceAtLeast(0)
             val shipmentDaysAgo = placedDaysAgo - Random.nextInt(maxShipmentAfter + 1).toLong()
             //val m1 = Random.nextInt(maxCustomer)
             val m1 = ((0.15 * rnd.nextGaussian() + 0.5) * maxCustomer).toInt().coerceIn(0, maxCustomer - 1)
-            o.customer = customer[m1].id
-            o.datetime_Order_Placed =
-                    OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
-            o.date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
-            o.shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
-            m.insert(o)
+            val orderId = Shipping_Order().run { // Create an order and get its Id
+                customer = customers[m1].id
+                datetime_Order_Placed =
+                        OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
+                date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
+                shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
+                m.insert(this)
+                id
+            }
             val k = Random.nextInt(minItems, maxItems + 1)
-            var total = BigDecimal.ZERO
-            for (j in 1..k) {
-                val item = Shipping_Order_Product()
-                //val m2 = Random.nextInt(maxProduct)
-                val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt().coerceIn(0, maxProduct - 1)
-                val p = product[m2] // Normal distribution (for ABC analysis graph)c
-                item.shipping_Order = o.id
-                item.product = p.id
-                item.quantity = Random.nextInt(maxQuantity) + 1
-                val pr = p.price ?: BigDecimal.ZERO
-                val s = item.quantity.toBigDecimal() * pr
-                item.price = pr
-                item.sum = s
-                m.insert(item)
-                total += s
+            repeat(k) {
+                Shipping_Order_Product().apply { // Create an item
+                    //val m2 = Random.nextInt(maxProduct)
+                    val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt().coerceIn(0, maxProduct - 1)
+                    val p = products[m2] // Normal distribution (for ABC analysis graph)c
+                    shipping_Order = orderId
+                    product = p.id
+                    quantity = Random.nextInt(maxQuantity) + 1
+                    val pr = p.price ?: BigDecimal.ZERO
+                    price = pr
+                    m.insert(this)
+                }
             }
-            if (total != BigDecimal.ZERO) {
-                o.total = total
-                m.update(o)
-            }
-            if (i % 100 == 0) Txt.info("Generated $i orders").msg()
+            if ((i + 1) % 100 == 0) Txt.info("Generated ${i + 1} orders").msg()
         }
         return Text.F("Done")
     }

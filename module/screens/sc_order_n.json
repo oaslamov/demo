@@ -248,7 +248,13 @@
                 "fields":"${@all_fields}"
               }
             }
-          }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
         },
         "update":{
           "request":{
@@ -259,7 +265,13 @@
                 "fields":"${@all_fields}"
               }
             }
-          }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
         },
         "delete":{
           "request":{
@@ -270,7 +282,13 @@
                 "tablename":"demo1_prvt.shipping_order_product"
               }
             }
-          }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
         }
       }
     },
@@ -431,7 +449,7 @@
         "from_col":6,
         "to_col":16,
         "from_row":10,
-        "to_row":15
+        "to_row":16
       },
       "data_source":{
         "code":"shipping_order_product",
