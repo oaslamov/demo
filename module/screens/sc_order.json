@@ -1,6 +1,6 @@
 {
   "code":"sc_order:scr@demo1_prvt",
-  "label":"$l{Orders}l",
+  "label":"$l{Order}l",
   "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "title":"Order # ${shipping_order.id}",
@@ -64,6 +64,13 @@
           "label":"$l{f:7ef07d00800b}l",
           "type":"plaindate",
           "hint":"$l{f:7ef07d00800b:d}l"
+        },
+        {
+          "code":"total",
+          "label":"$l{f:7ef07d00800e}l",
+          "type":"number",
+          "edit_condition":"false",
+          "hint":"$l{f:7ef07d00800e:d}l"
         }
       ],
       "operations":{
@@ -187,6 +194,19 @@
             }
           },
           "hint":"$l{f:7ef07d009006:d}l"
+        },
+        {
+          "code":"price",
+          "label":"$l{f:7ef07d009011}l",
+          "type":"number",
+          "hint":"$l{f:7ef07d009011:d}l"
+        },
+        {
+          "code":"sum",
+          "label":"$l{f:7ef07d009012}l",
+          "type":"number",
+          "edit_condition":"false",
+          "hint":"$l{f:7ef07d009012:d}l"
         }
       ],
       "operations":{
@@ -228,7 +248,13 @@
                 "fields":"${@all_fields}"
               }
             }
-          }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
         },
         "update":{
           "request":{
@@ -239,7 +265,13 @@
                 "fields":"${@all_fields}"
               }
             }
-          }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
         },
         "delete":{
           "request":{
@@ -250,7 +282,13 @@
                 "tablename":"demo1_prvt.shipping_order_product"
               }
             }
-          }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
         }
       }
     },
@@ -411,7 +449,7 @@
         "from_col":6,
         "to_col":16,
         "from_row":10,
-        "to_row":15
+        "to_row":16
       },
       "data_source":{
         "code":"shipping_order_product",
@@ -422,6 +460,12 @@
           },
           {
             "code":"quantity"
+          },
+          {
+            "code":"price"
+          },
+          {
+            "code":"sum"
           },
           {
             "code":"comment"
@@ -476,6 +520,9 @@
                 "fields":[
                   {
                     "code":"customer"
+                  },
+                  {
+                    "code":"total"
                   }
                 ],
                 "operations":[

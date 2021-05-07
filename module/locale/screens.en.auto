@@ -3,50 +3,22 @@
 // -- for installed system: "locale" dir in Workspace (including subpath for global files or locale/<module>/ folder for module files)
 // -- for module developer project: "locale" dir in the Dolmen SDK project
 
-// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Address=Address
-// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Billing=Billing
 // screens: sc_analysis:scr@demo1_prvt sc_chart:scr@demo1_prvt
 Charts=Charts
-// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Comment=Comment
-// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Contacts=Contacts
-// screens: demo1_customer:scr@demo1_prvt demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt
 Customer=Customer
-// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_order1610:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Demo1=Demo1
-// screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Details=Details
-// screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
-Odrer=Odrer
-// screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-"Order # ${shipping_order.id}"=Order # ${shipping_order.id}
-// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 "Order items"=Order items
-// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-"Order list"=Order list
-// screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-"Order summary"=Order summary
-// screens: demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Order=Order
-// screens: demo1_customer:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt
-Summary=Summary
 
 //-- demo1_c_details:scr@demo1_prvt --
 "Customer details"=Customer details
 
 //-- demo1_customer:scr@demo1_prvt --
-
-//-- demo1_customer_n:scr@demo1_prvt --
-"Customer N"=Customer N
-
-//-- demo1_order1610:scr@demo1_prvt --
-"Order ${shipping_order.id}"=Order ${shipping_order.id}
-Order1610=Order1610
-
-//-- demo1_order:scr@demo1_prvt --
+Summary=Summary
 
 //-- demo1_product:scr@demo1_prvt --
 Product=Product
@@ -71,7 +43,11 @@ Product=Product
 "Stacked Bar Chart"=Stacked Bar Chart
 
 //-- sc_order:scr@demo1_prvt --
-Orders=Orders
-
-//-- sc_order_n:scr@demo1_prvt --
-"Orders N"=Orders N
+Address=Address
+Billing=Billing
+Comment=Comment
+Contacts=Contacts
+Details=Details
+"Order # ${shipping_order.id}"=Order # ${shipping_order.id}
+"Order list"=Order list
+"Order summary"=Order summary
