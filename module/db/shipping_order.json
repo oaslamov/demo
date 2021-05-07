@@ -42,6 +42,11 @@
       "fields":[
         "customer"
       ]
+    },
+    {
+      "fields":[
+        "total"
+      ]
     }
   ],
   "@":"8",
