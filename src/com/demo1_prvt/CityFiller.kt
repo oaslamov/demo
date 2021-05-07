@@ -3,9 +3,11 @@ package com.demo1_prvt
 import com.dolmen.md.demo1_prvt.City
 import com.dolmen.md.demo1_prvt.Country
 import com.dolmen.md.demo1_prvt.Subcountry
+import com.dolmen.serv.table.ITableFieldFiller
 
 class CityFiller : City.ICity {
     private val db by lazy { Demo1.start() }
+    override fun getInstance(): ITableFieldFiller = CityFiller()
 
     override fun getList_Nm(table: City): String {
         val sbcntr = db.select(Subcountry(), table.subcountry_Id)
