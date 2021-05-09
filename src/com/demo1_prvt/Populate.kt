@@ -5,6 +5,7 @@ import com.dolmen.serv.CONST
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
+import com.dolmen.serv.table.RowID
 import com.dolmen.util.Text
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -135,29 +136,42 @@ class Populate(val m: Demo1) {
             val shipmentDaysAgo = placedDaysAgo - Random.nextInt(maxShipmentAfter + 1).toLong()
             //val m1 = Random.nextInt(maxCustomer)
             val m1 = ((0.15 * rnd.nextGaussian() + 0.5) * maxCustomer).toInt().coerceIn(0, maxCustomer - 1)
-            val orderId = Shipping_Order().run { // Create an order and get its Id
+            val o = Shipping_Order().apply { // Create an order and get its Id
                 customer = customers[m1].id
                 datetime_Order_Placed =
                         OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
                 date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
                 shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
                 m.insert(this)
-                id
             }
             val k = Random.nextInt(minItems, maxItems + 1)
+            var total = BigDecimal.ZERO
+            val itemsIDs = mutableListOf<RowID>()
             repeat(k) {
                 Shipping_Order_Product().apply { // Create an item
-                    //val m2 = Random.nextInt(maxProduct)
-                    val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt().coerceIn(0, maxProduct - 1)
-                    val p = products[m2] // Normal distribution (for ABC analysis graph)c
-                    shipping_Order = orderId
+                    var p: Product
+                    do { // generate unique item
+                        //val m2 = Random.nextInt(maxProduct)
+                        // Normal distribution (for a good looking ABC analysis graph)
+                        val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt().coerceIn(0, maxProduct - 1)
+                        p = products[m2]
+                    } while (p.id in itemsIDs)
+                    itemsIDs.add(p.id)
+                    shipping_Order = o.id
                     product = p.id
                     quantity = Random.nextInt(maxQuantity) + 1
                     val pr = p.price ?: BigDecimal.ZERO
+                    val s = quantity.toBigDecimal() * pr
                     price = pr
+                    sum = s
                     m.insert(this)
+                    total += s
                 }
             }
+            //if (total != BigDecimal.ZERO) {
+            //    o.total = total
+            //    m.update(o)
+            //}
             if ((i + 1) % 100 == 0) Txt.info("Generated ${i + 1} orders").msg()
         }
         return Text.F("Done")

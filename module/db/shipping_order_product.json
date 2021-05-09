@@ -27,7 +27,6 @@
     {
       "code":"sum",
       "type":"number",
-      "metatype":"function",
       "@":"18"
     },
     {

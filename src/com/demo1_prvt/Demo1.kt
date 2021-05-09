@@ -2,7 +2,6 @@ package com.demo1_prvt
 
 import com.demo1_prvt.filler.CityFiller
 import com.demo1_prvt.filler.ShippingOrderFiller
-import com.demo1_prvt.filler.ShippingOrderProductFiller
 import com.dolmen.call.ActionBase
 import com.dolmen.call.Http
 import com.dolmen.call.JSONManagerBase
@@ -466,18 +465,10 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
 
-    override fun beforeUpdate(t: ITopTable?) {
-        super.beforeUpdate(t)
-        if (t is Customer) {
-            t.city?.let {
-                selectFirst<City>("id=${t.city}")?.let { ct ->
-                    t.country = ct.country_Id
-                    t.subcountry = ct.subcountry_Id
-                    t.city = ct.id
-                }
-            }
-        }
+    override fun beforeUpdate(t: ITopTable) {
+        Operations(this).triggerBeforeUpdate(t)
     }
+
 
     @Description("Inserts a new record and navigates to the specified screen")
     @Parameters("tableCode: table code", "screenCode: screen code", "mode: screen opening mode",
@@ -551,8 +542,6 @@ class Demo1 : Demo1_PrvtModuleBase() {
     companion object {
         init {
             T.registerFieldFiller(City.ICity::class.java, CityFiller::class.java)
-            T.registerFieldFiller(Shipping_Order_Product.IShipping_Order_Product::class.java,
-                    ShippingOrderProductFiller::class.java)
             T.registerFieldFiller(Shipping_Order.IShipping_Order::class.java, ShippingOrderFiller::class.java)
         }
 
