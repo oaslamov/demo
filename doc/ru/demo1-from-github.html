@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Установка демо-модуля</title>
+  <link rel="stylesheet" type="text/css" href="../common/dolmendoc.css">
+  <link rel="shortcut icon" type="image/*" href="../common/dolmen32.png"/>
+  
+ </head>
+ <body>
+<div class="nav">
+<div id="mySidenav" class="sidenav">
+<ul class="c_ul">
+
+
+<li><a href="demo1-from-github.html">Установка демо-модуля</a></li>
+</ul></div>
+<script>
+var toggler = document.getElementsByClassName("c_clo");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  ind_tog(toggler[i], true)
+}
+
+function ind_tog(el, isinit){
+  var did;
+  var ul_e;
+  var ison;
+  ul_e=el.parentElement.querySelector(".c_subt");
+  did=ul_e.id;
+  if(isinit){
+    ison=localStorage.getItem("op"+did)
+    if(ison==1)ison=false
+    else ison=true
+  }else ison=ul_e.classList.contains("c_op");
+  if(ison){
+    ul_e.classList.remove("c_op");
+    el.classList.remove("c_clo-down");
+    if(!isinit)localStorage.removeItem("op"+did)
+  }else{
+    ul_e.className+=" c_op"
+    el.className+=" c_clo-down"
+    if(!isinit)localStorage.setItem("op"+did,"1")
+  }
+}
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    ind_tog(this, false)
+  });
+}
+</script>
+</div>
+<div id="main">
+<div class="sw-cont" style="position: absolute; right:1em">
+<input type="checkbox" id="chth" class="chsel" />
+<label for="chth"></label>
+<script>
+const sw = document.querySelector('.sw-cont input[type="checkbox"]');
+function swTheme(e) {
+    if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('dlm-theme-doc', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('dlm-theme-doc', 'light');
+    }    
+}
+sw.addEventListener('change', swTheme, false);
+const currTheme = localStorage.getItem('dlm-theme-doc')
+if (currTheme) {
+    document.documentElement.setAttribute('data-theme', currTheme);
+    sw.checked = currTheme === 'dark';
+}
+</script>
+</div>
+
+<!--dolmen
+label=Установка демо-модуля 
+-->
+<ul>
+<li>Создать новый проект для сборки Демо-модуля и получить исходый код с <em>GitHub</em>
+<ul>
+<li>запустить <code>c:/dolmen/workspace/idea.bat</code></li>
+<li>новый проект <strong>User Defined | dolmen module | project name: demo1</strong></li>
+<li><strong>View | Tool windows | Project</strong></li>
+<li><strong>View | Appearance | Toolbar</strong></li>
+<li>Подождать, когда закончится  Indexing JDK 12</li>
+<li><strong>Build | Configure dolmen project</strong></li>
+<li>удалить <code>module/module_mymodule.json</code></li>
+<li>удалить <code>src/com/mypackage</code></li>
+<li>удалить <code>module.conf</code></li>
+<li><strong>VCS(Git) | enable Version Control Integration | Git</strong></li>
+<li><strong>VCS(Git) | manage remotes,</strong> добавить <code>https://github.com/oaslamov/demo.git</code></li>
+<li><strong>Login via GitHub</strong></li>
+<li>В открывшемся окне браузера (Jetbrains) нажать <strong>authorize in GitHub</strong></li>
+<li><strong>VCS(Git) | Fetch</strong></li>
+<li><strong>VCS(Git) | Branches | Remote branches | origin/master | checkout</strong></li>
+</ul>
+</li>
+<li>Собрать модуль и запустить сервер
+<ul>
+<li><strong>Dolmen-deploy</strong></li>
+<li>Подождать, когда закончится сборка</li>
+<li><strong>Dolmen-tomcat</strong></li>
+</ul>
+</li>
+<li>Установить модуль
+<ul>
+<li>зайти в веб-интерфейс</li>
+<li>установить модуль <em>Demo module #1</em> в экране <strong>Администрирование | Сервер и модули | Модули</strong></li>
+</ul>
+</li>
+</ul>
+
+<script>
+
+    var a = document.getElementsByTagName("A");
+    for(var i=0;i<a.length;i++)
+        if(a[i].href == window.location.href.split("#")[0])
+            a[i].className='cur'
+</script>
+</div></body></html>
