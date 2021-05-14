@@ -22,7 +22,6 @@ import java.math.BigDecimal
 import java.time.Duration
 import java.time.LocalDate
 import java.time.OffsetDateTime
-import java.time.temporal.IsoFields
 
 
 class Demo1 : Demo1_PrvtModuleBase() {
@@ -304,166 +303,29 @@ class Demo1 : Demo1_PrvtModuleBase() {
 
     @Description("Prepares JSON for charts example")
     fun getChartExample(): String {
-        val c = Chart()
-        c.legends.addAll(listOf(
-                Legend("x", "year", "string"),
-                Legend("y1", "west", "number"),
-                Legend("y2", "east", "number")
-        ))
-        c.data.addAll(listOf(
-                mapOf("x" to "2016", "y1" to "4000", "y2" to "800"),
-                mapOf("x" to "2017", "y1" to "5000", "y2" to "700"),
-                mapOf("x" to "2018", "y1" to "2500", "y2" to "1300"),
-                mapOf("x" to "2019", "y1" to "1200", "y2" to "2000"),
-                mapOf("x" to "2020", "y1" to "3365", "y2" to "1000"),
-                mapOf("x" to "2021", "y1" to "4345", "y2" to "2000"),
-        ))
-        return c.getJSON()
+        return ChartManager(this).getChartExample()
     }
 
     @Description("Prepares JSON for ABC analysis graph")
     fun getChartABC(): String {
-        val c = Chart()
-        c.legends.add(Legend(code = "x", name = "% items", type = "number"))
-        c.legends.add(Legend("y1", xtr("label_p_revenue"), "number"))
-        c.legends.add(Legend("y2", xtr("label_c_revenue"), "number"))
-        c.legends.add(Legend("y3", xtr("label_p_threshold", "AB"), "number", "#91a3b2"))
-        c.legends.add(Legend("y4", xtr("label_p_threshold", "BC"), "number", "#b9c2ca"))
-
-        val products = selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
-        val maxProduct = products.size
-        c.data.add(mapOf("x" to "0", "y1" to "0"))
-        var class0 = "A"
-        var class1: String
-        products.forEachIndexed { i, p ->
-            val x = (i + 1).toFloat() / maxProduct * 100
-            val y = p.cuperc
-            c.data.add(mapOf("x" to x.toString(), "y1" to y.toString()))
-            class1 = p.abc_Class.toString()
-            if ((class0 == "A") and (class1 == "B")) {
-                c.data.add(mapOf("x" to "0", "y3" to y.toString()))
-                c.data.add(mapOf("x" to x.toString(), "y3" to y.toString()))
-                c.data.add(mapOf("x" to x.toString(), "y3" to "0"))
-            }
-            if ((class0 == "B") and (class1 == "C")) {
-                c.data.add(mapOf("x" to "0", "y4" to y.toString()))
-                c.data.add(mapOf("x" to x.toString(), "y4" to y.toString()))
-                c.data.add(mapOf("x" to x.toString(), "y4" to "0"))
-            }
-            class0 = class1
-        }
-
-        val customers = selectMap(Customer_Abc.fId, "").values.sortedByDescending { it.sum }
-        val maxCustomer = customers.size
-        c.data.add(mapOf("x" to "0", "y2" to "0"))
-        customers.forEachIndexed { i, p ->
-            val x = (i + 1).toFloat() / maxCustomer * 100
-            val y = p.cuperc
-            c.data.add(mapOf("x" to x.toString(), "y2" to y.toString()))
-        }
-        return c.getJSON()
+        return ChartManager(this).getChartABC()
     }
 
     @Description("Prepares JSON for Order totals chart")
     @Parameters("points: Groups limits")
     fun getChartOrderTotals(points: String): String {
-        if (points.isBlank()) return ""
-        val limits = points.split(",").map { it.trim().toInt() }.distinct().sorted()
-        val limitsSize = limits.size
-        if (limitsSize == 0) return ""
-
-        val c = Chart()
-        c.legends.add(Legend(code = "x", name = "Order total", type = "string"))
-        c.legends.add(Legend("y1", "Count", "number"))
-        for (i in 0..limitsSize) {
-            var x: String
-            var y: String
-            when {
-                i == 0 -> {
-                    x = "<${limits[0]}.00"
-                    y = count(Shipping_Order::class, "total<${limits[0]}").toString()
-                }
-                i < limitsSize -> {
-                    x = "${limits[i - 1]}.00-${limits[i]}.00"
-                    y = count(Shipping_Order::class, "total>=${limits[i - 1]} and total<${limits[i]}").toString()
-                }
-                else -> {
-                    x = ">${limits.last()}.00"
-                    y = count(Shipping_Order::class, "total>=${limits.last()}").toString()
-                }
-            }
-            c.data.add(mapOf("x" to x, "y1" to y))
-        }
-        return c.getJSON()
+        return ChartManager(this).getChartOrderTotals(points)
     }
 
     @Description("Prepares JSON for Sales by country chart")
     fun getChartSalesByCountry(): String {
-        data class Accum(val count: Int, val sum: BigDecimal)
-        data class Group(val period: String, val country: String)
-
-        val customers = selectMap(Customer.fId, "")
-        val countries = selectMap(Country.fId, "")
-        val orders = selectMap(Shipping_Order.fId, "").values
-                .groupingBy { o ->
-                    val d = o.date_Order_Paid
-                    val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
-                    if (d != null)
-                        Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
-                    else Group("-1", c)
-                }
-                .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
-                    Accum(acc.count + 1, acc.sum + (e.total ?: BigDecimal.ZERO))
-                }
-                .filterKeys { it.period != "-1" }
-                .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
-        val ct = orders.map { it.key.country }.distinct()
-        val c = Chart()
-        c.legends.add(Legend(code = "x", name = "Period", type = "string"))
-        c.legends.addAll(ct.map { Legend(it, it, "number") })
-        c.data.addAll(orders.map { o ->
-            mapOf("x" to o.key.period,
-                    o.key.country to o.value.sum.toString())
-        })
-        return c.getJSON()
+        return ChartManager(this).getChartSalesByCountry()
     }
 
     @Description("Prepares JSON for Percentage of sales by country chart")
     fun getChartSalesPercentageByCountry(): String {
-        data class Accum(val count: Int, val sum: BigDecimal)
-        data class Group(val period: String, val country: String)
-
-        val customers = selectMap(Customer.fId, "")
-        val countries = selectMap(Country.fId, "")
-        val orders = selectMap(Shipping_Order.fId, "").values
-                .groupingBy { o ->
-                    val d = o.date_Order_Paid
-                    val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
-                    if (d != null)
-                        Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
-                    else Group("-1", c)
-                }
-                .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
-                    Accum(acc.count + 1, acc.sum + (e.total ?: BigDecimal.ZERO))
-                }
-                .filterKeys { it.period != "-1" }
-                .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
-        val periodSums = orders.toList()
-                .groupingBy { it.first.period }
-                .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
-                    Accum(acc.count + 1, acc.sum + e.second.sum)
-                }
-        val ct = orders.map { it.key.country }.distinct()
-        val c = Chart()
-        c.legends.add(Legend(code = "x", name = "Period", type = "string"))
-        c.legends.addAll(ct.map { Legend(it, it, "number") })
-        c.data.addAll(orders.map { o ->
-            mapOf("x" to o.key.period,
-                    o.key.country to (BigDecimal(100) * o.value.sum / periodSums[o.key.period]?.sum!!).toString())
-        })
-        return c.getJSON()
+        return ChartManager(this).getChartSalesPercentageByCountry()
     }
-
 
     override fun beforeUpdate(t: ITopTable) {
         Operations(this).triggerBeforeUpdate(t)
