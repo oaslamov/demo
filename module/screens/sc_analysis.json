@@ -76,27 +76,6 @@
           "hint":"$l{f:7ef07d01e006:d}l"
         },
         {
-          "code":"product",
-          "label":"$l{f:7ef07d01e00a}l",
-          "type":"ref",
-          "ref":{
-            "data":{
-              "action":"demo1_prvt.selectList",
-              "args":{
-                "filter":[
-                  "${@ref_filter}"
-                ],
-                "tablename":"Demo1_Prvt.Product"
-              },
-              "fields":[
-                "id",
-                "@name"
-              ]
-            }
-          },
-          "hint":"$l{f:7ef07d01e00a:d}l"
-        },
-        {
           "code":"quantity",
           "label":"$l{f:7ef07d01e008}l",
           "type":"integer",
@@ -118,10 +97,14 @@
                 "filter":[
                   "${@user_filter}"
                 ],
+
                 "startFrom":"0",
                 "count":"5000",
                 "tableName":"demo1_prvt.product_abc"
-              }
+              },
+              "fields":[
+                "name","avg_price","quantity","sum","cusum","cuperc","abc_class"
+              ]
             }
           }
         }
@@ -159,27 +142,6 @@
           "hint":"$l{f:7ef07d01f00b:d}l"
         },
         {
-          "code":"customer",
-          "label":"$l{f:7ef07d01f006}l",
-          "type":"ref",
-          "ref":{
-            "data":{
-              "action":"demo1_prvt.selectList",
-              "args":{
-                "filter":[
-                  "${@ref_filter}"
-                ],
-                "tablename":"Demo1_Prvt.Customer"
-              },
-              "fields":[
-                "id",
-                "@name"
-              ]
-            }
-          },
-          "hint":"$l{f:7ef07d01f006:d}l"
-        },
-        {
           "code":"cusum",
           "label":"$l{f:7ef07d01f00a}l",
           "type":"number",
@@ -214,7 +176,10 @@
                 "startFrom":"0",
                 "count":"5000",
                 "tableName":"demo1_prvt.customer_abc"
-              }
+              },
+              "fields":[
+                "name","sum","cusum","cuperc","abc_class"
+              ]
             }
           }
         }
