@@ -97,13 +97,18 @@
                 "filter":[
                   "${@user_filter}"
                 ],
-
                 "startFrom":"0",
                 "count":"5000",
                 "tableName":"demo1_prvt.product_abc"
               },
               "fields":[
-                "name","avg_price","quantity","sum","cusum","cuperc","abc_class"
+                "name",
+                "avg_price",
+                "quantity",
+                "sum",
+                "cusum",
+                "cuperc",
+                "abc_class"
               ]
             }
           }
@@ -177,8 +182,12 @@
                 "count":"5000",
                 "tableName":"demo1_prvt.customer_abc"
               },
-              "fields":[
-                "name","sum","cusum","cuperc","abc_class"
+              "fields": [
+                "name",
+                "sum",
+                "cusum",
+                "cuperc",
+                "abc_class"
               ]
             }
           }
