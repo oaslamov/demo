@@ -22,7 +22,7 @@ Details=Детали
 // screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Odrer=Заказ
 // screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-"Order # ${shipping_order.id}"=Order # ${shipping_order.id}
+"Order # ${shipping_order.id}"=Заказ # ${shipping_order.id}
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 "Order items"=Товары в заказе
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
