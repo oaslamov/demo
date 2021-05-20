@@ -5,3 +5,5 @@ act1_c_header=$0. Name = $1, Phone = $2
 act1_o_header=$0.$1. Order #$2 placed $3
 act1_p_header=$0.$1.$2. Product = $3, qnty = $4
 act1_no_orders=No orders for $0
+skip_loading_sample_data="Data already exist. Skipping loading sample data..."
+loading_sample_data="Loading sample data..."
