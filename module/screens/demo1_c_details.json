@@ -6,25 +6,27 @@
   "show_in_menu":false,
   "args":[
     {
-      "code":"id",
-      "is_mandatory":true
+      "code": "id",
+      "is_mandatory": true
     }
   ],
-  "grid":{
-    "base":"screen",
-    "cols":16,
-    "rows":16
+  "grid": {
+    "base": "screen",
+    "cols": 8,
+    "rows": 8
   },
-  "data_sources":[
+  "width": 50,
+  "height": 50,
+  "data_sources": [
     {
-      "code":"ds_c",
-      "table_name":"Demo1_Prvt.Customer",
-      "type":"table",
-      "fields":[
+      "code": "ds_c",
+      "table_name": "Demo1_Prvt.Customer",
+      "type": "table",
+      "fields": [
         {
-          "code":"address_line1",
-          "label":"$l{f:7ef07d006008}l",
-          "type":"string",
+          "code": "address_line1",
+          "label": "$l{f:7ef07d006008}l",
+          "type": "string",
           "hint":"$l{f:7ef07d006008:d}l"
         },
         {
