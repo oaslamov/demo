@@ -6,43 +6,43 @@
 m:7ef07d000000=Demo module #1
 
 // table City
-t:7ef07d00c000=City
+t:7ef07d00c000=Город
 --  Country
-f:7ef07d00c006=Country
+f:7ef07d00c006=Страна
 --  Subcountry
-f:7ef07d00c008=Subcountry
+f:7ef07d00c008=Регион
 --  Name
-f:7ef07d00c00a=Name
+f:7ef07d00c00a=Наименование
 --  Geonameid
 f:7ef07d00c00b=Geonameid
 --  List Name
 f:7ef07d00c00c=List Name
 
 // table Country
-t:7ef07d00d000=Country
+t:7ef07d00d000=Страна
 --  Name
-f:7ef07d00d006=Name
+f:7ef07d00d006=Наименование
 
 // table Customer
-t:7ef07d006000=Customer
+t:7ef07d006000=Заказчик
 --  Name
-f:7ef07d006006=Name
+f:7ef07d006006=Имя
 --  Phone
-f:7ef07d006007=Phone
+f:7ef07d006007=Телефон
 --  Mobile
-f:7ef07d00600b=Mobile
+f:7ef07d00600b=Моб.тел.
 --  Address Line1
-f:7ef07d006008=Address Line1
+f:7ef07d006008=Адрес, строка 1
 --  Address Line2
-f:7ef07d006009=Address Line2
+f:7ef07d006009=Адрес, строка 2
 --  Address Line3
-f:7ef07d00600a=Address Line3
+f:7ef07d00600a=Адрес, строка 3
 --  Country
-f:7ef07d00600c=Country
+f:7ef07d00600c=Страна
 --  Subcountry
-f:7ef07d00600e=Subcountry
+f:7ef07d00600e=Регион
 --  City
-f:7ef07d006010=City
+f:7ef07d006010=Город
 
 // table Customer Abc
 t:7ef07d01f000=Заказчик Abc
@@ -97,52 +97,52 @@ e:7ef07d01e00e.B=B
 e:7ef07d01e00e.C=C
 
 // table Shipping Order
-t:7ef07d008000=Shipping Order
+t:7ef07d008000=Заказ
 --  Customer
-f:7ef07d008006=Customer
+f:7ef07d008006=Заказчик
 --  Order placed at
-f:7ef07d008008=Order placed at
+f:7ef07d008008=Дата создания
 --  Order paid at
-f:7ef07d008009=Order paid at
+f:7ef07d008009=Дата олаты
 --  Shipment Date
-f:7ef07d00800b=Shipment Date
+f:7ef07d00800b=Дата доставки
 --  Total
-f:7ef07d00800e=Total
+f:7ef07d00800e=Итого
 --  Comment
-f:7ef07d00800a=Comment
+f:7ef07d00800a=Комментарий
 
 // table Shipping Order Product
-t:7ef07d009000=Shipping Order Product
+t:7ef07d009000=Строка заказа
 --  Shipping Order
-f:7ef07d009006=Shipping Order
+f:7ef07d009006=Заказ
 --  Product
-f:7ef07d009008=Product
+f:7ef07d009008=Товар
 --  Qnty
-f:7ef07d00900a=Qnty
+f:7ef07d00900a=Количество
 --  Price
-f:7ef07d009011=Price
+f:7ef07d009011=Цена
 --  Sum
-f:7ef07d009012=Sum
+f:7ef07d009012=Сумма
 --  Comment
-f:7ef07d00900b=Comment
+f:7ef07d00900b=Комментарий
 
 // table Subcountry
-t:7ef07d00e000=Subcountry
+t:7ef07d00e000=Регион
 --  Country
-f:7ef07d00e006=Country
+f:7ef07d00e006=Страна
 --  Name
-f:7ef07d00e008=Name
+f:7ef07d00e008=Наименование
 
 // table View1
 t:7ef07d017000=View1
 --  Customer name
-f:7ef07d01700c=Customer name
+f:7ef07d01700c=Имя заказчика
 --  Customer phone
-f:7ef07d01700d=Customer phone
+f:7ef07d01700d=Телефон заказчика
 --  Customer mobile
-f:7ef07d01700e=Customer mobile
+f:7ef07d01700e=Моб. тел. заказчика
 --  Customer address
-f:7ef07d01700f=Customer address
+f:7ef07d01700f=Адрес заказчика
 
 // table V Dm7
 t:7ef07d01a000=V Dm7

@@ -4,55 +4,50 @@
 // -- for module developer project: "locale" dir in the Dolmen SDK project
 
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Address=Address
+Address=Адрес
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Billing=Billing
+Billing=Платежный адрес
 // screens: sc_analysis:scr@demo1_prvt sc_chart:scr@demo1_prvt
 Charts=Графики
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Comment=Comment
+Comment=Комментарий
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Contacts=Contacts
+Contacts=Контакты
 // screens: demo1_customer:scr@demo1_prvt demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Customer=Customer
+Customer=Заказчик
 // screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_order1610:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Demo1=Demo1
 // screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-Details=Details
+Details=Детали
 // screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
-Odrer=Odrer
+Odrer=Заказ
 // screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 "Order # ${shipping_order.id}"=Order # ${shipping_order.id}
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-"Order items"=Order items
+"Order items"=Товары в заказе
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-"Order list"=Order list
+"Order list"=Список заказов
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-"Order summary"=Order summary
+"Order summary"=Общая информация
 // screens: demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
-Order=Order
+Order=Заказ
 // screens: demo1_customer:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt
-Summary=Summary
+Summary=Сводка
 
 //-- demo1_c_details:scr@demo1_prvt --
-"Customer details"=Customer details
+"Customer details"=Детали заказчика
 
 //-- demo1_customer:scr@demo1_prvt --
 
-//-- demo1_customer_n:scr@demo1_prvt --
-"Customer N"=Customer N
 
-//-- demo1_order1610:scr@demo1_prvt --
-"Order ${shipping_order.id}"=Order ${shipping_order.id}
-Order1610=Order1610
 
 //-- demo1_order:scr@demo1_prvt --
 
 //-- demo1_product:scr@demo1_prvt --
-Product=Product
+Product=Товар
 
 //-- demo1_shipping_order:scr@demo1_prvt --
-"Shipping Order"=Shipping Order
+"Shipping Order"=Заказ (простой экран)
 
 //-- sc_analysis:scr@demo1_prvt --
 "ABC analysis graph"=График ABC анализа
@@ -64,14 +59,12 @@ Product=Product
 "Sales by country"=Продажи по странам
 
 //-- sc_chart:scr@demo1_prvt --
-"Bar Chart"=Bar Chart
-"Line Chart"=Line Chart
-"Pie Chart"=Pie Chart
-"Spline Chart"=Spline Chart
-"Stacked Bar Chart"=Stacked Bar Chart
+"Bar Chart"=Столбчатая диаграмма
+"Line Chart"=Линейная диаграмма
+"Pie Chart"=Круговая диаграмма
+"Spline Chart"=Сглаженная линейная диаграмма
+"Stacked Bar Chart"=Диаграмма с накоплением
 
 //-- sc_order:scr@demo1_prvt --
-Orders=Orders
+Orders=Заказы
 
-//-- sc_order_n:scr@demo1_prvt --
-"Orders N"=Orders N
