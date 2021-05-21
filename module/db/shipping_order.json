@@ -28,7 +28,6 @@
     {
       "code":"total",
       "type":"number",
-      "metatype":"function",
       "@":"14"
     },
     {
@@ -41,6 +40,11 @@
     {
       "fields":[
         "customer"
+      ]
+    },
+    {
+      "fields":[
+        "total"
       ]
     }
   ],

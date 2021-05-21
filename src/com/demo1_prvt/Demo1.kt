@@ -1,7 +1,6 @@
 package com.demo1_prvt
 
 import com.demo1_prvt.filler.CityFiller
-import com.demo1_prvt.filler.ShippingOrderFiller
 import com.dolmen.call.ActionBase
 import com.dolmen.call.Http
 import com.dolmen.call.JSONManagerBase
@@ -404,7 +403,6 @@ class Demo1 : Demo1_PrvtModuleBase() {
     companion object {
         init {
             T.registerFieldFiller(City.ICity::class.java, CityFiller::class.java)
-            T.registerFieldFiller(Shipping_Order.IShipping_Order::class.java, ShippingOrderFiller::class.java)
         }
 
         fun start(): Demo1 {

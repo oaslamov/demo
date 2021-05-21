@@ -168,10 +168,10 @@ class Populate(val m: Demo1) {
                     total += s
                 }
             }
-            //if (total != BigDecimal.ZERO) {
-            //    o.total = total
-            //    m.update(o)
-            //}
+            if (total != BigDecimal.ZERO) {
+                o.total = total
+                m.update(o)
+            }
             if ((i + 1) % 100 == 0) Txt.info("Generated ${i + 1} orders").msg()
         }
         return Text.F("Done")
