@@ -48,6 +48,6 @@ Billing=Billing
 Comment=Comment
 Contacts=Contacts
 Details=Details
-"Order # ${shipping_order.id}"=Order # ${shipping_order.id}
+"Order #"=Order #
 "Order list"=Order list
 "Order summary"=Order summary
