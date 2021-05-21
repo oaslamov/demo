@@ -8,3 +8,4 @@ dolmen-module-*.zip
 /bin/
 /build/
 /src_generated/
+/doc/
