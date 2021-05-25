@@ -1,9 +1,6 @@
 package com.demo1_prvt
 
 import com.demo1_prvt.filler.CityFiller
-import com.dolmen.call.ActionBase
-import com.dolmen.call.Http
-import com.dolmen.call.JSONManagerBase
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.mod.GuiModule
 import com.dolmen.serv.Txt
@@ -15,7 +12,6 @@ import com.dolmen.serv.exp.Formula
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
 import com.dolmen.util.Text
-import org.mpru.security.KerberosPrefs
 import java.io.File
 import java.math.BigDecimal
 import java.time.Duration
@@ -232,26 +228,22 @@ class Demo1 : Demo1_PrvtModuleBase() {
 
     @Description("Updates all orders sums")
     fun updateAllOrders() {
-        val product = selectMap(Product.fId, "")
+        val products = selectMap(Product.fId, "")
         var i = 0
-        iterate<Shipping_Order>("") { o ->
+        iterate<Shipping_Order_Product>("") { item ->
             i++
-            var total = BigDecimal.ZERO
-            iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
-                val p = product[item.product]
+            with(item) {
+                val p = products[product]
                 if (p != null) {
-                    val itemPrice = p.price ?: BigDecimal.ZERO
-                    item.price = itemPrice
-                    item.sum = (itemPrice * item.quantity.toBigDecimal())
+                    price = p.price ?: BigDecimal.ZERO
+                    sum = (price?.times(quantity.toBigDecimal()))
                     update(item)
                 }
-                total += item.sum ?: BigDecimal.ZERO
+                if (i % 100 == 0) Txt.info("${i}. Updated order item id = ${id}, sum = ${sum}").msg()
             }
-            o.total = total
-            update(o)
-            if (i % 100 == 0) Txt.info("${i}. Updated order # ${o.id}, total = ${o.total}").msg()
         }
     }
+
 
     @Description("Loads sample data")
     fun loadSampleData() {
@@ -347,52 +339,12 @@ class Demo1 : Demo1_PrvtModuleBase() {
 
     @Description("Calls dolmen server (JSON)")
     fun callDolmenJson(): String {
-        var res = ""
-        val url = "https://dolmensystem.corp.example.com/dolmen"
-        val spn = url.replace(Regex(".*//(.*)/.*"), "HTTP/$1")
-        val http = Http(url)
-        val kerbPrefs = KerberosPrefs()
-        //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")
-        //kerbPrefs.setPassword("Pass123456")
-        kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")
-        kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab")
-        kerbPrefs.setSpn(spn)
-        http.setKerberosClient(kerbPrefs)
-        http.setLog(this.l)
-        val ac = ActionBase.create("demo1_prvt.selectlist", "demo1_prvt.customer",
-                "name like '%val%' order by name").setTag("myTag1")
-        var ar = http.action(ac)
-        while (ar != null) {
-            res += JSONManagerBase.getJson(ar, false) + '\n'
-            ar = ar.next
-        }
-        res += "\nRC == ${http.rc()}"
-        return res
+        return Caller(this).callDolmenJson()
     }
 
     @Description("Calls dolmen server (XML)")
     fun callDolmenXml(): String {
-        val url = "https://dolmensystem.corp.example.com/dolmen"
-        val http = Http(url)
-        val spn = url.replace(Regex(".*//(.*)/.*"), "HTTP/$1")
-        val kerbPrefs = KerberosPrefs()
-        //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")
-        //kerbPrefs.setPassword("Pass123456")
-        kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")
-        kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab")
-        kerbPrefs.setSpn(spn)
-        http.setKerberosClient(kerbPrefs)
-        http.setLog(this.l)
-        var res = http.sendPost("""
-            <?xml version="1.0" encoding="UTF-8"?>
-            <dolmen version="1">
-            <a a="demo1_prvt.action1">
-                <arg name="customerFilter">name like '%val%'</arg>
-            </a>
-            </dolmen>
-        """.trimIndent())
-        res += "\nRC == ${http.rc()}\n"
-        return res
+        return Caller(this).callDolmenXml()
     }
 
     override fun x_installed(modulePreviousVersionId: Int) {
