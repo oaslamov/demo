@@ -13,7 +13,6 @@ import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
 import com.dolmen.util.Text
 import java.io.File
-import java.math.BigDecimal
 import java.time.Duration
 import java.time.LocalDate
 import java.time.OffsetDateTime
@@ -225,25 +224,10 @@ class Demo1 : Demo1_PrvtModuleBase() {
         }
     }
 
-
     @Description("Updates all orders sums")
     fun updateAllOrders() {
-        val products = selectMap(Product.fId, "")
-        var i = 0
-        iterate<Shipping_Order_Product>("") { item ->
-            i++
-            with(item) {
-                val p = products[product]
-                if (p != null) {
-                    price = p.price ?: BigDecimal.ZERO
-                    sum = (price?.times(quantity.toBigDecimal()))
-                    update(item)
-                }
-                if (i % 100 == 0) Txt.info("${i}. Updated order item id = ${id}, sum = ${sum}").msg()
-            }
-        }
+        Populate(this).updateAllOrders()
     }
-
 
     @Description("Loads sample data")
     fun loadSampleData() {

@@ -177,4 +177,22 @@ class Populate(val m: Demo1) {
         return Text.F("Done")
     }
 
+    @Description("Updates all orders sums")
+    fun updateAllOrders() {
+        val products = m.selectMap(Product.fId, "")
+        var i = 0
+        m.iterate<Shipping_Order_Product>("") { item ->
+            i++
+            with(item) {
+                val p = products[product]
+                if (p != null) {
+                    price = p.price ?: java.math.BigDecimal.ZERO
+                    sum = (price?.times(quantity.toBigDecimal()))
+                    m.update(item)
+                }
+                if (i % 100 == 0) com.dolmen.serv.Txt.info("${i}. Updated order item id = ${id}, sum = ${sum}").msg()
+            }
+        }
+    }
+
 }
