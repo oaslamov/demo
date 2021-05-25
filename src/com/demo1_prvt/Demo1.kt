@@ -1,7 +1,9 @@
 package com.demo1_prvt
 
 import com.demo1_prvt.filler.CityFiller
-import com.dolmen.md.demo1_prvt.*
+import com.dolmen.md.demo1_prvt.City
+import com.dolmen.md.demo1_prvt.Demo1_PrvtModuleBase
+import com.dolmen.md.demo1_prvt.View1
 import com.dolmen.mod.GuiModule
 import com.dolmen.serv.anno.ActionType
 import com.dolmen.serv.anno.Description
@@ -27,7 +29,6 @@ class Demo1 : Demo1_PrvtModuleBase() {
     fun action1(customerFilter: String) {
         CustomActions(this).action1(customerFilter)
     }
-
 
     @Description("Creates a customer")
     @Parameters("name: String", "phone: String", "mobile: String")
@@ -83,24 +84,7 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
-        class ViewIterator(f: Formula, m: Demo1) : View1.Data(f, m) {
-            val customers: Map<RowID, Customer> = selectMap(Customer.fId, "")
-            override fun create(s: Shipping_Order): View1 {
-                val v = super.create(s)
-                if (s.customer != null) {
-//                    val c = selectFirst<Customer>("id=${s.customer}")
-                    val c = customers[s.customer]
-                    if (c != null) {
-                        v.c_Name = c.name
-                        v.c_Phone = c.phone
-                        v.c_Mobile = c.mobile
-                        v.c_Address = listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()
-                    }
-                }
-                return v
-            }
-        }
-        return ViewIterator(f, this)
+        return Views(this).s_iterateView1(f)
     }
 
     @Description("Calculates sales statistics for a given period of time")
@@ -138,7 +122,6 @@ class Demo1 : Demo1_PrvtModuleBase() {
     override fun beforeUpdate(t: ITopTable) {
         Operations(this).triggerBeforeUpdate(t)
     }
-
 
     @Description("Inserts a new record and navigates to the specified screen")
     @Parameters("tableCode: table code", "screenCode: screen code", "mode: screen opening mode",
