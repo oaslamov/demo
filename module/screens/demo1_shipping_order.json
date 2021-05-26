@@ -18,7 +18,8 @@
           "code":"comment",
           "label":"$l{f:7ef07d00800a}l",
           "type":"text",
-          "hint":"$l{f:7ef07d00800a:d}l"
+          "hint":"$l{f:7ef07d00800a:d}l",
+          "edit_condition":"false"
         },
         {
           "code":"customer",
