@@ -142,6 +142,7 @@ class Populate(val m: Demo1) {
                         OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
                 date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
                 shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
+                comment = genOrderComment(customers[m1])
                 m.insert(this)
             }
             val k = Random.nextInt(minItems, maxItems + 1)
@@ -175,6 +176,24 @@ class Populate(val m: Demo1) {
             if ((i + 1) % 100 == 0) Txt.info("Generated ${i + 1} orders").msg()
         }
         return Text.F("Done")
+    }
+
+    private fun genOrderComment(customer: Customer): String {
+        fun mapLink(s: String?): String =
+                """<a href="https://maps.google.com/maps?q=$s" target="_blank" rel="noopener noreferrer">$s</a>"""
+        fun searchLink(s: String?): String =
+                """<a href="https://www.google.com/search?q=$s" target="_blank" rel="noopener noreferrer">$s</a>"""
+
+        with(customer) {
+            return """
+                <p>
+                <ul>
+                <li>Find: ${searchLink(name)}</li>
+                <li>Open map: ${mapLink(address_Line2)}</li>
+                </ul>
+                </p>
+            """.trimIndent().replace("\n", "")
+        }
     }
 
     @Description("Updates all orders sums")
