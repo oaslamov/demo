@@ -44,6 +44,7 @@ Summary=Сводка
 //-- demo1_order:scr@demo1_prvt --
 
 //-- demo1_product:scr@demo1_prvt --
+"Open link"=Открыть ссылку
 Product=Товар
 
 //-- demo1_shipping_order:scr@demo1_prvt --

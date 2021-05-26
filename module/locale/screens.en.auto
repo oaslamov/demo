@@ -21,6 +21,7 @@ Order=Order
 Summary=Summary
 
 //-- demo1_product:scr@demo1_prvt --
+"Open link"=Open link
 Product=Product
 
 //-- demo1_shipping_order:scr@demo1_prvt --

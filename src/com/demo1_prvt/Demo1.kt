@@ -1,8 +1,10 @@
 package com.demo1_prvt
 
 import com.demo1_prvt.filler.CityFiller
+import com.demo1_prvt.filler.ProductFiller
 import com.dolmen.md.demo1_prvt.City
 import com.dolmen.md.demo1_prvt.Demo1_PrvtModuleBase
+import com.dolmen.md.demo1_prvt.Product
 import com.dolmen.md.demo1_prvt.View1
 import com.dolmen.mod.GuiModule
 import com.dolmen.serv.anno.ActionType
@@ -155,6 +157,7 @@ class Demo1 : Demo1_PrvtModuleBase() {
     companion object {
         init {
             T.registerFieldFiller(City.ICity::class.java, CityFiller::class.java)
+            T.registerFieldFiller(Product.IProduct::class.java, ProductFiller::class.java)
         }
 
         fun start(): Demo1 {

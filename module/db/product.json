@@ -32,6 +32,14 @@
         }
       ],
       "@":"8"
+    },
+    {
+      "code":"url",
+      "metatype":"function",
+      "etc":{
+        "ignoreCase":true
+      },
+      "@":"10"
     }
   ],
   "indexes":[
@@ -48,6 +56,6 @@
     }
   ],
   "@":"7",
-  "@e":"2kat_dd:3;6name:1;8product_type:1;9price:6",
+  "@e":"2kat_dd:3;6name:1;8product_type:1;9price:6;10url:1",
   "@d":"7price:6"
 }

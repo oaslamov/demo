@@ -50,6 +50,13 @@
             }
           ],
           "hint":"$l{f:7ef07d007008:d}l"
+        },
+        {
+          "code":"url",
+          "label":"$l{f:7ef07d00700a}l",
+          "type":"string",
+          "edit_condition":"false",
+          "hint":"$l{f:7ef07d00700a:d}l"
         }
       ],
       "operations":{
@@ -109,7 +116,22 @@
             }
           }
         }
-      }
+      },
+      "actions":[
+        {
+          "code":"openLink",
+          "label":"$l{Open link}l",
+          "data_scope":"row",
+          "request":{
+            "data":{
+              "action":"gui.goLink",
+              "args":{
+                "url":"${product.url}"
+              }
+            }
+          }
+        }
+      ]
     }
   ],
   "parts":[
@@ -137,6 +159,9 @@
           {
             "code":"product_type",
             "width":"10%"
+          },
+          {
+            "code":"url"
           }
         ],
         "order":[
@@ -150,6 +175,9 @@
           "insert",
           "update",
           "delete"
+        ],
+        "actions":[
+          "openLink"
         ]
       }
     }

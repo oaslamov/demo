@@ -73,6 +73,8 @@ f:7ef07d007008=Product Type
 e:7ef07d007008.T=Toy
 e:7ef07d007008.B=Book
 e:7ef07d007008.G=Grocery
+--  Url
+f:7ef07d00700a=Url
 
 // table Product Abc
 t:7ef07d01e000=Product Abc
