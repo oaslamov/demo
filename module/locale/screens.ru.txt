@@ -52,6 +52,7 @@ Product=Товар
 
 //-- sc_analysis:scr@demo1_prvt --
 "ABC analysis graph"=График ABC анализа
+Analyze=Выполнить анализ
 "Customers ABC"=Заказчики ABC
 "Data analysis"=Анализ данных
 "Number of shipping orders by order totals"=Количество заказов по суммам заказа

@@ -8,6 +8,9 @@
     "cols":16,
     "rows":16
   },
+  "actions":[
+    "ds_p.makeStats"
+  ],
   "data_sources":[
     {
       "code":"ds_chart1",
@@ -113,7 +116,51 @@
             }
           }
         }
-      }
+      },
+      "actions":[
+        {
+          "code":"makeStats",
+          "label":"$l{Analyze}l",
+          "data_scope":"row",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.makeStats",
+              "args":{
+                "start":"",
+                "bcLimit":"90",
+                "finish":"",
+                "abLimit":"65"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"ds_p",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_c",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_chart1",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_chart2",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_chart3",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_chart4",
+              "type":"all_rows"
+            }
+          ]
+        }
+      ]
     },
     {
       "code":"ds_c",
@@ -182,7 +229,7 @@
                 "count":"5000",
                 "tableName":"demo1_prvt.customer_abc"
               },
-              "fields": [
+              "fields":[
                 "name",
                 "sum",
                 "cusum",

@@ -29,6 +29,7 @@ Product=Product
 
 //-- sc_analysis:scr@demo1_prvt --
 "ABC analysis graph"=ABC analysis graph
+Analyze=Analyze
 "Customers ABC"=Customers ABC
 "Data analysis"=Data analysis
 "Number of shipping orders by order totals"=Number of shipping orders by order totals
