@@ -19,6 +19,7 @@ import java.time.LocalDate
 
 
 class Demo1 : Demo1_PrvtModuleBase() {
+    var isLoadingSampleData  = false
 
     @Description("My Action")
     @Parameters("input: String")
@@ -167,11 +168,11 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     override fun x_installed(modulePreviousVersionId: Int) {
-        super.x_installed(modulePreviousVersionId)
         Populate(this).loadSampleData()
     }
 
     companion object {
+
         init {
             T.registerFieldFiller(City.ICity::class.java, CityFiller::class.java)
             T.registerFieldFiller(Product.IProduct::class.java, ProductFiller::class.java)

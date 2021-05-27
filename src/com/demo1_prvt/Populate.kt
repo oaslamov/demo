@@ -22,12 +22,14 @@ class Populate(val m: Demo1) {
         if (hasData) {
             Txt.info(m.xtr("skip_loading_sample_data")).msg()
         } else {
+            m.isLoadingSampleData = true
             Txt.info(m.xtr("loading_sample_data")).msg()
             createCities()
             createCustomers()
             createProducts()
             genOrders(1000)
             Stats(m).makeStats(abLimit = 65, bcLimit = 90)
+            m.isLoadingSampleData = false
         }
     }
 
@@ -124,9 +126,11 @@ class Populate(val m: Demo1) {
         val maxPaidAfter = 30
         val maxShipmentAfter = 45
         val minItems = 3
-        val maxItems = 10
+        val maxItems = 7
+        val maxQuantity = 20
         val minutesInDay = 3600
         val customers = m.selectMap(Customer.fId, "").values.toList().shuffled()
+        val products = m.selectMap(Product.fId, "").values.toList().shuffled()
         val maxCustomer = customers.size
         repeat(n) { i ->
             val placedDaysAgo = Random.nextInt(maxPlacedDaysAgo + 1).toLong()
@@ -134,20 +138,45 @@ class Populate(val m: Demo1) {
             val shipmentDaysAgo = placedDaysAgo - Random.nextInt(maxShipmentAfter + 1).toLong()
             //val m1 = Random.nextInt(maxCustomer)      // Use this for uniform distribution
             // Or this for normal distribution (for a good looking ABC analysis graph)
-            val m1 = ((0.15 * rnd.nextGaussian() + 0.5) * maxCustomer).toInt().coerceIn(0, maxCustomer - 1)
+            val k = ((0.15 * rnd.nextGaussian() + 0.5) * maxCustomer).toInt().coerceIn(0, maxCustomer - 1)
             Shipping_Order().apply {
-                customer = customers[m1].id
+                customer = customers[k].id
                 datetime_Order_Placed =
                         OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
                 date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
                 shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
-                comment = makeOrderComment(customers[m1])
+                comment = makeOrderComment(customers[k])
                 m.insert(this)
-                genItems(Random.nextInt(minItems, maxItems + 1))
+                genItems(n = Random.nextInt(minItems, maxItems + 1), products, maxQuantity)
             }
             if ((i + 1) % 100 == 0) Txt.info("Generated ${i + 1} orders").msg()
         }
         return Text.F("Done")
+    }
+
+    private fun Shipping_Order.genItems(n: Int, products: List<Product>, maxQuantity: Int) {
+        val maxProduct = products.size
+        val itemsIDs = mutableListOf<RowID>()
+        repeat(n) {
+            Shipping_Order_Product().apply { // Create an item
+                var p: Product
+                do { // generate unique item
+                    //val m2 = Random.nextInt(maxProduct)       // Use this for uniform distribution
+                    // Or this for normal distribution (for a good looking ABC analysis graph)
+                    val k = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt().coerceIn(0, maxProduct - 1)
+                    p = products[k]
+                } while (p.id in itemsIDs)
+                itemsIDs.add(p.id)
+                shipping_Order = this@genItems.id
+                product = p.id
+                quantity = Random.nextInt(maxQuantity) + 1
+                price = p.price
+                sum = price?.times(quantity.toBigDecimal())
+                m.insert(this)
+                total = (total ?: BigDecimal.ZERO) + (sum ?: BigDecimal.ZERO)
+            }
+        }
+        m.update(this)
     }
 
     private fun makeOrderComment(customer: Customer): String {
@@ -187,32 +216,6 @@ class Populate(val m: Demo1) {
         }
     }
 
-    private fun Shipping_Order.genItems(n: Int) {
-        val maxQuantity = 15
-        val products = m.selectMap(Product.fId, "").values.toList().shuffled()
-        val maxProduct = products.size
-        val itemsIDs = mutableListOf<RowID>()
-        repeat(n) {
-            Shipping_Order_Product().apply { // Create an item
-                var p: Product
-                do { // generate unique item
-                    //val m2 = Random.nextInt(maxProduct)       // Use this for uniform distribution
-                    // Or this for normal distribution (for a good looking ABC analysis graph)
-                    val m2 = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt().coerceIn(0, maxProduct - 1)
-                    p = products[m2]
-                } while (p.id in itemsIDs)
-                itemsIDs.add(p.id)
-                shipping_Order = this@genItems.id
-                product = p.id
-                quantity = Random.nextInt(maxQuantity) + 1
-                price = p.price
-                sum = price?.times(quantity.toBigDecimal())
-                m.insert(this)
-                //total = (total ?: BigDecimal.ZERO) + (sum ?: BigDecimal.ZERO)
-            }
-        }
-        //m.update(this)
-    }
 }
 
 

@@ -13,13 +13,7 @@ class Operations(val m: Demo1) {
     }
 
     fun triggerBeforeInsert(t: ITopTable?) {
-        when (t) {
-            is Customer -> refreshCustomer(t)
-            is Shipping_Order_Product -> refreshShippingOrderProduct(t)
-        }
-    }
-
-    fun triggerBeforeDelete(t: ITopTable?) {
+        if (m.isLoadingSampleData) return
         when (t) {
             is Customer -> refreshCustomer(t)
             is Shipping_Order_Product -> refreshShippingOrderProduct(t)
@@ -27,7 +21,14 @@ class Operations(val m: Demo1) {
     }
 
     fun triggerAfterInsert(t: ITopTable?) {
+        if (m.isLoadingSampleData) return
+    }
 
+    fun triggerBeforeDelete(t: ITopTable?) {
+        when (t) {
+            is Customer -> refreshCustomer(t)
+            is Shipping_Order_Product -> refreshShippingOrderProduct(t)
+        }
     }
 
     fun refreshCustomer(t: Customer) {
