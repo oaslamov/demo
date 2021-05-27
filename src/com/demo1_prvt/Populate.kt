@@ -138,6 +138,7 @@ class Populate(val m: Demo1) {
                 customer = customers[k].id
                 datetime_Order_Placed = OffsetDateTime.now().minusMinutes(Random.nextLong(maxPeriod))
                 date_Order_Paid = datetime_Order_Placed?.toLocalDate()?.plusDays(Random.nextLong(maxPaidAfter))
+                        ?.coerceAtMost(OffsetDateTime.now().toLocalDate())
                 shipment_Date = datetime_Order_Placed?.toLocalDate()?.plusDays(Random.nextLong(maxShipmentAfter))
                 comment = makeOrderComment(customers[k])
                 m.insert(this)
