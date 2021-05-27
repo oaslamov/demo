@@ -208,10 +208,10 @@ class Populate(val m: Demo1) {
                 price = p.price
                 sum = price?.times(quantity.toBigDecimal())
                 m.insert(this)
-                total = (total ?: BigDecimal.ZERO) + (sum ?: BigDecimal.ZERO)
+                //total = (total ?: BigDecimal.ZERO) + (sum ?: BigDecimal.ZERO)
             }
         }
-        m.update(this)
+        //m.update(this)
     }
 }
 
