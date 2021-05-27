@@ -9,7 +9,6 @@ import com.dolmen.serv.table.RowID
 import com.dolmen.util.Text
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.time.LocalDate
 import java.time.OffsetDateTime
 import kotlin.random.Random
 
@@ -122,29 +121,24 @@ class Populate(val m: Demo1) {
     @Description("Generates random orders")
     @Parameters("n: Int")
     fun genOrders(n: Int): String {
-        val maxPlacedDaysAgo = 365 * 3
-        val maxPaidAfter = 30
-        val maxShipmentAfter = 45
+        val maxPeriod = 3L * 365L * 24L * 60L // Three years in minutes
+        val maxPaidAfter = 30L
+        val maxShipmentAfter = 45L
         val minItems = 3
         val maxItems = 7
         val maxQuantity = 20
-        val minutesInDay = 3600
         val customers = m.selectMap(Customer.fId, "").values.toList().shuffled()
         val products = m.selectMap(Product.fId, "").values.toList().shuffled()
         val maxCustomer = customers.size
         repeat(n) { i ->
-            val placedDaysAgo = Random.nextInt(maxPlacedDaysAgo + 1).toLong()
-            val paidDaysAgo = (placedDaysAgo - Random.nextInt(maxPaidAfter + 1)).coerceAtLeast(0)
-            val shipmentDaysAgo = placedDaysAgo - Random.nextInt(maxShipmentAfter + 1).toLong()
-            //val m1 = Random.nextInt(maxCustomer)      // Use this for uniform distribution
+            //val k = Random.nextInt(maxCustomer)      // Use this for uniform distribution
             // Or this for normal distribution (for a good looking ABC analysis graph)
             val k = ((0.15 * rnd.nextGaussian() + 0.5) * maxCustomer).toInt().coerceIn(0, maxCustomer - 1)
             Shipping_Order().apply {
                 customer = customers[k].id
-                datetime_Order_Placed =
-                        OffsetDateTime.now().minusDays(placedDaysAgo).minusMinutes(Random.nextInt(minutesInDay).toLong())
-                date_Order_Paid = LocalDate.now().minusDays(paidDaysAgo)
-                shipment_Date = LocalDate.now().minusDays(shipmentDaysAgo)
+                datetime_Order_Placed = OffsetDateTime.now().minusMinutes(Random.nextLong(maxPeriod))
+                date_Order_Paid = datetime_Order_Placed?.toLocalDate()?.plusDays(Random.nextLong(maxPaidAfter))
+                shipment_Date = datetime_Order_Placed?.toLocalDate()?.plusDays(Random.nextLong(maxShipmentAfter))
                 comment = makeOrderComment(customers[k])
                 m.insert(this)
                 genItems(n = Random.nextInt(minItems, maxItems + 1), products, maxQuantity)
@@ -161,7 +155,7 @@ class Populate(val m: Demo1) {
             Shipping_Order_Product().apply { // Create an item
                 var p: Product
                 do { // generate unique item
-                    //val m2 = Random.nextInt(maxProduct)       // Use this for uniform distribution
+                    //val k = Random.nextInt(maxProduct)       // Use this for uniform distribution
                     // Or this for normal distribution (for a good looking ABC analysis graph)
                     val k = ((0.15 * rnd.nextGaussian() + 0.5) * maxProduct).toInt().coerceIn(0, maxProduct - 1)
                     p = products[k]
