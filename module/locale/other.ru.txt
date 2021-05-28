@@ -5,5 +5,6 @@ act1_c_header=$0. Имя = $1, Телефон = $2
 act1_o_header=$0.$1. Заказ #$2 размещен $3
 act1_p_header=$0.$1.$2. Товар = $3, количество = $4
 act1_no_orders=Нет заказов для $0
-skip_loading_sample_data="Уже есть данные. Демо данные не будут загружены..."
-loading_sample_data="Загрузка демо данных..."
+skip_loading_sample_data=Уже есть данные. Демо данные не будут загружены...
+loading_sample_data=Загрузка демо данных...
+analysis_done=Анализ данных выполнен
