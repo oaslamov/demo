@@ -17,6 +17,7 @@
       "code":"quantity",
       "label":"Qnty",
       "type":"integer",
+      "value":"1",
       "@":"10"
     },
     {

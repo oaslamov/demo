@@ -69,4 +69,7 @@ Analyze=Выполнить анализ
 
 //-- sc_order:scr@demo1_prvt --
 Orders=Заказы
+"Auto calculate"=Вычисляется автоматически
+"Get price from Product table if blank"=Из таблицы товаров, если пусто
+
 

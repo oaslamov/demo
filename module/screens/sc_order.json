@@ -145,12 +145,14 @@
         },
         {
           "code":"id",
-          "type":"string"
+          "type":"string",
+          "edit_condition":"false"
         },
         {
           "code":"product",
           "label":"$l{f:7ef07d009008}l",
           "type":"ref",
+          "mandatory":true,
           "ref":{
             "data":{
               "action":"demo1_prvt.selectList",
@@ -172,6 +174,7 @@
           "code":"quantity",
           "label":"$l{f:7ef07d00900a}l",
           "type":"integer",
+          "mandatory":true,
           "hint":"$l{f:7ef07d00900a:d}l"
         },
         {
@@ -199,14 +202,16 @@
           "code":"price",
           "label":"$l{f:7ef07d009011}l",
           "type":"number",
-          "hint":"$l{f:7ef07d009011:d}l"
+          "hint":"$l{f:7ef07d009011:d}l",
+          "placeholder":"$l{Get price from Product table if blank}l"
         },
         {
           "code":"sum",
           "label":"$l{f:7ef07d009012}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009012:d}l"
+          "hint":"$l{f:7ef07d009012:d}l",
+          "placeholder":"$l{Auto calculate}l"
         }
       ],
       "operations":{
@@ -396,8 +401,8 @@
             "data":{
               "action":"gui.goLink",
               "args":{
-                "url":"https://maps.google.com/maps?q=${customer.address_line2}",
-                "newWindow":"true"
+                "newWindow":"true",
+                "url":"https://maps.google.com/maps?q=${customer.address_line2}"
               }
             }
           }
@@ -482,6 +487,9 @@
       "data_source":{
         "code":"shipping_order_product",
         "fields":[
+          {
+            "code":"id"
+          },
           {
             "code":"product",
             "width":"30%"

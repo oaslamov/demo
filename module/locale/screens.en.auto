@@ -46,10 +46,12 @@ Analyze=Analyze
 
 //-- sc_order:scr@demo1_prvt --
 Address=Address
+"Auto calculate"=Auto calculate
 Billing=Billing
 Comment=Comment
 Contacts=Contacts
 Details=Details
+"Get price from Product table if blank"=Get price from Product table if blank
 "Order #"=Order #
 "Order list"=Order list
 "Order summary"=Order summary
