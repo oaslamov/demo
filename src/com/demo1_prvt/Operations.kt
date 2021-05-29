@@ -51,12 +51,12 @@ class Operations(val m: Demo1) {
             val newSum = (price ?: BigDecimal.ZERO) * quantity.toBigDecimal()
             if (oldSum != newSum) {  // update item sum and order total
                 sum = newSum
-                val orderId = if (shipping_Order == null)
-                    oldItem?.shipping_Order // when deleting an item
-                else shipping_Order // when creating or updating an item
+                // t.shipping_Order is null when deleting an item
+                // oldItem is null when creating an item
+                // both are not null when editing an item
+                val orderId = shipping_Order ?: oldItem?.shipping_Order
                 m.selectFirst<Shipping_Order>("id=$orderId")?.let { o ->
-                    o.total = m.selectMap(Shipping_Order_Product.fId, "shipping_order=${o.id}").values
-                            .sumOf { it.sum ?: BigDecimal.ZERO } - oldSum + newSum
+                    o.total = (o.total ?: BigDecimal.ZERO) - oldSum + newSum
                     m.update(o)
                 }
             }
