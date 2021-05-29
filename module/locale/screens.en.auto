@@ -10,6 +10,8 @@ Customer=Customer
 // screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Demo1=Demo1
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
+Id=Id
+// screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 "Order items"=Order items
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Order=Order

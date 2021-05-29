@@ -71,5 +71,5 @@ Analyze=Выполнить анализ
 Orders=Заказы
 "Auto calculate"=Вычисляется автоматически
 "Get price from Product table if blank"=Из таблицы товаров, если пусто
-
+Id=Код
 

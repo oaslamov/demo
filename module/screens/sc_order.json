@@ -145,6 +145,7 @@
         },
         {
           "code":"id",
+          "label":"$l{Id}l",
           "type":"string",
           "edit_condition":"false"
         },
