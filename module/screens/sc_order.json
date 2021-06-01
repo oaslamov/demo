@@ -489,7 +489,8 @@
         "code":"shipping_order_product",
         "fields":[
           {
-            "code":"id"
+            "code":"id",
+            "view":"t"
           },
           {
             "code":"product",
@@ -499,13 +500,16 @@
             "code":"quantity"
           },
           {
-            "code":"price"
+            "code":"price",
+            "view":"t"
           },
           {
-            "code":"sum"
+            "code":"sum",
+            "view":"t"
           },
           {
-            "code":"comment"
+            "code":"comment",
+            "view":"t"
           }
         ],
         "operations":[
