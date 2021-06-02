@@ -489,10 +489,6 @@
         "code":"shipping_order_product",
         "fields":[
           {
-            "code":"id",
-            "view":"t"
-          },
-          {
             "code":"product",
             "width":"30%"
           },
