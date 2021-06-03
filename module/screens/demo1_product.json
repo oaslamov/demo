@@ -126,7 +126,7 @@
             "data":{
               "action":"gui.goLink",
               "args":{
-                "url":"${product.url}"
+                "url":"${(-q)product.url}"
               }
             }
           }

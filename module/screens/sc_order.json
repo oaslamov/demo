@@ -389,7 +389,7 @@
               "action":"gui.goLink",
               "args":{
                 "newWindow":"true",
-                "url":"www.google.com/search?q=${customer.name}"
+                "url":"www.google.com/search?q=${(-q)customer.name}"
               }
             }
           }
@@ -403,7 +403,7 @@
               "action":"gui.goLink",
               "args":{
                 "newWindow":"true",
-                "url":"https://maps.google.com/maps?q=${customer.address_line2}"
+                "url":"https://maps.google.com/maps?q=${(-q)customer.address_line2}"
               }
             }
           }
