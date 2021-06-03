@@ -161,7 +161,8 @@
             "width":"10%"
           },
           {
-            "code":"url"
+            "code":"url",
+            "cell_template":"<a href=\"${url}\" target=\"_blank\" rel=\"noopener noreferrer\">${url}</a>"
           }
         ],
         "order":[
