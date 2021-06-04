@@ -123,24 +123,21 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     override fun beforeUpdate(t: ITopTable) {
-        super.beforeUpdate(t)
-        Operations(this).triggerBeforeUpdate(t)
+        Operations(this).refreshTable(t)
     }
 
     override fun beforeDelete(t: ITopTable?, isTableFilled: Boolean) {
-        super.beforeDelete(t, isTableFilled)
-        Operations(this).triggerBeforeDelete(t)
+        Operations(this).refreshTable(t, true)
     }
 
     override fun beforeInsert(t: ITopTable) {
-        super.beforeInsert(t)
-        Operations(this).triggerBeforeInsert(t)
+        Operations(this).refreshTable(t)
     }
 
-    override fun afterInsert(t: ITopTable) {
-        super.afterInsert(t)
-        Operations(this).triggerAfterInsert(t)
-    }
+    //override fun afterInsert(t: ITopTable) {
+    //    super.afterInsert(t)
+    //    Operations(this).triggerAfterInsert(t)
+    //}
 
 
     @Description("Inserts a new record and navigates to the specified screen")

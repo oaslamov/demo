@@ -203,6 +203,7 @@
           "code":"price",
           "label":"$l{f:7ef07d009011}l",
           "type":"number",
+          "edit_condition":"false",
           "hint":"$l{f:7ef07d009011:d}l",
           "placeholder":"$l{Get price from Product table if blank}l"
         },

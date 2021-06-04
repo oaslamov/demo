@@ -7,7 +7,7 @@ import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.table.RowID
 import com.dolmen.util.Text
-import java.math.BigDecimal
+import java.math.BigDecimal.ZERO
 import java.math.RoundingMode
 import java.time.OffsetDateTime
 import kotlin.random.Random
@@ -168,7 +168,7 @@ class Populate(val m: Demo1) {
                 price = p.price
                 sum = price?.times(quantity.toBigDecimal())
                 m.insert(this)
-                total = (total ?: BigDecimal.ZERO) + (sum ?: BigDecimal.ZERO)
+                total = (total ?: ZERO) + (sum ?: ZERO)
             }
         }
         m.update(this)
@@ -202,7 +202,7 @@ class Populate(val m: Demo1) {
             with(item) {
                 val p = products[product]
                 if (p != null) {
-                    price = p.price ?: java.math.BigDecimal.ZERO
+                    price = p.price ?: ZERO
                     sum = (price?.times(quantity.toBigDecimal()))
                     m.update(item)
                 }

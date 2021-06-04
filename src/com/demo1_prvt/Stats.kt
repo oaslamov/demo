@@ -4,6 +4,7 @@ import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.Txt
 import com.dolmen.serv.table.RowID
 import java.math.BigDecimal
+import java.math.BigDecimal.ZERO
 import java.time.LocalDate
 
 class Stats(val m: Demo1) {
@@ -27,14 +28,14 @@ class Stats(val m: Demo1) {
                 .aggregate { _, acc: Accum?, item, _ ->
                     Accum(
                             (acc?.qnty ?: 0) + item.quantity,
-                            (acc?.sum ?: BigDecimal.ZERO) + (item.sum ?: BigDecimal.ZERO)
+                            (acc?.sum ?: ZERO) + (item.sum ?: ZERO)
                     )
                 }
                 .toList()
                 .sortedByDescending { (_, value) -> value.sum }
                 .toMap()
         val grandTotal = items.values.sumOf { it.sum }
-        var cuSum = BigDecimal.ZERO
+        var cuSum = ZERO
         items.forEach { (id, aggr) ->
             Product_Abc().apply {
                 product = id
@@ -64,14 +65,14 @@ class Stats(val m: Demo1) {
                 .aggregate { _, acc: Accum?, item, _ ->
                     Accum(
                             (acc?.qnty ?: 0) + item.quantity,
-                            (acc?.sum ?: BigDecimal.ZERO) + (item.sum ?: BigDecimal.ZERO)
+                            (acc?.sum ?: ZERO) + (item.sum ?: ZERO)
                     )
                 }
                 .toList()
                 .sortedByDescending { (_, value) -> value.sum }
                 .toMap()
         val grandTotal = items.values.sumOf { it.sum }
-        var cuSum = BigDecimal.ZERO
+        var cuSum = ZERO
         items.forEach { (id, aggr) ->
             Customer_Abc().apply {
                 customer = id

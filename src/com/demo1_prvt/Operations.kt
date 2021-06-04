@@ -2,64 +2,49 @@ package com.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.table.ITopTable
-import java.math.BigDecimal
+import java.math.BigDecimal.ZERO
 
 class Operations(val m: Demo1) {
-    fun triggerBeforeUpdate(t: ITopTable?) {
-        when (t) {
-            is Customer -> refreshCustomer(t)
-            is Shipping_Order_Product -> refreshShippingOrderProduct(t)
-        }
-    }
 
-    fun triggerBeforeInsert(t: ITopTable?) {
+    fun refreshTable(t: ITopTable?, deleting: Boolean = false) {
         if (m.isLoadingSampleData) return
         when (t) {
-            is Customer -> refreshCustomer(t)
-            is Shipping_Order_Product -> refreshShippingOrderProduct(t)
+            is Customer -> refreshCustomer(t, deleting)
+            is Shipping_Order_Product -> refreshShippingOrderProduct(t, deleting)
         }
     }
 
-    fun triggerAfterInsert(t: ITopTable?) {
-        if (m.isLoadingSampleData) return
-    }
-
-    fun triggerBeforeDelete(t: ITopTable?) {
-        when (t) {
-            is Customer -> refreshCustomer(t)
-            is Shipping_Order_Product -> refreshShippingOrderProduct(t)
-        }
-    }
-
-    fun refreshCustomer(t: Customer) {
-        t.city?.let {
-            m.selectFirst<City>("id=${t.city}")?.let { ct ->
-                t.country = ct.country_Id
-                t.subcountry = ct.subcountry_Id
-                t.city = ct.id
+    fun refreshCustomer(t: Customer, deleting: Boolean = false) {
+        if (deleting) return
+        if (t.city != null) {
+            val city = m.selectFirst<City>("id=${t.city}")
+            if (city != null) {
+                t.country = city.country_Id
+                t.subcountry = city.subcountry_Id
+                t.city = city.id
             }
         }
     }
 
-    fun refreshShippingOrderProduct(t: Shipping_Order_Product) {
-        t.apply {
-            val oldItem = m.selectFirst<Shipping_Order_Product>("id=$id")
-            val shouldRefreshPrice = (price?.compareTo(BigDecimal.ZERO) ?: 0) <= 0  // unknown or bad price
-                    || oldItem?.product != product  // product is changed
-            if (shouldRefreshPrice) price = m.selectFirst<Product>("id=${product}")?.price // get price for product
-            val oldSum = oldItem?.sum ?: BigDecimal.ZERO
-            val newSum = (price ?: BigDecimal.ZERO) * quantity.toBigDecimal()
-            if (oldSum != newSum) {  // update item sum and order total
-                sum = newSum
-                // t.shipping_Order is null when deleting an item
-                // oldItem is null when creating an item
-                // both are not null when editing an item
-                val orderId = shipping_Order ?: oldItem?.shipping_Order
-                m.selectFirst<Shipping_Order>("id=$orderId")?.let { o ->
-                    o.total = (o.total ?: BigDecimal.ZERO) - oldSum + newSum
-                    m.update(o)
-                }
+    fun refreshShippingOrderProduct(t: Shipping_Order_Product, deleting: Boolean = false) {
+        if (!deleting) {
+            t.price = m.selectFirst<Product>("id=${t.product}")?.price    // Always recalculate the whole row???
+            t.sum = (t.price ?: ZERO) * t.quantity.toBigDecimal()
+        }
+        // t.shipping_Order is null when deleting an item
+        // oldItem is null when creating an item
+        // both are not null when editing an item
+        val orderId = t.shipping_Order ?: m.selectFirst<Shipping_Order_Product>("id=${t.id}")?.shipping_Order
+        val o = m.selectFirst<Shipping_Order>("id=$orderId")
+        if (o != null) {
+            var total = t.sum ?: ZERO                           // start with the current item sum
+            var itemFilter = "shipping_order=$orderId"          // creating, updating or deleting an item
+            if (t.id != null) itemFilter += " and id!=${t.id}"  // updating or deleting an item
+            m.iterate<Shipping_Order_Product>(itemFilter) { item ->
+                total += item.sum ?: ZERO
             }
+            o.total = total
+            m.update(o)
         }
     }
 }

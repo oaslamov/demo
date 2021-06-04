@@ -5,6 +5,7 @@ import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.util.JSONManager
 import java.math.BigDecimal
+import java.math.BigDecimal.ZERO
 import java.time.temporal.IsoFields
 
 data class Legend(val code: String, val name: String, val type: String, val color: String? = null)
@@ -125,8 +126,8 @@ class ChartManager(val m: Demo1) {
                         Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
                     else Group("-1", c)
                 }
-                .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
-                    Accum(acc.count + 1, acc.sum + (e.total ?: BigDecimal.ZERO))
+                .fold(Accum(count = 0, sum = ZERO)) { acc, e ->
+                    Accum(acc.count + 1, acc.sum + (e.total ?: ZERO))
                 }
                 .filterKeys { it.period != "-1" }
                 .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
@@ -156,14 +157,14 @@ class ChartManager(val m: Demo1) {
                         Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
                     else Group("-1", c)
                 }
-                .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
-                    Accum(acc.count + 1, acc.sum + (e.total ?: BigDecimal.ZERO))
+                .fold(Accum(count = 0, sum = ZERO)) { acc, e ->
+                    Accum(acc.count + 1, acc.sum + (e.total ?: ZERO))
                 }
                 .filterKeys { it.period != "-1" }
                 .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
         val periodSums = orders.toList()
                 .groupingBy { it.first.period }
-                .fold(Accum(count = 0, sum = BigDecimal.ZERO)) { acc, e ->
+                .fold(Accum(count = 0, sum = ZERO)) { acc, e ->
                     Accum(acc.count + 1, acc.sum + e.second.sum)
                 }
         val ct = orders.map { it.key.country }.distinct()
