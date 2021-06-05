@@ -38,10 +38,8 @@ class Operations(val m: Demo1) {
         val o = m.selectFirst<Shipping_Order>("id=$orderId")
         if (o != null) {
             var total = t.sum ?: ZERO                           // start with the current item sum
-            var itemFilter = "shipping_order=$orderId"          // creating, updating or deleting an item
-            if (t.id != null) itemFilter += " and id!=${t.id}"  // updating or deleting an item
-            m.iterate<Shipping_Order_Product>(itemFilter) { item ->
-                total += item.sum ?: ZERO
+            m.iterate<Shipping_Order_Product>("shipping_order=$orderId") { item ->
+                if (item.id != t.id) total += item.sum ?: ZERO
             }
             o.total = total
             m.update(o)
