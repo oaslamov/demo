@@ -19,7 +19,7 @@ import java.time.LocalDate
 
 
 class Demo1 : Demo1_PrvtModuleBase() {
-    var isLoadingSampleData  = false
+    var isLoadingSampleData = false
 
     @Description("My Action")
     @Parameters("input: String")
@@ -123,22 +123,16 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     override fun beforeUpdate(t: ITopTable) {
-        Operations(this).refreshTable(t)
+        RefreshTable(this).refreshTable(t)
     }
 
     override fun beforeDelete(t: ITopTable?, isTableFilled: Boolean) {
-        Operations(this).refreshTable(t, true)
+        RefreshTable(this).refreshTable(t, deleting = true)
     }
 
     override fun beforeInsert(t: ITopTable) {
-        Operations(this).refreshTable(t)
+        RefreshTable(this).refreshTable(t)
     }
-
-    //override fun afterInsert(t: ITopTable) {
-    //    super.afterInsert(t)
-    //    Operations(this).triggerAfterInsert(t)
-    //}
-
 
     @Description("Inserts a new record and navigates to the specified screen")
     @Parameters("tableCode: table code", "screenCode: screen code", "mode: screen opening mode",
