@@ -16,22 +16,16 @@ class Stats(val m: Demo1) {
         Txt.info(m.xtr("analysis_done")).msg()
     }
 
-    private data class Accum(val qnty: Int, val sum: BigDecimal)
 
     fun makeProductStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int,
                          itemQuery: Map<RowID, Shipping_Order_Product>) {
-        val statsTableName = "demo1_prvt.product_abc"
-        m.deleteList(statsTableName, "")
+        data class Accum(val qnty: Int, val sum: BigDecimal)
+        m.deleteList(Product_Abc.TABLE_ID, "")
         val products = m.selectMap(Product.fId, "")
         val items = itemQuery
                 .values
                 .groupingBy { it.product }
-                .aggregate { _, acc: Accum?, item, _ ->
-                    Accum(
-                            (acc?.qnty ?: 0) + item.quantity,
-                            (acc?.sum ?: ZERO) + (item.sum ?: ZERO)
-                    )
-                }
+                .fold(Accum(qnty = 0, sum = ZERO)) { acc, e -> Accum(acc.qnty + e.quantity, acc.sum + (e.sum ?: ZERO)) }
                 .toList()
                 .sortedByDescending { (_, value) -> value.sum }
                 .toMap()
@@ -56,30 +50,24 @@ class Stats(val m: Demo1) {
 
     fun makeCustomerStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int,
                           itemQuery: Map<RowID, Shipping_Order_Product>) {
-        val statsTableName = "demo1_prvt.customer_abc"
-        m.deleteList(statsTableName, "")
+        m.deleteList(Customer_Abc.TABLE_ID, "")
         val customers = m.selectMap(Customer.fId, "")
         val orders = m.selectMap(Shipping_Order.fId, "")
         val items = itemQuery
                 .values
                 .groupingBy { orders[it.shipping_Order]?.customer }
-                .aggregate { _, acc: Accum?, item, _ ->
-                    Accum(
-                            (acc?.qnty ?: 0) + item.quantity,
-                            (acc?.sum ?: ZERO) + (item.sum ?: ZERO)
-                    )
-                }
+                .fold(ZERO) { acc, e -> acc + (e.sum ?: ZERO) }
                 .toList()
-                .sortedByDescending { (_, value) -> value.sum }
+                .sortedByDescending { (_, value) -> value }
                 .toMap()
-        val grandTotal = items.values.sumOf { it.sum }
+        val grandTotal = items.values.sumOf { it }
         var cuSum = ZERO
         items.forEach { (id, aggr) ->
             Customer_Abc().apply {
                 customer = id
                 name = customers[id]?.name
-                sum = aggr.sum
-                cuSum += aggr.sum
+                sum = aggr
+                cuSum += aggr
                 cusum = cuSum
                 val cuPerc = percentage(cuSum, grandTotal)
                 cuperc = cuPerc
