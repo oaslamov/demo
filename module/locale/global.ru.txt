@@ -26,7 +26,11 @@ f:7ef07d00d006=Наименование
 // table Customer
 t:7ef07d006000=Заказчик
 --  Name
-f:7ef07d006006=Имя
+f:7ef07d006006=ФИО
+--  First Name
+f:7ef07d006013=Имя
+--  Last Name
+f:7ef07d006014=Фамилия
 --  Phone
 f:7ef07d006007=Телефон
 --  Mobile
@@ -43,6 +47,8 @@ f:7ef07d00600c=Страна
 f:7ef07d00600e=Регион
 --  City
 f:7ef07d006010=Город
+--  Mailing Label
+f:7ef07d006015=Почтовый ярлык
 
 // table Customer Abc
 t:7ef07d01f000=Заказчик Abc

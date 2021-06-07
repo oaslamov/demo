@@ -10,6 +10,14 @@
       "@":"6"
     },
     {
+      "code":"first_name",
+      "@":"19"
+    },
+    {
+      "code":"last_name",
+      "@":"20"
+    },
+    {
       "code":"phone",
       "etc":{
         "ignoreCase":true
@@ -58,6 +66,11 @@
       "code":"city",
       "ref":"city",
       "@":"16:17"
+    },
+    {
+      "code":"mailing_label",
+      "type":"text",
+      "@":"21"
     }
   ],
   "indexes":[
@@ -68,6 +81,6 @@
     }
   ],
   "@":"6",
-  "@e":"2kat_dd:3;6name:1;7phone:1;8address_line1:1;9address_line2:1;10address_line3:1;11mobile:1;12country:0;14subcountry:0;16city:0",
+  "@e":"2kat_dd:3;6name:1;7phone:1;8address_line1:1;9address_line2:1;10address_line3:1;11mobile:1;12country:0;14subcountry:0;16city:0;19first_name:1;20last_name:1;21mailing_label:2",
   "@d":"18geo_city:0"
 }

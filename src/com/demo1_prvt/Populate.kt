@@ -60,12 +60,17 @@ class Populate(val m: Demo1) {
             val rec = l.split(",").toTypedArray()
             Customer().apply {
                 name = "${rec[1]}, ${rec[0]}"
+                first_Name = rec[0]
+                last_Name = rec[1]
                 phone = rec[6]
                 mobile = rec[7]
                 address_Line1 = rec[2]
                 address_Line2 = "${rec[3]}, ${rec[4]}"
                 address_Line3 = rec[5]
-                country = countries[(i - 1) / customersPerCountry].first
+                val countryPair = countries[(i - 1) / customersPerCountry]
+                country = countryPair.first
+                mailing_Label = mailingLabelHtml(name, address_Line1, address_Line2, address_Line3,
+                        countryPair.second.name)
                 m.insert(this)
             }
         }
@@ -209,6 +214,19 @@ class Populate(val m: Demo1) {
                 if (i % 100 == 0) com.dolmen.serv.Txt.info("${i}. Updated order item id = ${id}, sum = ${sum}").msg()
             }
         }
+    }
+
+    fun mailingLabelHtml(name: String?, addressLine1: String?, addressLine2: String?,
+                         addressLine3: String?, country: String?): String {
+        return """
+            <p>
+            <strong>${name?.toUpperCase()}</strong></br>
+            $addressLine1</br>
+            $addressLine2</br>
+            $addressLine3</br>
+            <em>${country?.toUpperCase()}</em>
+            </p>
+        """.trimIndent()
     }
 
 }
