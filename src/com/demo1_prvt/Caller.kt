@@ -57,5 +57,5 @@ class Caller(val m: Demo1) {
         return res
     }
 
-    private fun String.toSpn() : String = this.replace(Regex(".*//(.*)/.*"), "HTTP/$1")
+    private fun String.toSpn(): String = this.replace(Regex(".*//(.*)/.*"), "HTTP/$1")
 }
