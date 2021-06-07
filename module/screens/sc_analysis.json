@@ -57,10 +57,11 @@
           "hint":"$l{f:7ef07d01e007:d}l"
         },
         {
-          "code":"cuperc",
-          "label":"$l{f:7ef07d01e00d}l",
-          "type":"number",
-          "hint":"$l{f:7ef07d01e00d:d}l"
+          "code": "cuperc",
+          "label": "$l{f:7ef07d01e00d}l",
+          "type": "number",
+          "format": "#0.0",
+          "hint": "$l{f:7ef07d01e00d:d}l"
         },
         {
           "code":"cusum",
@@ -188,10 +189,11 @@
           "hint":"$l{f:7ef07d01f00c:d}l"
         },
         {
-          "code":"cuperc",
-          "label":"$l{f:7ef07d01f00b}l",
-          "type":"number",
-          "hint":"$l{f:7ef07d01f00b:d}l"
+          "code": "cuperc",
+          "label": "$l{f:7ef07d01f00b}l",
+          "type": "number",
+          "format": "#0.0",
+          "hint": "$l{f:7ef07d01f00b:d}l"
         },
         {
           "code":"cusum",

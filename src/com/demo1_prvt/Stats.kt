@@ -5,6 +5,7 @@ import com.dolmen.serv.Txt
 import com.dolmen.serv.table.RowID
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
+import java.math.RoundingMode
 import java.time.LocalDate
 
 class Stats(val m: Demo1) {
@@ -45,7 +46,7 @@ class Stats(val m: Demo1) {
                 avg_Price = aggr.sum / aggr.qnty.toBigDecimal()
                 cuSum += aggr.sum
                 cusum = cuSum
-                val cuPerc = (cuSum.setScale(4) / grandTotal) * BigDecimal(100)
+                val cuPerc = percentage(cuSum, grandTotal)
                 cuperc = cuPerc
                 abc_Class = abcClass(cuPerc, abLimit, bcLimit)
                 m.insert(this)
@@ -80,7 +81,7 @@ class Stats(val m: Demo1) {
                 sum = aggr.sum
                 cuSum += aggr.sum
                 cusum = cuSum
-                val cuPerc = (cuSum.setScale(4) / grandTotal) * BigDecimal(100)
+                val cuPerc = percentage(cuSum, grandTotal)
                 cuperc = cuPerc
                 abc_Class = abcClass(cuPerc, abLimit, bcLimit)
                 m.insert(this)
@@ -88,10 +89,14 @@ class Stats(val m: Demo1) {
         }
     }
 
-    private fun abcClass(cuPerc: BigDecimal, abLimit: Int, bcLimit: Int): String =
+    private fun percentage(sum: BigDecimal, total: BigDecimal,
+                           scale: Int = 1, roundingMode: RoundingMode = RoundingMode.HALF_UP) =
+            (sum * BigDecimal(100) / total).setScale(scale, roundingMode)
+
+    private fun abcClass(percentage: BigDecimal, abLimit: Int, bcLimit: Int): String =
             when {
-                cuPerc < abLimit.toBigDecimal() -> "A"
-                cuPerc < bcLimit.toBigDecimal() -> "B"
+                percentage < abLimit.toBigDecimal() -> "A"
+                percentage < bcLimit.toBigDecimal() -> "B"
                 else -> "C"
             }
 }
