@@ -393,7 +393,8 @@
                 "url":"www.google.com/search?q=${(-q)customer.name}"
               }
             }
-          }
+          },
+          "hint":"Search Google for \"${customer.name}\""
         },
         {
           "code":"mapSearch",
@@ -407,7 +408,8 @@
                 "url":"https://maps.google.com/maps?q=${(-q)customer.address_line2}"
               }
             }
-          }
+          },
+          "hint":"Show on Google Maps"
         }
       ]
     }
