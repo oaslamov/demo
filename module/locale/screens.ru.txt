@@ -72,4 +72,5 @@ Orders=Заказы
 "Auto calculate"=Вычисляется автоматически
 "Get price from Product table if blank"=Из таблицы товаров, если пусто
 Id=Код
-
+"Search in Google"=Найти в Google
+"Show on Google Maps"=Показать на Google Maps

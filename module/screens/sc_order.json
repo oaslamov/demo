@@ -394,7 +394,7 @@
               }
             }
           },
-          "hint":"Search Google for \"${customer.name}\""
+          "hint":"$l{Search in Google}l"
         },
         {
           "code":"mapSearch",
@@ -409,7 +409,7 @@
               }
             }
           },
-          "hint":"Show on Google Maps"
+          "hint":"$l{Show on Google Maps}l"
         }
       ]
     }
