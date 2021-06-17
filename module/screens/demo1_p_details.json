@@ -1,14 +1,111 @@
 {
   "code":"demo1_p_details:scr@demo1_prvt",
   "label":"$l{Product details}l",
+  "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "show_in_menu":false,
-  "serverStatus":"r",
+  "args":[
+    {
+      "code":"id",
+      "is_mandatory":true
+    }
+  ],
   "grid":{
     "base":"screen",
     "cols":4,
     "rows":4
   },
-  "width":"70",
-  "height":"70"
+  "width":"65",
+  "height":"90",
+  "data_sources":[
+    {
+      "code":"ds_p",
+      "table_name":"Demo1_Prvt.Product_Det",
+      "type":"table",
+      "fields":[
+        {
+          "code":"format",
+          "label":"$l{f:7ef07d020009}l",
+          "type":"string",
+          "hint":"$l{f:7ef07d020009:d}l"
+        },
+        {
+          "code":"id",
+          "type":"string"
+        },
+        {
+          "code":"img",
+          "label":"$l{f:7ef07d020008}l",
+          "type":"bytes",
+          "hint":"$l{f:7ef07d020008:d}l"
+        },
+        {
+          "code":"product",
+          "label":"$l{f:7ef07d020006}l",
+          "type":"ref",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "filter":[
+                  "${@ref_filter}"
+                ],
+                "tablename":"Demo1_Prvt.Product"
+              },
+              "fields":[
+                "id",
+                "@name"
+              ]
+            }
+          },
+          "hint":"$l{f:7ef07d020006:d}l"
+        }
+      ],
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "filter":[
+                  "product=${@screen.id}"
+                ],
+                "tablename":"demo1_prvt.product_det"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "parts":[
+    {
+      "code":"p_main",
+      "type":"form",
+      "border_type":"none",
+      "position":{
+        "from_col":0,
+        "to_col":0,
+        "from_row":0,
+        "to_row":0
+      },
+      "data_source":{
+        "code":"ds_p",
+        "fields":[
+          {
+            "code":"format",
+            "query":false
+          },
+          {
+            "code":"img",
+            "query":false
+          }
+        ],
+        "operations":[
+          "select"
+        ],
+        "row_template":"${image_html}\n<script>\nds.getRows().forEach( row=> {\ndata.image_html=\"<img src='data:image/\"+row.format+\";base64,\"+row.img+\"' style='height: 100%; width: 100%'>\"\n})\n</script>"
+      }
+    }
+  ]
 }
