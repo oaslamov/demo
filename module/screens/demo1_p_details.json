@@ -1,0 +1,14 @@
+{
+  "code":"demo1_p_details:scr@demo1_prvt",
+  "label":"$l{Product details}l",
+  "subject":"$l{Demo1}l",
+  "show_in_menu":false,
+  "serverStatus":"r",
+  "grid":{
+    "base":"screen",
+    "cols":4,
+    "rows":4
+  },
+  "width":"70",
+  "height":"70"
+}

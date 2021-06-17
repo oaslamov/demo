@@ -1,0 +1,31 @@
+{
+  "code":"product_det",
+  "label":"Product details",
+  "fields":[
+    {
+      "code":"product",
+      "ref":"product",
+      "refDelete":"delete",
+      "@":"6:7"
+    },
+    {
+      "code":"img",
+      "label":"Image",
+      "type":"bytes",
+      "@":"8"
+    },
+    {
+      "code":"format",
+      "@":"9"
+    }
+  ],
+  "indexes":[
+    {
+      "fields":[
+        "product"
+      ]
+    }
+  ],
+  "@":"32",
+  "@e":"2kat_dd:3;6product:0;8img:10;9format:1"
+}

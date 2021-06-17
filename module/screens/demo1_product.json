@@ -130,6 +130,21 @@
               }
             }
           }
+        },
+        {
+          "code":"ac_det",
+          "label":"$l{Details}l",
+          "data_scope":"row",
+          "request":{
+            "data":{
+              "action":"gui.goScreen",
+              "args":{
+                "screenId":"demo1_p_details:scr@demo1_prvt",
+                "args":"",
+                "mode":"popup"
+              }
+            }
+          }
         }
       ]
     }
@@ -178,7 +193,8 @@
           "delete"
         ],
         "actions":[
-          "openLink"
+          "openLink",
+          "ac_det"
         ]
       }
     }
