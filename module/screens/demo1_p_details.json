@@ -17,6 +17,9 @@
   },
   "width":"65",
   "height":"90",
+  "actions":[
+    "ds_p.upload_photo"
+  ],
   "data_sources":[
     {
       "code":"ds_p",
@@ -75,7 +78,32 @@
             }
           }
         }
-      }
+      },
+      "actions":[
+        {
+          "code":"upload_photo",
+          "label":"$l{Change photo}l",
+          "type":"file_upload",
+          "data_scope":"row",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.uploadProductImage",
+              "args":{
+                "fileTime":"${@filetime}",
+                "fileName":"${@name}",
+                "fileBytes":"${@bytes}",
+                "rowID":"${@screen.id}"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"ds_p",
+              "type":"current_row"
+            }
+          ]
+        }
+      ]
     }
   ],
   "parts":[
@@ -93,16 +121,15 @@
         "code":"ds_p",
         "fields":[
           {
-            "code":"format",
-            "query":false
-          },
-          {
             "code":"img",
             "query":false
           }
         ],
         "operations":[
           "select"
+        ],
+        "actions":[
+          "upload_photo"
         ],
         "row_template":"${image_html}\n<script>\nds.getRows().forEach( row=> {\ndata.image_html=\"<img src='data:image/\"+row.format+\";base64,\"+row.img+\"' style='height: 100%; width: 100%'>\"\n})\n</script>"
       }

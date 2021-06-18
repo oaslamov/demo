@@ -25,6 +25,7 @@ Order=Order
 Summary=Summary
 
 //-- demo1_p_details:scr@demo1_prvt --
+"Change photo"=Change photo
 "Product details"=Product details
 
 //-- demo1_product:scr@demo1_prvt --

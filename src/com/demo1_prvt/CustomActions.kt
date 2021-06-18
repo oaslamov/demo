@@ -1,5 +1,6 @@
 package com.demo1_prvt
 
+import com.dolmen.ex.BaseException
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
@@ -10,7 +11,20 @@ import java.io.File
 import java.time.Duration
 import java.time.OffsetDateTime
 
+
 class CustomActions(val m: Demo1) {
+    val IMAGE_FORMATS = mapOf(
+            "png" to "png",
+            "svg" to "svg+xml",
+            "jpeg" to "jpeg",
+            "jpg" to "jpeg",
+            "webp" to "webp",
+            "gif" to "gif",
+            "apng" to "apng",
+            "avif" to "avif",
+            "bmp" to "bmp",
+            "ico" to "x-icon"
+    )
 
     @Description("Shows customers' orders summary")
     @Parameters("customerFilter: String")
@@ -222,6 +236,25 @@ class CustomActions(val m: Demo1) {
         order = order.filterValues { it.customer in customer }
         item = item.filterValues { (it.product in product) and (it.shipping_Order in order) }
         return item.values.take(count).toList()
+    }
+
+    fun uploadProductImage(rowID: RowID?, fileName: String, FileTime: Long, fileBytes: ByteArray?) {
+        val ext = File(fileName).extension.toLowerCase()
+        val imgFrmt = IMAGE_FORMATS[ext] ?: throw BaseException("$ext - unsupported image format")
+
+        if (rowID == null) {
+            Txt.warn("No parent object").msg()
+            return
+        }
+        if (fileBytes == null) return
+        var file = m.selectFirst<Product_Det>("product=$rowID")
+        if (file == null) {
+            file = Product_Det()
+            file.product = rowID
+        }
+        file.format = imgFrmt
+        file.img = fileBytes
+        if (file.id == null) m.insert(file) else m.update(file)
     }
 
 }

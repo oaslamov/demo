@@ -122,6 +122,16 @@ class Demo1 : Demo1_PrvtModuleBase() {
         return ChartManager(this).getChartSalesPercentageByCountry()
     }
 
+    @Description("Uploads product photo to the server")
+    @ActionType("file_upload")
+    @Parameters("rowID: object id",
+            "fileName: file name with extension",
+            "fileTime: file modification date in long",
+            "fileBytes: bytes array of file data")
+    fun uploadProductImage(rowID: RowID?, fileName: String, fileTime: Long, fileBytes: ByteArray?) {
+        return CustomActions(this).uploadProductImage(rowID, fileName, fileTime, fileBytes)
+    }
+
     override fun beforeUpdate(t: ITopTable) {
         RefreshTable(this).refreshTable(t)
     }
