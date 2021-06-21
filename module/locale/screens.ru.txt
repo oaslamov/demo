@@ -74,3 +74,9 @@ Orders=Заказы
 Id=Код
 "Search in Google"=Найти в Google
 "Show on Google Maps"=Показать на Google Maps
+
+
+//-- demo1_p_details:scr@demo1_prvt --
+"Delete image"=Удалить изображение
+"Product details"=Детали товара
+"Upload image"=Загрузить изображение

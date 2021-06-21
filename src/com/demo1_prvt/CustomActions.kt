@@ -13,19 +13,6 @@ import java.time.OffsetDateTime
 
 
 class CustomActions(val m: Demo1) {
-    val IMAGE_FORMATS = mapOf(
-            "png" to "png",
-            "svg" to "svg+xml",
-            "jpeg" to "jpeg",
-            "jpg" to "jpeg",
-            "webp" to "webp",
-            "gif" to "gif",
-            "apng" to "apng",
-            "avif" to "avif",
-            "bmp" to "bmp",
-            "ico" to "x-icon"
-    )
-
     @Description("Shows customers' orders summary")
     @Parameters("customerFilter: String")
     fun action1(customerFilter: String) {
@@ -240,8 +227,7 @@ class CustomActions(val m: Demo1) {
 
     fun uploadProductImage(rowID: RowID?, fileName: String, FileTime: Long, fileBytes: ByteArray?) {
         val ext = File(fileName).extension.toLowerCase()
-        val imgFrmt = IMAGE_FORMATS[ext] ?: throw BaseException("$ext - unsupported image format")
-
+        val imgFormat = ext.toImageFormat() ?: throw BaseException("$ext - unsupported image format")
         if (rowID == null) {
             Txt.warn("No parent object").msg()
             return
@@ -252,9 +238,29 @@ class CustomActions(val m: Demo1) {
             file = Product_Det()
             file.product = rowID
         }
-        file.format = imgFrmt
+        file.format = imgFormat
         file.img = fileBytes
         if (file.id == null) m.insert(file) else m.update(file)
     }
 
+    fun deleteProductImage(rowID: RowID) {
+        val p = m.selectFirst<Product_Det>("product=$rowID")
+        if (p != null) m.delete(p)
+    }
+
+    fun String.toImageFormat(): String? {
+        val IMAGE_FORMATS = mapOf(
+                "png" to "png",
+                "svg" to "svg+xml",
+                "jpeg" to "jpeg",
+                "jpg" to "jpeg",
+                "webp" to "webp",
+                "gif" to "gif",
+                "apng" to "apng",
+                "avif" to "avif",
+                "bmp" to "bmp",
+                "ico" to "x-icon"
+        )
+        return IMAGE_FORMATS[this]
+    }
 }

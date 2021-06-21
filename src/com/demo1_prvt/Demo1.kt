@@ -129,7 +129,13 @@ class Demo1 : Demo1_PrvtModuleBase() {
             "fileTime: file modification date in long",
             "fileBytes: bytes array of file data")
     fun uploadProductImage(rowID: RowID?, fileName: String, fileTime: Long, fileBytes: ByteArray?) {
-        return CustomActions(this).uploadProductImage(rowID, fileName, fileTime, fileBytes)
+        CustomActions(this).uploadProductImage(rowID, fileName, fileTime, fileBytes)
+    }
+
+    @Description("Deletes product photo")
+    @Parameters("rowID: product id")
+    fun deleteProductImage(rowID: RowID) {
+        CustomActions(this).deleteProductImage(rowID)
     }
 
     override fun beforeUpdate(t: ITopTable) {

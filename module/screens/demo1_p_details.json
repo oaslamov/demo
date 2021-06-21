@@ -82,7 +82,7 @@
       "actions":[
         {
           "code":"upload_photo",
-          "label":"$l{Change photo}l",
+          "label":"$l{Upload image}l",
           "type":"file_upload",
           "data_scope":"none",
           "request":{
@@ -100,6 +100,26 @@
             {
               "code":"ds_img",
               "type":"all_rows"
+            }
+          ]
+        },
+        {
+          "code":"delete_photo",
+          "label":"$l{Delete image}l",
+          "data_scope":"row",
+          "confirm":true,
+          "request":{
+            "data":{
+              "action":"demo1_prvt.deleteProductImage",
+              "args":{
+                "rowID":"${ds_img.product}"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"ds_img",
+              "type":"current_row"
             }
           ]
         }
@@ -130,7 +150,8 @@
           "select"
         ],
         "actions":[
-          "upload_photo"
+          "upload_photo",
+          "delete_photo"
         ],
         "row_template":"${image_html}\n<script>\nds.getRows().forEach( row=> {\ndata.image_html=\"<img src='data:image/\"+row.format+\";base64,\"+row.img+\"' style='height:500px;width:100%;object-fit:scale-down'>\"\n})\n</script>"
       }
