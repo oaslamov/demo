@@ -92,7 +92,7 @@
                 "fileTime":"${@filetime}",
                 "fileName":"${@name}",
                 "fileBytes":"${@bytes}",
-                "rowID":"${@screen.id}"
+                "rowID":"${@screen.product_id}"
               }
             }
           },
