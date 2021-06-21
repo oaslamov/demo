@@ -81,7 +81,7 @@
       },
       "actions":[
         {
-          "code":"upload_photo",
+          "code":"upload_image",
           "label":"$l{Upload image}l",
           "type":"file_upload",
           "data_scope":"none",
@@ -104,7 +104,7 @@
           ]
         },
         {
-          "code":"delete_photo",
+          "code":"delete_image",
           "label":"$l{Delete image}l",
           "data_scope":"row",
           "confirm":true,
@@ -122,6 +122,19 @@
               "type":"current_row"
             }
           ]
+        },
+        {
+          "code":"download_image",
+          "label":"$l{Download image}l",
+          "data_scope":"row",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.downloadProductImage",
+              "args":{
+                "productId":"${ds_img.product}"
+              }
+            }
+          }
         }
       ]
     }
@@ -150,8 +163,9 @@
           "select"
         ],
         "actions":[
-          "upload_photo",
-          "delete_photo"
+          "upload_image",
+          "download_image",
+          "delete_image"
         ],
         "row_template":"${image_html}\n<script>\nds.getRows().forEach( row=> {\ndata.image_html=\"<img src='data:image/\"+row.format+\";base64,\"+row.img+\"' style='height:500px;width:100%;object-fit:scale-down'>\"\n})\n</script>"
       }

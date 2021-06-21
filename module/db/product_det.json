@@ -9,14 +9,23 @@
       "@":"6:7"
     },
     {
+      "code":"format",
+      "@":"9"
+    },
+    {
+      "code":"filename",
+      "@":"10"
+    },
+    {
+      "code":"file_time",
+      "type":"datetime",
+      "@":"11"
+    },
+    {
       "code":"img",
       "label":"Image",
       "type":"bytes",
       "@":"8"
-    },
-    {
-      "code":"format",
-      "@":"9"
     }
   ],
   "indexes":[
@@ -27,5 +36,5 @@
     }
   ],
   "@":"32",
-  "@e":"2kat_dd:3;6product:0;8img:10;9format:1"
+  "@e":"2kat_dd:3;6product:0;8img:10;9format:1;10filename:1;11file_time:7"
 }

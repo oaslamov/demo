@@ -7,6 +7,7 @@ import com.dolmen.md.demo1_prvt.Demo1_PrvtModuleBase
 import com.dolmen.md.demo1_prvt.Product
 import com.dolmen.md.demo1_prvt.View1
 import com.dolmen.mod.GuiModule
+import com.dolmen.serv.Action
 import com.dolmen.serv.anno.ActionType
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
@@ -122,7 +123,7 @@ class Demo1 : Demo1_PrvtModuleBase() {
         return ChartManager(this).getChartSalesPercentageByCountry()
     }
 
-    @Description("Uploads product photo to the server")
+    @Description("Uploads product image to the server")
     @ActionType("file_upload")
     @Parameters("rowID: object id",
             "fileName: file name with extension",
@@ -132,7 +133,13 @@ class Demo1 : Demo1_PrvtModuleBase() {
         CustomActions(this).uploadProductImage(rowID, fileName, fileTime, fileBytes)
     }
 
-    @Description("Deletes product photo")
+    @Description("Downloads product image from the server")
+    @Parameters("productId: product id")
+    fun downloadProductImage(productId: RowID): Action.FileData? {
+        return CustomActions(this).downloadProductImage(productId)
+    }
+
+    @Description("Deletes product image")
     @Parameters("rowID: product id")
     fun deleteProductImage(rowID: RowID) {
         CustomActions(this).deleteProductImage(rowID)

@@ -80,3 +80,4 @@ Id=Код
 "Delete image"=Удалить изображение
 "Product details"=Детали товара
 "Upload image"=Загрузить изображение
+"Download image"=Скачать изображение

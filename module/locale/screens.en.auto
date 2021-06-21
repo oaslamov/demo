@@ -27,6 +27,7 @@ Summary=Summary
 //-- demo1_p_details:scr@demo1_prvt --
 "${@screen.product_name}"=${@screen.product_name}
 "Delete image"=Delete image
+"Download image"=Download image
 "Product details"=Product details
 "Upload image"=Upload image
 

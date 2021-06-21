@@ -2,11 +2,13 @@ package com.demo1_prvt
 
 import com.dolmen.ex.BaseException
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.serv.Action
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
+import com.dolmen.serv.table.Type
 import java.io.File
 import java.time.Duration
 import java.time.OffsetDateTime
@@ -225,7 +227,7 @@ class CustomActions(val m: Demo1) {
         return item.values.take(count).toList()
     }
 
-    fun uploadProductImage(rowID: RowID?, fileName: String, FileTime: Long, fileBytes: ByteArray?) {
+    fun uploadProductImage(rowID: RowID?, fileName: String, fileTime: Long, fileBytes: ByteArray?) {
         val ext = File(fileName).extension.toLowerCase()
         val imgFormat = ext.toImageFormat() ?: throw BaseException("$ext - unsupported image format")
         if (rowID == null) {
@@ -239,8 +241,19 @@ class CustomActions(val m: Demo1) {
             file.product = rowID
         }
         file.format = imgFormat
+        file.filename = fileName
+        file.file_Time = Type.toOffsetDateTime(fileTime)
         file.img = fileBytes
         if (file.id == null) m.insert(file) else m.update(file)
+    }
+
+    fun downloadProductImage(productId: RowID): Action.FileData? {
+        val image = m.selectFirst<Product_Det>("product=$productId")
+        if (image == null) {
+            Txt.warn("Image not found").msg()
+            return null
+        }
+        return Action.FileData(image.filename, 0L, image.img)
     }
 
     fun deleteProductImage(rowID: RowID) {

@@ -108,10 +108,14 @@ e:7ef07d01e00e.C=C
 t:7ef07d020000=Product details
 --  Product
 f:7ef07d020006=Product
---  Image
-f:7ef07d020008=Image
 --  Format
 f:7ef07d020009=Format
+--  Filename
+f:7ef07d02000a=Filename
+--  File Time
+f:7ef07d02000b=File Time
+--  Image
+f:7ef07d020008=Image
 
 // table Shipping Order
 t:7ef07d008000=Shipping Order
