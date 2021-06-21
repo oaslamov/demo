@@ -141,7 +141,8 @@
               "args":{
                 "screenId":"demo1_p_details:scr@demo1_prvt",
                 "args":{
-                  "id":"${product.id}"
+                  "product_id":"${product.id}",
+                  "product_name":"${product.name}"
                 },
                 "mode":"popup"
               }

@@ -25,6 +25,7 @@ Order=Order
 Summary=Summary
 
 //-- demo1_p_details:scr@demo1_prvt --
+"${@screen.product_name}"=${@screen.product_name}
 "Change photo"=Change photo
 "Product details"=Product details
 

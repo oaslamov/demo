@@ -6,7 +6,11 @@
   "show_in_menu":false,
   "args":[
     {
-      "code":"id",
+      "code":"product_id",
+      "is_mandatory":true
+    },
+    {
+      "code":"product_name",
       "is_mandatory":true
     }
   ],
@@ -15,14 +19,10 @@
     "cols":4,
     "rows":4
   },
-  "width":"65",
-  "height":"90",
-  "actions":[
-    "ds_p.upload_photo"
-  ],
+  "width":"70",
   "data_sources":[
     {
-      "code":"ds_p",
+      "code":"ds_img",
       "table_name":"Demo1_Prvt.Product_Det",
       "type":"table",
       "fields":[
@@ -71,7 +71,7 @@
               "action":"demo1_prvt.selectList",
               "args":{
                 "filter":[
-                  "product=${@screen.id}"
+                  "product=${@screen.product_id}"
                 ],
                 "tablename":"demo1_prvt.product_det"
               }
@@ -84,7 +84,7 @@
           "code":"upload_photo",
           "label":"$l{Change photo}l",
           "type":"file_upload",
-          "data_scope":"row",
+          "data_scope":"none",
           "request":{
             "data":{
               "action":"demo1_prvt.uploadProductImage",
@@ -98,8 +98,8 @@
           },
           "freshen":[
             {
-              "code":"ds_p",
-              "type":"current_row"
+              "code":"ds_img",
+              "type":"all_rows"
             }
           ]
         }
@@ -109,16 +109,17 @@
   "parts":[
     {
       "code":"p_main",
+      "label":"$l{${@screen.product_name}}l",
       "type":"form",
       "border_type":"none",
       "position":{
-        "from_col":0,
-        "to_col":0,
-        "from_row":0,
-        "to_row":0
+        "from_col":1,
+        "to_col":4,
+        "from_row":1,
+        "to_row":4
       },
       "data_source":{
-        "code":"ds_p",
+        "code":"ds_img",
         "fields":[
           {
             "code":"img",
@@ -131,7 +132,7 @@
         "actions":[
           "upload_photo"
         ],
-        "row_template":"${image_html}\n<script>\nds.getRows().forEach( row=> {\ndata.image_html=\"<img src='data:image/\"+row.format+\";base64,\"+row.img+\"' style='height: 100%; width: 100%'>\"\n})\n</script>"
+        "row_template":"${image_html}\n<script>\nds.getRows().forEach( row=> {\ndata.image_html=\"<img src='data:image/\"+row.format+\";base64,\"+row.img+\"' style='height:500px;width:100%;object-fit:scale-down'>\"\n})\n</script>"
       }
     }
   ]
