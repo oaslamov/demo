@@ -6,7 +6,6 @@ import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.table.RowID
-import com.dolmen.util.Text
 import java.math.BigDecimal.ZERO
 import java.math.RoundingMode
 import java.time.OffsetDateTime
@@ -125,7 +124,7 @@ class Populate(val m: Demo1) {
 
     @Description("Generates random orders")
     @Parameters("n: Int")
-    fun genOrders(n: Int): String {
+    fun genOrders(n: Int) {
         val maxPeriod = 3L * 365L * 24L * 60L // Three years in minutes
         val maxPaidAfter = 30L
         val maxShipmentAfter = 45L
@@ -149,9 +148,9 @@ class Populate(val m: Demo1) {
                 m.insert(this)
                 genItems(n = Random.nextInt(minItems, maxItems + 1), products, maxQuantity)
             }
-            if ((i + 1) % 100 == 0) Txt.info("Generated ${i + 1} orders").msg()
+            //if ((i + 1) % 100 == 0) Txt.info("Generated ${i + 1} orders").msg()
         }
-        return Text.F("Done")
+        Txt.info("Generated $n orders").msg()
     }
 
     private fun Shipping_Order.genItems(n: Int, products: List<Product>, maxQuantity: Int) {
