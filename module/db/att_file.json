@@ -1,0 +1,38 @@
+{
+  "code":"att_file",
+  "fields":[
+    {
+      "code":"name",
+      "usage":"name, filename",
+      "@":"6"
+    },
+    {
+      "code":"upload_date",
+      "label":"Filedate",
+      "type":"datetime",
+      "usage":"filetime",
+      "@":"7"
+    },
+    {
+      "code":"ref_id",
+      "label":"Reference ID",
+      "type":"bigint",
+      "@":"8"
+    },
+    {
+      "code":"ref_code",
+      "label":"Reference code",
+      "@":"9"
+    }
+  ],
+  "indexes":[
+    {
+      "fields":[
+        "ref_id",
+        "ref_code"
+      ]
+    }
+  ],
+  "@":"33",
+  "@e":"2kat_dd:3;6name:1;7upload_date:7;8ref_id:4;9ref_code:1"
+}

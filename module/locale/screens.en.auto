@@ -7,12 +7,14 @@
 Charts=Charts
 // screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt
 Customer=Customer
-// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_p_details:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_p_details:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Demo1=Demo1
-// screens: demo1_product:scr@demo1_prvt sc_order:scr@demo1_prvt
+// screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_order:scr@demo1_prvt
 Details=Details
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Id=Id
+// screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt
+"Open link"=Open link
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 "Order items"=Order items
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
@@ -32,8 +34,13 @@ Summary=Summary
 "Upload image"=Upload image
 
 //-- demo1_product:scr@demo1_prvt --
-"Open link"=Open link
 Product=Product
+
+//-- demo1_product_ext:scr@demo1_prvt --
+Download=Download
+"File name"=File name
+"Product (extended info)"=Product (extended info)
+Upload=Upload
 
 //-- demo1_shipping_order:scr@demo1_prvt --
 "Shipping Order"=Shipping Order

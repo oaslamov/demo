@@ -1,0 +1,26 @@
+{
+  "code":"att_file_data",
+  "fields":[
+    {
+      "code":"att_file",
+      "ref":"att_file",
+      "refDelete":"delete",
+      "@":"6:7"
+    },
+    {
+      "code":"data",
+      "type":"bytes",
+      "usage":"filedata",
+      "@":"8"
+    }
+  ],
+  "indexes":[
+    {
+      "fields":[
+        "att_file"
+      ]
+    }
+  ],
+  "@":"34",
+  "@e":"2kat_dd:3;6att_file:0;8data:10"
+}

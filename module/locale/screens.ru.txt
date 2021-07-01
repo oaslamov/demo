@@ -47,6 +47,13 @@ Summary=Сводка
 "Open link"=Открыть ссылку
 Product=Товар
 
+//-- demo1_product_ext:scr@demo1_prvt --
+Download=Скачать
+"File name"=Имя файла
+"Product (extended info)"=Товар (подробности)
+Upload=Загрузить
+
+
 //-- demo1_shipping_order:scr@demo1_prvt --
 "Shipping Order"=Заказ (простой экран)
 
