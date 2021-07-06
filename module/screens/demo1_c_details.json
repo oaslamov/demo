@@ -6,27 +6,27 @@
   "show_in_menu":false,
   "args":[
     {
-      "code": "id",
-      "is_mandatory": true
+      "code":"id",
+      "is_mandatory":true
     }
   ],
-  "grid": {
-    "base": "screen",
-    "cols": 8,
-    "rows": 8
+  "grid":{
+    "base":"screen",
+    "cols":8,
+    "rows":8
   },
-  "width": 50,
-  "height": 50,
-  "data_sources": [
+  "width":"50",
+  "height":"50",
+  "data_sources":[
     {
-      "code": "ds_c",
-      "table_name": "Demo1_Prvt.Customer",
-      "type": "table",
-      "fields": [
+      "code":"ds_c",
+      "table_name":"Demo1_Prvt.Customer",
+      "type":"table",
+      "fields":[
         {
-          "code": "address_line1",
-          "label": "$l{f:7ef07d006008}l",
-          "type": "string",
+          "code":"address_line1",
+          "label":"$l{f:7ef07d006008}l",
+          "type":"string",
           "hint":"$l{f:7ef07d006008:d}l"
         },
         {
@@ -108,6 +108,32 @@
           "label":"$l{f:7ef07d006007}l",
           "type":"string",
           "hint":"$l{f:7ef07d006007:d}l"
+        },
+        {
+          "code":"subcountry",
+          "label":"$l{f:7ef07d00600e}l",
+          "type":"ref",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "tablename":"Demo1_Prvt.Subcountry",
+                "filter":[
+                  "${@ref_filter}",
+                  "country=${ds_c.country}"
+                ]
+              },
+              "fields":[
+                "id",
+                "@name"
+              ]
+            },
+            "dependencies":[
+              "ds_c.country"
+            ]
+          },
+          "edit_condition":"false",
+          "hint":"$l{f:7ef07d00600e:d}l"
         }
       ],
       "operations":{
@@ -172,6 +198,9 @@
           },
           {
             "code":"country"
+          },
+          {
+            "code":"subcountry"
           },
           {
             "code":"city"
