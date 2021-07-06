@@ -51,7 +51,7 @@
               "args":{
                 "filter":[
                   "${@ref_filter}",
-                  "country_id=${ds_c.country}"
+                  "country=${ds_c.country}"
                 ],
                 "tablename":"Demo1_Prvt.City"
               },

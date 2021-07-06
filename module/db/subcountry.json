@@ -2,7 +2,7 @@
   "code":"subcountry",
   "fields":[
     {
-      "code":"country_id",
+      "code":"country",
       "label":"Country",
       "ref":"country",
       "@":"6:7"
@@ -24,17 +24,17 @@
     },
     {
       "fields":[
-        "country_id",
+        "country",
         "name"
       ],
       "type":"unique"
     },
     {
       "fields":[
-        "country_id"
+        "country"
       ]
     }
   ],
   "@":"14",
-  "@e":"2kat_dd:3;6country_id:0;8name:1"
+  "@e":"2kat_dd:3;6country:0;8name:1"
 }

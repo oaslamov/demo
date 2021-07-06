@@ -20,8 +20,8 @@ class RefreshTable(val m: Demo1) {
         if (t.city != null) {
             val city = m.selectFirst<City>("id=${t.city}")
             if (city != null) {
-                t.country = city.country_Id
-                t.subcountry = city.subcountry_Id
+                t.country = city.country
+                t.subcountry = city.subcountry
                 t.city = city.id
             }
         }

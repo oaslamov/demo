@@ -11,8 +11,8 @@ class CityFiller : City.ICity {
     override fun getInstance(): ITableFieldFiller = CityFiller()
 
     override fun getList_Nm(table: City): String {
-        val sbcntr = db.select(Subcountry(), table.subcountry_Id)
-        val cntr = db.select(Country(), table.country_Id)
+        val sbcntr = db.select(Subcountry(), table.subcountry)
+        val cntr = db.select(Country(), table.country)
         return listOfNotNull(table.name, sbcntr.name, cntr.name).joinToString()
     }
 

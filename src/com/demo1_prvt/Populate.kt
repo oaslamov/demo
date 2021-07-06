@@ -103,15 +103,15 @@ class Populate(val m: Demo1) {
             countryMap.value.forEach { subcountryMap ->
                 val subcountryId = Subcountry().run { // Create a subcountry and get its Id
                     name = subcountryMap.key
-                    country_Id = countryId
+                    country = countryId
                     m.insert(this)
                     id
                 }
                 subcountryMap.value.forEach { rec ->
                     City().apply { // Create a city
                         name = rec.city
-                        country_Id = countryId
-                        subcountry_Id = subcountryId
+                        country = countryId
+                        subcountry = subcountryId
                         geonameid = rec.geonameid
                         m.insert(this)
                         n++
