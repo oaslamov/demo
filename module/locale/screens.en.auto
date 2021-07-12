@@ -37,7 +37,9 @@ Summary=Summary
 Product=Product
 
 //-- demo1_product_ext:scr@demo1_prvt --
+Document=Document
 Download=Download
+"Edit document"=Edit document
 "File name"=File name
 "Product (extended info)"=Product (extended info)
 Upload=Upload

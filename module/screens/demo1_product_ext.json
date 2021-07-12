@@ -179,7 +179,7 @@
           "hint":"$l{f:7ef07d021008:d}l"
         },
         {
-          "code":"upload_date",
+          "code":"file_date",
           "label":"$l{f:7ef07d021007}l",
           "type":"datetime",
           "hint":"$l{f:7ef07d021007:d}l"
@@ -289,6 +289,101 @@
           }
         }
       ]
+    },
+    {
+      "code":"ds_doc_info",
+      "table_name":"Onlyoffice.Doc_Info",
+      "type":"table",
+      "fields":[
+        {
+          "code":"assigned_field",
+          "label":"$l{f:68009007}l",
+          "type":"string",
+          "hint":"$l{f:68009007:d}l"
+        },
+        {
+          "code":"configuration",
+          "label":"$l{f:6800900b}l",
+          "type":"text",
+          "hint":"$l{f:6800900b:d}l"
+        },
+        {
+          "code":"doc_row_id",
+          "label":"$l{f:6800900e}l",
+          "type":"string",
+          "hint":"$l{f:6800900e:d}l"
+        },
+        {
+          "code":"id",
+          "type":"string"
+        },
+        {
+          "code":"is_can_edit",
+          "label":"$l{f:68009009}l",
+          "type":"bool",
+          "hint":"$l{f:68009009:d}l"
+        },
+        {
+          "code":"is_supported_file_type",
+          "label":"$l{f:6800900a}l",
+          "type":"bool",
+          "hint":"$l{f:6800900a:d}l"
+        },
+        {
+          "code":"key",
+          "label":"$l{f:68009010}l",
+          "type":"string",
+          "hint":"$l{f:68009010:d}l"
+        },
+        {
+          "code":"message",
+          "label":"$l{f:6800900d}l",
+          "type":"text",
+          "hint":"$l{f:6800900d:d}l"
+        },
+        {
+          "code":"module",
+          "label":"$l{f:68009008}l",
+          "type":"string",
+          "hint":"$l{f:68009008:d}l"
+        },
+        {
+          "code":"title",
+          "label":"$l{f:6800900f}l",
+          "type":"string",
+          "hint":"$l{f:6800900f:d}l"
+        }
+      ],
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"onlyoffice.selectList",
+              "args":{
+                "filter":[
+                  "doc_row_id=${ds_att_file.id} and assigned_field='demo1_prvt.att_file_data.data'"
+                ],
+                "tablename":"onlyoffice.doc_info"
+              }
+            },
+            "dependencies":[
+              "ds_att_file.id"
+            ]
+          }
+        }
+      },
+      "actions":[
+        {
+          "code":"editDocument",
+          "label":"$l{Edit document}l",
+          "data_scope":"row",
+          "request":{
+            "data":{
+              "action":"gui.editDocument"
+            }
+          }
+        }
+      ]
     }
   ],
   "parts":[
@@ -298,9 +393,9 @@
       "border_type":"none",
       "position":{
         "from_col":1,
-        "to_col":120,
+        "to_col":100,
         "from_row":1,
-        "to_row":240
+        "to_row":160
       },
       "data_source":{
         "code":"ds_product",
@@ -341,10 +436,10 @@
       "type":"table",
       "border_type":"none",
       "position":{
-        "from_col":121,
-        "to_col":240,
-        "from_row":1,
-        "to_row":120
+        "from_col":1,
+        "to_col":100,
+        "from_row":161,
+        "to_row":240
       },
       "data_source":{
         "code":"ds_att_file",
@@ -353,7 +448,7 @@
             "code":"name"
           },
           {
-            "code":"upload_date"
+            "code":"file_date"
           }
         ],
         "operations":[
@@ -366,6 +461,27 @@
         "actions":[
           "upload",
           "download"
+        ]
+      }
+    },
+    {
+      "code":"p_doc_form",
+      "label":"$l{Document}l: ${ds_doc_info.title}",
+      "type":"form",
+      "border_type":"none",
+      "position":{
+        "from_col":101,
+        "to_col":240,
+        "from_row":1,
+        "to_row":240
+      },
+      "data_source":{
+        "code":"ds_doc_info",
+        "operations":[
+          "select"
+        ],
+        "actions":[
+          "editDocument"
         ]
       }
     }
