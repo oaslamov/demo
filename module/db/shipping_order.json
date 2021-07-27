@@ -46,6 +46,11 @@
       "fields":[
         "total"
       ]
+    },
+    {
+      "fields":[
+        "shipment_date"
+      ]
     }
   ],
   "@":"8",
