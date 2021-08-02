@@ -7,7 +7,7 @@
 Charts=Charts
 // screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt
 Customer=Customer
-// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_p_details:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_p_details:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Demo1=Demo1
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_order:scr@demo1_prvt
 Details=Details
@@ -25,6 +25,11 @@ Order=Order
 
 //-- demo1_customer:scr@demo1_prvt --
 Summary=Summary
+
+//-- demo1_customer_html:scr@demo1_prvt --
+"Customer (HTML)"=Customer (HTML)
+"Customer Details"=Customer Details
+"Delete Customer"=Delete Customer
 
 //-- demo1_p_details:scr@demo1_prvt --
 "${@screen.product_name}"=${@screen.product_name}
