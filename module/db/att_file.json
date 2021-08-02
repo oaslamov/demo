@@ -3,6 +3,7 @@
   "fields":[
     {
       "code":"name",
+      "value":"-- New File --",
       "usage":"name, filename",
       "@":"6"
     },
