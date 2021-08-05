@@ -34,6 +34,15 @@ Order=Заказ
 // screens: demo1_customer:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt
 Summary=Сводка
 
+//-- demo1_customer_html:scr@demo1_prvt --
+"Customer (HTML)"=Заказчик (HTML)
+"Customer Details"=Свойства заказчика
+"Delete Customer"=Удалить заказчика
+Filter=Фильтр
+Mobile=Моб.тел.
+New=Новый
+Phone=Телефон
+
 //-- demo1_c_details:scr@demo1_prvt --
 "Customer details"=Свойства заказчика
 
