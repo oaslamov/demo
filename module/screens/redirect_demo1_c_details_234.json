@@ -1,0 +1,14 @@
+{
+  "code":"redirect_demo1_c_details_234:scr@demo1_prvt",
+  "label":"$l{Customer details}l 234",
+  "subject":"$l{Demo1}l/$l{Customer}l",
+  "redirect":{
+    "code":"demo1_c_details:scr@demo1_prvt",
+    "args":[
+      {
+        "code":"id",
+        "value":"234"
+      }
+    ]
+  }
+}
