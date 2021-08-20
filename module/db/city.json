@@ -5,12 +5,14 @@
       "code":"country",
       "label":"Country",
       "ref":"country",
+      "refDelete":"error",
       "@":"6:7"
     },
     {
       "code":"subcountry",
       "label":"Subcountry",
       "ref":"subcountry",
+      "refDelete":"error",
       "@":"8:9"
     },
     {

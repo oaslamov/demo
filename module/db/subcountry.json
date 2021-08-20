@@ -5,6 +5,7 @@
       "code":"country",
       "label":"Country",
       "ref":"country",
+      "refDelete":"error",
       "@":"6:7"
     },
     {
