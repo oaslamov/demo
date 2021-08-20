@@ -9,7 +9,7 @@ Charts=Charts
 "Customer details"=Customer details
 // screens: demo1_customer:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_order:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 Customer=Customer
-// screens: demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_p_details:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
+// screens: sc_analysis:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_city:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_p_details:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 Demo1=Demo1
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_order:scr@demo1_prvt
 Details=Details
@@ -77,6 +77,9 @@ Analyze=Analyze
 "Pie Chart"=Pie Chart
 "Spline Chart"=Spline Chart
 "Stacked Bar Chart"=Stacked Bar Chart
+
+//-- sc_city:scr@demo1_prvt --
+City=City
 
 //-- sc_order:scr@demo1_prvt --
 Address=Address

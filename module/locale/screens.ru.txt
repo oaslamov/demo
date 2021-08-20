@@ -85,6 +85,9 @@ Analyze=Выполнить анализ
 "Spline Chart"=Сглаженная линейная диаграмма
 "Stacked Bar Chart"=Диаграмма с накоплением
 
+//-- sc_city:scr@demo1_prvt --
+City=Город
+
 //-- sc_order:scr@demo1_prvt --
 Orders=Заказы
 "Auto calculate"=Вычисляется автоматически
