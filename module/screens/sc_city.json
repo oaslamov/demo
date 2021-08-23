@@ -294,7 +294,7 @@
               "args":{
                 "filter":[
                   "${@user_filter}",
-                  "${main_tree.current_id}=subcountry"
+                  "${main_tree.current_id}=subcountry order by name"
                 ],
                 "tablename":"demo1_prvt.city"
               }
