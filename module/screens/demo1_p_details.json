@@ -1,7 +1,6 @@
 {
   "code":"demo1_p_details:scr@demo1_prvt",
   "label":"$l{Product details}l",
-  "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "show_in_menu":false,
   "args":[
@@ -167,7 +166,7 @@
           "download_image",
           "delete_image"
         ],
-        "row_template":"${image_html}\n<script>\nds.getRows().forEach( row=> {\ndata.image_html=\"<img src='data:image/\"+row.format+\";base64,\"+row.img+\"' style='height:500px;width:100%;object-fit:scale-down'>\"\n})\n</script>"
+        "row_template":"<header>\n<img style=\"object-fit:contain; height: 100%; width: 100%; padding: 1em;\" src=\"data:image/${img_frmt};base64,${img}\" onerror=\"this.style.display='none'\">\n</header>\n<script>\nds.getRows().forEach( row=> {\ndata.img=row.img\ndata.img_frmt=row.format\n})\n</script>"
       }
     }
   ]
