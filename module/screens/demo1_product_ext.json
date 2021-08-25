@@ -571,7 +571,7 @@
         "operations":[
           "select"
         ],
-        "row_template":"<header>\n<img style=\"object-fit:contain; height: 100%; width: 100%; padding: 1em;\" src=\"data:image/${img_frmt};base64,${img}\" onerror=\"this.style.display='none'\">\n</header>\n<script>\nds.getRows().forEach( row=> {\ndata.img=row.data\ndata.img_frmt=row[\"att_file:name\"].split('.').pop()\n})\n</script>"
+        "row_template":"<header>\n<img style=\"object-fit:scale-down; height: 100%; width: 100%; padding: 1em;\" src=\"data:image/${img_frmt};base64,${img}\" onerror=\"this.style.display='none'\">\n</header>\n<script>\nds.getRows().forEach( row=> {\ndata.img=row.data\ndata.img_frmt=row[\"att_file:name\"].split('.').pop()\n})\n</script>"
       },
       "view_condition":"!${ds_doc_info.is_supported_file_type}"
     }
