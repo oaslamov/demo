@@ -1,7 +1,6 @@
 {
   "code":"demo1_product:scr@demo1_prvt",
   "label":"$l{Product}l",
-  "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "sort_order":"Z50",
   "grid":{
@@ -196,8 +195,7 @@
           "delete"
         ],
         "actions":[
-          "openLink",
-          "ac_det"
+          "openLink"
         ]
       }
     }

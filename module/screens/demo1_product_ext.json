@@ -1,7 +1,6 @@
 {
   "code":"demo1_product_ext:scr@demo1_prvt",
   "label":"$l{Product (extended info)}l",
-  "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "sort_order":"Z50",
   "grid":{
@@ -275,6 +274,10 @@
             {
               "code":"ds_doc_info",
               "type":"current_row"
+            },
+            {
+              "code":"ds_att_file_data",
+              "type":"all_rows"
             }
           ]
         },
@@ -388,6 +391,62 @@
           }
         }
       ]
+    },
+    {
+      "code":"ds_att_file_data",
+      "table_name":"Demo1_Prvt.Att_File_Data",
+      "type":"table",
+      "fields":[
+        {
+          "code":"att_file",
+          "label":"$l{f:7ef07d022006}l",
+          "type":"ref",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "filter":[
+                  "${@ref_filter}"
+                ],
+                "tablename":"Demo1_Prvt.Att_File"
+              },
+              "fields":[
+                "id",
+                "@name"
+              ]
+            }
+          },
+          "hint":"$l{f:7ef07d022006:d}l"
+        },
+        {
+          "code":"data",
+          "label":"$l{f:7ef07d022008}l",
+          "type":"bytes",
+          "hint":"$l{f:7ef07d022008:d}l"
+        },
+        {
+          "code":"id",
+          "type":"string"
+        }
+      ],
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "filter":[
+                  "${ds_att_file.id}=Att_File"
+                ],
+                "tablename":"demo1_prvt.att_file_data"
+              }
+            },
+            "dependencies":[
+              "ds_att_file.id"
+            ]
+          }
+        }
+      }
     }
   ],
   "parts":[
@@ -430,8 +489,7 @@
           "delete"
         ],
         "actions":[
-          "openLink",
-          "ac_det"
+          "openLink"
         ]
       }
     },
@@ -487,7 +545,35 @@
         "actions":[
           "editDocument"
         ]
-      }
+      },
+      "view_condition":"${ds_doc_info.is_supported_file_type}"
+    },
+    {
+      "code":"p_img_form",
+      "type":"form",
+      "border_type":"none",
+      "position":{
+        "from_col":101,
+        "to_col":240,
+        "from_row":1,
+        "to_row":240
+      },
+      "data_source":{
+        "code":"ds_att_file_data",
+        "fields":[
+          {
+            "code":"att_file"
+          },
+          {
+            "code":"data"
+          }
+        ],
+        "operations":[
+          "select"
+        ],
+        "row_template":"<header>\n<img style=\"object-fit:contain; height: 100%; width: 100%; padding: 1em;\" src=\"data:image/${img_frmt};base64,${img}\" onerror=\"this.style.display='none'\">\n</header>\n<script>\nds.getRows().forEach( row=> {\ndata.img=row.data\ndata.img_frmt=row[\"att_file:name\"].split('.').pop()\n})\n</script>"
+      },
+      "view_condition":"!${ds_doc_info.is_supported_file_type}"
     }
   ]
 }
