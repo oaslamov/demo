@@ -9,7 +9,7 @@ Charts=Charts
 "Customer details"=Customer details
 // screens: demo1_customer:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_order:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 Customer=Customer
-// screens: sc_analysis:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_city:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_p_details:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
+// screens: sc_analysis:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_city:scr@demo1_prvt sc_new_order_item:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_p_details:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 Demo1=Demo1
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_order:scr@demo1_prvt
 Details=Details
@@ -19,7 +19,7 @@ Id=Id
 "Open link"=Open link
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 "Order items"=Order items
-// screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_new_order_item:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Order=Order
 
 //-- demo1_c_details:scr@demo1_prvt --
@@ -81,7 +81,12 @@ Analyze=Analyze
 //-- sc_city:scr@demo1_prvt --
 City=City
 
+//-- sc_new_order_item:scr@demo1_prvt --
+"New item"=New item
+Save=Save
+
 //-- sc_order:scr@demo1_prvt --
+"Add item"=Add item
 Address=Address
 "Auto calculate"=Auto calculate
 Billing=Billing

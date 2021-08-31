@@ -1,7 +1,6 @@
 {
   "code":"sc_order:scr@demo1_prvt",
   "label":"$l{Order}l",
-  "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "title":"$l{Order #}l ${shipping_order.id}",
   "sort_order":"Z10",
@@ -297,7 +296,36 @@
             }
           ]
         }
-      }
+      },
+      "actions":[
+        {
+          "code":"new_item",
+          "label":"$l{Add item}l",
+          "data_scope":"none",
+          "request":{
+            "data":{
+              "action":"gui.goScreen",
+              "args":{
+                "screenId":"sc_new_order_item:scr@demo1_prvt",
+                "args":{
+                  "order_id":"${shipping_order.id}"
+                },
+                "mode":"popup"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order_product",
+              "type":"all_rows"
+            },
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
+        }
+      ]
     },
     {
       "code":"customer",
@@ -517,6 +545,9 @@
           "insert",
           "update",
           "delete"
+        ],
+        "actions":[
+          "new_item"
         ]
       }
     },

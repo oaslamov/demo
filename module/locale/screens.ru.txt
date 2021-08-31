@@ -88,7 +88,12 @@ Analyze=Выполнить анализ
 //-- sc_city:scr@demo1_prvt --
 City=Город
 
+//-- sc_new_order_item:scr@demo1_prvt --
+"New item"=Новый товар
+Save=Сохранить
+
 //-- sc_order:scr@demo1_prvt --
+"Add item"=Добавить товар
 Orders=Заказы
 "Auto calculate"=Вычисляется автоматически
 "Get price from Product table if blank"=Из таблицы товаров, если пусто
