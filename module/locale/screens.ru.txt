@@ -19,6 +19,8 @@ Customer=Заказчик
 Demo1=Demo1
 // screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Details=Свойства
+// screens: sc_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
+"Edit items"=Edit items
 // screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Odrer=Заказ
 // screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
@@ -87,6 +89,12 @@ Analyze=Выполнить анализ
 
 //-- sc_city:scr@demo1_prvt --
 City=Город
+
+//-- sc_edit_order_items:scr@demo1_prvt --
+"Add this product to order"=Add this product to order
+"Available products"=Available products
+"Edit order items"=Edit order items
+"Items in this order"=Items in this order
 
 //-- sc_new_order_item:scr@demo1_prvt --
 Cancel=Отмена

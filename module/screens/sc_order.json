@@ -324,6 +324,33 @@
               "type":"current_row"
             }
           ]
+        },
+        {
+          "code":"edit_items",
+          "label":"$l{Edit items}l",
+          "data_scope":"none",
+          "request":{
+            "data":{
+              "action":"gui.goScreen",
+              "args":{
+                "screenId":"sc_edit_order_items:scr@demo1_prvt",
+                "args":{
+                  "order_id":"${shipping_order.id}"
+                },
+                "mode":"popup"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order_product",
+              "type":"all_rows"
+            },
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
         }
       ]
     },
@@ -547,7 +574,8 @@
           "delete"
         ],
         "actions":[
-          "new_item"
+          "new_item",
+          "edit_items"
         ]
       }
     },
