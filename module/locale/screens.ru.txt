@@ -89,6 +89,7 @@ Analyze=Выполнить анализ
 City=Город
 
 //-- sc_new_order_item:scr@demo1_prvt --
+Cancel=Отмена
 "New item"=Новый товар
 Save=Сохранить
 

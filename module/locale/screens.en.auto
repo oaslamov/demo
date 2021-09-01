@@ -82,6 +82,7 @@ Analyze=Analyze
 City=City
 
 //-- sc_new_order_item:scr@demo1_prvt --
+Cancel=Cancel
 "New item"=New item
 Save=Save
 

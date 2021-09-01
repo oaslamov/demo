@@ -16,7 +16,8 @@
   "width":"30",
   "height":"60",
   "actions":[
-    "ds_product.submit>"
+    "ds_product.submit>",
+    "ds_product.cancel>"
   ],
   "data_sources":[
     {
@@ -130,6 +131,16 @@
                 "fields":"${@all_fields}",
                 "tableName":"demo1_prvt.shipping_order_product"
               }
+            }
+          }
+        },
+        {
+          "code":"cancel",
+          "label":"$l{Cancel}l",
+          "data_scope":"row",
+          "request":{
+            "data":{
+              "action":"gui.noAction"
             }
           }
         }
