@@ -16,12 +16,12 @@
   "width":"30",
   "height":"60",
   "actions":[
-    "ds_product.submit>",
-    "ds_product.cancel>"
+    "ds_item.submit>",
+    "ds_item.cancel>"
   ],
   "data_sources":[
     {
-      "code":"ds_product",
+      "code":"ds_item",
       "table_name":"Demo1_Prvt.Shipping_Order_Product",
       "type":"table",
       "fields":[
@@ -236,7 +236,7 @@
         "to_row":4
       },
       "data_source":{
-        "code":"ds_product",
+        "code":"ds_item",
         "fields":[
           {
             "code":"product"
