@@ -13,7 +13,7 @@ class Stats(val m: Demo1) {
     fun makeStats(start: LocalDate? = null, finish: LocalDate? = null, abLimit: Int, bcLimit: Int) {
         makeProductStats(start, finish, abLimit, bcLimit, itemQuery)
         makeCustomerStats(start, finish, abLimit, bcLimit, itemQuery)
-        Txt.info(m.xtr("analysis_done")).msg()
+        Txt.info(m.MID("analysis_done")).msg()
     }
 
 

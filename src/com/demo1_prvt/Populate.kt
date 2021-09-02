@@ -18,10 +18,10 @@ class Populate(val m: Demo1) {
         val hasData = m.exists<Country>("") || m.exists<Subcountry>("") || m.exists<City>("")
                 || m.exists<Product>("") || m.exists<Customer>("")
         if (hasData) {
-            Txt.info(m.xtr("skip_loading_sample_data")).msg()
+            Txt.info(m.MID("skip_loading_sample_data")).msg()
         } else {
             m.isLoadingSampleData = true
-            Txt.info(m.xtr("loading_sample_data")).msg()
+            Txt.info(m.MID("loading_sample_data")).msg()
             createCities()
             createCustomers()
             createProducts()

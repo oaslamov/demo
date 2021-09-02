@@ -22,20 +22,20 @@ class CustomActions(val m: Demo1) {
         var n0 = 0
         m.iterate<Customer>(customerFilter) { c ->
             n0++
-            Txt.info(m.xtr("act1_c_header", n0, c.name, c.phone)).msg()
+            Txt.info(m.MID("act1_c_header"), n0, c.name, c.phone).msg()
             var n1 = 0
             m.iterate<Shipping_Order>("customer=${c.id}") { o ->
                 n1++
-                Txt.info(m.xtr("act1_o_header", n0, n1, o.id, o.datetime_Order_Placed?.toLocalDate())).msg()
+                Txt.info(m.MID("act1_o_header"), n0, n1, o.id, o.datetime_Order_Placed?.toLocalDate()).msg()
                 var n2 = 0
                 m.iterate<Shipping_Order_Product>("shipping_order=${o.id}") { item ->
                     n2++
 //                    val p = m.select(Product(), item.product)
                     val p = product[item.product]
-                    Txt.info(m.xtr("act1_p_header", n0, n1, n2, p?.name, item.quantity)).msg()
+                    Txt.info(m.MID("act1_p_header"), n0, n1, n2, p?.name, item.quantity).msg()
                 }
             }
-            if (n1 == 0) Txt.info(m.xtr("act1_no_orders", c.name)).msg()
+            if (n1 == 0) Txt.info(m.MID("act1_no_orders"), c.name).msg()
         }
     }
 
