@@ -294,10 +294,7 @@
                 ],
                 "tablename":"demo1_prvt.shipping_order_product"
               }
-            },
-            "dependencies":[
-              "ds_product.id"
-            ]
+            }
           }
         },
         "update":{
