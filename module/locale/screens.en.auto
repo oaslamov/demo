@@ -13,8 +13,6 @@ Customer=Customer
 Demo1=Demo1
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_order:scr@demo1_prvt
 Details=Details
-// screens: sc_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
-"Edit items"=Edit items
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Id=Id
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt
@@ -102,8 +100,8 @@ Address=Address
 Billing=Billing
 Comment=Comment
 Contacts=Contacts
+"Edit items"=Edit items
 "Get price from Product table if blank"=Get price from Product table if blank
-"Order #"=Order #
 "Order list"=Order list
 "Order summary"=Order summary
 "Search in Google"=Search in Google

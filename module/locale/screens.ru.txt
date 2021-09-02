@@ -20,11 +20,9 @@ Demo1=Demo1
 // screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 Details=Свойства
 // screens: sc_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
-"Edit items"=Edit items
+"Edit items"=Редактировать список
 // screens: demo1_order1610:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Odrer=Заказ
-// screens: sc_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
-"Order #"=Заказ #
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
 "Order items"=Товары в заказе
 // screens: demo1_order1610:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_order:scr@demo1_prvt sc_order_n:scr@demo1_prvt
@@ -91,10 +89,10 @@ Analyze=Выполнить анализ
 City=Город
 
 //-- sc_edit_order_items:scr@demo1_prvt --
-"Add this product to order"=Add this product to order
-"Available products"=Available products
-"Edit order items"=Edit order items
-"Items in this order"=Items in this order
+"Add this product to order"=Добавить этот товар в заказ
+"Available products"=Доступные товары
+"Edit order items"=Редактирование списка товаров
+"Items in this order"=Товары в этом заказе
 
 //-- sc_new_order_item:scr@demo1_prvt --
 Cancel=Отмена

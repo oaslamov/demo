@@ -132,7 +132,8 @@
                 "tableName":"demo1_prvt.shipping_order_product"
               }
             }
-          }
+          },
+          "enable_condition":"${ds_item.product}>0 & ${ds_item.quantity}>0"
         },
         {
           "code":"cancel",

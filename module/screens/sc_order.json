@@ -2,7 +2,7 @@
   "code":"sc_order:scr@demo1_prvt",
   "label":"$l{Order}l",
   "subject":"$l{Demo1}l",
-  "title":"$l{Order #}l ${shipping_order.id}",
+  "title":"$l{Order}l # ${shipping_order.id}",
   "sort_order":"Z10",
   "grid":{
     "base":"screen",
@@ -508,7 +508,7 @@
     },
     {
       "code":"p_header",
-      "label":"$l{Order #}l ${shipping_order.id}",
+      "label":"$l{Order}l # ${shipping_order.id}",
       "type":"form",
       "border_type":"none",
       "position":{

@@ -2,7 +2,7 @@
   "code":"sc_edit_order_items:scr@demo1_prvt",
   "label":"$l{Edit order items}l",
   "subject":"$l{Demo1}l",
-  "title":"$l{Order}l # ${@screen.order_id}. $l{Edit items}l",
+  "title":"$l{Order}l # ${@screen.order_id}. $l{Edit order items}l",
   "show_in_menu":false,
   "args":[
     {
@@ -134,7 +134,8 @@
               "code":"ds_item_list",
               "type":"all_rows"
             }
-          ]
+          ],
+          "enable_condition":"${ds_item.product}>0 & ${ds_item.quantity}>0"
         }
       ]
     },
