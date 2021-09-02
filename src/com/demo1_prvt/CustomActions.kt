@@ -3,6 +3,7 @@ package com.demo1_prvt
 import com.dolmen.ex.BaseException
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.Action
+import com.dolmen.serv.Msg
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
@@ -22,7 +23,10 @@ class CustomActions(val m: Demo1) {
         var n0 = 0
         m.iterate<Customer>(customerFilter) { c ->
             n0++
-            Txt.info(m.MID("act1_c_header"), n0, c.name, c.phone).msg()
+            Msg.create(Txt.info(m.MID("act1_c_header"), n0, c.name))
+                    .fullText(m.xtr("act1_c_header_det", n0, c.name, c.phone, c.mobile,
+                            listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()))
+                    .msg()
             var n1 = 0
             m.iterate<Shipping_Order>("customer=${c.id}") { o ->
                 n1++
