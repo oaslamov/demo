@@ -138,6 +138,7 @@
         {
           "code":"cancel",
           "label":"$l{Cancel}l",
+          "type":"cancel",
           "data_scope":"row",
           "request":{
             "data":{
