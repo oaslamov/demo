@@ -621,12 +621,21 @@
                     "code":"customer"
                   },
                   {
-                    "code":"total"
+                    "code":"shipment_date"
+                  },
+                  {
+                    "code":"date_order_paid"
+                  },
+                  {
+                    "code":"datetime_order_placed"
                   }
                 ],
                 "operations":[
                   "select",
-                  "update"
+                  "update",
+                  "delete",
+                  "insert",
+                  "new"
                 ]
               }
             },
@@ -644,13 +653,7 @@
                 "code":"shipping_order",
                 "fields":[
                   {
-                    "code":"shipment_date"
-                  },
-                  {
-                    "code":"date_order_paid"
-                  },
-                  {
-                    "code":"datetime_order_placed"
+                    "code":"total"
                   }
                 ],
                 "operations":[
