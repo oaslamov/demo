@@ -181,6 +181,13 @@ class Demo1 : Demo1_PrvtModuleBase() {
         return Caller(this).callDolmenXml()
     }
 
+    @Description("Sends a test mail message")
+    @Parameters("To: send a message to", "Subject: message subject default(Test subject)",
+            "Body: message body default(Test message)")
+    fun sendTestMail(to: String, subject: String, body: String) {
+        CustomActions(this).sendTestMail(to, subject, body)
+    }
+
     override fun x_installed(modulePreviousVersionId: Int) {
         Populate(this).loadSampleData()
     }

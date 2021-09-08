@@ -10,6 +10,7 @@ import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
 import com.dolmen.serv.table.Type
+import com.dolmenmod.mail.Mail
 import java.io.File
 import java.time.Duration
 import java.time.OffsetDateTime
@@ -263,6 +264,11 @@ class CustomActions(val m: Demo1) {
     fun deleteProductImage(rowID: RowID) {
         val p = m.selectFirst<Product_Det>("product=$rowID")
         if (p != null) m.delete(p)
+    }
+
+    fun sendTestMail(to: String, subject: String, body: String) {
+        val mailer = Mail.start(Mail::class.java)
+        mailer.send("Test sender<test@example.org>", subject, body, true, mailer.getPrefs(null), to)
     }
 
     fun String.toImageFormat(): String? {
