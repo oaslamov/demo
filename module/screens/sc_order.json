@@ -129,7 +129,34 @@
             }
           }
         }
-      }
+      },
+      "actions":[
+        {
+          "code":"choose_customer",
+          "data_scope":"row",
+          "icon":"fas fa-hand-point-left",
+          "request":{
+            "data":{
+              "action":"gui.goScreen",
+              "args":{
+                "screenId":"sc_choose_customer:scr@demo1_prvt",
+                "mode":"popup",
+                "args":{
+                  "field":"customer",
+                  "id":"${shipping_order.id}",
+                  "tableName":"demo1_prvt.shipping_order"
+                }
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
+        }
+      ]
     },
     {
       "code":"shipping_order_product",
@@ -513,7 +540,7 @@
       "border_type":"none",
       "position":{
         "from_col":6,
-        "to_col":16,
+        "to_col":11,
         "from_row":1,
         "to_row":3
       },
@@ -524,7 +551,10 @@
             "code":"shipment_date"
           },
           {
-            "code":"customer"
+            "code":"customer",
+            "actions":[
+              "choose_customer"
+            ]
           }
         ],
         "operations":[

@@ -79,6 +79,10 @@ Analyze=Analyze
 "Spline Chart"=Spline Chart
 "Stacked Bar Chart"=Stacked Bar Chart
 
+//-- sc_choose_customer:scr@demo1_prvt --
+"Choose customer"=Choose customer
+"Choose this customer"=Choose this customer
+
 //-- sc_city:scr@demo1_prvt --
 City=City
 
