@@ -134,7 +134,7 @@
         {
           "code":"choose_customer",
           "data_scope":"row",
-          "icon":"fas fa-hand-point-left",
+          "icon":"fas fa-search",
           "request":{
             "data":{
               "action":"gui.goScreen",
@@ -466,7 +466,7 @@
         {
           "code":"internetSearch",
           "data_scope":"row",
-          "icon":"fas fa-search",
+          "icon":"fab fa-google",
           "request":{
             "data":{
               "action":"gui.goLink",

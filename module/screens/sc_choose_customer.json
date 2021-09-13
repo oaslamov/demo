@@ -73,7 +73,8 @@
               "action":"demo1_prvt.selectList",
               "args":{
                 "filter":[
-                  "${@user_filter}"
+                  "${@user_filter}",
+                  "order by name"
                 ],
                 "tablename":"demo1_prvt.customer"
               }

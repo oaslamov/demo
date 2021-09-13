@@ -85,6 +85,10 @@ Analyze=Выполнить анализ
 "Spline Chart"=Сглаженная линейная диаграмма
 "Stacked Bar Chart"=Диаграмма с накоплением
 
+//-- sc_choose_customer:scr@demo1_prvt --
+"Choose customer"=Выбор заказчика
+"Choose this customer"=Выбрать этого заказчика
+
 //-- sc_city:scr@demo1_prvt --
 City=Город
 
