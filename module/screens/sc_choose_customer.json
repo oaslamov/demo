@@ -104,12 +104,6 @@
       ]
     }
   ],
-  "expressions":[
-    {
-      "code":"selected_customer",
-      "type":"string"
-    }
-  ],
   "parts":[
     {
       "code":"p_main",
