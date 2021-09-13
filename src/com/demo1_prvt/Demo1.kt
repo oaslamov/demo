@@ -15,8 +15,14 @@ import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
+import com.dolmen.ui.Resource
+import com.dolmen.ui.screen.*
 import com.dolmen.util.Text
 import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.set
 
 
 class Demo1 : Demo1_PrvtModuleBase() {
@@ -186,6 +192,71 @@ class Demo1 : Demo1_PrvtModuleBase() {
             "Body: message body default(Test message)")
     fun sendTestMail(to: String, subject: String, body: String) {
         CustomActions(this).sendTestMail(to, subject, body)
+    }
+
+    override fun x_getDynScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {
+        if (scrId == "ref_picker:scr@demo1_prvt") {
+            var refField = ""
+            var id = ""
+            var tableName = ""
+            var refTable = ""
+            if (args?.size == 4) {
+                refField = args[0]
+                id = args[1]
+                tableName = args[2]
+                refTable = args[3]
+            }
+            val scr = Screen(Resource.STORE_TYPE.STD)
+            with(scr) {
+                code = scrId
+                label = "Pick customer"
+                grid = Grid()
+                grid.base = "screen"
+                grid.cols = 1
+                grid.rows = 1
+                val ds = DataSource()
+                ds.code = "ds_c"
+                ds.table_name = refTable
+                ds.fields = ArrayList<Field_c>()
+                ds.fields.addAll(
+                        listOf(
+                                Field_c("name", "Name", "string"),
+                                Field_c("phone", "Phone", "string"),
+                                Field_c("mobile", "Mobile", "string")
+                        ))
+
+                val op = Operation()
+                op.request = Request()
+                op.request.data = ActionData()
+                op.request.data.action = "demo1_prvt.selectList"
+                op.request.data.args = mapOf("tableName" to refTable)
+                //= ActionData().also{"dd"}
+                //op.request.data.action="demo1_prvt.selectList"
+
+                //op.request = Request(ActionData("demo1_prvt.selectList", linkedMapOf("tableName" to refTable), ArrayList()), ArrayList())
+                ds.operations = LinkedHashMap()
+                ds.operations.put("select", op)
+                data_sources = ArrayList<DataSource>()
+                data_sources.add(ds)
+
+                parts = ArrayList<Part>()
+
+                val part = Part()
+                part.data_source = PartDataSource()
+                part.data_source.code = ds.code
+                part.generate(ds, Screen.GenerateOptions())
+                part.position = Position()
+                part.position.from_col = 1
+                part.position.to_col = 1
+                part.position.from_row = 1
+                part.position.to_row = 1
+                parts.add(part)
+            }
+            //scr.generate()
+            val json = scr.toPreparedJson()
+            return json
+        }
+        return null
     }
 
     override fun x_installed(modulePreviousVersionId: Int) {
