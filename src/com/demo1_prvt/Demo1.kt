@@ -214,42 +214,52 @@ class Demo1 : Demo1_PrvtModuleBase() {
                 grid.base = "screen"
                 grid.cols = 1
                 grid.rows = 1
+
                 val ds = DataSource()
                 ds.code = "ds_c"
                 ds.table_name = refTable
-                ds.fields = ArrayList<Field_c>()
-                ds.fields.addAll(
-                        listOf(
-                                Field_c("name", "Name", "string"),
-                                Field_c("phone", "Phone", "string"),
-                                Field_c("mobile", "Mobile", "string")
-                        ))
-
+                ds.generateFields(this)
                 val op = Operation()
                 op.request = Request()
                 op.request.data = ActionData()
                 op.request.data.action = "demo1_prvt.selectList"
-                op.request.data.args = mapOf("tableName" to refTable)
-                //= ActionData().also{"dd"}
-                //op.request.data.action="demo1_prvt.selectList"
-
-                //op.request = Request(ActionData("demo1_prvt.selectList", linkedMapOf("tableName" to refTable), ArrayList()), ArrayList())
+                op.request.data.args = mapOf("tableName" to refTable,
+                        "filter" to listOf("\${@user_filter}", "order by name"))
                 ds.operations = LinkedHashMap()
-                ds.operations.put("select", op)
+                ds.operations["select"] = op
                 data_sources = ArrayList<DataSource>()
                 data_sources.add(ds)
 
                 parts = ArrayList<Part>()
 
                 val part = Part()
+                part.code = "p_main"
+                part.type = "table"
                 part.data_source = PartDataSource()
                 part.data_source.code = ds.code
-                part.generate(ds, Screen.GenerateOptions())
                 part.position = Position()
                 part.position.from_col = 1
                 part.position.to_col = 1
                 part.position.from_row = 1
                 part.position.to_row = 1
+                part.data_source = PartDataSource()
+                part.data_source.code = "ds_c"
+                part.data_source.fields = ArrayList<PartField>()
+                part.data_source.fields.addAll(
+                        listOf(
+                                PartField().apply {
+                                    code = "id"
+                                    edit_condition = "false"
+                                },
+                                PartField().apply { code = "name" },
+                                PartField().apply { code = "phone" },
+                                PartField().apply { code = "mobile" },
+                                PartField().apply { code = "address_line1" },
+                                PartField().apply { code = "address_line2" },
+                                PartField().apply { code = "address_line3" },
+                        )
+                )
+
                 parts.add(part)
             }
             //scr.generate()
