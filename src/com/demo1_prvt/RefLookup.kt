@@ -69,15 +69,10 @@ class RefLookup(val m: Demo1) {
             part.position.to_row = 1
             part.data_source = PartDataSource()
             part.data_source.code = "ds_c"
-            part.data_source.fields = arrayListOf()
-            part.data_source.fields.addAll(refTableFields.map { PartField().apply { code = it } })
-
+            part.data_source.fields = ArrayList(refTableFields.map { PartField().apply { code = it } })
             part.data_source.actions = arrayListOf("submit")
-
             parts.add(part)
         }
-
-    val json = scr.toPreparedJson()
-    return json
-}
+        return scr.toPreparedJson()
+    }
 }
