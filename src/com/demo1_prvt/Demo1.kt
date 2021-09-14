@@ -15,13 +15,8 @@ import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
-import com.dolmen.ui.Resource
-import com.dolmen.ui.screen.*
 import com.dolmen.util.Text
 import java.time.LocalDate
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import kotlin.collections.set
 
 
@@ -195,77 +190,8 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     override fun x_getDynScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {
-        if (scrId == "ref_picker:scr@demo1_prvt") {
-            var refField = ""
-            var id = ""
-            var tableName = ""
-            var refTable = ""
-            if (args?.size == 4) {
-                refField = args[0]
-                id = args[1]
-                tableName = args[2]
-                refTable = args[3]
-            }
-            val scr = Screen(Resource.STORE_TYPE.STD)
-            with(scr) {
-                code = scrId
-                label = "Pick customer"
-                grid = Grid()
-                grid.base = "screen"
-                grid.cols = 1
-                grid.rows = 1
-
-                val ds = DataSource()
-                ds.code = "ds_c"
-                ds.table_name = refTable
-                ds.generateFields(this)
-                val op = Operation()
-                op.request = Request()
-                op.request.data = ActionData()
-                op.request.data.action = "demo1_prvt.selectList"
-                op.request.data.args = mapOf("tableName" to refTable,
-                        "filter" to listOf("\${@user_filter}", "order by name"))
-                ds.operations = LinkedHashMap()
-                ds.operations["select"] = op
-                data_sources = ArrayList<DataSource>()
-                data_sources.add(ds)
-
-                parts = ArrayList<Part>()
-
-                val part = Part()
-                part.code = "p_main"
-                part.type = "table"
-                part.data_source = PartDataSource()
-                part.data_source.code = ds.code
-                part.position = Position()
-                part.position.from_col = 1
-                part.position.to_col = 1
-                part.position.from_row = 1
-                part.position.to_row = 1
-                part.data_source = PartDataSource()
-                part.data_source.code = "ds_c"
-                part.data_source.fields = ArrayList<PartField>()
-                part.data_source.fields.addAll(
-                        listOf(
-                                PartField().apply {
-                                    code = "id"
-                                    edit_condition = "false"
-                                },
-                                PartField().apply { code = "name" },
-                                PartField().apply { code = "phone" },
-                                PartField().apply { code = "mobile" },
-                                PartField().apply { code = "address_line1" },
-                                PartField().apply { code = "address_line2" },
-                                PartField().apply { code = "address_line3" },
-                        )
-                )
-
-                parts.add(part)
-            }
-            //scr.generate()
-            val json = scr.toPreparedJson()
-            return json
-        }
+        if (scrId == "ref_picker:scr@demo1_prvt")
+            return RefLookup(this).getChooseCustomerScreen(originalScrId, scrId, args)
         return null
     }
 
