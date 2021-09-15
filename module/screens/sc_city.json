@@ -84,7 +84,13 @@
                   "fields":"${@all_fields}"
                 }
               }
-            }
+            },
+            "freshen":[
+              {
+                "code":"ds_city",
+                "type":"all_rows"
+              }
+            ]
           }
         }
       ]
@@ -195,7 +201,13 @@
                   "fields":"${@all_fields}"
                 }
               }
-            }
+            },
+            "freshen":[
+              {
+                "code":"ds_city",
+                "type":"all_rows"
+              }
+            ]
           }
         }
       ]
