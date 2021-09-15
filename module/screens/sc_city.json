@@ -2,6 +2,7 @@
   "code":"sc_city:scr@demo1_prvt",
   "label":"$l{City}l",
   "subject":"$l{Demo1}l",
+  "sort_order":"Z80",
   "trees":[
     "main_tree"
   ],

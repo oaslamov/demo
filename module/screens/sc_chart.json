@@ -3,6 +3,7 @@
   "label":"$l{Charts}l",
   "serverStatus":"r",
   "subject":"$l{Demo1}l",
+  "sort_order":"Z70",
   "grid":{
     "base":"screen",
     "cols":12,
