@@ -3,7 +3,7 @@
   "label":"$l{Shipping Order}l",
   "serverStatus":"r",
   "subject":"$l{Demo1}l/$l{Order}l",
-  "sort_order":"Z30",
+  "sort_order":"Z30.1",
   "grid":{
     "base":"screen",
     "cols":240,

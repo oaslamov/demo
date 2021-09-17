@@ -2,7 +2,7 @@
   "code":"demo1_product:scr@demo1_prvt",
   "label":"$l{Product}l",
   "subject":"$l{Demo1}l/$l{Product}l",
-  "sort_order":"Z20",
+  "sort_order":"Z20.1",
   "grid":{
     "base":"screen",
     "cols":240,
