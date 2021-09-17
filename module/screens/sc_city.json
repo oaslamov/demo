@@ -71,7 +71,10 @@
               "data":{
                 "action":"demo1_prvt.selectList",
                 "args":{
-                  "tablename":"demo1_prvt.country"
+                  "tablename":"demo1_prvt.country",
+                  "filter":[
+                    "order by name"
+                  ]
                 }
               }
             }
@@ -183,7 +186,8 @@
                 "action":"demo1_prvt.selectList",
                 "args":{
                   "filter":[
-                    "country=${main_tree.parent_id}"
+                    "country=${main_tree.parent_id}",
+                    "order by name"
                   ],
                   "tablename":"demo1_prvt.subcountry"
                 }
