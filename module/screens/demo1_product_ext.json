@@ -252,7 +252,7 @@
       "actions":[
         {
           "code":"upload",
-          "label":"$l{Upload}l",
+          "label":"$l{Upload to this row}l",
           "type":"file_upload",
           "data_scope":"row",
           "request":{
@@ -294,6 +294,33 @@
               }
             }
           }
+        },
+        {
+          "code":"uploadFile",
+          "label":"$l{Upload to new row}l",
+          "type":"file_upload",
+          "data_scope":"none",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.uploadNewFile",
+              "args":{
+                "filename":"${@name}",
+                "dataTableName":"demo1_prvt.att_file_data",
+                "data":"${@bytes}",
+                "fileTimeMillis":"${@filetime}",
+                "infoFields":{
+                  "ref_id":"${ds_product.id}",
+                  "ref_code":"product"
+                }
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"ds_att_file",
+              "type":"all_rows"
+            }
+          ]
         }
       ]
     },
@@ -522,7 +549,8 @@
         ],
         "actions":[
           "upload",
-          "download"
+          "download",
+          "uploadFile"
         ]
       }
     },

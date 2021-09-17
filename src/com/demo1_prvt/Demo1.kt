@@ -11,6 +11,7 @@ import com.dolmen.serv.Action
 import com.dolmen.serv.anno.ActionType
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
+import com.dolmen.serv.anno.Priv
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
 import com.dolmen.serv.table.ITopTable
@@ -187,6 +188,19 @@ class Demo1 : Demo1_PrvtModuleBase() {
             "Body: message body default(Test message)")
     fun sendTestMail(to: String, subject: String, body: String) {
         CustomActions(this).sendTestMail(to, subject, body)
+    }
+
+    @Description("Creates a new record in the Info table and uploads a file to the Data table")
+    @Parameters("infoFields: : optional map of info table field values default(null)",
+            "dataTableName: table having a field with usage=\"filedata\"",
+            "filename: file name",
+            "fileTimeMillis: file time",
+            "data: data")
+    @ActionType("file_upload")
+    @Priv(value = "update", tableParameterName = "dataTableName")
+    fun uploadNewFile(infoFields: Map<String?, Any?>?, dataTableName: String, filename: String,
+                      fileTimeMillis: Long, data: ByteArray?) {
+        CustomActions(this).uploadNewFile(infoFields, dataTableName, filename, fileTimeMillis, data)
     }
 
     override fun x_getDynScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {

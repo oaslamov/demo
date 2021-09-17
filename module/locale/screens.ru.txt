@@ -62,7 +62,8 @@ Download=Скачать
 "Edit document"=Редактировать документ
 "File name"=Имя файла
 "Product (extended info)"=Товар (подробности)
-Upload=Загрузить
+"Upload to new row"=Загрузить в новую строку
+"Upload to this row"=Загрузить в эту строку
 
 
 //-- demo1_shipping_order:scr@demo1_prvt --

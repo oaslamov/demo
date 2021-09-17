@@ -4,11 +4,13 @@ import com.dolmen.ex.BaseException
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.Action
 import com.dolmen.serv.Msg
+import com.dolmen.serv.TableBinaryDataProvider
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
+import com.dolmen.serv.table.Table
 import com.dolmen.serv.table.Type
 import com.dolmenmod.mail.Mail
 import java.io.File
@@ -269,6 +271,18 @@ class CustomActions(val m: Demo1) {
     fun sendTestMail(to: String, subject: String, body: String) {
         val mailer = Mail.start(Mail::class.java)
         mailer.send("Test sender<test@example.org>", subject, body, true, mailer.getPrefs(null), to)
+    }
+
+    fun uploadNewFile(infoFields: Map<String?, Any?>?, dataTableName: String, filename: String,
+                      fileTimeMillis: Long, data: ByteArray?) {
+        val dataTableTT = Table.T(dataTableName)
+        val tbd = dataTableTT.tableBinaryDataProvider
+        if (tbd == null) {
+            throw BaseException(Txt.error("Cannnot upload: table \"$0\" is not a data table", dataTableTT))
+        } else {
+            val infoRec = m.insert(tbd.infoTableType.name, infoFields)
+            tbd.update(infoRec.id, data, filename, fileTimeMillis, TableBinaryDataProvider.MODE.UPDATE)
+        }
     }
 
     fun String.toImageFormat(): String? {

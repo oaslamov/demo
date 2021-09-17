@@ -53,7 +53,8 @@ Download=Download
 "Edit document"=Edit document
 "File name"=File name
 "Product (extended info)"=Product (extended info)
-Upload=Upload
+"Upload to new row"=Upload to new row
+"Upload to this row"=Upload to this row
 
 //-- demo1_shipping_order:scr@demo1_prvt --
 "Shipping Order"=Shipping Order
