@@ -248,20 +248,4 @@ class CustomActions(val m: Demo1) {
             tbd.update(infoRec.id, data, filename, fileTimeMillis, TableBinaryDataProvider.MODE.UPDATE)
         }
     }
-
-    fun String.toImageFormat(): String? {
-        val IMAGE_FORMATS = mapOf(
-                "png" to "png",
-                "svg" to "svg+xml",
-                "jpeg" to "jpeg",
-                "jpg" to "jpeg",
-                "webp" to "webp",
-                "gif" to "gif",
-                "apng" to "apng",
-                "avif" to "avif",
-                "bmp" to "bmp",
-                "ico" to "x-icon"
-        )
-        return IMAGE_FORMATS[this]
-    }
 }
