@@ -2,6 +2,7 @@ package com.demo1_prvt
 
 import com.dolmen.ex.BaseException
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.mod.GuiModule
 import com.dolmen.serv.Msg
 import com.dolmen.serv.TableBinaryDataProvider
 import com.dolmen.serv.Txt
@@ -247,5 +248,14 @@ class CustomActions(val m: Demo1) {
             val infoRec = m.insert(tbd.infoTableType.name, infoFields)
             tbd.update(infoRec.id, data, filename, fileTimeMillis, TableBinaryDataProvider.MODE.UPDATE)
         }
+    }
+
+    fun insertNewCity(country: String?, subcountry: String?) {
+        val cityId = m.insert(City.TABLE_ID,
+                mapOf("country" to country,
+                        "subcountry" to subcountry,
+                        "name" to "Created at ${OffsetDateTime.now()}"))
+                .id
+        GuiModule.set("@e", mapOf("cityNewId" to cityId))
     }
 }

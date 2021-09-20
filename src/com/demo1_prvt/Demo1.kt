@@ -164,6 +164,12 @@ class Demo1 : Demo1_PrvtModuleBase() {
         CustomActions(this).uploadNewFile(infoFields, dataTableName, filename, fileTimeMillis, data)
     }
 
+    @Description("Creates a new city")
+    @Parameters("Country", "Subcountry")
+    fun insertNewCity(country: String?, subcountry: String?) {
+        CustomActions(this).insertNewCity(country, subcountry)
+    }
+
     override fun x_getDynScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {
         if (scrId == "ref_picker:scr@demo1_prvt")
             return RefLookup(this).getChooseCustomerScreen(originalScrId, scrId, args)

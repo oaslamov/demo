@@ -13,6 +13,8 @@ Customer=Customer
 Demo1=Demo1
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Id=Id
+// screens: sc_city:scr@demo1_prvt sc_new_city:scr@demo1_prvt
+"New city"=New city
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt
 "Open link"=Open link
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
@@ -77,12 +79,15 @@ Analyze=Analyze
 
 //-- sc_city:scr@demo1_prvt --
 City=City
+GoScreen=GoScreen
 
 //-- sc_edit_order_items:scr@demo1_prvt --
 "Add this product to order"=Add this product to order
 "Available products"=Available products
 "Edit order items"=Edit order items
 "Items in this order"=Items in this order
+
+//-- sc_new_city:scr@demo1_prvt --
 
 //-- sc_new_order_item:scr@demo1_prvt --
 Cancel=Cancel
