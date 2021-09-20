@@ -129,24 +129,6 @@
               }
             }
           }
-        },
-        {
-          "code":"ac_det",
-          "label":"$l{Details}l",
-          "data_scope":"row",
-          "request":{
-            "data":{
-              "action":"gui.goScreen",
-              "args":{
-                "screenId":"demo1_p_details:scr@demo1_prvt",
-                "args":{
-                  "product_id":"${ds_product.id}",
-                  "product_name":"${ds_product.name}"
-                },
-                "mode":"popup"
-              }
-            }
-          }
         }
       ]
     },

@@ -6,7 +6,6 @@ import com.dolmen.md.demo1_prvt.City
 import com.dolmen.md.demo1_prvt.Demo1_PrvtModuleBase
 import com.dolmen.md.demo1_prvt.Product
 import com.dolmen.md.demo1_prvt.View1
-import com.dolmen.serv.Action
 import com.dolmen.serv.anno.ActionType
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
@@ -121,28 +120,6 @@ class Demo1 : Demo1_PrvtModuleBase() {
     @Description("Prepares JSON for Percentage of sales by country chart")
     fun getChartSalesPercentageByCountry(): String {
         return ChartManager(this).getChartSalesPercentageByCountry()
-    }
-
-    @Description("Uploads product image to the server")
-    @ActionType("file_upload")
-    @Parameters("rowID: object id",
-            "fileName: file name with extension",
-            "fileTime: file modification date in long",
-            "fileBytes: bytes array of file data")
-    fun uploadProductImage(rowID: RowID?, fileName: String, fileTime: Long, fileBytes: ByteArray?) {
-        CustomActions(this).uploadProductImage(rowID, fileName, fileTime, fileBytes)
-    }
-
-    @Description("Downloads product image from the server")
-    @Parameters("productId: product id")
-    fun downloadProductImage(productId: RowID): Action.FileData? {
-        return CustomActions(this).downloadProductImage(productId)
-    }
-
-    @Description("Deletes product image")
-    @Parameters("rowID: product id")
-    fun deleteProductImage(rowID: RowID) {
-        CustomActions(this).deleteProductImage(rowID)
     }
 
     override fun beforeUpdate(t: ITopTable) {

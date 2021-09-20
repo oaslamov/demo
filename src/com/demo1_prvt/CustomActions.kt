@@ -2,7 +2,6 @@ package com.demo1_prvt
 
 import com.dolmen.ex.BaseException
 import com.dolmen.md.demo1_prvt.*
-import com.dolmen.serv.Action
 import com.dolmen.serv.Msg
 import com.dolmen.serv.TableBinaryDataProvider
 import com.dolmen.serv.Txt
@@ -11,7 +10,6 @@ import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
 import com.dolmen.serv.table.Table
-import com.dolmen.serv.table.Type
 import com.dolmenmod.mail.Mail
 import java.io.File
 import java.time.Duration
@@ -232,40 +230,6 @@ class CustomActions(val m: Demo1) {
         order = order.filterValues { it.customer in customer }
         item = item.filterValues { (it.product in product) and (it.shipping_Order in order) }
         return item.values.take(count).toList()
-    }
-
-    fun uploadProductImage(rowID: RowID?, fileName: String, fileTime: Long, fileBytes: ByteArray?) {
-        val ext = File(fileName).extension.toLowerCase()
-        val imgFormat = ext.toImageFormat() ?: throw BaseException("$ext - unsupported image format")
-        if (rowID == null) {
-            Txt.warn("No parent object").msg()
-            return
-        }
-        if (fileBytes == null) return
-        var file = m.selectFirst<Product_Det>("product=$rowID")
-        if (file == null) {
-            file = Product_Det()
-            file.product = rowID
-        }
-        file.format = imgFormat
-        file.filename = fileName
-        file.file_Time = Type.toOffsetDateTime(fileTime)
-        file.img = fileBytes
-        if (file.id == null) m.insert(file) else m.update(file)
-    }
-
-    fun downloadProductImage(productId: RowID): Action.FileData? {
-        val image = m.selectFirst<Product_Det>("product=$productId")
-        if (image == null) {
-            Txt.warn("Image not found").msg()
-            return null
-        }
-        return Action.FileData(image.filename, 0L, image.img)
-    }
-
-    fun deleteProductImage(rowID: RowID) {
-        val p = m.selectFirst<Product_Det>("product=$rowID")
-        if (p != null) m.delete(p)
     }
 
     fun sendTestMail(to: String, subject: String, body: String) {
