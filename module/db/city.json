@@ -17,7 +17,6 @@
     },
     {
       "code":"name",
-      "usage":"name",
       "etc":{
         "ignoreCase":true
       },
