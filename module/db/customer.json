@@ -55,16 +55,19 @@
     {
       "code":"country",
       "ref":"country",
+      "refDelete":"error",
       "@":"12:13"
     },
     {
       "code":"subcountry",
       "ref":"subcountry",
+      "refDelete":"error",
       "@":"14:15"
     },
     {
       "code":"city",
       "ref":"city",
+      "refDelete":"error",
       "@":"16:17"
     },
     {
