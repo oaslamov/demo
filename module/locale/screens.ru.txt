@@ -32,6 +32,7 @@ Odrer=Заказ
 // screens: demo1_shipping_order:scr@demo1_prvt demo1_order:scr@demo1_prvt
 Order=Заказ
 // screens: demo1_customer:scr@demo1_prvt demo1_customer_n:scr@demo1_prvt
+Phones=Телефоны
 Summary=Сводка
 
 //-- demo1_customer_html:scr@demo1_prvt --

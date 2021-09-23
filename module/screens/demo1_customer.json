@@ -135,7 +135,8 @@
               "action":"demo1_prvt.selectList",
               "args":{
                 "filter":[
-                  "${@user_filter}","order by name"
+                  "${@user_filter}",
+                  "order by name"
                 ],
                 "tablename":"demo1_prvt.customer"
               }
@@ -213,19 +214,41 @@
             "width":"40%"
           },
           {
-            "code":"phone"
+            "code":"fg_billing",
+            "label":"$l{Billing}l",
+            "type":"group"
           },
           {
-            "code":"mobile"
+            "code":"fg_phones",
+            "label":"$l{Phones}l",
+            "type":"group",
+            "group":"fg_billing"
           },
           {
-            "code":"address_line1"
+            "code":"phone",
+            "group":"fg_phones"
           },
           {
-            "code":"address_line2"
+            "code":"mobile",
+            "group":"fg_phones"
           },
           {
-            "code":"address_line3"
+            "code":"fg_address",
+            "label":"$l{Address}l",
+            "type":"group",
+            "group":"fg_billing"
+          },
+          {
+            "code":"address_line1",
+            "group":"fg_address"
+          },
+          {
+            "code":"address_line2",
+            "group":"fg_address"
+          },
+          {
+            "code":"address_line3",
+            "group":"fg_address"
           },
           {
             "code":"country",

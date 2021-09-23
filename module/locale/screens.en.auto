@@ -3,6 +3,10 @@
 // -- for installed system: "locale" dir in Workspace (including subpath for global files or locale/<module>/ folder for module files)
 // -- for module developer project: "locale" dir in the Dolmen SDK project
 
+// screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt
+Address=Address
+// screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt
+Billing=Billing
 // screens: sc_analysis:scr@demo1_prvt sc_chart:scr@demo1_prvt
 Charts=Charts
 // screens: demo1_c_details:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
@@ -27,6 +31,7 @@ Product=Product
 //-- demo1_c_details:scr@demo1_prvt --
 
 //-- demo1_customer:scr@demo1_prvt --
+Phones=Phones
 Summary=Summary
 
 //-- demo1_customer_html:scr@demo1_prvt --
@@ -96,9 +101,7 @@ Save=Save
 
 //-- sc_order:scr@demo1_prvt --
 "Add item"=Add item
-Address=Address
 "Auto calculate"=Auto calculate
-Billing=Billing
 Comment=Comment
 Contacts=Contacts
 Details=Details
