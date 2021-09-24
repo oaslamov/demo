@@ -51,24 +51,6 @@ class Demo1 : Demo1_PrvtModuleBase() {
         CustomActions(this).action4(customerId)
     }
 
-    @Description("Shows customers' orders summary - selectMap() version")
-    @Parameters("customerFilter: String")
-    fun action91(customerFilter: String) {
-        CustomActions(this).action91(customerFilter)
-    }
-
-    @Description("Shows customers' orders summary - selectMap() version")
-    @Parameters("customerFilter: String")
-    fun action92(customerFilter: String) {
-        CustomActions(this).action92(customerFilter)
-    }
-
-    @Description("Shows customers' orders summary - selectMap() version")
-    @Parameters("customerFilter: String")
-    fun action93(customerFilter: String) {
-        CustomActions(this).action93(customerFilter)
-    }
-
     @Description("Updates all orders sums")
     fun updateAllOrders() {
         Populate(this).updateAllOrders()
@@ -77,13 +59,6 @@ class Demo1 : Demo1_PrvtModuleBase() {
     @Description("Loads sample data")
     fun loadSampleData() {
         return Populate(this).loadSampleData()
-    }
-
-    @Description("Performs complex order item search")
-    @Parameters("itemFilter", "productFilter", "orderFilter", "customerFilter")
-    fun search(itemFilter: String?, productFilter: String?, orderFilter: String?,
-               customerFilter: String?): List<ITopTable> {
-        return CustomActions(this).search(itemFilter, productFilter, orderFilter, customerFilter)
     }
 
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
