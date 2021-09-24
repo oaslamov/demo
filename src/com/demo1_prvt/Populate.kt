@@ -80,7 +80,7 @@ class Populate(val m: Demo1) {
         //val recs = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
         val recs = CITY_DATASET
                 .map { l ->
-                    val rec = l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)".toRegex())
+                    val rec = l.split(""",(?=(?:[^"]*"[^"]*")*[^"]*$)""".toRegex())
                     Rec(city = rec[0].replace("\"", "").take(CONST.MAX_STRING_CHARS),
                             country = rec[1].replace("\"", "").take(CONST.MAX_STRING_CHARS),
                             subcountry = rec[2].replace("\"", "").take(CONST.MAX_STRING_CHARS),
