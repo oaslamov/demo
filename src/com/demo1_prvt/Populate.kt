@@ -59,8 +59,6 @@ class Populate(val m: Demo1) {
             val rec = l.split(",").toTypedArray()
             Customer().apply {
                 name = "${rec[1]}, ${rec[0]}"
-                first_Name = rec[0]
-                last_Name = rec[1]
                 phone = rec[6]
                 mobile = rec[7]
                 address_Line1 = rec[2]
@@ -68,8 +66,6 @@ class Populate(val m: Demo1) {
                 address_Line3 = rec[5]
                 val countryPair = countries[(i - 1) / customersPerCountry]
                 country = countryPair.first
-                mailing_Label = mailingLabelHtml(name, address_Line1, address_Line2, address_Line3,
-                        countryPair.second.name)
                 m.insert(this)
             }
         }

@@ -45,10 +45,6 @@ f:7ef07d00d006=Name
 t:7ef07d006000=Customer
 --  Name
 f:7ef07d006006=Name
---  First Name
-f:7ef07d006013=First Name
---  Last Name
-f:7ef07d006014=Last Name
 --  Phone
 f:7ef07d006007=Phone
 --  Mobile
@@ -65,8 +61,6 @@ f:7ef07d00600c=Country
 f:7ef07d00600e=Subcountry
 --  City
 f:7ef07d006010=City
---  Mailing Label
-f:7ef07d006015=Mailing Label
 
 // table Customer Abc
 t:7ef07d01f000=Customer Abc
