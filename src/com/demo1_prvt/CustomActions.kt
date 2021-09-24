@@ -81,7 +81,7 @@ class CustomActions(val m: Demo1) {
     @Parameters("customerId: RowId")
     fun action4(customerId: RowID) {
         Txt.info("Deleting orders for customer ID = $customerId").msg()
-        m.deleteList("demo1_prvt.shipping_order", "customer=${customerId}")
+        m.deleteList(Shipping_Order.TABLE_ID, "customer=${customerId}")
     }
 
     fun sendTestMail(to: String, subject: String, body: String) {
