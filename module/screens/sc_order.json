@@ -461,7 +461,8 @@
                 "mode":"popup"
               }
             }
-          }
+          },
+          "hint":"$l{Opens in a popup window}l"
         },
         {
           "code":"internetSearch",

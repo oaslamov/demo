@@ -122,10 +122,12 @@ t:7ef07d008000=Shipping Order
 f:7ef07d008006=Customer
 --  Order placed at
 f:7ef07d008008=Order placed at
+f:7ef07d008008:d=Your local time
 --  Order paid at
 f:7ef07d008009=Order paid at
 --  Shipment Date
 f:7ef07d00800b=Shipment Date
+f:7ef07d00800b:d=From the warehouse
 --  Total
 f:7ef07d00800e=Total
 --  Comment

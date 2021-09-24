@@ -116,3 +116,4 @@ Orders=Заказы
 Id=Код
 "Search in Google"=Найти в Google
 "Show on Google Maps"=Показать на Google Maps
+"Opens in a popup window"=Откроется во всплывающем окне

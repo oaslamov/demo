@@ -10,6 +10,7 @@
     {
       "code":"datetime_order_placed",
       "label":"Order placed at",
+      "desc":"Your local time",
       "type":"datetime",
       "value":"now()",
       "@":"8"
@@ -22,6 +23,7 @@
     },
     {
       "code":"shipment_date",
+      "desc":"From the warehouse",
       "type":"plaindate",
       "@":"11"
     },
