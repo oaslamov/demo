@@ -27,7 +27,7 @@
       "fields":[
         {
           "code":"address_line1",
-          "label":"$l{f:7ef07d006008}l",
+          "label":"$l{Address}l",
           "type":"string",
           "hint":"$l{f:7ef07d006008:d}l"
         },
@@ -131,13 +131,16 @@
             "code":"mobile"
           },
           {
-            "code":"address_line1"
+            "code":"address_line1",
+            "cell_template":"${address_line1}, ${address_line2}, ${address_line3}"
           },
           {
-            "code":"address_line2"
+            "code":"address_line2",
+            "view_condition":"false"
           },
           {
-            "code":"address_line3"
+            "code":"address_line3",
+            "view_condition":"false"
           }
         ],
         "operations":[

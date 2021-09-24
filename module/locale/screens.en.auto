@@ -3,7 +3,7 @@
 // -- for installed system: "locale" dir in Workspace (including subpath for global files or locale/<module>/ folder for module files)
 // -- for module developer project: "locale" dir in the Dolmen SDK project
 
-// screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt sc_choose_customer:scr@demo1_prvt
 Address=Address
 // screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt
 Billing=Billing
