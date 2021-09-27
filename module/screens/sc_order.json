@@ -329,6 +329,7 @@
           "code":"new_item",
           "label":"$l{Add item}l",
           "data_scope":"none",
+          "icon":"fa fa-plus-square",
           "request":{
             "data":{
               "action":"gui.goScreen",
@@ -356,6 +357,7 @@
           "code":"edit_items",
           "label":"$l{Edit items}l",
           "data_scope":"none",
+          "icon":"fas fa-edit",
           "request":{
             "data":{
               "action":"gui.goScreen",
@@ -425,6 +427,69 @@
           "label":"$l{f:7ef07d006007}l",
           "type":"string",
           "hint":"$l{f:7ef07d006007:d}l"
+        },
+        {
+          "code":"city",
+          "label":"$l{f:7ef07d006010}l",
+          "type":"ref",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "tablename":"Demo1_Prvt.City",
+                "filter":[
+                  "${@ref_filter}"
+                ]
+              },
+              "fields":[
+                "id",
+                "@name"
+              ]
+            }
+          },
+          "hint":"$l{f:7ef07d006010:d}l"
+        },
+        {
+          "code":"country",
+          "label":"$l{f:7ef07d00600c}l",
+          "type":"ref",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "tablename":"Demo1_Prvt.Country",
+                "filter":[
+                  "${@ref_filter}"
+                ]
+              },
+              "fields":[
+                "id",
+                "@name"
+              ]
+            }
+          },
+          "hint":"$l{f:7ef07d00600c:d}l"
+        },
+        {
+          "code":"subcountry",
+          "label":"$l{f:7ef07d00600e}l",
+          "type":"ref",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "tablename":"Demo1_Prvt.Subcountry",
+                "filter":[
+                  "${@ref_filter}"
+                ]
+              },
+              "fields":[
+                "id",
+                "@name"
+              ]
+            }
+          },
+          "hint":"$l{f:7ef07d00600e:d}l"
         }
       ],
       "operations":{
@@ -497,6 +562,12 @@
       ]
     }
   ],
+  "expressions":[
+    {
+      "code":"show_city_info",
+      "text":"${customer.city}!=null"
+    }
+  ],
   "parts":[
     {
       "code":"p_list",
@@ -518,6 +589,13 @@
           },
           {
             "code":"customer"
+          },
+          {
+            "code":"id",
+            "view_condition":"false"
+          },
+          {
+            "code":"total"
           }
         ],
         "order":[
@@ -786,6 +864,18 @@
                   {
                     "code":"address_line3",
                     "group":"fg_a"
+                  },
+                  {
+                    "code":"country",
+                    "view_condition":"${@e.show_city_info}"
+                  },
+                  {
+                    "code":"subcountry",
+                    "view_condition":"${@e.show_city_info}"
+                  },
+                  {
+                    "code":"city",
+                    "view_condition":"${@e.show_city_info}"
                   }
                 ],
                 "operations":[
