@@ -1,0 +1,10 @@
+{
+  "table": "product",
+  "code": "decor",
+  "groups":[
+    {
+      "code": "price_level",
+      "fields": ["price"]
+    }
+  ]
+}

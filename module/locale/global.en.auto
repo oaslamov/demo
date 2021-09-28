@@ -93,6 +93,8 @@ e:7ef07d007008.B=Book
 e:7ef07d007008.G=Grocery
 --  Url
 f:7ef07d00700a=Url
+--  Decor
+f:7ef07d00700b=Decor
 
 // table Product Abc
 t:7ef07d01e000=Product Abc
