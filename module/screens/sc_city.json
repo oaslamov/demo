@@ -454,7 +454,7 @@
           "insertNewCity"
         ]
       },
-      "view_condition":"${main_tree.parent_id}>0"
+      "view_condition":"${main_tree.parent_id}!=null"
     }
   ]
 }
