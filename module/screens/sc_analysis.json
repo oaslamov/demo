@@ -123,7 +123,7 @@
         {
           "code":"makeStats",
           "label":"$l{Analyze}l",
-          "data_scope":"row",
+          "data_scope":"none",
           "request":{
             "data":{
               "action":"demo1_prvt.makeStats",
