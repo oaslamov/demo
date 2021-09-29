@@ -19,9 +19,18 @@ class ProductFiller : Product.IProduct {
 
     override fun getDecor(table: Product): DecorData<Decor_Product_Decor> {
         val decorData = Decor_Product_Decor.newData()
-        val styleLow = Style().apply { color(Style.COLOR_GREEN) }
-        val styleMid = Style().apply { color(Style.COLOR_YELLOW) }
-        val styleHigh = Style().apply { color(Style.COLOR_RED) }
+        val styleLow = Style().apply {
+            color(Style.COLOR_GREEN)
+            font(Style.FONT_ITALIC)
+        }
+        val styleMid = Style().apply {
+            font(Style.FONT_STRIKETHROUGH)
+            color(Style.COLOR_YELLOW)
+        }
+        val styleHigh = Style().apply {
+            font(Style.FONT_BOLD)
+            color(Style.COLOR_RED)
+        }
         val p = table.price
         if (p != null) {
             when {
