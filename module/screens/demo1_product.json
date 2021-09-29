@@ -56,6 +56,12 @@
           "type":"string",
           "edit_condition":"false",
           "hint":"$l{f:7ef07d00700a:d}l"
+        },
+        {
+          "code":"decor",
+          "label":"$l{f:7ef07d00700b}l",
+          "type":"decor",
+          "hint":"$l{f:7ef07d00700b:d}l"
         }
       ],
       "operations":{
@@ -75,7 +81,8 @@
               "action":"demo1_prvt.selectList",
               "args":{
                 "filter":[
-                  "${@user_filter}","order by name"
+                  "${@user_filter}",
+                  "order by name"
                 ],
                 "tablename":"demo1_prvt.product"
               }
@@ -129,7 +136,8 @@
               }
             }
           }
-        }]
+        }
+      ]
     }
   ],
   "parts":[
@@ -146,6 +154,9 @@
       "data_source":{
         "code":"product",
         "fields":[
+          {
+            "code":"decor"
+          },
           {
             "code":"name",
             "width":"30%"
