@@ -2,10 +2,7 @@ package com.demo1_prvt
 
 import com.demo1_prvt.filler.CityFiller
 import com.demo1_prvt.filler.ProductFiller
-import com.dolmen.md.demo1_prvt.City
-import com.dolmen.md.demo1_prvt.Demo1_PrvtModuleBase
-import com.dolmen.md.demo1_prvt.Product
-import com.dolmen.md.demo1_prvt.View1
+import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.anno.ActionType
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
@@ -63,6 +60,10 @@ class Demo1 : Demo1_PrvtModuleBase() {
 
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
         return Views(this).s_iterateView1(f)
+    }
+
+    override fun s_iterateDecor_Test_Card(f: Formula): SelectedData<Decor_Test_Card> {
+        return Views(this).s_iterateDecor_Test_Card(f)
     }
 
     @Description("Calculates sales statistics for a given period of time")

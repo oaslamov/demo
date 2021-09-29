@@ -80,6 +80,21 @@ e:7ef07d01f00c.A=A
 e:7ef07d01f00c.B=B
 e:7ef07d01f00c.C=C
 
+// table Decor Test Card
+t:7ef07d023000=Decor Test Card
+--  Style
+f:7ef07d023006=Style
+--  Fg Color
+f:7ef07d023007=Fg Color
+--  Bg Color
+f:7ef07d023008=Bg Color
+--  Font
+f:7ef07d023009=Font
+--  Align
+f:7ef07d02300a=Align
+--  Formatting
+f:7ef07d02300b=Formatting
+
 // table Product
 t:7ef07d007000=Product
 --  Name

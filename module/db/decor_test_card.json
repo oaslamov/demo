@@ -1,0 +1,34 @@
+{
+  "code":"decor_test_card",
+  "type":"abstract",
+  "idtype":"bigint",
+  "fields":[
+    {
+      "code":"style",
+      "@":"6"
+    },
+    {
+      "code":"fg_color",
+      "@":"7"
+    },
+    {
+      "code":"bg_color",
+      "@":"8"
+    },
+    {
+      "code":"font",
+      "@":"9"
+    },
+    {
+      "code":"align",
+      "@":"10"
+    },
+    {
+      "code":"formatting",
+      "type":"decor",
+      "@":"11"
+    }
+  ],
+  "@":"35",
+  "@e":"2kat_dd:3;6style:1;7fg_color:1;8bg_color:1;9font:1;10align:1;11formatting:19"
+}
