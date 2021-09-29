@@ -5,22 +5,27 @@
   "fields":[
     {
       "code":"style",
+      "label":"Sample text",
       "@":"6"
     },
     {
       "code":"fg_color",
+      "type":"integer",
       "@":"7"
     },
     {
       "code":"bg_color",
+      "type":"integer",
       "@":"8"
     },
     {
       "code":"font",
+      "type":"integer",
       "@":"9"
     },
     {
       "code":"align",
+      "type":"integer",
       "@":"10"
     },
     {
@@ -30,5 +35,5 @@
     }
   ],
   "@":"35",
-  "@e":"2kat_dd:3;6style:1;7fg_color:1;8bg_color:1;9font:1;10align:1;11formatting:19"
+  "@e":"2kat_dd:3;6style:1;7fg_color:3;8bg_color:3;9font:3;10align:3;11formatting:19"
 }

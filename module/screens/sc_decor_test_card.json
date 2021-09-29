@@ -1,6 +1,8 @@
 {
   "code":"sc_decor_test_card:scr@demo1_prvt",
-  "label":"Decor Test Card",
+  "label":"$l{Decor Test Card}l",
+  "subject":"$l{Demo1}l",
+  "sort_order":"Z90",
   "grid":{
     "base":"screen",
     "cols":4,
@@ -15,25 +17,25 @@
         {
           "code":"align",
           "label":"$l{f:7ef07d02300a}l",
-          "type":"string",
+          "type":"integer",
           "hint":"$l{f:7ef07d02300a:d}l"
         },
         {
           "code":"bg_color",
           "label":"$l{f:7ef07d023008}l",
-          "type":"string",
+          "type":"integer",
           "hint":"$l{f:7ef07d023008:d}l"
         },
         {
           "code":"fg_color",
           "label":"$l{f:7ef07d023007}l",
-          "type":"string",
+          "type":"integer",
           "hint":"$l{f:7ef07d023007:d}l"
         },
         {
           "code":"font",
           "label":"$l{f:7ef07d023009}l",
-          "type":"string",
+          "type":"integer",
           "hint":"$l{f:7ef07d023009:d}l"
         },
         {
@@ -85,22 +87,22 @@
         "code":"ds_d",
         "fields":[
           {
-            "code":"align"
-          },
-          {
-            "code":"bg_color"
+            "code":"id"
           },
           {
             "code":"fg_color"
           },
           {
+            "code":"bg_color"
+          },
+          {
             "code":"font"
           },
           {
-            "code":"formatting"
+            "code":"align"
           },
           {
-            "code":"id"
+            "code":"formatting"
           },
           {
             "code":"style"

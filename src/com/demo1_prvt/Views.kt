@@ -33,10 +33,12 @@ class Views(val m: Demo1) {
     fun s_iterateDecor_Test_Card(f: Formula): SelectedData<Decor_Test_Card> {
         class DecorTestCardData(f: Formula?, m: Demo1) : SelectedData<Decor_Test_Card>(f, m) {
             var seqNum: Long = 1
-            val MAX_COLOR = 4
+            val MAX_COLOR = 26
             val MAX_FONT = 8
             val MAX_ALIGN = 4
             val MAX_ROW = MAX_COLOR * MAX_COLOR * MAX_ALIGN * MAX_FONT
+            val samples = m.selectMap(Customer.fId, "").values
+                    .map{listOfNotNull(it.address_Line1, it.address_Line2, it.address_Line3).joinToString()}
 
             override fun hasNext(): Boolean {
                 if (table != null) return true
@@ -46,10 +48,11 @@ class Views(val m: Demo1) {
                     val bgColor = (((seqNum - 1) / MAX_COLOR) % MAX_COLOR + 1).toInt()
                     val font = (((seqNum - 1) / (MAX_COLOR * MAX_COLOR)) % MAX_FONT + 1).toInt()
                     val align = (((seqNum - 1) / (MAX_COLOR * MAX_COLOR * MAX_FONT)) % MAX_ALIGN + 1).toInt()
-                    table.fg_Color = "fg = $fgColor"
-                    table.bg_Color = "bg = $bgColor"
-                    table.font = "font = $font"
-                    table.align = "align = $align"
+                    table.fg_Color = fgColor
+                    table.bg_Color = bgColor
+                    table.font = font
+                    table.align = align
+                    table.style = samples.random()
 
                     val decorData = Decor_Decor_Test_Card_Formatting.newData()
                     val style = Style().apply {
