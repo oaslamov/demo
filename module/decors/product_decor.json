@@ -1,10 +1,20 @@
 {
   "table": "demo1_prvt.product",
   "code": "decor",
-  "groups":[
+  "groups": [
     {
       "code": "price_level",
-      "fields": ["price"]
+      "fields": [
+        "name",
+        "price",
+        "url"
+      ]
+    },
+    {
+      "code": "dropdown_list",
+      "fields": [
+        "product_type"
+      ]
     }
   ]
 }

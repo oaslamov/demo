@@ -19,26 +19,20 @@ class ProductFiller : Product.IProduct {
 
     override fun getDecor(table: Product): DecorData<Decor_Product_Decor> {
         val decorData = Decor_Product_Decor.newData()
-        val styleLow = Style().apply {
-            color(Style.COLOR_GREEN)
-            font(Style.FONT_ITALIC)
-        }
-        val styleMid = Style().apply {
-            font(Style.FONT_STRIKETHROUGH)
-            color(Style.COLOR_YELLOW)
-        }
-        val styleHigh = Style().apply {
-            font(Style.FONT_BOLD)
-            color(Style.COLOR_RED)
-        }
         val p = table.price
+        val stylePriceLevel = Style()
         if (p != null) {
-            when {
-                p.compareTo(BigDecimal(10)) < 0 -> decorData.set(Decor_Product_Decor.Price_Level, styleLow)
-                p.compareTo(BigDecimal(20)) < 0 -> decorData.set(Decor_Product_Decor.Price_Level, styleMid)
-                else -> decorData.set(Decor_Product_Decor.Price_Level, styleHigh)
-            }
+            stylePriceLevel.bgColor(
+                    when {
+                        p.compareTo(BigDecimal(10)) < 0 -> Style.COLOR_GREEN
+                        p.compareTo(BigDecimal(20)) < 0 -> Style.COLOR_YELLOW
+                        else -> Style.COLOR_RED
+                    }
+            )
         }
+        decorData.set(Decor_Product_Decor.Price_Level, stylePriceLevel)
+        val styleDropdownList = stylePriceLevel.clone().apply { align(Style.ALIGN_CENTER) }
+        decorData.set(Decor_Product_Decor.Dropdown_List, styleDropdownList)
         return decorData
     }
 }
