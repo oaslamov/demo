@@ -33,12 +33,21 @@ class Views(val m: Demo1) {
     fun s_iterateDecor_Test_Card(f: Formula): SelectedData<Decor_Test_Card> {
         class DecorTestCardData(f: Formula?, m: Demo1) : SelectedData<Decor_Test_Card>(f, m) {
             var seqNum: Long = 1
+            val colorCodes = listOf("COLOR_DEFAULT", "COLOR_GOOD", "COLOR_ATTENTION", "COLOR_WARNING", "COLOR_ERROR",
+                    "5", "6", "7", "8", "9",
+                    "CONTRAST100", "CONTRAST95", "CONTRAST90", "CONTRAST80", "CONTRAST60", "CONTRAST50",
+                    "CONTRAST40", "CONTRAST20", "CONTRAST00", "19",
+                    "COLOR_RED", "COLOR_GREEN", "COLOR_BLUE", "COLOR_YELLOW", "COLOR_BLACK", "COLOR_WHITE")
+            val fontCodes = listOf("FONT_NORMAL", "FONT_ITALIC", "FONT_BOLD", "FONT_ITALIC+FONT_BOLD",
+                    "FONT_STRIKETHROUGH", "FONT_ITALIC+FONT_STRIKETHROUGH", "FONT_BOLD+FONT_STRIKETHROUGH",
+                    "FONT_ITALIC+FONT_BOLD+FONT_STRIKETHROUGH")
+            val alignCodes = listOf("ALIGN_DEFAULT", "ALIGN_LEFT", "ALIGN_RIGHT", "ALIGN_CENTER")
             val MAX_COLOR = 26
             val MAX_FONT = 8
             val MAX_ALIGN = 4
             val MAX_ROW = MAX_COLOR * MAX_COLOR * MAX_ALIGN * MAX_FONT
             val samples = m.selectMap(Customer.fId, "").values
-                    .map{listOfNotNull(it.address_Line1, it.address_Line2, it.address_Line3).joinToString()}
+                    .map { listOfNotNull(it.address_Line1, it.address_Line2, it.address_Line3).joinToString() }
 
             override fun hasNext(): Boolean {
                 if (table != null) return true
@@ -52,7 +61,9 @@ class Views(val m: Demo1) {
                     table.bg_Color = bgColor
                     table.font = font
                     table.align = align
-                    table.style = samples.random()
+                    table.style =
+                            "${colorCodes[fgColor]}, ${colorCodes[bgColor]}, ${fontCodes[font]}, ${alignCodes[align - 1]}"
+                    table.sample_Text = samples.random()
 
                     val decorData = Decor_Decor_Test_Card_Formatting.newData()
                     val style = Style().apply {

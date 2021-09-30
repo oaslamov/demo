@@ -82,8 +82,10 @@ e:7ef07d01f00c.C=C
 
 // table Decor Test Card
 t:7ef07d023000=Decor Test Card
---  Sample text
-f:7ef07d023006=Sample text
+--  Style
+f:7ef07d023006=Style
+--  Sample Text
+f:7ef07d02300c=Sample Text
 --  Fg Color
 f:7ef07d023007=Fg Color
 --  Bg Color

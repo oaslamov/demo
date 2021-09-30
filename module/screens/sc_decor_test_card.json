@@ -53,6 +53,12 @@
           "label":"$l{f:7ef07d023006}l",
           "type":"string",
           "hint":"$l{f:7ef07d023006:d}l"
+        },
+        {
+          "code":"sample_text",
+          "label":"$l{f:7ef07d02300c}l",
+          "type":"string",
+          "hint":"$l{f:7ef07d02300c:d}l"
         }
       ],
       "operations":{
@@ -106,6 +112,9 @@
           },
           {
             "code":"style"
+          },
+          {
+            "code":"sample_text"
           }
         ],
         "operations":[

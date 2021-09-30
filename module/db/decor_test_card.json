@@ -5,8 +5,11 @@
   "fields":[
     {
       "code":"style",
-      "label":"Sample text",
       "@":"6"
+    },
+    {
+      "code":"sample_text",
+      "@":"12"
     },
     {
       "code":"fg_color",
@@ -35,5 +38,5 @@
     }
   ],
   "@":"35",
-  "@e":"2kat_dd:3;6style:1;7fg_color:3;8bg_color:3;9font:3;10align:3;11formatting:19"
+  "@e":"2kat_dd:3;6style:1;7fg_color:3;8bg_color:3;9font:3;10align:3;11formatting:19;12sample_text:1"
 }
