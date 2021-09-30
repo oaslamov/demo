@@ -15,12 +15,10 @@ class ProductFiller : Product.IProduct {
         return "${engines.random()}${table.name}"
     }
 
-    override fun setUrl(table: Product, value: String?) {}
-
     override fun getDecor(table: Product): DecorData<Decor_Product_Decor> {
         val decorData = Decor_Product_Decor.newData()
         val p = table.price
-        val stylePriceLevel = Style()
+        val stylePriceLevel = Style().apply { color(Style.CONTRAST100) }
         if (p != null) {
             stylePriceLevel.bgColor(
                     when {
@@ -31,7 +29,10 @@ class ProductFiller : Product.IProduct {
             )
         }
         decorData.set(Decor_Product_Decor.Price_Level, stylePriceLevel)
-        val styleDropdownList = stylePriceLevel.clone().apply { align(Style.ALIGN_CENTER) }
+        val styleDropdownList = stylePriceLevel.clone().apply {
+            align(Style.ALIGN_CENTER)
+            font(Style.FONT_BOLD + Style.FONT_ITALIC)
+        }
         decorData.set(Decor_Product_Decor.Dropdown_List, styleDropdownList)
         return decorData
     }

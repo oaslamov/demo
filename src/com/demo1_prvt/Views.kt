@@ -44,9 +44,9 @@ class Views(val m: Demo1) {
                 if (table != null) return true
                 while (seqNum <= MAX_ROW) {
                     table = Decor_Test_Card()
-                    val fgColor = ((seqNum - 1) % MAX_COLOR + 1).toInt()
-                    val bgColor = (((seqNum - 1) / MAX_COLOR) % MAX_COLOR + 1).toInt()
-                    val font = (((seqNum - 1) / (MAX_COLOR * MAX_COLOR)) % MAX_FONT + 1).toInt()
+                    val fgColor = ((seqNum - 1) % MAX_COLOR).toInt()
+                    val bgColor = (((seqNum - 1) / MAX_COLOR) % MAX_COLOR).toInt()
+                    val font = (((seqNum - 1) / (MAX_COLOR * MAX_COLOR)) % MAX_FONT).toInt()
                     val align = (((seqNum - 1) / (MAX_COLOR * MAX_COLOR * MAX_FONT)) % MAX_ALIGN + 1).toInt()
                     table.fg_Color = fgColor
                     table.bg_Color = bgColor
