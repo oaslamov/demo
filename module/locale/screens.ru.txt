@@ -97,6 +97,9 @@ Analyze=Выполнить анализ
 //-- sc_city:scr@demo1_prvt --
 City=Город
 
+//-- sc_edit_order_comment:scr@demo1_prvt --
+"Edit order comment"=Редактирование комментария к заказу
+
 //-- sc_edit_order_items:scr@demo1_prvt --
 "Add this product to order"=Добавить этот товар в заказ
 "Available products"=Доступные товары
@@ -114,6 +117,7 @@ Orders=Заказы
 "Auto calculate"=Вычисляется автоматически
 "Get price from Product table if blank"=Из таблицы товаров, если пусто
 Id=Код
+"Edit comment"=Редактировать комментарии
 "Search in Google"=Найти в Google
 "Show on Google Maps"=Показать на Google Maps
 "Opens in a popup window"=Откроется во всплывающем окне

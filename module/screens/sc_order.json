@@ -19,6 +19,7 @@
           "code":"comment",
           "label":"$l{f:7ef07d00800a}l",
           "type":"text",
+          "edit_condition":"false",
           "hint":"$l{f:7ef07d00800a:d}l"
         },
         {
@@ -146,6 +147,29 @@
                   "id":"${shipping_order.id}",
                   "tableName":"demo1_prvt.shipping_order"
                 }
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
+        },
+        {
+          "code":"edit_comment",
+          "label":"$l{Edit comment}l",
+          "data_scope":"row",
+          "request":{
+            "data":{
+              "action":"gui.goScreen",
+              "args":{
+                "screenId":"sc_edit_order_comment:scr@demo1_prvt",
+                "args":{
+                  "id":"${id}"
+                },
+                "mode":"popup"
               }
             }
           },
@@ -905,7 +929,7 @@
           "sub_parts":[
             {
               "code":"p_order_comment",
-              "type":"text",
+              "type":"form",
               "border_type":"none",
               "position":{
                 "from_col":6,
@@ -923,6 +947,9 @@
                 "operations":[
                   "select",
                   "update"
+                ],
+                "actions":[
+                  "edit_comment"
                 ]
               }
             }

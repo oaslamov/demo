@@ -89,6 +89,9 @@ GoScreen=GoScreen
 //-- sc_decor_test_card:scr@demo1_prvt --
 "Decor Test Card"=Decor Test Card
 
+//-- sc_edit_order_comment:scr@demo1_prvt --
+"Edit order comment"=Edit order comment
+
 //-- sc_edit_order_items:scr@demo1_prvt --
 "Add this product to order"=Add this product to order
 "Available products"=Available products
@@ -108,6 +111,7 @@ Save=Save
 Comment=Comment
 Contacts=Contacts
 Details=Details
+"Edit comment"=Edit comment
 "Edit items"=Edit items
 "Get price from Product table if blank"=Get price from Product table if blank
 "Opens in a popup window"=Opens in a popup window
