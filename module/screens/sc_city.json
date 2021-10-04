@@ -443,6 +443,11 @@
             "code":"name"
           }
         ],
+        "order":[
+          {
+            "field":"name"
+          }
+        ],
         "operations":[
           "new",
           "select",
