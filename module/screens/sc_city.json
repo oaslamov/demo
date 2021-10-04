@@ -354,49 +354,7 @@
             }
           }
         }
-      },
-      "actions":[
-        {
-          "code":"insertNewCity",
-          "label":"$l{New city}l",
-          "data_scope":"none",
-          "request":{
-            "data":{
-              "action":"demo1_prvt.insertNewCity",
-              "args":{
-                "Subcountry":"${main_tree.current_id}",
-                "Country":"${main_tree.parent_id}"
-              }
-            }
-          }
-        },
-        {
-          "code":"goScreen",
-          "label":"$l{GoScreen}l",
-          "data_scope":"row",
-          "request":{
-            "data":{
-              "action":"gui.goScreen",
-              "args":{
-                "screenId":"sc_new_city:scr@demo1_prvt",
-                "args":{
-                  "id":"${@e.cityNewId}"
-                },
-                "mode":"popup"
-              }
-            },
-            "dependencies":[
-              "@action.ds_city:insertNewCity"
-            ]
-          },
-          "freshen":[
-            {
-              "code":"ds_city",
-              "type":"all_rows"
-            }
-          ]
-        }
-      ]
+      }
     }
   ],
   "expressions":[
@@ -454,9 +412,6 @@
           "insert",
           "update",
           "delete"
-        ],
-        "actions":[
-          "insertNewCity"
         ]
       },
       "view_condition":"${main_tree.parent_id}!=null"

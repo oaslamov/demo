@@ -392,7 +392,10 @@
                 },
                 "mode":"popup"
               }
-            }
+            },
+            "dependencies":[
+              "@action.shipping_order:insert"
+            ]
           },
           "freshen":[
             {
