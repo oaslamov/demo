@@ -628,7 +628,8 @@
             "view_condition":"false"
           },
           {
-            "code":"total"
+            "code":"total",
+            "view":"t"
           }
         ],
         "order":[
