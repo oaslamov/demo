@@ -186,7 +186,8 @@
                 }
               }
             }
-          }
+          },
+          "enable_condition":"${@e.is_product_selected}"
         },
         "select":{
           "request":{
@@ -213,7 +214,8 @@
                 "fields":"${@all_fields}"
               }
             }
-          }
+          },
+          "enable_condition":"${@e.is_product_selected}"
         },
         "update":{
           "request":{
@@ -309,7 +311,8 @@
               "code":"ds_att_file",
               "type":"all_rows"
             }
-          ]
+          ],
+          "enable_condition":"${@e.is_product_selected}"
         }
       ]
     },
@@ -463,6 +466,12 @@
           }
         }
       }
+    }
+  ],
+  "expressions":[
+    {
+      "code":"is_product_selected",
+      "text":"${ds_product.id}!=null"
     }
   ],
   "parts":[
