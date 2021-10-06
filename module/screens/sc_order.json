@@ -278,7 +278,8 @@
                 }
               }
             }
-          }
+          },
+          "enable_condition":"${@e.is_order_selected}"
         },
         "select":{
           "request":{
@@ -311,7 +312,8 @@
               "code":"shipping_order",
               "type":"current_row"
             }
-          ]
+          ],
+          "enable_condition":"${@e.is_order_selected}"
         },
         "update":{
           "request":{
@@ -375,7 +377,8 @@
               "code":"shipping_order",
               "type":"current_row"
             }
-          ]
+          ],
+          "enable_condition":"${@e.is_order_selected}"
         },
         {
           "code":"edit_items",
@@ -406,7 +409,8 @@
               "code":"shipping_order",
               "type":"current_row"
             }
-          ]
+          ],
+          "enable_condition":"${@e.is_order_selected}"
         }
       ]
     },
@@ -599,6 +603,10 @@
     {
       "code":"show_city_info",
       "text":"${customer.city}!=null"
+    },
+    {
+      "code":"is_order_selected",
+      "text":"${shipping_order.id}!=null"
     }
   ],
   "parts":[
