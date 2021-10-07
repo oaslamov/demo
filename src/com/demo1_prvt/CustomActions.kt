@@ -112,6 +112,7 @@ class CustomActions(val m: Demo1) {
             fieldName = args[1]
             rowId = args[2]
         }
+        val moduleName = tableName.substringBefore(".")
         val scr = Screen(Resource.STORE_TYPE.STD)
         with(scr) {
             code = scrId
@@ -130,14 +131,14 @@ class CustomActions(val m: Demo1) {
             ds.operations["select"] = Operation().apply {
                 request = Request()
                 request.data = ActionData()
-                request.data.action = "demo1_prvt.selectList"
+                request.data.action = "$moduleName.selectList"
                 request.data.args = mapOf("tableName" to tableName, "filter" to listOf("id=$rowId"))
             }
 
             ds.operations["update"] = Operation().apply {
                 request = Request()
                 request.data = ActionData()
-                request.data.action = "demo1_prvt.update"
+                request.data.action = "$moduleName.update"
                 request.data.args = mapOf("tableName" to tableName, "fields" to "\${@all_fields}")
             }
 
