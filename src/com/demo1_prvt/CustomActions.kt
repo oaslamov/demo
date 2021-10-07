@@ -126,7 +126,6 @@ class CustomActions(val m: Demo1) {
         val scr = Screen(Resource.STORE_TYPE.STD)
         with(scr) {
             code = scrId
-            label = fieldName
             grid = Grid().apply {
                 base = "screen"
                 cols = 1
@@ -136,6 +135,7 @@ class CustomActions(val m: Demo1) {
             ds.code = "ds_o"
             ds.table_name = tableName
             ds.generateFields(this)
+            label = ds.fields.find { it.code == fieldName }?.label
             ds.operations = LinkedHashMap()
 
             ds.operations["select"] = Operation().apply {
