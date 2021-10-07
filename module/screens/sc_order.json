@@ -155,7 +155,8 @@
               "code":"shipping_order",
               "type":"current_row"
             }
-          ]
+          ],
+          "enable_condition":"${@e.is_order_selected}"
         },
         {
           "code":"edit_comment",
@@ -178,7 +179,8 @@
               "code":"shipping_order",
               "type":"current_row"
             }
-          ]
+          ],
+          "enable_condition":"${@e.is_order_selected}"
         },
         {
           "code":"edit_richtext",
@@ -199,7 +201,8 @@
               "code":"shipping_order",
               "type":"current_row"
             }
-          ]
+          ],
+          "enable_condition":"${@e.is_order_selected}"
         }
       ]
     },
