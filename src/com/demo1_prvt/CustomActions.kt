@@ -10,8 +10,12 @@ import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.table.RowID
 import com.dolmen.serv.table.Table
+import com.dolmen.ui.Resource
+import com.dolmen.ui.screen.*
 import com.dolmenmod.mail.Mail
 import java.time.OffsetDateTime
+import java.util.*
+import kotlin.collections.set
 
 
 class CustomActions(val m: Demo1) {
@@ -108,5 +112,65 @@ class CustomActions(val m: Demo1) {
                         "name" to "Created at ${OffsetDateTime.now()}"))
                 .id
         GuiModule.set("@e", mapOf("cityNewId" to cityId))
+    }
+
+    fun getRichTextPopupScreen(originalScrId: String?, scrId: String, args: Array<out String>?): String? {
+        var tableName = ""
+        var fieldName = ""
+        var rowId = ""
+        if (args?.size == 3) {
+            tableName = args[0]
+            fieldName = args[1]
+            rowId = args[2]
+        }
+        val scr = Screen(Resource.STORE_TYPE.STD)
+        with(scr) {
+            code = scrId
+            label = fieldName
+            grid = Grid().apply {
+                base = "screen"
+                cols = 1
+                rows = 1
+            }
+            val ds = DataSource()
+            ds.code = "ds_o"
+            ds.table_name = tableName
+            ds.generateFields(this)
+            ds.operations = LinkedHashMap()
+
+            ds.operations["select"] = Operation().apply {
+                request = Request()
+                request.data = ActionData()
+                request.data.action = "demo1_prvt.selectList"
+                request.data.args = mapOf("tableName" to tableName, "filter" to listOf("id=$rowId"))
+            }
+
+            ds.operations["update"] = Operation().apply {
+                request = Request()
+                request.data = ActionData()
+                request.data.action = "demo1_prvt.update"
+                request.data.args = mapOf("tableName" to tableName, "fields" to "\${@all_fields}")
+            }
+
+            data_sources = arrayListOf(ds)
+
+            val part = Part().apply {
+                code = "p_main"
+                type = "text"
+                data_source = PartDataSource()
+                data_source.code = ds.code
+                position = Position()
+                position.from_col = 1
+                position.to_col = 1
+                position.from_row = 1
+                position.to_row = 1
+                data_source = PartDataSource()
+                data_source.code = "ds_o"
+                data_source.fields = arrayListOf(PartField().apply { code = fieldName })
+                data_source.actions = arrayListOf("select", "update")
+            }
+            parts = arrayListOf(part)
+        }
+        return scr.toPreparedJson()
     }
 }

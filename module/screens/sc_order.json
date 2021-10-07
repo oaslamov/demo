@@ -179,6 +179,27 @@
               "type":"current_row"
             }
           ]
+        },
+        {
+          "code":"edit_richtext",
+          "data_scope":"row",
+          "icon":"fas fa-edit",
+          "request":{
+            "data":{
+              "action":"gui.goScreen",
+              "args":{
+                "screenId":"dyn:richtext_popup:demo1_prvt.shipping_order:comment:${id}:scr@demo1_prvt",
+                "args":"",
+                "mode":"popup"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"shipping_order",
+              "type":"current_row"
+            }
+          ]
         }
       ]
     },
@@ -953,7 +974,10 @@
                 "code":"shipping_order",
                 "fields":[
                   {
-                    "code":"comment"
+                    "code":"comment",
+                    "actions":[
+                      "edit_richtext"
+                    ]
                   }
                 ],
                 "operations":[

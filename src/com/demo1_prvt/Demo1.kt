@@ -147,9 +147,11 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     override fun x_getDynScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {
-        if (scrId == "ref_picker:scr@demo1_prvt")
-            return RefLookup(this).getChooseCustomerScreen(originalScrId, scrId, args)
-        return null
+        return when (scrId) {
+            "ref_picker:scr@demo1_prvt" -> RefLookup(this).getChooseCustomerScreen(originalScrId, scrId, args)
+            "richtext_popup:scr@demo1_prvt" -> CustomActions(this).getRichTextPopupScreen(originalScrId, scrId, args)
+            else -> null
+        }
     }
 
     override fun x_installed(modulePreviousVersionId: Int) {
