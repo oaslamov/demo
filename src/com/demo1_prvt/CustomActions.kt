@@ -103,7 +103,7 @@ class CustomActions(val m: Demo1) {
         }
     }
 
-    fun getRichTextPopupScreen(originalScrId: String?, scrId: String, args: Array<out String>?): String? {
+    fun getRichTextPopupScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {
         var tableName = ""
         var fieldName = ""
         var rowId = ""
