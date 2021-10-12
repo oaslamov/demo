@@ -357,12 +357,6 @@
       }
     }
   ],
-  "expressions":[
-    {
-      "code":"cityNewId",
-      "type":"string"
-    }
-  ],
   "parts":[
     {
       "code":"p_tree",
