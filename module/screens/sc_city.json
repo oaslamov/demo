@@ -354,7 +354,23 @@
             }
           }
         }
-      }
+      },
+      "actions":[
+        {
+          "code":"testAltCtrl",
+          "label":"$l{TestAltCtrl}l",
+          "data_scope":"row",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.testAltCtrl",
+              "args":{
+                "isAltPressed":"${@special.altkey}",
+                "isCtrlPressed":"${@special.ctrlkey}"
+              }
+            }
+          }
+        }
+      ]
     }
   ],
   "parts":[
@@ -406,6 +422,9 @@
           "insert",
           "update",
           "delete"
+        ],
+        "actions":[
+          "testAltCtrl"
         ]
       },
       "view_condition":"${main_tree.parent_id}!=null"

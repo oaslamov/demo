@@ -3,6 +3,7 @@ package com.demo1_prvt
 import com.demo1_prvt.filler.CityFiller
 import com.demo1_prvt.filler.ProductFiller
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.ActionType
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
@@ -138,6 +139,12 @@ class Demo1 : Demo1_PrvtModuleBase() {
     fun uploadNewFile(infoFields: Map<String?, Any?>?, dataTableName: String, filename: String,
                       fileTimeMillis: Long, data: ByteArray?) {
         CustomActions(this).uploadNewFile(infoFields, dataTableName, filename, fileTimeMillis, data)
+    }
+
+    @Description("Tests alt, ctrl keys")
+    @Parameters("isAltPressed","isCtrlPressed","special")
+    fun testAltCtrl(isAltPressed:Boolean, isCtrlPressed:Boolean){
+        Txt.info("With Alt == $isAltPressed, with Ctrl == $isCtrlPressed").msg()
     }
 
     override fun x_getDynScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {

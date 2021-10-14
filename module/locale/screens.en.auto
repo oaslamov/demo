@@ -82,6 +82,7 @@ Analyze=Analyze
 
 //-- sc_city:scr@demo1_prvt --
 City=City
+TestAltCtrl=TestAltCtrl
 
 //-- sc_decor_test_card:scr@demo1_prvt --
 "Decor Test Card"=Decor Test Card
