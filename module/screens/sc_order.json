@@ -90,7 +90,8 @@
               "action":"demo1_prvt.selectList",
               "args":{
                 "filter":[
-                  "${@user_filter}"
+                  "${@user_filter}",
+                  "${@screen.filter}"
                 ],
                 "tablename":"demo1_prvt.shipping_order"
               }

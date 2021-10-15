@@ -1,0 +1,16 @@
+{
+  "code":"sc_recent_orders:scr@demo1_prvt",
+  "label":"$l{Recent orders}l",
+  "subject":"$l{Demo1}l/$l{Order}l",
+  "title":"$l{Recent orders}l - $l{Order}l # ${shipping_order.id}",
+  "sort_order":"Z30.3",
+  "redirect":{
+    "code":"sc_order:scr@demo1_prvt",
+    "args":[
+      {
+        "code":"filter",
+        "value":"datetime_order_placed>=trunc(now()-30)"
+      }
+    ]
+  }
+}
