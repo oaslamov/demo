@@ -142,8 +142,8 @@ class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     @Description("Tests alt, ctrl keys")
-    @Parameters("isAltPressed","isCtrlPressed","special")
-    fun testAltCtrl(isAltPressed:Boolean, isCtrlPressed:Boolean){
+    @Parameters("isAltPressed", "isCtrlPressed")
+    fun testAltCtrl(isAltPressed: Boolean, isCtrlPressed: Boolean) {
         Txt.info("With Alt == $isAltPressed, with Ctrl == $isCtrlPressed").msg()
     }
 
