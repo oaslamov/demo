@@ -16,7 +16,7 @@ import com.dolmen.util.Text
 import java.time.LocalDate
 
 
-class Demo1 : Demo1_PrvtModuleBase() {
+open class Demo1 : Demo1_PrvtModuleBase() {
     var isLoadingSampleData = false
 
     @Description("My Action")
