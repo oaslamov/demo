@@ -1,4 +1,4 @@
-package com.demo1_prvt.filler
+package com.dlmdemo.demo1_prvt.filler
 
 import com.dolmen.md.demo1_prvt.Decor_Product_Decor
 import com.dolmen.md.demo1_prvt.Product

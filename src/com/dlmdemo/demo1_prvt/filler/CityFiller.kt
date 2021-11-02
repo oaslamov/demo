@@ -1,6 +1,6 @@
-package com.demo1_prvt.filler
+package com.dlmdemo.demo1_prvt.filler
 
-import com.demo1_prvt.Demo1
+import com.dlmdemo.demo1_prvt.Demo1
 import com.dolmen.md.demo1_prvt.City
 import com.dolmen.md.demo1_prvt.Country
 import com.dolmen.md.demo1_prvt.Subcountry

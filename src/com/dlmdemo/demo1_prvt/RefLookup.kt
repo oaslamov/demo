@@ -1,4 +1,4 @@
-package com.demo1_prvt
+package com.dlmdemo.demo1_prvt
 
 import com.dolmen.ui.Resource
 import com.dolmen.ui.screen.*

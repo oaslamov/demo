@@ -1,7 +1,7 @@
-package com.demo1_prvt
+package com.dlmdemo.demo1_prvt
 
-import com.demo1_prvt.filler.CityFiller
-import com.demo1_prvt.filler.ProductFiller
+import com.dlmdemo.demo1_prvt.filler.CityFiller
+import com.dlmdemo.demo1_prvt.filler.ProductFiller
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.ActionType
