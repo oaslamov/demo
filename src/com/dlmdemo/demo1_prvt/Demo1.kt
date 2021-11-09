@@ -27,7 +27,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
 
     @Description("Shows customers' orders summary")
     @Parameters("customerFilter: String")
-    fun action1(customerFilter: String) {
+    open fun action1(customerFilter: String) {
         CustomActions(this).action1(customerFilter)
     }
 

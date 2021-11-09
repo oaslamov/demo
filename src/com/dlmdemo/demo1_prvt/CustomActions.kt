@@ -16,10 +16,10 @@ import java.util.*
 import kotlin.collections.set
 
 
-class CustomActions(val m: Demo1) {
+open class CustomActions(val m: Demo1) {
     @Description("Shows customers' orders summary")
     @Parameters("customerFilter: String")
-    fun action1(customerFilter: String) {
+    open fun action1(customerFilter: String) {
         val product = m.selectMap(Product.fId, "")
         var n0 = 0
         m.iterate<Customer>(customerFilter) { c ->
