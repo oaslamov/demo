@@ -6,6 +6,9 @@
   "privateIID":8319101,
   "lang":"en",
   "version":2,
+  "required":{
+    "mail":""
+  },
   "details":{
     "company":"Dolmen",
     "category":"test"
