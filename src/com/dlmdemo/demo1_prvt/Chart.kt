@@ -6,6 +6,7 @@ import com.dolmen.serv.anno.Parameters
 import com.dolmen.util.JSONManager
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
+import java.math.RoundingMode
 import java.time.temporal.IsoFields
 
 data class Legend(val code: String, val name: String, val type: String, val color: String? = null)
@@ -173,7 +174,8 @@ class ChartManager(val m: Demo1) {
         c.legends.addAll(ct.map { Legend(it, it, "number") })
         c.data.addAll(orders.map { o ->
             mapOf("x" to o.key.period,
-                    o.key.country to (BigDecimal(100) * o.value.sum / periodSums[o.key.period]?.sum!!).toString())
+                    o.key.country to (BigDecimal(100) * o.value.sum / periodSums[o.key.period]?.sum!!)
+                            .setScale(2, RoundingMode.HALF_UP).toString())
         })
         return c.getJSON()
     }
