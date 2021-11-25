@@ -1,6 +1,7 @@
 package com.dlmdemo.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.serv.CONST.MAX_SCALE
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.util.JSONManager
@@ -145,39 +146,47 @@ class ChartManager(val m: Demo1) {
 
     @Description("Prepares JSON for Percentage of sales by country chart")
     fun getChartSalesPercentageByCountry(): String {
-        data class Accum(val count: Int, val sum: BigDecimal)
-        data class Group(val period: String, val country: String)
+        data class OrderData(val period: String, val country: String, val sum: BigDecimal)
 
         val customers = m.selectMap(Customer.fId, "")
         val countries = m.selectMap(Country.fId, "")
-        val orders = m.selectMap(Shipping_Order.fId, "").values
-                .groupingBy { o ->
+        val ct = mutableListOf<String>()
+        val ordersAggr = m.selectMap(Shipping_Order.fId, "").values
+                .map { o ->
                     val d = o.date_Order_Paid
+                    val p = if (d != null) "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}" else "-1"
                     val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
-                    if (d != null)
-                        Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
-                    else Group("-1", c)
+                    if (c !in ct) ct.add(c)
+                    val s = o.total ?: ZERO
+                    OrderData(period = p, country = c, sum = s)
                 }
-                .fold(Accum(count = 0, sum = ZERO)) { acc, e ->
-                    Accum(acc.count + 1, acc.sum + (e.total ?: ZERO))
+                .filterNot { it.period == "-1" }
+                .groupBy { it.period }
+                .mapValues {
+                    it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum }
                 }
-                .filterKeys { it.period != "-1" }
-                .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
-        val periodSums = orders.toList()
-                .groupingBy { it.first.period }
-                .fold(Accum(count = 0, sum = ZERO)) { acc, e ->
-                    Accum(acc.count + 1, acc.sum + e.second.sum)
-                }
-        val ct = orders.map { it.key.country }.distinct()
+                .toSortedMap(compareBy<String> { it })
+
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "Period", type = "string"))
-        c.legends.addAll(ct.map { Legend(it, it, "number") })
-        c.data.addAll(orders.map { o ->
-            mapOf("x" to o.key.period,
-                    o.key.country to (BigDecimal(100) * o.value.sum / periodSums[o.key.period]?.sum!!)
-                            .setScale(2, RoundingMode.HALF_UP).toString())
-        })
+        c.legends.addAll(ct.sorted().map { Legend(it, it, "number") })
+
+        ordersAggr.forEach { o ->
+            val x = o.value.toList().sortedBy { (_, value) -> value }.toMap()
+            var sum = BigDecimal("100").setScale(MAX_SCALE) // Distribute 100 percents proportionally
+            var q = x.values.sumOf { it } // Sales total for this period
+            val roundTo = BigDecimal("0.2").setScale(MAX_SCALE)
+            x.forEach { p ->
+                val v = p.value
+                val w = sum / q
+                val result = roundTo * (w * v / roundTo).setScale(0, RoundingMode.HALF_UP)
+                c.data.add(mapOf(
+                        "x" to o.key,
+                        p.key to result.toString()))
+                sum -= result
+                q -= v
+            }
+        }
         return c.getJSON()
     }
-
 }
