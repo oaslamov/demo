@@ -156,11 +156,11 @@ class ChartManager(val m: Demo1) {
                     val d = o.date_Order_Paid
                     val p = if (d != null) "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}" else "-1"
                     val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
-                    if (c !in ct) ct.add(c)
+                    if (c !in ct && d!=null) ct.add(c)
                     val s = o.total ?: ZERO
                     OrderData(period = p, country = c, sum = s)
                 }
-                .filterNot { it.period == "-1" }
+                .filter { it.period != "-1" }
                 .groupBy { it.period }
                 .mapValues {
                     it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum }
