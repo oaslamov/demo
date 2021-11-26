@@ -115,7 +115,6 @@ class ChartManager(val m: Demo1) {
 
     @Description("Prepares JSON for Sales by country chart")
     fun getChartSalesByCountry(): String {
-        data class Accum(val count: Int, val sum: BigDecimal)
         data class Group(val period: String, val country: String)
 
         val customers = m.selectMap(Customer.fId, "")
@@ -128,9 +127,7 @@ class ChartManager(val m: Demo1) {
                         Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
                     else Group("-1", c)
                 }
-                .fold(Accum(count = 0, sum = ZERO)) { acc, e ->
-                    Accum(acc.count + 1, acc.sum + (e.total ?: ZERO))
-                }
+                .fold(ZERO) { acc, e -> acc + (e.total ?: ZERO) }
                 .filterKeys { it.period != "-1" }
                 .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
         val ct = orders.map { it.key.country }.distinct()
@@ -139,7 +136,7 @@ class ChartManager(val m: Demo1) {
         c.legends.addAll(ct.map { Legend(it, it, "number") })
         c.data.addAll(orders.map { o ->
             mapOf("x" to o.key.period,
-                    o.key.country to o.value.sum.toString())
+                    o.key.country to o.value.toString())
         })
         return c.getJSON()
     }
