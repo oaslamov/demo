@@ -152,19 +152,18 @@ class ChartManager(val m: Demo1) {
         val countries = m.selectMap(Country.fId, "")
         val ct = mutableListOf<String>()
         val ordersAggr = m.selectMap(Shipping_Order.fId, "").values
-                .map { o ->
+                .mapNotNull { o ->
                     val d = o.date_Order_Paid
-                    val p = if (d != null) "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}" else "-1"
-                    val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
-                    if (c !in ct && d!=null) ct.add(c)
-                    val s = o.total ?: ZERO
-                    OrderData(period = p, country = c, sum = s)
+                    if (d != null) {
+                        val p = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
+                        val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
+                        if (c !in ct) ct.add(c)
+                        val s = o.total ?: ZERO
+                        OrderData(period = p, country = c, sum = s)
+                    } else null
                 }
-                .filter { it.period != "-1" }
                 .groupBy { it.period }
-                .mapValues {
-                    it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum }
-                }
+                .mapValues { it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum } }
                 .toSortedMap(compareBy<String> { it })
 
         val c = Chart()
@@ -175,14 +174,12 @@ class ChartManager(val m: Demo1) {
             val x = o.value.toList().sortedBy { (_, value) -> value }.toMap()
             var sum = BigDecimal("100").setScale(MAX_SCALE) // Distribute 100 percents proportionally
             var q = x.values.sumOf { it } // Sales total for this period
-            val roundTo = BigDecimal("0.2").setScale(MAX_SCALE)
+            val roundTo = BigDecimal("0.1")
             x.forEach { p ->
                 val v = p.value
                 val w = sum / q
                 val result = roundTo * (w * v / roundTo).setScale(0, RoundingMode.HALF_UP)
-                c.data.add(mapOf(
-                        "x" to o.key,
-                        p.key to result.toString()))
+                c.data.add(mapOf("x" to o.key, p.key to result.toString()))
                 sum -= result
                 q -= v
             }
