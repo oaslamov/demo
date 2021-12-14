@@ -62,6 +62,27 @@
           "label":"$l{f:7ef07d00700b}l",
           "type":"decor",
           "hint":"$l{f:7ef07d00700b:d}l"
+        },
+        {
+          "code":"shipping_from",
+          "label":"$l{f:7ef07d00700c}l",
+          "type":"id_list",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "filter":[
+                  "${@ref_filter}"
+                ],
+                "tablename":"Demo1_Prvt.Country"
+              },
+              "fields":[
+                "id",
+                "@name"
+              ]
+            }
+          },
+          "hint":"$l{f:7ef07d00700c:d}l"
         }
       ],
       "operations":{
@@ -127,7 +148,6 @@
         {
           "code":"openLink",
           "label":"$l{Open link}l",
-          "data_scope":"row",
           "request":{
             "data":{
               "action":"gui.goLink",
@@ -245,7 +265,6 @@
           "code":"upload",
           "label":"$l{Upload to this row}l",
           "type":"file_upload",
-          "data_scope":"row",
           "request":{
             "data":{
               "action":"common.upload",
@@ -275,7 +294,6 @@
         {
           "code":"download",
           "label":"$l{Download}l",
-          "data_scope":"row",
           "request":{
             "data":{
               "action":"common.download",
@@ -402,7 +420,6 @@
         {
           "code":"editDocument",
           "label":"$l{Edit document}l",
-          "data_scope":"row",
           "request":{
             "data":{
               "action":"gui.editDocument"
@@ -483,7 +500,7 @@
         "from_col":1,
         "to_col":100,
         "from_row":1,
-        "to_row":160
+        "to_row":120
       },
       "data_source":{
         "code":"ds_product",
@@ -603,6 +620,29 @@
         "row_template":"<header>\n<img style=\"object-fit:scale-down; height: 100%; width: 100%; padding: 1em;\" src=\"data:image/${img_frmt};base64,${img}\" onerror=\"this.style.display='none'\">\n</header>\n<script>\nds.getRows().forEach( row=> {\ndata.img=row.data\ndata.img_frmt=row[\"att_file:name\"].split('.').pop()\n})\n</script>"
       },
       "view_condition":"!${ds_doc_info.is_supported_file_type}"
+    },
+    {
+      "code":"p_shipping_from",
+      "type":"form",
+      "border_type":"none",
+      "position":{
+        "from_col":1,
+        "to_col":100,
+        "from_row":121,
+        "to_row":160
+      },
+      "data_source":{
+        "code":"ds_product",
+        "fields":[
+          {
+            "code":"shipping_from"
+          }
+        ],
+        "operations":[
+          "select",
+          "update"
+        ]
+      }
     }
   ]
 }
