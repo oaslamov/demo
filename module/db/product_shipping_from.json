@@ -4,11 +4,13 @@
     {
       "code":"product",
       "ref":"product",
+      "refDelete":"error",
       "@":"6:7"
     },
     {
       "code":"shipping_from",
       "ref":"country",
+      "refDelete":"error",
       "@":"8:9"
     }
   ],

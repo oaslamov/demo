@@ -33,8 +33,9 @@ class Populate(val m: Demo1) {
 
     @Description("Creates products")
     fun createProducts() {
-        //val pathIn = "/product.csv"
+        val maxShippingFrom = 4
         val maxPrice = 30
+        //val pathIn = "/product.csv"
         //val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
         val countries = m.selectMap(Country.fId, "")
         PRODUCT_DATASET.forEach { l ->
@@ -43,7 +44,7 @@ class Populate(val m: Demo1) {
                 price = ((Random.nextInt(maxPrice * 100) + 1) / 100.0).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
                 product_Type = Product.PRODUCT_TYPE.GROCERY
                 m.insert(this)
-                countries.keys.shuffled().take(Random.nextInt(countries.size) + 1)
+                countries.keys.shuffled().take(Random.nextInt(maxShippingFrom) + 1)
                     .forEach { countryId ->
                         val rel = Product_Shipping_From()
                         rel.product = this.id
@@ -87,6 +88,12 @@ class Populate(val m: Demo1) {
 
         //val pathIn = "/world-cities.csv"
         //val recs = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        COUNTRY_DATASET.forEach { countryName -> // Create countries without cities
+            Country().apply {
+                name = countryName
+                m.insert(this)
+            }
+        }
         val recs = CITY_DATASET
             .map { l ->
                 val rec = l.split(""",(?=(?:[^"]*"[^"]*")*[^"]*$)""".toRegex())
