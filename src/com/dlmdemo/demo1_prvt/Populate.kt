@@ -36,12 +36,20 @@ class Populate(val m: Demo1) {
         //val pathIn = "/product.csv"
         val maxPrice = 30
         //val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        val countries = m.selectMap(Country.fId, "")
         PRODUCT_DATASET.forEach { l ->
             Product().apply {
                 name = l.trim()
                 price = ((Random.nextInt(maxPrice * 100) + 1) / 100.0).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
                 product_Type = Product.PRODUCT_TYPE.GROCERY
                 m.insert(this)
+                countries.keys.shuffled().take(Random.nextInt(countries.size) + 1)
+                    .forEach { countryId ->
+                        val rel = Product_Shipping_From()
+                        rel.product = this.id
+                        rel.shipping_From = countryId
+                        m.insert(rel)
+                    }
             }
         }
         Txt.info("Created ${PRODUCT_DATASET.size} products").msg()
@@ -52,8 +60,9 @@ class Populate(val m: Demo1) {
         //val pathIn = "/customer.csv"
         val customersPerCountry = 500
         val countries = m.selectMap(
-                Country.fId, "name in ('Australia', 'Canada', 'United Kingdom', 'United States') order by name")
-                .toList().sortedBy { it.second.name }
+            Country.fId, "name in ('Australia', 'Canada', 'United Kingdom', 'United States') order by name"
+        )
+            .toList().sortedBy { it.second.name }
         //val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
         CUSTOMER_DATASET.forEachIndexed { i, l ->
             val rec = l.split(",").toTypedArray()
@@ -79,15 +88,17 @@ class Populate(val m: Demo1) {
         //val pathIn = "/world-cities.csv"
         //val recs = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
         val recs = CITY_DATASET
-                .map { l ->
-                    val rec = l.split(""",(?=(?:[^"]*"[^"]*")*[^"]*$)""".toRegex())
-                    Rec(city = rec[0].replace("\"", "").take(CONST.MAX_STRING_CHARS),
-                            country = rec[1].replace("\"", "").take(CONST.MAX_STRING_CHARS),
-                            subcountry = rec[2].replace("\"", "").take(CONST.MAX_STRING_CHARS),
-                            geonameid = rec[3].take(CONST.MAX_STRING_CHARS))
-                }
-                .groupBy { it.country }
-                .mapValues { r -> r.value.groupBy { it.subcountry } }
+            .map { l ->
+                val rec = l.split(""",(?=(?:[^"]*"[^"]*")*[^"]*$)""".toRegex())
+                Rec(
+                    city = rec[0].replace("\"", "").take(CONST.MAX_STRING_CHARS),
+                    country = rec[1].replace("\"", "").take(CONST.MAX_STRING_CHARS),
+                    subcountry = rec[2].replace("\"", "").take(CONST.MAX_STRING_CHARS),
+                    geonameid = rec[3].take(CONST.MAX_STRING_CHARS)
+                )
+            }
+            .groupBy { it.country }
+            .mapValues { r -> r.value.groupBy { it.subcountry } }
         var n = 0
         recs.forEach { countryMap ->
             val countryId = Country().run { // Create a country and get its Id
@@ -138,7 +149,7 @@ class Populate(val m: Demo1) {
                 customer = customers[k].id
                 datetime_Order_Placed = OffsetDateTime.now().minusMinutes(Random.nextLong(maxPeriod))
                 date_Order_Paid = datetime_Order_Placed?.toLocalDate()?.plusDays(Random.nextLong(maxPaidAfter))
-                        ?.coerceAtMost(OffsetDateTime.now().toLocalDate())
+                    ?.coerceAtMost(OffsetDateTime.now().toLocalDate())
                 shipment_Date = datetime_Order_Placed?.toLocalDate()?.plusDays(Random.nextLong(maxShipmentAfter))
                 comment = makeOrderComment(customers[k])
                 m.insert(this)
@@ -176,10 +187,10 @@ class Populate(val m: Demo1) {
 
     private fun makeOrderComment(customer: Customer): String {
         fun mapLink(s: String?): String =
-                """<a href="https://maps.google.com/maps?q=$s" target="_blank" rel="noopener noreferrer">$s</a>"""
+            """<a href="https://maps.google.com/maps?q=$s" target="_blank" rel="noopener noreferrer">$s</a>"""
 
         fun searchLink(s: String?): String =
-                """<a href="https://www.google.com/search?q=$s" target="_blank" rel="noopener noreferrer">$s</a>"""
+            """<a href="https://www.google.com/search?q=$s" target="_blank" rel="noopener noreferrer">$s</a>"""
 
         with(customer) {
             return """
@@ -211,8 +222,10 @@ class Populate(val m: Demo1) {
         }
     }
 
-    fun mailingLabelHtml(name: String?, addressLine1: String?, addressLine2: String?,
-                         addressLine3: String?, country: String?): String {
+    fun mailingLabelHtml(
+        name: String?, addressLine1: String?, addressLine2: String?,
+        addressLine3: String?, country: String?
+    ): String {
         return """
             <p>
             <strong>${name?.toUpperCase()}</strong></br>
