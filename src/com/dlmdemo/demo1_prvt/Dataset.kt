@@ -6492,7 +6492,7 @@ val COUNTRY_DATASET = listOf(
     "Congo",
     "Congo, Democratic Republic of the",
     "Costa Rica",
-    "C?te d'Ivoire",
+    "Côte d'Ivoire",
     "Croatia",
     "Cuba",
     "Cyprus",
