@@ -1,0 +1,17 @@
+{
+  "code":"product_shipping_from",
+  "fields":[
+    {
+      "code":"product",
+      "ref":"product",
+      "@":"6:7"
+    },
+    {
+      "code":"shipping_from",
+      "ref":"country",
+      "@":"8:9"
+    }
+  ],
+  "@":"36",
+  "@e":"2kat_dd:3;6product:0;8shipping_from:0"
+}

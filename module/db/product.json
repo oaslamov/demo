@@ -46,6 +46,14 @@
       "type":"decor",
       "metatype":"function",
       "@":"11"
+    },
+    {
+      "code":"shipping_from",
+      "desc":"Can be shipped from these countries",
+      "multiref":{
+        "multitable":"product_shipping_from"
+      },
+      "@":"12"
     }
   ],
   "indexes":[
@@ -62,6 +70,6 @@
     }
   ],
   "@":"7",
-  "@e":"2kat_dd:3;6name:1;8product_type:1;9price:6;10url:1;11decor:19",
+  "@e":"2kat_dd:3;6name:1;8product_type:1;9price:6;10url:1;11decor:19;12shipping_from:22",
   "@d":"7price:6"
 }

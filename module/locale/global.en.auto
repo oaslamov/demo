@@ -112,6 +112,9 @@ e:7ef07d007008.G=Grocery
 f:7ef07d00700a=Url
 --  Decor
 f:7ef07d00700b=Decor
+--  Shipping From
+f:7ef07d00700c=Shipping From
+f:7ef07d00700c:d=Can be shipped from these countries
 
 // table Product Abc
 t:7ef07d01e000=Product Abc
@@ -134,6 +137,13 @@ f:7ef07d01e00e=ABC class
 e:7ef07d01e00e.A=A
 e:7ef07d01e00e.B=B
 e:7ef07d01e00e.C=C
+
+// table Product Shipping From
+t:7ef07d024000=Product Shipping From
+--  Product
+f:7ef07d024006=Product
+--  Shipping From
+f:7ef07d024008=Shipping From
 
 // table Shipping Order
 t:7ef07d008000=Shipping Order

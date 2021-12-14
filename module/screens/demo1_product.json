@@ -56,6 +56,27 @@
           "type":"string",
           "edit_condition":"false",
           "hint":"$l{f:7ef07d00700a:d}l"
+        },
+        {
+          "code":"shipping_from",
+          "label":"$l{f:7ef07d00700c}l",
+          "type":"id_list",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "tablename":"Demo1_Prvt.Country",
+                "filter":[
+                  "${@ref_filter}"
+                ]
+              },
+              "fields":[
+                "id",
+                "@name"
+              ]
+            }
+          },
+          "hint":"$l{f:7ef07d00700c:d}l"
         }
       ],
       "operations":{
@@ -121,7 +142,6 @@
         {
           "code":"openLink",
           "label":"$l{Open link}l",
-          "data_scope":"row",
           "request":{
             "data":{
               "action":"gui.goLink",
@@ -159,6 +179,9 @@
           {
             "code":"product_type",
             "width":"10%"
+          },
+          {
+            "code":"shipping_from"
           },
           {
             "code":"url",
