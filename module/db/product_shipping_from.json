@@ -12,6 +12,18 @@
       "@":"8:9"
     }
   ],
+  "indexes":[
+    {
+      "fields":[
+        "product"
+      ]
+    },
+    {
+      "fields":[
+        "shipping_from"
+      ]
+    }
+  ],
   "@":"36",
   "@e":"2kat_dd:3;6product:0;8shipping_from:0"
 }
