@@ -108,7 +108,8 @@
             "code":"align"
           },
           {
-            "code":"formatting"
+            "code":"formatting",
+            "query":false
           },
           {
             "code":"style"
