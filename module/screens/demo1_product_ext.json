@@ -436,7 +436,22 @@
         {
           "code":"att_file",
           "label":"$l{f:7ef07d022006}l",
-          "type":"string",
+          "type":"ref",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "tablename":"Demo1_Prvt.Att_File",
+                "filter":[
+                  "${@ref_filter}"
+                ]
+              },
+              "fields":[
+                "id",
+                "@name"
+              ]
+            }
+          },
           "hint":"$l{f:7ef07d022006:d}l"
         },
         {
