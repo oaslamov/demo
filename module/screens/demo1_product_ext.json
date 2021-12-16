@@ -436,22 +436,7 @@
         {
           "code":"att_file",
           "label":"$l{f:7ef07d022006}l",
-          "type":"ref",
-          "ref":{
-            "data":{
-              "action":"demo1_prvt.selectList",
-              "args":{
-                "filter":[
-                  "${@ref_filter}"
-                ],
-                "tablename":"Demo1_Prvt.Att_File"
-              },
-              "fields":[
-                "id",
-                "@name"
-              ]
-            }
-          },
+          "type":"string",
           "hint":"$l{f:7ef07d022006:d}l"
         },
         {
@@ -506,7 +491,8 @@
         "code":"ds_product",
         "fields":[
           {
-            "code":"decor"
+            "code":"decor",
+            "query":false
           },
           {
             "code":"name",
