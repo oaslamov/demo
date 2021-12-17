@@ -130,7 +130,7 @@ class ChartManager(val m: Demo1) {
                 .fold(ZERO) { acc, e -> acc + (e.total ?: ZERO) }
                 .filterKeys { it.period != "-1" }
                 .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
-        val ct = orders.map { it.key.country }.distinct()
+        val ct = orders.map { it.key.country }.distinct().sorted()
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "Period", type = "string"))
         c.legends.addAll(ct.map { Legend(it, it, "number") })
