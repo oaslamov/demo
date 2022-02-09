@@ -10,7 +10,7 @@ label=Установка демо-модуля
     - Подождать, когда закончится  Indexing JDK 12
     - **Build | Configure dolmen project**
     - удалить `module/module_mymodule.json`
-    - удалить `src/com/mypackage`
+    - удалить `src/com/mycompany/mymodule`
     - удалить `module.conf`
     - **VCS(Git) | enable Version Control Integration | Git**
     - **VCS(Git) | manage remotes,** добавить `https://github.com/oaslamov/demo.git`
