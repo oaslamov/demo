@@ -176,6 +176,8 @@ f:7ef07d009011=Price
 f:7ef07d009012=Sum
 --  Comment
 f:7ef07d00900b=Comment
+--  Item Order
+f:7ef07d009013=Item Order
 
 // table Subcountry
 t:7ef07d00e000=Subcountry

@@ -135,7 +135,6 @@
       "actions":[
         {
           "code":"choose_customer",
-          "data_scope":"row",
           "icon":"fas fa-search",
           "request":{
             "data":{
@@ -162,7 +161,6 @@
         {
           "code":"edit_comment",
           "label":"$l{Edit comment}l",
-          "data_scope":"row",
           "request":{
             "data":{
               "action":"gui.goScreen",
@@ -185,7 +183,6 @@
         },
         {
           "code":"edit_richtext",
-          "data_scope":"row",
           "icon":"fas fa-edit",
           "request":{
             "data":{
@@ -289,6 +286,13 @@
           "edit_condition":"false",
           "hint":"$l{f:7ef07d009012:d}l",
           "placeholder":"$l{Auto calculate}l"
+        },
+        {
+          "code":"item_order",
+          "label":"$l{f:7ef07d009013}l",
+          "type":"float64",
+          "edit_condition":"false",
+          "hint":"$l{f:7ef07d009013:d}l"
         }
       ],
       "operations":{
@@ -436,6 +440,54 @@
             }
           ],
           "enable_condition":"${@e.is_order_selected}"
+        },
+        {
+          "code":"up",
+          "label":"$l{Up}l",
+          "type":"update",
+          "icon":"fas fa-arrow-up",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.updateRowOrder",
+              "args":{
+                "isFast":"${@special.ctrlkey}",
+                "query":"shipping_order=${shipping_order.id}",
+                "orderFieldName":"item_order",
+                "fields":"${@all_fields}",
+                "isDown":"false",
+                "tableName":"demo1_prvt.shipping_order_product"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "type":"all_rows"
+            }
+          ]
+        },
+        {
+          "code":"down",
+          "label":"$l{Down}l",
+          "type":"update",
+          "icon":"fas fa-arrow-down",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.updateRowOrder",
+              "args":{
+                "isFast":"${@special.ctrlkey}",
+                "query":"shipping_order=${shipping_order.id}",
+                "orderFieldName":"item_order",
+                "fields":"${@all_fields}",
+                "isDown":"true",
+                "tableName":"demo1_prvt.shipping_order_product"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "type":"all_rows"
+            }
+          ]
         }
       ]
     },
@@ -570,7 +622,6 @@
         {
           "code":"ac_c_det",
           "label":"$l{Details}l",
-          "data_scope":"row",
           "request":{
             "data":{
               "action":"gui.goScreen",
@@ -593,7 +644,6 @@
         },
         {
           "code":"internetSearch",
-          "data_scope":"row",
           "icon":"fab fa-google",
           "request":{
             "data":{
@@ -608,7 +658,6 @@
         },
         {
           "code":"mapSearch",
-          "data_scope":"row",
           "icon":"fas fa-search-location",
           "request":{
             "data":{
@@ -740,6 +789,16 @@
           {
             "code":"comment",
             "view":"t"
+          },
+          {
+            "code":"item_order",
+            "query":false,
+            "view_condition":"false"
+          }
+        ],
+        "order":[
+          {
+            "field":"item_order"
           }
         ],
         "operations":[
@@ -751,7 +810,9 @@
         ],
         "actions":[
           "new_item",
-          "edit_items"
+          "edit_items",
+          "up",
+          "down"
         ]
       }
     },

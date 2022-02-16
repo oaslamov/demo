@@ -99,6 +99,7 @@ Save=Save
 Comment=Comment
 Contacts=Contacts
 Details=Details
+Down=Down
 "Edit comment"=Edit comment
 "Edit items"=Edit items
 "Get price from Product table if blank"=Get price from Product table if blank
@@ -107,6 +108,7 @@ Details=Details
 "Order summary"=Order summary
 "Search in Google"=Search in Google
 "Show on Google Maps"=Show on Google Maps
+Up=Up
 
 //-- sc_recent_orders:scr@demo1_prvt --
 "Recent orders"=Recent orders

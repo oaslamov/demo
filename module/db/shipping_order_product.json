@@ -33,6 +33,12 @@
     {
       "code":"comment",
       "@":"11"
+    },
+    {
+      "code":"item_order",
+      "type":"float64",
+      "value":"999999",
+      "@":"19"
     }
   ],
   "indexes":[
@@ -63,6 +69,6 @@
     }
   ],
   "@":"9",
-  "@e":"2kat_dd:3;6shipping_order:0;8product:0;10quantity:3;11comment:1;17price:6;18sum:6",
+  "@e":"2kat_dd:3;6shipping_order:0;8product:0;10quantity:3;11comment:1;17price:6;18sum:6;19item_order:15",
   "@d":"15i_price:6;16i_sum:6;13item_price:1;14item_sum:1;12deleteme:1"
 }
