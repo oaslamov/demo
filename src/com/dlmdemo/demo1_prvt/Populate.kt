@@ -170,6 +170,8 @@ class Populate(val m: Demo1) {
     private fun Shipping_Order.genItems(n: Int, products: List<Product>, maxQuantity: Int) {
         val maxProduct = products.size
         val itemsIDs = mutableListOf<RowID>()
+        var prevItemOrder = 0.0
+        val itemOrderStep = 2000.0
         repeat(n) {
             Shipping_Order_Product().apply { // Create an item
                 var p: Product
@@ -185,6 +187,8 @@ class Populate(val m: Demo1) {
                 quantity = Random.nextInt(maxQuantity) + 1
                 price = p.price
                 sum = price?.times(quantity.toBigDecimal())
+                item_Order = prevItemOrder + itemOrderStep
+                prevItemOrder = item_Order
                 m.insert(this)
                 total = (total ?: ZERO) + (sum ?: ZERO)
             }

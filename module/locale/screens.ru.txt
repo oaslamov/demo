@@ -121,6 +121,8 @@ Id=Код
 "Search in Google"=Найти в Google
 "Show on Google Maps"=Показать на Google Maps
 "Opens in a popup window"=Откроется во всплывающем окне
+Down=Вниз
+Up=Вверх
 
 //-- sc_recent_orders:scr@demo1_prvt --
 "Recent orders"=Недавние заказы
