@@ -119,7 +119,6 @@
         {
           "code":"add",
           "label":"$l{Add this product to order}l",
-          "data_scope":"row",
           "request":{
             "data":{
               "action":"demo1_prvt.insert",
@@ -281,6 +280,13 @@
           "type":"number",
           "edit_condition":"false",
           "hint":"$l{f:7ef07d009012:d}l"
+        },
+        {
+          "code":"item_order",
+          "label":"$l{f:7ef07d009013}l",
+          "type":"float64",
+          "edit_condition":"false",
+          "hint":"$l{f:7ef07d009013:d}l"
         }
       ],
       "operations":{
@@ -319,7 +325,57 @@
             }
           }
         }
-      }
+      },
+      "actions":[
+        {
+          "code":"up",
+          "label":"$l{Up}l",
+          "type":"update",
+          "icon":"fas fa-arrow-up",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.updateRowOrder",
+              "args":{
+                "isFast":"${@special.ctrlkey}",
+                "query":"shipping_order=${@screen.order_id}",
+                "orderFieldName":"item_order",
+                "fields":"${@all_fields}",
+                "isDown":"false",
+                "tableName":"demo1_prvt.shipping_order_product"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "type":"all_rows"
+            }
+          ]
+        },
+        {
+          "code":"down",
+          "label":"$l{Down}l",
+          "type":"update",
+          "icon":"fas fa-arrow-down",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.updateRowOrder",
+              "args":{
+                "isFast":"${@special.ctrlkey}",
+                "query":"shipping_order=${@screen.order_id}",
+                "orderFieldName":"item_order",
+                "fields":"${@all_fields}",
+                "isDown":"true",
+                "tableName":"demo1_prvt.shipping_order_product"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "type":"all_rows"
+            }
+          ]
+        }
+      ]
     }
   ],
   "parts":[
@@ -385,12 +441,26 @@
           {
             "code":"comment",
             "query":false
+          },
+          {
+            "code":"item_order",
+            "query":false,
+            "view_condition":"false"
+          }
+        ],
+        "order":[
+          {
+            "field":"item_order"
           }
         ],
         "operations":[
           "select",
           "update",
           "delete"
+        ],
+        "actions":[
+          "up",
+          "down"
         ]
       }
     },

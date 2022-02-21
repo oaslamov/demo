@@ -15,6 +15,8 @@ Charts=Charts
 Customer=Customer
 // screens: sc_analysis:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_city:scr@demo1_prvt sc_new_order_item:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt sc_decor_test_card:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt sc_recent_orders:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 Demo1=Demo1
+// screens: sc_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
+Down=Down
 // screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Id=Id
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt
@@ -25,6 +27,8 @@ Id=Id
 Order=Order
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
 Product=Product
+// screens: sc_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
+Up=Up
 
 //-- demo1_customer:scr@demo1_prvt --
 Phones=Phones
@@ -99,7 +103,6 @@ Save=Save
 Comment=Comment
 Contacts=Contacts
 Details=Details
-Down=Down
 "Edit comment"=Edit comment
 "Edit items"=Edit items
 "Get price from Product table if blank"=Get price from Product table if blank
@@ -108,7 +111,6 @@ Down=Down
 "Order summary"=Order summary
 "Search in Google"=Search in Google
 "Show on Google Maps"=Show on Google Maps
-Up=Up
 
 //-- sc_recent_orders:scr@demo1_prvt --
 "Recent orders"=Recent orders
