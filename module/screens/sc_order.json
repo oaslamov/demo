@@ -1039,10 +1039,7 @@
                 "code":"shipping_order",
                 "fields":[
                   {
-                    "code":"comment",
-                    "actions":[
-                      "edit_richtext"
-                    ]
+                    "code":"comment"
                   }
                 ],
                 "operations":[
