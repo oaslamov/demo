@@ -80,6 +80,13 @@ e:7ef07d01f00c.A=A
 e:7ef07d01f00c.B=B
 e:7ef07d01f00c.C=C
 
+// table Customer Category
+t:7ef07d025000=Customer Category
+--  Parent category
+f:7ef07d025006=Parent category
+--  Name
+f:7ef07d025008=Name
+
 // table Decor Test Card
 t:7ef07d023000=Decor Test Card
 --  Style

@@ -1,0 +1,22 @@
+{
+  "code":"customer_category",
+  "fields":[
+    {
+      "code":"category",
+      "label":"Parent category",
+      "ref":"customer_category",
+      "refDelete":"error",
+      "@":"6:7"
+    },
+    {
+      "code":"name",
+      "usage":"name",
+      "etc":{
+        "ignoreCase":true
+      },
+      "@":"8"
+    }
+  ],
+  "@":"37",
+  "@e":"2kat_dd:3;6category:0;8name:1"
+}
