@@ -56,6 +56,9 @@ Phone=Телефон
 // screens: sc_city:scr@demo1_prvt sc_new_city:scr@demo1_prvt
 "New city"=Новый город
 
+//-- sc_customer_category:scr@demo1_prvt --
+"Customer category"=Категория заказчика
+
 //-- demo1_product:scr@demo1_prvt --
 "Open link"=Открыть ссылку
 Product=Товар

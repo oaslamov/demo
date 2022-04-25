@@ -65,6 +65,8 @@ f:7ef07d00600c=Страна
 f:7ef07d00600e=Регион
 --  City
 f:7ef07d006010=Город
+--  Category
+f:7ef07d006016=Категория
 --  Mailing Label
 f:7ef07d006015=Почтовый ярлык
 
@@ -85,6 +87,13 @@ f:7ef07d01f00c=Класс ABC
 e:7ef07d01f00c.A=A
 e:7ef07d01f00c.B=B
 e:7ef07d01f00c.C=C
+
+// table Customer Category
+t:7ef07d025000=Категория заказчика
+--  Parent category
+f:7ef07d025006=Категория-родитель
+--  Name
+f:7ef07d025008=Наименование
 
 // table Product
 t:7ef07d007000=Товар
