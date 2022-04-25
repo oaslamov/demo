@@ -61,6 +61,8 @@ f:7ef07d00600c=Country
 f:7ef07d00600e=Subcountry
 --  City
 f:7ef07d006010=City
+--  Category
+f:7ef07d006016=Category
 
 // table Customer Abc
 t:7ef07d01f000=Customer Abc

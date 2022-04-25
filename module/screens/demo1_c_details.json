@@ -1,7 +1,6 @@
 {
   "code":"demo1_c_details:scr@demo1_prvt",
   "label":"$l{Customer details}l",
-  "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "show_in_menu":false,
   "args":[
@@ -117,11 +116,11 @@
             "data":{
               "action":"demo1_prvt.selectList",
               "args":{
-                "tablename":"Demo1_Prvt.Subcountry",
                 "filter":[
                   "${@ref_filter}",
                   "country=${ds_c.country}"
-                ]
+                ],
+                "tablename":"Demo1_Prvt.Subcountry"
               },
               "fields":[
                 "id",
@@ -134,6 +133,29 @@
           },
           "edit_condition":"false",
           "hint":"$l{f:7ef07d00600e:d}l"
+        },
+        {
+          "code":"category",
+          "label":"$l{f:7ef07d006016}l",
+          "type":"ref",
+          "format":"tree",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "tablename":"Demo1_Prvt.Customer_Category",
+                "filter":[
+                  "${@ref_filter}"
+                ]
+              },
+              "fields":[
+                "id",
+                "@name",
+                "@parent"
+              ]
+            }
+          },
+          "hint":"$l{f:7ef07d006016:d}l"
         }
       ],
       "operations":{
@@ -195,6 +217,9 @@
           },
           {
             "code":"address_line3"
+          },
+          {
+            "code":"category"
           },
           {
             "code":"country"

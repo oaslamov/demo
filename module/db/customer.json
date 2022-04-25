@@ -61,6 +61,12 @@
       "ref":"city",
       "refDelete":"error",
       "@":"16:17"
+    },
+    {
+      "code":"category",
+      "ref":"customer_category",
+      "refDelete":"error",
+      "@":"22:23"
     }
   ],
   "indexes":[
@@ -71,6 +77,6 @@
     }
   ],
   "@":"6",
-  "@e":"2kat_dd:3;6name:1;7phone:1;8address_line1:1;9address_line2:1;10address_line3:1;11mobile:1;12country:0;14subcountry:0;16city:0",
+  "@e":"2kat_dd:3;6name:1;7phone:1;8address_line1:1;9address_line2:1;10address_line3:1;11mobile:1;12country:0;14subcountry:0;16city:0;22category:0",
   "@d":"19first_name:1;20last_name:1;21mailing_label:2;18geo_city:0"
 }
