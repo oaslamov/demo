@@ -2,6 +2,7 @@
   "code":"sc_customer_category:scr@demo1_prvt",
   "label":"$l{Customer category}l",
   "subject":"$l{Demo1}l/$l{Customer}l",
+  "sort_order":"Z10.3",
   "trees":[
     "main_tree"
   ],

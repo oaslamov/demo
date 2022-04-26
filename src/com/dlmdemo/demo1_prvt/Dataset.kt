@@ -2003,6 +2003,15 @@ val CUSTOMER_DATASET = listOf(
     """Chauncey,Motley,63 E Aurora Dr,Orlando,FL,32804,407-413-4842,407-557-8857""",
 )
 
+val CUSTOMER_CATEGORY_DATASET = mapOf(
+    "Awesome" to listOf("Loyal", "Referral", "Advocate"),
+    "Good" to listOf("New", "Novice", "Active", "Repeat"),
+    "Bad" to listOf("At risk", "Lapsed", "Unhappy"),
+    "Prospects" to null,
+    "Suspects" to null,
+    "Leads" to null
+)
+
 val PRODUCT_DATASET = listOf(
     """Clams - Canned""",
     """Ostrich - Prime Cut""",

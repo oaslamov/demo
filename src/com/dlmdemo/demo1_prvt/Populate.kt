@@ -23,6 +23,7 @@ class Populate(val m: Demo1) {
             m.isLoadingSampleData = true
             Txt.info(m.MID("loading_sample_data")).msg()
             createCities()
+            createCustomerCategories()
             createCustomers()
             createProducts()
             genOrders(1000)
@@ -64,6 +65,7 @@ class Populate(val m: Demo1) {
             Country.fId, "name in ('Australia', 'Canada', 'United Kingdom', 'United States') order by name"
         )
             .toList().sortedBy { it.second.name }
+        val customerCategoryIds = m.selectMap(Customer_Category.fId, "").keys.toList()
         //val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
         CUSTOMER_DATASET.forEachIndexed { i, l ->
             val rec = l.split(",").toTypedArray()
@@ -74,12 +76,28 @@ class Populate(val m: Demo1) {
                 address_Line1 = rec[2]
                 address_Line2 = "${rec[3]}, ${rec[4]}"
                 address_Line3 = rec[5]
+                category = customerCategoryIds.random()
                 val countryPair = countries[(i - 1) / customersPerCountry]
                 country = countryPair.first
                 m.insert(this)
             }
         }
         Txt.info("Created ${CUSTOMER_DATASET.size} customers").msg()
+    }
+
+    @Description("Creates customer categories")
+    fun createCustomerCategories() {
+        CUSTOMER_CATEGORY_DATASET.forEach { (parentName, children) ->
+            val parentNode = Customer_Category()
+            parentNode.name = parentName
+            m.insert(parentNode)
+            children?.forEach { childName ->
+                val childNode = Customer_Category()
+                childNode.name = childName
+                childNode.category = parentNode.id
+                m.insert(childNode)
+            }
+        }
     }
 
     @Description("Creates countries, subcountries and cities")
