@@ -65,6 +65,7 @@ class Populate(val m: Demo1) {
             Country.fId, "name in ('Australia', 'Canada', 'United Kingdom', 'United States') order by name"
         )
             .toList().sortedBy { it.second.name }
+        val cities = m.selectMap(City.fId, "").values
         val customerCategoryIds = m.selectMap(Customer_Category.fId, "").keys.toList()
         //val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
         CUSTOMER_DATASET.forEachIndexed { i, l ->
@@ -79,6 +80,11 @@ class Populate(val m: Demo1) {
                 category = customerCategoryIds.random()
                 val countryPair = countries[(i - 1) / customersPerCountry]
                 country = countryPair.first
+                val ct = cities.find { (it.name == rec[3]) and (it.country == country) }
+                if (ct != null) {
+                    subcountry = ct.subcountry
+                    city = ct.id
+                }
                 m.insert(this)
             }
         }
