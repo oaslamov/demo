@@ -766,10 +766,7 @@
             "code":"shipment_date"
           },
           {
-            "code":"customer",
-            "actions":[
-              "select_customer"
-            ]
+            "code":"customer"
           }
         ],
         "operations":[
@@ -875,7 +872,10 @@
                 "code":"shipping_order",
                 "fields":[
                   {
-                    "code":"customer"
+                    "code":"customer",
+                    "actions":[
+                      "select_customer"
+                    ]
                   },
                   {
                     "code":"shipment_date"
