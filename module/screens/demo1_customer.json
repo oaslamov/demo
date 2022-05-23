@@ -25,6 +25,29 @@
           "hint":"$l{f:7ef07d006006:d}l"
         },
         {
+          "code":"category",
+          "label":"$l{f:7ef07d006016}l",
+          "type":"ref",
+          "format":"tree",
+          "ref":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "filter":[
+                  "${@ref_filter}"
+                ],
+                "tablename":"Demo1_Prvt.Customer_Category"
+              },
+              "fields":[
+                "id",
+                "@name",
+                "@parent"
+              ]
+            }
+          },
+          "hint":"$l{f:7ef07d006016:d}l"
+        },
+        {
           "code":"address_line1",
           "label":"$l{f:7ef07d006008}l",
           "type":"string",
@@ -181,7 +204,6 @@
         {
           "code":"act1",
           "label":"$l{Summary}l",
-          "data_scope":"row",
           "confirm":true,
           "request":{
             "data":{
@@ -212,6 +234,9 @@
           {
             "code":"name",
             "width":"40%"
+          },
+          {
+            "code":"category"
           },
           {
             "code":"fg_billing",
@@ -252,14 +277,17 @@
           },
           {
             "code":"country",
+            "group":"fg_address",
             "view":"e"
           },
           {
             "code":"subcountry",
+            "group":"fg_address",
             "view":"e"
           },
           {
             "code":"city",
+            "group":"fg_address",
             "view":"e"
           }
         ],
