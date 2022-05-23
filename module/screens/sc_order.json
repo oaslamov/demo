@@ -995,14 +995,17 @@
                   },
                   {
                     "code":"country",
+                    "group":"fg_a",
                     "view_condition":"${@e.show_city_info}"
                   },
                   {
                     "code":"subcountry",
+                    "group":"fg_a",
                     "view_condition":"${@e.show_city_info}"
                   },
                   {
                     "code":"city",
+                    "group":"fg_a",
                     "view_condition":"${@e.show_city_info}"
                   }
                 ],
