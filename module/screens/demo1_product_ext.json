@@ -156,6 +156,25 @@
               }
             }
           }
+        },
+        {
+          "code":"select_shipping_from",
+          "icon":"fas fa-search-plus",
+          "request":{
+            "data":{
+              "action":"gui.goScreen",
+              "args":{
+                "args":"",
+                "mode":"selector",
+                "screenId":"dyn:tab_view:Demo1_Prvt.Country:scr@std"
+              }
+            }
+          },
+          "target":{
+            "ds":"ds_product",
+            "field":"shipping_from",
+            "mode":"add"
+          }
         }
       ]
     },
@@ -632,7 +651,10 @@
         "code":"ds_product",
         "fields":[
           {
-            "code":"shipping_from"
+            "code":"shipping_from",
+            "actions":[
+              "select_shipping_from"
+            ]
           }
         ],
         "operations":[
