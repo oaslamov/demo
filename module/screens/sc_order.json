@@ -201,6 +201,26 @@
             }
           ],
           "enable_condition":"${@e.is_order_selected}"
+        },
+        {
+          "code":"select_customer",
+          "icon":"fas fa-search-plus",
+          "request":{
+            "data":{
+              "action":"gui.goScreen",
+              "args":{
+                "args":"",
+                "mode":"selector",
+                "screenId":"demo1_customer:scr@demo1_prvt"
+              }
+            }
+          },
+          "target":{
+            "ds":"shipping_order",
+            "field":"customer",
+            "mode":"replace"
+          },
+          "enable_condition":"${@e.is_order_selected}"
         }
       ]
     },
@@ -748,7 +768,7 @@
           {
             "code":"customer",
             "actions":[
-              "choose_customer"
+              "select_customer"
             ]
           }
         ],
