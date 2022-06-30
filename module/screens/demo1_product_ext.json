@@ -421,17 +421,26 @@
         "select":{
           "request":{
             "data":{
-              "action":"onlyoffice.selectList",
+              "action":"onlyoffice.getDocument",
               "args":{
-                "filter":[
-                  "doc_row_id=${ds_att_file.id} and assigned_field='demo1_prvt.att_file_data.data'"
-                ],
-                "tablename":"onlyoffice.doc_info"
+                "tableName":"demo1_prvt.att_file_data",
+                "fieldName":"data",
+                "docRowId":"${ds_att_file.id}"
               }
             },
             "dependencies":[
               "ds_att_file.id"
             ]
+          }
+        },
+        "update":{
+          "request":{
+            "data":{
+              "action":"onlyoffice.updateDocument",
+              "args":{
+                "tableName":"demo1_prvt.att_file_data"
+              }
+            }
           }
         }
       },
@@ -606,7 +615,8 @@
       "data_source":{
         "code":"ds_doc_info",
         "operations":[
-          "select"
+          "select",
+          "update"
         ],
         "actions":[
           "editDocument"
