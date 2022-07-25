@@ -137,8 +137,8 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     @ActionType("file_upload")
     @Priv(value = "update", tableParameterName = "dataTableName")
     fun uploadNewFile(infoFields: Map<String?, Any?>?, dataTableName: String, filename: String,
-                      fileTimeMillis: Long, data: ByteArray?) {
-        CustomActions(this).uploadNewFile(infoFields, dataTableName, filename, fileTimeMillis, data)
+                      fileTimeMillis: Long, data: ByteArray?): RowID? {
+        return CustomActions(this).uploadNewFile(infoFields, dataTableName, filename, fileTimeMillis, data)
     }
 
     @Description("Tests alt, ctrl keys")

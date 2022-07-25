@@ -343,6 +343,10 @@
               }
             }
           },
+          "target":{
+            "ds":"ds_att_file",
+            "mode":"select"
+          },
           "freshen":[
             {
               "code":"ds_att_file",
@@ -423,9 +427,9 @@
             "data":{
               "action":"onlyoffice.getDocument",
               "args":{
-                "tableName":"demo1_prvt.att_file_data",
                 "fieldName":"data",
-                "docRowId":"${ds_att_file.id}"
+                "docRowId":"${ds_att_file.id}",
+                "tableName":"demo1_prvt.att_file_data"
               }
             },
             "dependencies":[

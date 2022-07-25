@@ -7,12 +7,12 @@ import com.dolmen.serv.TableBinaryDataProvider
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
+import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
 import com.dolmen.serv.table.Table
 import com.dolmen.ui.Resource
 import com.dolmen.ui.screen.*
 import com.dolmenmod.mail.Mail
-import java.util.*
 import kotlin.collections.set
 
 
@@ -25,9 +25,13 @@ open class CustomActions(val m: Demo1) {
         m.iterate<Customer>(customerFilter) { c ->
             n0++
             Msg.create(Txt.info(m.MID("act1_c_header"), n0, c.name))
-                    .fullText(m.xtr("act1_c_header_det", n0, c.name, c.phone, c.mobile,
-                            listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()))
-                    .msg()
+                .fullText(
+                    m.xtr(
+                        "act1_c_header_det", n0, c.name, c.phone, c.mobile,
+                        listOfNotNull(c.address_Line1, c.address_Line2, c.address_Line3).joinToString()
+                    )
+                )
+                .msg()
             var n1 = 0
             m.iterate<Shipping_Order>("customer=${c.id}") { o ->
                 n1++
@@ -91,16 +95,20 @@ open class CustomActions(val m: Demo1) {
         mailer.send("Test sender<test@example.org>", subject, body, true, mailer.getPrefs(null), to)
     }
 
-    fun uploadNewFile(infoFields: Map<String?, Any?>?, dataTableName: String, filename: String,
-                      fileTimeMillis: Long, data: ByteArray?) {
+    fun uploadNewFile(
+        infoFields: Map<String?, Any?>?, dataTableName: String, filename: String,
+        fileTimeMillis: Long, data: ByteArray?
+    ): RowID? {
         val dataTableTT = Table.T(dataTableName)
         val tbd = dataTableTT.tableBinaryDataProvider
+        var infoRec: ITopTable? = null
         if (tbd == null) {
             throw BaseException(Txt.error("Cannnot upload: table \"$0\" is not a data table", dataTableTT))
         } else {
-            val infoRec = m.insert(tbd.infoTableType.name, infoFields)
+            infoRec = m.insert(tbd.infoTableType.name, infoFields)
             tbd.update(infoRec.id, data, filename, fileTimeMillis, TableBinaryDataProvider.MODE.UPDATE)
         }
+        return infoRec.id
     }
 
     fun getRichTextPopupScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {
