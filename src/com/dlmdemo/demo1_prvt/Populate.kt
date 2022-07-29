@@ -37,7 +37,7 @@ class Populate(val m: Demo1) {
         val maxShippingFrom = 4
         val maxPrice = 30
         val pathIn = "product.csv"
-        val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        val lines = readLines(pathIn)
         val countries = m.selectMap(Country.fId, "")
         lines.forEach { l ->
             Product().apply {
@@ -67,7 +67,7 @@ class Populate(val m: Demo1) {
             .toList().sortedBy { it.second.name }
         val cities = m.selectMap(City.fId, "").values
         val customerCategoryIds = m.selectMap(Customer_Category.fId, "").keys.toList()
-        val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        val lines = readLines(pathIn)
         lines.forEachIndexed { i, l ->
             val rec = l.split(",").toTypedArray()
             Customer().apply {
@@ -109,8 +109,9 @@ class Populate(val m: Demo1) {
     @Description("Creates countries, subcountries and cities")
     fun createCities() {
         data class Rec(val city: String, val country: String, val subcountry: String, val geonameid: String)
+
         val pathIn = "world-cities.csv"
-        val recs = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        val recs = readLines(pathIn)
             .map { l ->
                 val rec = l.split(""",(?=(?:[^"]*"[^"]*")*[^"]*$)""".toRegex())
                 Rec(
@@ -264,6 +265,7 @@ class Populate(val m: Demo1) {
         """.trimIndent()
     }
 
+    fun readLines(pathIn: String) = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
 }
 
 
