@@ -36,10 +36,10 @@ class Populate(val m: Demo1) {
     fun createProducts() {
         val maxShippingFrom = 4
         val maxPrice = 30
-        //val pathIn = "/product.csv"
-        //val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        val pathIn = "product.csv"
+        val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
         val countries = m.selectMap(Country.fId, "")
-        PRODUCT_DATASET.forEach { l ->
+        lines.forEach { l ->
             Product().apply {
                 name = l.trim()
                 price = ((Random.nextInt(maxPrice * 100) + 1) / 100.0).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
@@ -54,12 +54,12 @@ class Populate(val m: Demo1) {
                     }
             }
         }
-        Txt.info("Created ${PRODUCT_DATASET.size} products").msg()
+        Txt.info("Created ${lines.size} products").msg()
     }
 
     @Description("Creates customers")
     fun createCustomers() {
-        //val pathIn = "/customer.csv"
+        val pathIn = "customer.csv"
         val customersPerCountry = 500
         val countries = m.selectMap(
             Country.fId, "name in ('Australia', 'Canada', 'United Kingdom', 'United States') order by name"
@@ -67,8 +67,8 @@ class Populate(val m: Demo1) {
             .toList().sortedBy { it.second.name }
         val cities = m.selectMap(City.fId, "").values
         val customerCategoryIds = m.selectMap(Customer_Category.fId, "").keys.toList()
-        //val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
-        CUSTOMER_DATASET.forEachIndexed { i, l ->
+        val lines = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+        lines.forEachIndexed { i, l ->
             val rec = l.split(",").toTypedArray()
             Customer().apply {
                 name = "${rec[1]}, ${rec[0]}"
@@ -88,7 +88,7 @@ class Populate(val m: Demo1) {
                 m.insert(this)
             }
         }
-        Txt.info("Created ${CUSTOMER_DATASET.size} customers").msg()
+        Txt.info("Created ${lines.size} customers").msg()
     }
 
     @Description("Creates customer categories")
@@ -109,16 +109,8 @@ class Populate(val m: Demo1) {
     @Description("Creates countries, subcountries and cities")
     fun createCities() {
         data class Rec(val city: String, val country: String, val subcountry: String, val geonameid: String)
-
-        //val pathIn = "/world-cities.csv"
-        //val recs = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
-        COUNTRY_DATASET.forEach { countryName -> // Create countries without cities
-            Country().apply {
-                name = countryName
-                m.insert(this)
-            }
-        }
-        val recs = CITY_DATASET
+        val pathIn = "world-cities.csv"
+        val recs = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
             .map { l ->
                 val rec = l.split(""",(?=(?:[^"]*"[^"]*")*[^"]*$)""".toRegex())
                 Rec(
