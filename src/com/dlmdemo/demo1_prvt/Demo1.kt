@@ -22,6 +22,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     @Description("My Action")
     @Parameters("input: String")
     fun myAction(input: String): String {
+        Txt.info("Testing: $input").msg()
         return Text.F("\n-------------\nTest OK (input: $0)\n--------------", input)
     }
 

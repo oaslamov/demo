@@ -94,6 +94,7 @@ TestAltCtrl=TestAltCtrl
 "Available products"=Available products
 "Edit order items"=Edit order items
 "Items in this order"=Items in this order
+MyAction=MyAction
 
 //-- sc_new_order_item:scr@demo1_prvt --
 Cancel=Cancel

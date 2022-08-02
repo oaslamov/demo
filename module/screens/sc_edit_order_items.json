@@ -135,6 +135,20 @@
             }
           ],
           "enable_condition":"${ds_item.product}>0 & ${ds_item.quantity}>0"
+        },
+        {
+          "code":"myAction",
+          "label":"$l{MyAction}l",
+          "type":"close",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.myAction",
+              "args":{
+                "input":"Closing"
+              }
+            }
+          },
+          "enable_condition":"false"
         }
       ]
     },
