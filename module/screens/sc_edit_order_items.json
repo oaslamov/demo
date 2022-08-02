@@ -148,7 +148,7 @@
               }
             }
           },
-          "enable_condition":"false"
+          "enable_condition":"${ds_item.product}>0 & ${ds_item.quantity}>0"
         }
       ]
     },
