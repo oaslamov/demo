@@ -4,6 +4,8 @@ import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.CONST.MAX_SCALE
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
+import com.dolmen.serv.table.Type
+import com.dolmen.ui.screen.ChartData
 import com.dolmen.util.JSONManager
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
@@ -19,7 +21,8 @@ class Chart {
 
 class ChartManager(val m: Demo1) {
     @Description("Prepares JSON for charts example")
-    fun getChartExample(): String {
+    fun getChartExample(isShowy2: Boolean?): String {
+        /*
         val c = Chart()
         c.legends.addAll(listOf(
                 Legend("x", "year", "string"),
@@ -34,7 +37,37 @@ class ChartManager(val m: Demo1) {
                 mapOf("x" to "2020", "y1" to "3365", "y2" to "1000"),
                 mapOf("x" to "2021", "y1" to "4345", "y2" to "2000"),
         ))
+        c.legends.addAll(listOf(
+            Legend("x", "year", "string"),
+            Legend("y1", "west", "number"),
+            Legend("y2", "east", "number")
+        ))
+        c.data.addAll(listOf(
+            mapOf("x" to "2016", "y1" to "4000", "y2" to "800"),
+            mapOf("x" to "2017", "y1" to "5000", "y2" to "700"),
+            mapOf("x" to "2018", "y1" to "2500", "y2" to "1300"),
+            mapOf("x" to "2019", "y1" to "1200", "y2" to "2000"),
+            mapOf("x" to "2020", "y1" to "3365", "y2" to "1000"),
+            mapOf("x" to "2021", "y1" to "4345", "y2" to "2000"),
+        ))
         return c.getJSON()
+        */
+        val data = ChartData<String, Int>()
+        data.setLegendX("year", "string")
+        data.setLegendY(0, "west")
+        val y2=data.setLegendY(1, "east")
+        if(isShowy2!=null && isShowy2) {
+            y2.showAxis()
+        }
+
+        data.add("2016", 4001, 8000)
+        data.add("2017", 5000, 7000)
+        data.add("2018", 2500, 13000)
+        data.add("2019", 1200, 20000)
+        data.add("2020", 3365, 10000)
+        data.add("2021", 4345, 20000)
+
+        return data.toJson()
     }
 
     @Description("Prepares JSON for ABC analysis graph")

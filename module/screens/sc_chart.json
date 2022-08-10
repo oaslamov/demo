@@ -17,7 +17,10 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartExample"
+              "action":"demo1_prvt.getChartExample",
+              "args": {
+                "isShowY2": true
+              }
             }
           }
         }
@@ -166,7 +169,10 @@
         "to_row":12
       },
       "data_source":{
-        "code":"ds_ch5"
+        "code":"ds_ch5",
+        "operations":[
+          "select"
+        ]
       }
     }
   ]
