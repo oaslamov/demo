@@ -128,7 +128,7 @@ class Populate(val m: Demo1) {
             val countryId = Country().run { // Create a country and get its Id
                 name = countryMap.key
                 m.insert(this)
-                Txt.info("Loading ${name}").msg()
+                //Txt.info("Loading ${name}").msg()
                 id
             }
             countryMap.value.forEach { subcountryMap ->
@@ -245,7 +245,7 @@ class Populate(val m: Demo1) {
                     sum = (price?.times(quantity.toBigDecimal()))
                     m.update(item)
                 }
-                if (i % 100 == 0) com.dolmen.serv.Txt.info("${i}. Updated order item id = ${id}, sum = ${sum}").msg()
+                if (i % 100 == 0) Txt.info("${i}. Updated order item id = ${id}, sum = ${sum}").msg()
             }
         }
     }
@@ -256,16 +256,22 @@ class Populate(val m: Demo1) {
     ): String {
         return """
             <p>
-            <strong>${name?.toUpperCase()}</strong></br>
+            <strong>${name?.uppercase()}</strong></br>
             $addressLine1</br>
             $addressLine2</br>
             $addressLine3</br>
-            <em>${country?.toUpperCase()}</em>
+            <em>${country?.uppercase()}</em>
             </p>
         """.trimIndent()
     }
 
-    fun readLines(pathIn: String) = javaClass.getResource(pathIn).readText().lines().filterNot { it.isEmpty() }
+    private fun readLines(pathIn: String): List<String> {
+        val r = javaClass.getResource(pathIn)
+        if (r == null)
+            return listOf<String>()
+        else
+            return r.readText().lines().filterNot { it.isEmpty() }
+    }
 }
 
 
