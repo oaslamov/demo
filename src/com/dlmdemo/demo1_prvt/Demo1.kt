@@ -75,8 +75,9 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     @Description("Prepares JSON for charts example")
-    fun getChartExample(): String {
-        return ChartManager(this).getChartExample()
+    @Parameters("isShowY2: shows second Y axis if true default(false)")
+    fun getChartExample(isShowY2: Boolean?): String {
+        return ChartManager(this).getChartExample(isShowY2)
     }
 
     @Description("Prepares JSON for ABC analysis graph")
