@@ -21,15 +21,14 @@ class Chart {
 class ChartManager(val m: Demo1) {
     @Description("Prepares JSON for charts example")
     fun getChartExample(isShowy2: Boolean?): String {
+        val is2=isShowy2!=null && isShowy2
         val data = ChartData<String, Int>()
         data.setLegendX("year", "string")
         data.setLegendY(0, "west")
         data.setLegendY(1, "south")
-        data.setLegendY(2, "north")
-        val y2=data.setLegendY(3, "east")
-        if(isShowy2!=null && isShowy2) {
-            y2.showAxis()
-        }
+        data.setLegendY(2, "north").alternativeAxis(is2)
+        data.setLegendY(3, "east").alternativeAxis(is2)
+
 
         /*data.add("2016", 4001, 4200, 5200, 7000)
         data.add("2017", 5000, 5200, 6200, 6000)
