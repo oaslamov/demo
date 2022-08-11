@@ -4,6 +4,8 @@ import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.CONST.MAX_SCALE
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
+import com.dolmen.serv.exp.FieldLimit
+import com.dolmen.serv.exp.Formula
 import com.dolmen.ui.screen.ChartData
 import com.dolmen.util.JSONManager
 import java.math.BigDecimal
@@ -19,8 +21,15 @@ class Chart {
 }
 
 class ChartManager(val m: Demo1) {
+    fun getChartExample(filter: String): ChartData<*, *> {
+        val f=Formula.parse(filter, com.dolmen.md.std.Parameters.T)
+
+        var isShowy2=true==FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck)
+
+        return getChartExample(isShowy2)
+    }
     @Description("Prepares JSON for charts example")
-    fun getChartExample(isShowy2: Boolean?): String {
+    fun getChartExample(isShowy2: Boolean?): ChartData<*,*> {
         val is2=isShowy2!=null && isShowy2
         val data = ChartData<String, Int>()
         data.setLegendX("year", "string")
@@ -44,7 +53,7 @@ class ChartManager(val m: Demo1) {
         data.add("2020", 3365, 3565, 8000, 9000)
         data.add("2021", 4345, 4545, 12000, 19000)
 
-        return data.toJson()
+        return data
     }
 
     @Description("Prepares JSON for ABC analysis graph")
@@ -193,4 +202,5 @@ class ChartManager(val m: Demo1) {
         }
         return c.getJSON()
     }
+
 }

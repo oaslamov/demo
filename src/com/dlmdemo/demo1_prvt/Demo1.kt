@@ -3,6 +3,7 @@ package com.dlmdemo.demo1_prvt
 import com.dlmdemo.demo1_prvt.filler.CityFiller
 import com.dlmdemo.demo1_prvt.filler.ProductFiller
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.serv.Action
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.ActionType
 import com.dolmen.serv.anno.Description
@@ -12,6 +13,7 @@ import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
 import com.dolmen.serv.table.ITopTable
 import com.dolmen.serv.table.RowID
+import com.dolmen.ui.screen.ChartData
 import com.dolmen.util.Text
 import java.time.LocalDate
 
@@ -76,8 +78,14 @@ open class Demo1 : Demo1_PrvtModuleBase() {
 
     @Description("Prepares JSON for charts example")
     @Parameters("isShowY2: shows second Y axis if true default(false)")
-    fun getChartExample(isShowY2: Boolean?): String {
+    fun getChartExample(isShowY2: Boolean?): Action.IJSONResult<ChartData<*,*>> {
         return ChartManager(this).getChartExample(isShowY2)
+    }
+
+    @Description("Prepares JSON for charts example 2")
+    @Parameters("filter: filter type(filter)")
+    fun getChartExample2(filter: String): Action.IJSONResult<ChartData<*,*>> {
+        return ChartManager(this).getChartExample(filter)
     }
 
     @Description("Prepares JSON for ABC analysis graph")
