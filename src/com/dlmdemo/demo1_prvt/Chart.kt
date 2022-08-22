@@ -93,7 +93,7 @@ class ChartManager(val m: Demo1) {
     @Description("Prepares JSON for Order totals chart")
     @Parameters("points: Groups limits")
     fun getChartOrderTotals(points: String): ChartData<*, *> {
-        val data = ChartData<String, Int>()
+        val data = ChartData<String, Long>()
         if (points.isBlank()) return data
         val limits = points.split(",").map { it.trim().toInt() }.distinct().sorted()
         val limitsSize = limits.size
@@ -104,19 +104,19 @@ class ChartManager(val m: Demo1) {
 
         for (i in 0..limitsSize) {
             var x: String
-            var y: Int
+            var y: Long
             when {
                 i == 0 -> {
                     x = "<${limits[0]}.00"
-                    y = m.count(Shipping_Order::class, "total<${limits[0]}").toInt()
+                    y = m.count(Shipping_Order::class, "total<${limits[0]}")
                 }
                 i < limitsSize -> {
                     x = "${limits[i - 1]}.00-${limits[i]}.00"
-                    y = m.count(Shipping_Order::class, "total>=${limits[i - 1]} and total<${limits[i]}").toInt()
+                    y = m.count(Shipping_Order::class, "total>=${limits[i - 1]} and total<${limits[i]}")
                 }
                 else -> {
                     x = ">${limits.last()}.00"
-                    y = m.count(Shipping_Order::class, "total>=${limits.last()}").toInt()
+                    y = m.count(Shipping_Order::class, "total>=${limits.last()}")
                 }
             }
             data.add(x, y)
