@@ -22,29 +22,20 @@ class Chart {
 
 class ChartManager(val m: Demo1) {
     fun getChartExample(filter: String): ChartData<*, *> {
-        val f=Formula.parse(filter, com.dolmen.md.std.Parameters.T)
-
-        var isShowy2=true==FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck)
-
+        val f = Formula.parse(filter, com.dolmen.md.std.Parameters.T)
+        val isShowy2 = true == FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck)
         return getChartExample(isShowy2)
     }
+
     @Description("Prepares JSON for charts example")
-    fun getChartExample(isShowy2: Boolean?): ChartData<*,*> {
-        val is2=isShowy2!=null && isShowy2
+    fun getChartExample(isShowy2: Boolean?): ChartData<*, *> {
+        val is2 = isShowy2 != null && isShowy2
         val data = ChartData<String, Int>()
         data.setLegendX("year", "string")
         data.setLegendY(0, "west")
         data.setLegendY(1, "south")
         data.setLegendY(2, "north").alternativeAxis(is2)
         data.setLegendY(3, "east").alternativeAxis(is2)
-
-
-        /*data.add("2016", 4001, 4200, 5200, 7000)
-        data.add("2017", 5000, 5200, 6200, 6000)
-        data.add("2018", 2500, 2700, 3700, 12000)
-        data.add("2019", 1200, 1400, 2400, 19000)
-        data.add("2020", 3365, 3565, 4500, 9000)
-        data.add("2021", 4345, 4545, 5600, 19000)*/
 
         data.add("2016", 4001, 4200, 6000, 7000)
         data.add("2017", 5000, 5200, 5000, 6000)
@@ -139,23 +130,25 @@ class ChartManager(val m: Demo1) {
         val customers = m.selectMap(Customer.fId, "")
         val countries = m.selectMap(Country.fId, "")
         val orders = m.selectMap(Shipping_Order.fId, "").values
-                .groupingBy { o ->
-                    val d = o.date_Order_Paid
-                    val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
-                    if (d != null)
-                        Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
-                    else Group("-1", c)
-                }
-                .fold(ZERO) { acc, e -> acc + (e.total ?: ZERO) }
-                .filterKeys { it.period != "-1" }
-                .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
+            .groupingBy { o ->
+                val d = o.date_Order_Paid
+                val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
+                if (d != null)
+                    Group("${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}", c)
+                else Group("-1", c)
+            }
+            .fold(ZERO) { acc, e -> acc + (e.total ?: ZERO) }
+            .filterKeys { it.period != "-1" }
+            .toSortedMap(compareBy<Group> { it.period }.thenBy { it.country })
         val ct = orders.map { it.key.country }.distinct().sorted()
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "Period", type = "string"))
         c.legends.addAll(ct.map { Legend(it, it, "number") })
         c.data.addAll(orders.map { o ->
-            mapOf("x" to o.key.period,
-                    o.key.country to o.value.toString())
+            mapOf(
+                "x" to o.key.period,
+                o.key.country to o.value.toString()
+            )
         })
         return c.getJSON()
     }
@@ -168,19 +161,19 @@ class ChartManager(val m: Demo1) {
         val countries = m.selectMap(Country.fId, "")
         val ct = mutableListOf<String>()
         val ordersAggr = m.selectMap(Shipping_Order.fId, "").values
-                .mapNotNull { o ->
-                    val d = o.date_Order_Paid
-                    if (d != null) {
-                        val p = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
-                        val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
-                        if (c !in ct) ct.add(c)
-                        val s = o.total ?: ZERO
-                        OrderData(period = p, country = c, sum = s)
-                    } else null
-                }
-                .groupBy { it.period }
-                .mapValues { it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum } }
-                .toSortedMap(compareBy<String> { it })
+            .mapNotNull { o ->
+                val d = o.date_Order_Paid
+                if (d != null) {
+                    val p = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
+                    val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
+                    if (c !in ct) ct.add(c)
+                    val s = o.total ?: ZERO
+                    OrderData(period = p, country = c, sum = s)
+                } else null
+            }
+            .groupBy { it.period }
+            .mapValues { it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum } }
+            .toSortedMap(compareBy<String> { it })
 
         val c = Chart()
         c.legends.add(Legend(code = "x", name = "Period", type = "string"))

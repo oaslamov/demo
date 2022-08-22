@@ -2,8 +2,6 @@ package com.dlmdemo.demo1_prvt
 
 import com.dolmen.ui.Resource
 import com.dolmen.ui.screen.*
-import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.set
 
 class RefLookup(val m: Demo1) {
@@ -12,8 +10,10 @@ class RefLookup(val m: Demo1) {
         var id = ""
         var tableName = ""
         var refTable = ""
-        val refTableFields = arrayListOf("id", "name", "phone", "mobile",
-                "address_line1", "address_line2", "address_line3")
+        val refTableFields = arrayListOf(
+            "id", "name", "phone", "mobile",
+            "address_line1", "address_line2", "address_line3"
+        )
         if (args?.size == 4) {
             refField = args[0]
             id = args[1]
@@ -38,8 +38,10 @@ class RefLookup(val m: Demo1) {
             op.request = Request()
             op.request.data = ActionData()
             op.request.data.action = "demo1_prvt.selectList"
-            op.request.data.args = mapOf("tableName" to refTable,
-                    "filter" to listOf("\${@user_filter}", "order by name"))
+            op.request.data.args = mapOf(
+                "tableName" to refTable,
+                "filter" to listOf("\${@user_filter}", "order by name")
+            )
             op.request.data.fields = refTableFields
             ds.operations = LinkedHashMap()
             ds.operations["select"] = op
@@ -51,8 +53,10 @@ class RefLookup(val m: Demo1) {
             ac.request = Request()
             ac.request.data = ActionData()
             ac.request.data.action = "demo1_prvt.update"
-            ac.request.data.args = mapOf("tableName" to tableName,
-                    "fields" to mapOf("id" to id, refField to "\${ds_c.id}"))
+            ac.request.data.args = mapOf(
+                "tableName" to tableName,
+                "fields" to mapOf("id" to id, refField to "\${ds_c.id}")
+            )
             ds.actions = arrayListOf(ac)
             data_sources = arrayListOf(ds)
 

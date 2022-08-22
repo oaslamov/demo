@@ -21,8 +21,10 @@ class Caller(val m: Demo1) {
         kerbPrefs.setSpn(spn)
         http.setKerberosClient(kerbPrefs)
         http.setLog(m.l())
-        val ac = ActionBase.create("demo1_prvt.selectlist", "demo1_prvt.customer",
-                "name like '%val%' order by name").setTag("myTag1")
+        val ac = ActionBase.create(
+            "demo1_prvt.selectlist", "demo1_prvt.customer",
+            "name like '%val%' order by name"
+        ).setTag("myTag1")
         var ar = http.action(ac)
         while (ar != null) {
             res += JSONManagerBase.getJson(ar, false) + '\n'
@@ -45,14 +47,16 @@ class Caller(val m: Demo1) {
         kerbPrefs.setSpn(spn)
         http.setKerberosClient(kerbPrefs)
         http.setLog(m.l())
-        var res = http.sendPost("""
+        var res = http.sendPost(
+            """
             <?xml version="1.0" encoding="UTF-8"?>
             <dolmen version="1">
             <a a="demo1_prvt.action1">
                 <arg name="customerFilter">name like '%val%'</arg>
             </a>
             </dolmen>
-        """.trimIndent())
+        """.trimIndent()
+        )
         res += "\nRC == ${http.rc()}\n"
         return res
     }

@@ -17,18 +17,20 @@ class Stats(val m: Demo1) {
     }
 
 
-    fun makeProductStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int,
-                         itemQuery: Map<RowID, Shipping_Order_Product>) {
+    fun makeProductStats(
+        start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int,
+        itemQuery: Map<RowID, Shipping_Order_Product>
+    ) {
         data class Accum(val qnty: Int, val sum: BigDecimal)
         m.deleteList(Product_Abc.TABLE_ID, "")
         val products = m.selectMap(Product.fId, "")
         val items = itemQuery
-                .values
-                .groupingBy { it.product }
-                .fold(Accum(qnty = 0, sum = ZERO)) { acc, e -> Accum(acc.qnty + e.quantity, acc.sum + (e.sum ?: ZERO)) }
-                .toList()
-                .sortedByDescending { (_, value) -> value.sum }
-                .toMap()
+            .values
+            .groupingBy { it.product }
+            .fold(Accum(qnty = 0, sum = ZERO)) { acc, e -> Accum(acc.qnty + e.quantity, acc.sum + (e.sum ?: ZERO)) }
+            .toList()
+            .sortedByDescending { (_, value) -> value.sum }
+            .toMap()
         val grandTotal = items.values.sumOf { it.sum }
         var cuSum = ZERO
         items.forEach { (id, aggr) ->
@@ -48,18 +50,20 @@ class Stats(val m: Demo1) {
         }
     }
 
-    fun makeCustomerStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int,
-                          itemQuery: Map<RowID, Shipping_Order_Product>) {
+    fun makeCustomerStats(
+        start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int,
+        itemQuery: Map<RowID, Shipping_Order_Product>
+    ) {
         m.deleteList(Customer_Abc.TABLE_ID, "")
         val customers = m.selectMap(Customer.fId, "")
         val orders = m.selectMap(Shipping_Order.fId, "")
         val items = itemQuery
-                .values
-                .groupingBy { orders[it.shipping_Order]?.customer }
-                .fold(ZERO) { acc, e -> acc + (e.sum ?: ZERO) }
-                .toList()
-                .sortedByDescending { (_, value) -> value }
-                .toMap()
+            .values
+            .groupingBy { orders[it.shipping_Order]?.customer }
+            .fold(ZERO) { acc, e -> acc + (e.sum ?: ZERO) }
+            .toList()
+            .sortedByDescending { (_, value) -> value }
+            .toMap()
         val grandTotal = items.values.sumOf { it }
         var cuSum = ZERO
         items.forEach { (id, aggr) ->
@@ -77,14 +81,16 @@ class Stats(val m: Demo1) {
         }
     }
 
-    private fun percentage(sum: BigDecimal, total: BigDecimal,
-                           scale: Int = 1, roundingMode: RoundingMode = RoundingMode.HALF_UP) =
-            (sum * BigDecimal(100) / total).setScale(scale, roundingMode)
+    private fun percentage(
+        sum: BigDecimal, total: BigDecimal,
+        scale: Int = 1, roundingMode: RoundingMode = RoundingMode.HALF_UP
+    ) =
+        (sum * BigDecimal(100) / total).setScale(scale, roundingMode)
 
     private fun abcClass(percentage: BigDecimal, abLimit: Int, bcLimit: Int): String =
-            when {
-                percentage < abLimit.toBigDecimal() -> "A"
-                percentage < bcLimit.toBigDecimal() -> "B"
-                else -> "C"
-            }
+        when {
+            percentage < abLimit.toBigDecimal() -> "A"
+            percentage < bcLimit.toBigDecimal() -> "B"
+            else -> "C"
+        }
 }

@@ -78,13 +78,13 @@ open class Demo1 : Demo1_PrvtModuleBase() {
 
     @Description("Prepares JSON for charts example")
     @Parameters("isShowY2: shows second Y axis if true default(false)")
-    fun getChartExample(isShowY2: Boolean?): Action.IJSONResult<ChartData<*,*>> {
+    fun getChartExample(isShowY2: Boolean?): Action.IJSONResult<ChartData<*, *>> {
         return ChartManager(this).getChartExample(isShowY2)
     }
 
     @Description("Prepares JSON for charts example 2")
     @Parameters("filter: filter type(filter)")
-    fun getChartExample2(filter: String): Action.IJSONResult<ChartData<*,*>> {
+    fun getChartExample2(filter: String): Action.IJSONResult<ChartData<*, *>> {
         return ChartManager(this).getChartExample(filter)
     }
 
@@ -132,22 +132,28 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     @Description("Sends a test mail message")
-    @Parameters("To: send a message to", "Subject: message subject default(Test subject)",
-            "Body: message body default(Test message)")
+    @Parameters(
+        "To: send a message to", "Subject: message subject default(Test subject)",
+        "Body: message body default(Test message)"
+    )
     fun sendTestMail(to: String, subject: String, body: String) {
         CustomActions(this).sendTestMail(to, subject, body)
     }
 
     @Description("Creates a new record in the Info table and uploads a file to the Data table")
-    @Parameters("infoFields: : optional map of info table field values default(null)",
-            "dataTableName: table having a field with usage=\"filedata\"",
-            "filename: file name",
-            "fileTimeMillis: file time",
-            "data: data")
+    @Parameters(
+        "infoFields: : optional map of info table field values default(null)",
+        "dataTableName: table having a field with usage=\"filedata\"",
+        "filename: file name",
+        "fileTimeMillis: file time",
+        "data: data"
+    )
     @ActionType("file_upload")
     @Priv(value = "update", tableParameterName = "dataTableName")
-    fun uploadNewFile(infoFields: Map<String?, Any?>?, dataTableName: String, filename: String,
-                      fileTimeMillis: Long, data: ByteArray?): RowID? {
+    fun uploadNewFile(
+        infoFields: Map<String?, Any?>?, dataTableName: String, filename: String,
+        fileTimeMillis: Long, data: ByteArray?
+    ): RowID? {
         return CustomActions(this).uploadNewFile(infoFields, dataTableName, filename, fileTimeMillis, data)
     }
 

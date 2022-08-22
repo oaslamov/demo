@@ -9,9 +9,10 @@ import java.math.BigDecimal
 class ProductFiller : Product.IProduct {
     override fun getUrl(table: Product): String {
         val engines = listOf(
-                "https://www.google.com/search?q=",
-                "https://www.bing.com/search?q=",
-                "https://duckduckgo.com/?q=")
+            "https://www.google.com/search?q=",
+            "https://www.bing.com/search?q=",
+            "https://duckduckgo.com/?q="
+        )
         return "${engines.random()}${table.name}"
     }
 
@@ -21,11 +22,11 @@ class ProductFiller : Product.IProduct {
         val stylePriceLevel = Style().apply { color(Style.CONTRAST100) }
         if (p != null) {
             stylePriceLevel.bgColor(
-                    when {
-                        p.compareTo(BigDecimal(10)) < 0 -> Style.COLOR_GREEN
-                        p.compareTo(BigDecimal(20)) < 0 -> Style.COLOR_YELLOW
-                        else -> Style.COLOR_RED
-                    }
+                when {
+                    p.compareTo(BigDecimal(10)) < 0 -> Style.COLOR_GREEN
+                    p.compareTo(BigDecimal(20)) < 0 -> Style.COLOR_YELLOW
+                    else -> Style.COLOR_RED
+                }
             )
         }
         decorData.set(Decor_Product_Decor.Price_Level, stylePriceLevel)
