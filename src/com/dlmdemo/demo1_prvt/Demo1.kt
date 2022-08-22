@@ -105,7 +105,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     @Description("Prepares JSON for Percentage of sales by country chart")
-    fun getChartSalesPercentageByCountry(): String {
+    fun getChartSalesPercentageByCountry(): ChartData<*, *> {
         return ChartManager(this).getChartSalesPercentageByCountry()
     }
 

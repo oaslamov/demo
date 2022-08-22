@@ -3,6 +3,7 @@ label_c_revenue=% customer revenue
 label_p_threshold=product $0 threshold
 label_order_total=Order total
 label_count=Count
+label_period=Period
 act1_c_header=$0. Name = $1
 act1_c_header_det=$0. Name = $1<br/>Phone = $2<br/>Mobile = $3<br/>Address = $4
 act1_o_header=$0.$1. Order #$2 placed $3

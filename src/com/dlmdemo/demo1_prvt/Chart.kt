@@ -128,8 +128,6 @@ class ChartManager(val m: Demo1) {
     fun getChartSalesByCountry(): ChartData<*, *> {
         data class OrderData(val period: String, val country: String, val sum: BigDecimal)
 
-        val data = ChartData<String, BigDecimal>()
-
         val customers = m.selectMap(Customer.fId, "")
         val countries = m.selectMap(Country.fId, "")
         val ct = mutableListOf<String>()
@@ -146,13 +144,19 @@ class ChartManager(val m: Demo1) {
             }
             .groupBy { it.period }
             .mapValues { it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum }.toSortedMap() }
-            .toSortedMap(compareBy<String> { it })
+            .toSortedMap()
+
+        val data = ChartData<String, BigDecimal>()
         data.setLegendX(m.xtr("label_period"), "string")
-        ct.sorted().forEachIndexed { i, c ->
+        ct.sort()
+        ct.forEachIndexed { i, c ->
             data.setLegendY(i, c, "number")
         }
         ordersAggr.forEach { p, c ->
-            val y = c.map { it.value }.toTypedArray()
+            var y = arrayOf<BigDecimal>()
+            ct.forEach{ cName->
+                y += c[cName] ?: ZERO
+            }
             data.add(p, *y)
         }
 
@@ -160,7 +164,7 @@ class ChartManager(val m: Demo1) {
     }
 
     @Description("Prepares JSON for Percentage of sales by country chart")
-    fun getChartSalesPercentageByCountry(): String {
+    fun getChartSalesPercentageByCountry(): ChartData<*, *> {
         data class OrderData(val period: String, val country: String, val sum: BigDecimal)
 
         val customers = m.selectMap(Customer.fId, "")
@@ -178,28 +182,36 @@ class ChartManager(val m: Demo1) {
                 } else null
             }
             .groupBy { it.period }
-            .mapValues { it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum } }
-            .toSortedMap(compareBy<String> { it })
+            .mapValues { it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum }.toSortedMap() }
+            .toSortedMap()
 
-        val c = Chart()
-        c.legends.add(Legend(code = "x", name = "Period", type = "string"))
-        c.legends.addAll(ct.sorted().map { Legend(it, it, "number") })
+        val data = ChartData<String, BigDecimal>()
+        data.setLegendX(m.xtr("label_period"), "string")
+        ct.sort()
+        ct.forEachIndexed { i, c ->
+            data.setLegendY(i, c, "number")
+        }
 
         ordersAggr.forEach { o ->
-            val x = o.value.toList().sortedBy { (_, value) -> value }.toMap()
+            val x = o.value
             var sum = BigDecimal("100").setScale(MAX_SCALE) // Distribute 100 percents proportionally
             var q = x.values.sumOf { it } // Sales total for this period
             val roundTo = BigDecimal("0.1")
-            x.forEach { p ->
-                val v = p.value
-                val w = sum / q
-                val result = roundTo * (w * v / roundTo).setScale(0, RoundingMode.HALF_UP)
-                c.data.add(mapOf("x" to o.key, p.key to result.toString()))
-                sum -= result
-                q -= v
+            var y = arrayOf<BigDecimal>()
+            ct.forEach { c ->
+                if (q.signum() > 0) {
+                    val v = x[c] ?: ZERO
+                    val w = sum / q
+                    val result = roundTo * (w * v / roundTo).setScale(0, RoundingMode.HALF_UP)
+                    y += result
+                    sum -= result
+                    q -= v
+                } else y += ZERO
             }
+            data.add(o.key, *y)
         }
-        return c.getJSON()
+
+        return data
     }
 
 }
