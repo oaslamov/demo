@@ -100,7 +100,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     @Description("Prepares JSON for Sales by country chart")
-    fun getChartSalesByCountry(): String {
+    fun getChartSalesByCountry(): ChartData<*, *> {
         return ChartManager(this).getChartSalesByCountry()
     }
 
