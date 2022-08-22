@@ -95,7 +95,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
 
     @Description("Prepares JSON for Order totals chart")
     @Parameters("points: Groups limits")
-    fun getChartOrderTotals(points: String): String {
+    fun getChartOrderTotals(points: String): ChartData<*, *> {
         return ChartManager(this).getChartOrderTotals(points)
     }
 

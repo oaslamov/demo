@@ -92,35 +92,36 @@ class ChartManager(val m: Demo1) {
 
     @Description("Prepares JSON for Order totals chart")
     @Parameters("points: Groups limits")
-    fun getChartOrderTotals(points: String): String {
-        if (points.isBlank()) return ""
+    fun getChartOrderTotals(points: String): ChartData<*, *> {
+        val data = ChartData<String, Int>()
+        if (points.isBlank()) return data
         val limits = points.split(",").map { it.trim().toInt() }.distinct().sorted()
         val limitsSize = limits.size
-        if (limitsSize == 0) return ""
+        if (limitsSize == 0) return data
 
-        val c = Chart()
-        c.legends.add(Legend(code = "x", name = "Order total", type = "string"))
-        c.legends.add(Legend("y1", "Count", "number"))
+        data.setLegendX(m.xtr("label_order_total"), "string")
+        data.setLegendY(0, m.xtr("label_count"), "number")
+
         for (i in 0..limitsSize) {
             var x: String
-            var y: String
+            var y: Int
             when {
                 i == 0 -> {
                     x = "<${limits[0]}.00"
-                    y = m.count(Shipping_Order::class, "total<${limits[0]}").toString()
+                    y = m.count(Shipping_Order::class, "total<${limits[0]}").toInt()
                 }
                 i < limitsSize -> {
                     x = "${limits[i - 1]}.00-${limits[i]}.00"
-                    y = m.count(Shipping_Order::class, "total>=${limits[i - 1]} and total<${limits[i]}").toString()
+                    y = m.count(Shipping_Order::class, "total>=${limits[i - 1]} and total<${limits[i]}").toInt()
                 }
                 else -> {
                     x = ">${limits.last()}.00"
-                    y = m.count(Shipping_Order::class, "total>=${limits.last()}").toString()
+                    y = m.count(Shipping_Order::class, "total>=${limits.last()}").toInt()
                 }
             }
-            c.data.add(mapOf("x" to x, "y1" to y))
+            data.add(x, y)
         }
-        return c.getJSON()
+        return data
     }
 
     @Description("Prepares JSON for Sales by country chart")
