@@ -7,18 +7,10 @@ import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.exp.FieldLimit
 import com.dolmen.serv.exp.Formula
 import com.dolmen.ui.screen.ChartData
-import com.dolmen.util.JSONManager
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
 import java.math.RoundingMode
 import java.time.temporal.IsoFields
-
-data class Legend(val code: String, val name: String, val type: String, val color: String? = null)
-class Chart {
-    val legends: MutableList<Legend> = mutableListOf()
-    val data: MutableList<Map<String, String>> = mutableListOf()
-    fun getJSON(): String = JSONManager.getJson(mapOf("legends" to legends, "data" to data), true)
-}
 
 class ChartManager(val m: Demo1) {
     fun getChartExample(filter: String): ChartData<*, *> {
@@ -48,46 +40,24 @@ class ChartManager(val m: Demo1) {
     }
 
     @Description("Prepares JSON for ABC analysis graph")
-    fun getChartABC(): String {
-        val c = Chart()
-        c.legends.add(Legend(code = "x", name = "% items", type = "number"))
-        c.legends.add(Legend("y1", m.xtr("label_p_revenue"), "number"))
-        c.legends.add(Legend("y2", m.xtr("label_c_revenue"), "number"))
-        c.legends.add(Legend("y3", m.xtr("label_p_threshold", "AB"), "number", "#91a3b2"))
-        c.legends.add(Legend("y4", m.xtr("label_p_threshold", "BC"), "number", "#b9c2ca"))
+    fun getChartABC(): ChartData<*, *> {
+        val data = ChartData<Int, BigDecimal>()
+        data.setLegendX("% items", "number")
+        data.setLegendY(0, m.xtr("label_p_revenue"), "number")
 
         val products = m.selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
         val maxProduct = products.size
-        c.data.add(mapOf("x" to "0", "y1" to "0"))
-        var class0 = "A"
-        var class1: String
-        products.forEachIndexed { i, p ->
-            val x = (i + 1).toFloat() / maxProduct * 100
-            val y = p.cuperc
-            c.data.add(mapOf("x" to x.toString(), "y1" to y.toString()))
-            class1 = p.abc_Class.toString()
-            if ((class0 == "A") and (class1 == "B")) {
-                c.data.add(mapOf("x" to "0", "y3" to y.toString()))
-                c.data.add(mapOf("x" to x.toString(), "y3" to y.toString()))
-                c.data.add(mapOf("x" to x.toString(), "y3" to "0"))
-            }
-            if ((class0 == "B") and (class1 == "C")) {
-                c.data.add(mapOf("x" to "0", "y4" to y.toString()))
-                c.data.add(mapOf("x" to x.toString(), "y4" to y.toString()))
-                c.data.add(mapOf("x" to x.toString(), "y4" to "0"))
-            }
-            class0 = class1
-        }
-
         val customers = m.selectMap(Customer_Abc.fId, "").values.sortedByDescending { it.sum }
         val maxCustomer = customers.size
-        c.data.add(mapOf("x" to "0", "y2" to "0"))
-        customers.forEachIndexed { i, p ->
-            val x = (i + 1).toFloat() / maxCustomer * 100
-            val y = p.cuperc
-            c.data.add(mapOf("x" to x.toString(), "y2" to y.toString()))
+
+        data.add(0, ZERO, ZERO)
+        for (x in 5..100 step 5) {
+            val iProduct = (x * maxProduct / 100 - 1).coerceIn(0, maxProduct - 1)
+            val iCustomer = (x * maxCustomer / 100 - 1).coerceIn(0, maxCustomer - 1)
+            data.add(x, products[iProduct].cuperc, customers[iCustomer].cuperc)
         }
-        return c.getJSON()
+
+        return data
     }
 
     @Description("Prepares JSON for Order totals chart")
@@ -154,7 +124,7 @@ class ChartManager(val m: Demo1) {
         }
         ordersAggr.forEach { p, c ->
             var y = arrayOf<BigDecimal>()
-            ct.forEach{ cName->
+            ct.forEach { cName ->
                 y += c[cName] ?: ZERO
             }
             data.add(p, *y)

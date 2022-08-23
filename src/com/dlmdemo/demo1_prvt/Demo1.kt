@@ -89,7 +89,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     @Description("Prepares JSON for ABC analysis graph")
-    fun getChartABC(): String {
+    fun getChartABC(): ChartData<*, *> {
         return ChartManager(this).getChartABC()
     }
 
