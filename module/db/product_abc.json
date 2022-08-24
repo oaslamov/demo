@@ -45,20 +45,6 @@
     {
       "code":"abc_class",
       "label":"ABC class",
-      "enum":[
-        {
-          "label":"A",
-          "value":"A"
-        },
-        {
-          "label":"B",
-          "value":"B"
-        },
-        {
-          "label":"C",
-          "value":"C"
-        }
-      ],
       "@":"14"
     }
   ],

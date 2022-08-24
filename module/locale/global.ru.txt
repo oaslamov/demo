@@ -84,9 +84,7 @@ f:7ef07d01f00a=Накопленная сумма
 f:7ef07d01f00b=Накопленный процент
 --  ABC class
 f:7ef07d01f00c=Класс ABC
-e:7ef07d01f00c.A=A
-e:7ef07d01f00c.B=B
-e:7ef07d01f00c.C=C
+
 
 // table Customer Category
 t:7ef07d025000=Категория заказчика
@@ -130,9 +128,6 @@ f:7ef07d01e00c=Накопленная сумма
 f:7ef07d01e00d=Накопленный процент
 --  ABC class
 f:7ef07d01e00e=Класс ABC
-e:7ef07d01e00e.A=A
-e:7ef07d01e00e.B=B
-e:7ef07d01e00e.C=C
 
 // table Shipping Order
 t:7ef07d008000=Заказ

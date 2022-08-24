@@ -78,9 +78,6 @@ f:7ef07d01f00a=Cumulative sum
 f:7ef07d01f00b=Cumulative percentage
 --  ABC class
 f:7ef07d01f00c=ABC class
-e:7ef07d01f00c.A=A
-e:7ef07d01f00c.B=B
-e:7ef07d01f00c.C=C
 
 // table Customer Category
 t:7ef07d025000=Customer Category
@@ -143,9 +140,6 @@ f:7ef07d01e00c=Cumulative sum
 f:7ef07d01e00d=Cumulative percentage
 --  ABC class
 f:7ef07d01e00e=ABC class
-e:7ef07d01e00e.A=A
-e:7ef07d01e00e.B=B
-e:7ef07d01e00e.C=C
 
 // table Product Shipping From
 t:7ef07d024000=Product Shipping From

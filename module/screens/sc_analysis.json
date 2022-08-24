@@ -1,7 +1,6 @@
 {
   "code":"sc_analysis:scr@demo1_prvt",
   "label":"$l{Data analysis}l",
-  "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "sort_order":"Z60",
   "grid":{
@@ -34,21 +33,7 @@
         {
           "code":"abc_class",
           "label":"$l{f:7ef07d01e00e}l",
-          "type":"enum",
-          "enum":[
-            {
-              "label":"$l{e:7ef07d01e00e.A}l",
-              "value":"A"
-            },
-            {
-              "label":"$l{e:7ef07d01e00e.B}l",
-              "value":"B"
-            },
-            {
-              "label":"$l{e:7ef07d01e00e.C}l",
-              "value":"C"
-            }
-          ],
+          "type":"string",
           "hint":"$l{f:7ef07d01e00e:d}l"
         },
         {
@@ -58,11 +43,11 @@
           "hint":"$l{f:7ef07d01e007:d}l"
         },
         {
-          "code": "cuperc",
-          "label": "$l{f:7ef07d01e00d}l",
-          "type": "number",
-          "format": "#0.0",
-          "hint": "$l{f:7ef07d01e00d:d}l"
+          "code":"cuperc",
+          "label":"$l{f:7ef07d01e00d}l",
+          "type":"number",
+          "format":"#0.0",
+          "hint":"$l{f:7ef07d01e00d:d}l"
         },
         {
           "code":"cusum",
@@ -172,29 +157,15 @@
         {
           "code":"abc_class",
           "label":"$l{f:7ef07d01f00c}l",
-          "type":"enum",
-          "enum":[
-            {
-              "label":"$l{e:7ef07d01f00c.A}l",
-              "value":"A"
-            },
-            {
-              "label":"$l{e:7ef07d01f00c.B}l",
-              "value":"B"
-            },
-            {
-              "label":"$l{e:7ef07d01f00c.C}l",
-              "value":"C"
-            }
-          ],
+          "type":"string",
           "hint":"$l{f:7ef07d01f00c:d}l"
         },
         {
-          "code": "cuperc",
-          "label": "$l{f:7ef07d01f00b}l",
-          "type": "number",
-          "format": "#0.0",
-          "hint": "$l{f:7ef07d01f00b:d}l"
+          "code":"cuperc",
+          "label":"$l{f:7ef07d01f00b}l",
+          "type":"number",
+          "format":"#0.0",
+          "hint":"$l{f:7ef07d01f00b:d}l"
         },
         {
           "code":"cusum",
