@@ -85,7 +85,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     @Description("Prepares JSON for charts example 2")
     @Parameters("filter: filter type(filter)")
     fun getChartExample2(filter: String): Action.IJSONResult<ChartData<*, *>> {
-        return ChartManager(this).getChartExample(filter)
+        return ChartManager(this).getChartExample2(filter)
     }
 
     @Description("Prepares JSON for ABC analysis graph")

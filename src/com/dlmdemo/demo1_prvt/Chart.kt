@@ -13,10 +13,25 @@ import java.math.RoundingMode
 import java.time.temporal.IsoFields
 
 class ChartManager(val m: Demo1) {
-    fun getChartExample(filter: String): ChartData<*, *> {
+    fun getChartExample2(filter: String): ChartData<*, *> {
         val f = Formula.parse(filter, com.dolmen.md.std.Parameters.T)
-        val isShowy2 = true == FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck)
-        return getChartExample(isShowy2)
+        val isShowy2 = FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck) == true
+
+
+        val data = ChartData<String, Int>()
+        data.setLegendX("year", "string")
+        data.setLegendY(0, "west")
+        data.setLegendY(1, "east").alternativeAxis(isShowy2)
+
+        data.add("2016", 4001, 7000)
+        data.add("2017", 5000, 6000)
+        data.add("2018", 2500, 12000)
+        data.add("2019", 1200, 19000)
+        data.add("2020", 3365, 9000)
+        data.add("2021", 4345, 19000)
+
+        return data
+
     }
 
     @Description("Prepares JSON for charts example")
@@ -25,16 +40,14 @@ class ChartManager(val m: Demo1) {
         val data = ChartData<String, Int>()
         data.setLegendX("year", "string")
         data.setLegendY(0, "west")
-        data.setLegendY(1, "south")
-        data.setLegendY(2, "north").alternativeAxis(is2)
-        data.setLegendY(3, "east").alternativeAxis(is2)
+        data.setLegendY(1, "east").alternativeAxis(is2)
 
-        data.add("2016", 4001, 4200, 6000, 7000)
-        data.add("2017", 5000, 5200, 5000, 6000)
-        data.add("2018", 2500, 2700, 11000, 12000)
-        data.add("2019", 1200, 1400, 12000, 19000)
-        data.add("2020", 3365, 3565, 8000, 9000)
-        data.add("2021", 4345, 4545, 12000, 19000)
+        data.add("2016", 4001, 7000)
+        data.add("2017", 5000, 6000)
+        data.add("2018", 2500, 12000)
+        data.add("2019", 1200, 19000)
+        data.add("2020", 3365, 9000)
+        data.add("2021", 4345, 19000)
 
         return data
     }

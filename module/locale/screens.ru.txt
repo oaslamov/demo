@@ -90,7 +90,7 @@ Analyze=Выполнить анализ
 //-- sc_chart:scr@demo1_prvt --
 "Bar Chart"=Столбчатая диаграмма
 "Line Chart"=Линейная диаграмма
-"Pie Chart"=Круговая диаграмма
+"Donut Chart"=Круговая диаграмма
 "Spline Chart"=Сглаженная линейная диаграмма
 "Stacked Bar Chart"=Диаграмма с накоплением
 

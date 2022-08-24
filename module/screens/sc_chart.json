@@ -1,7 +1,6 @@
 {
   "code":"sc_chart:scr@demo1_prvt",
   "label":"$l{Charts}l",
-  "serverStatus":"r",
   "subject":"$l{Demo1}l",
   "sort_order":"Z70",
   "grid":{
@@ -12,14 +11,31 @@
   "data_sources":[
     {
       "code":"ds_ch1",
-      "type":"chart",
+      "table_name":"Std.Parameters",
+      "type":"table",
+      "fields":[
+        {
+          "code":"check",
+          "label":"$l{two Y axes}l",
+          "type":"bool",
+          "hint":"$l{f:201d00a:d}l"
+        },
+        {
+          "code":"date_from",
+          "label":"$l{Date}l",
+          "type":"plaindate",
+          "hint":"$l{f:201d006:d}l"
+        }
+      ],
       "operations":{
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartExample",
-              "args": {
-                "isShowY2": true
+              "action":"demo1_prvt.getChartExample2",
+              "args":{
+                "filter":[
+                  "${@user_filter}"
+                ]
               }
             }
           }
@@ -33,7 +49,10 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartExample"
+              "action":"demo1_prvt.getChartExample",
+              "args":{
+                "isShowY2":"false"
+              }
             }
           }
         }
@@ -46,7 +65,10 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartExample"
+              "action":"demo1_prvt.getChartExample",
+              "args":{
+                "isShowY2":"false"
+              }
             }
           }
         }
@@ -59,7 +81,10 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartExample"
+              "action":"demo1_prvt.getChartExample",
+              "args":{
+                "isShowY2":"false"
+              }
             }
           }
         }
@@ -72,7 +97,10 @@
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartExample"
+              "action":"demo1_prvt.getChartExample",
+              "args":{
+                "isShowY2":"false"
+              }
             }
           }
         }
@@ -94,6 +122,14 @@
       },
       "data_source":{
         "code":"ds_ch1",
+        "fields":[
+          {
+            "code":"check"
+          },
+          {
+            "code":"date_from"
+          }
+        ],
         "operations":[
           "select"
         ]
@@ -120,9 +156,9 @@
     },
     {
       "code":"p3",
-      "label":"$l{Pie Chart}l",
+      "label":"$l{Donut Chart}l",
       "type":"chart",
-      "chart_type":"pie",
+      "chart_type":"donut",
       "border_type":"none",
       "position":{
         "from_col":1,
@@ -173,6 +209,9 @@
         "operations":[
           "select"
         ]
+      },
+      "etc":{
+        "swapAxes":true
       }
     }
   ]
