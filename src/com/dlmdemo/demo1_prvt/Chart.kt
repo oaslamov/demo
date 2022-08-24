@@ -44,6 +44,7 @@ class ChartManager(val m: Demo1) {
         val data = ChartData<Int, BigDecimal>()
         data.setLegendX("% items", "number")
         data.setLegendY(0, m.xtr("label_p_revenue"), "number")
+        data.setLegendY(1, m.xtr("label_c_revenue"), "number")
 
         val products = m.selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
         val maxProduct = products.size
