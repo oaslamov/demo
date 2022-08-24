@@ -15,11 +15,7 @@
     {
       "code":"ds_category",
       "table_name":"Demo1_Prvt.Customer_Category",
-      "type":"tree",
-      "tree_code":"main_tree",
-      "tree_parents":[
-        "ds_category"
-      ],
+      "type":"tree2",
       "fields":[
         {
           "code":"category",
@@ -29,10 +25,10 @@
             "data":{
               "action":"demo1_prvt.selectList",
               "args":{
+                "tablename":"Demo1_Prvt.Customer_Category",
                 "filter":[
                   "${@ref_filter}"
-                ],
-                "tablename":"Demo1_Prvt.Customer_Category"
+                ]
               },
               "fields":[
                 "id",
@@ -52,129 +48,77 @@
           "label":"$l{f:7ef07d025008}l",
           "type":"string",
           "tree_node_type":"name",
-          "mandatory":true,
           "hint":"$l{f:7ef07d025008:d}l"
         }
       ],
-      "tree_operations":[
-        {
-          "delete":{
-            "request":{
-              "data":{
-                "action":"demo1_prvt.deleteById",
-                "args":{
-                  "id":"${id}",
-                  "tablename":"demo1_prvt.customer_category"
-                }
-              }
-            }
-          },
-          "from":"",
-          "insert":{
-            "request":{
-              "data":{
-                "action":"demo1_prvt.insert",
-                "args":{
-                  "tablename":"demo1_prvt.customer_category",
-                  "fields":"${@all_fields}"
-                }
-              }
-            }
-          },
-          "new":{
-            "request":{
-              "data":{
-                "action":"demo1_prvt.new",
-                "args":{
-                  "tablename":"demo1_prvt.customer_category"
-                }
-              }
-            }
-          },
-          "select":{
-            "request":{
-              "data":{
-                "action":"demo1_prvt.selectList",
-                "args":{
-                  "filter":[
-                    "category is null or category=id"
-                  ],
-                  "tablename":"demo1_prvt.customer_category"
-                }
-              }
-            }
-          },
-          "update":{
-            "request":{
-              "data":{
-                "action":"demo1_prvt.update",
-                "args":{
-                  "tablename":"demo1_prvt.customer_category",
-                  "fields":"${@all_fields}"
+      "operations":{
+        "new":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.new",
+              "args":{
+                "tablename":"demo1_prvt.customer_category",
+                "fields":{
+                  "Category":"${ds_category.id}"
                 }
               }
             }
           }
         },
-        {
-          "delete":{
-            "request":{
-              "data":{
-                "action":"demo1_prvt.deleteById",
-                "args":{
-                  "id":"${id}",
-                  "tableName":"demo1_prvt.customer_category"
-                }
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.selectTreeList",
+              "args":{
+                "filter":"",
+                "topFilter":"",
+                "tablename":"demo1_prvt.customer_category",
+                "searchFilter":"${@user_filter}"
+              }
+            }
+          }
+        },
+        "insert":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.insert",
+              "args":{
+                "tablename":"demo1_prvt.customer_category",
+                "fields":"${@all_fields}"
               }
             }
           },
-          "from":"ds_category",
-          "insert":{
-            "request":{
-              "data":{
-                "action":"demo1_prvt.insert",
-                "args":{
-                  "fields":"${@all_fields}",
-                  "tableName":"demo1_prvt.customer_category"
-                }
+          "enable_condition":"!!${ds_category.id}"
+        },
+        "update":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.update",
+              "args":{
+                "tablename":"demo1_prvt.customer_category",
+                "fields":"${@all_fields}"
               }
             }
-          },
-          "new":{
-            "request":{
-              "data":{
-                "action":"demo1_prvt.new",
-                "args":{
-                  "fields":{
-                    "category":"${main_tree.parent_id}"
-                  },
-                  "tableName":"demo1_prvt.customer_category"
-                }
-              }
-            }
-          },
-          "select":{
-            "request":{
-              "data":{
-                "action":"demo1_prvt.selectList",
-                "args":{
-                  "filter":[
-                    "category=${main_tree.parent_id} and category!=id"
-                  ],
-                  "tableName":"demo1_prvt.customer_category"
-                }
+          }
+        },
+        "delete":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.deleteById",
+              "args":{
+                "id":"${id}",
+                "tablename":"demo1_prvt.customer_category"
               }
             }
           }
         }
-      ]
+      }
     }
   ],
   "parts":[
     {
-      "code":"main_tree",
-      "type":"tree",
-      "tree_code":"main_tree",
+      "code":"p_main",
+      "type":"tree2",
       "border_type":"none",
       "position":{
         "from_col":1,
@@ -183,6 +127,19 @@
         "to_row":4
       },
       "data_source":{
+        "code":"ds_category",
+        "fields":[
+          {
+            "code":"name"
+          }
+        ],
+        "operations":[
+          "new",
+          "select",
+          "insert",
+          "update",
+          "delete"
+        ]
       }
     }
   ]
