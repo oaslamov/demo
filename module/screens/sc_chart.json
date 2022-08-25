@@ -19,12 +19,6 @@
           "label":"$l{two Y axes}l",
           "type":"bool",
           "hint":"$l{f:201d00a:d}l"
-        },
-        {
-          "code":"date_from",
-          "label":"$l{Date}l",
-          "type":"plaindate",
-          "hint":"$l{f:201d006:d}l"
         }
       ],
       "operations":{
@@ -125,9 +119,6 @@
         "fields":[
           {
             "code":"check"
-          },
-          {
-            "code":"date_from"
           }
         ],
         "operations":[

@@ -15,23 +15,8 @@ import java.time.temporal.IsoFields
 class ChartManager(val m: Demo1) {
     fun getChartExample2(filter: String): ChartData<*, *> {
         val f = Formula.parse(filter, com.dolmen.md.std.Parameters.T)
-        val isShowy2 = FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck) == true
-
-
-        val data = ChartData<String, Int>()
-        data.setLegendX("year", "string")
-        data.setLegendY(0, "west")
-        data.setLegendY(1, "east").alternativeAxis(isShowy2)
-
-        data.add("2016", 4001, 7000)
-        data.add("2017", 5000, 6000)
-        data.add("2018", 2500, 12000)
-        data.add("2019", 1200, 19000)
-        data.add("2020", 3365, 9000)
-        data.add("2021", 4345, 19000)
-
-        return data
-
+        val isShowy2 = true == FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck)
+        return getChartExample(isShowy2)
     }
 
     @Description("Prepares JSON for charts example")
@@ -39,8 +24,8 @@ class ChartManager(val m: Demo1) {
         val is2 = isShowy2 != null && isShowy2
         val data = ChartData<String, Int>()
         data.setLegendX("year", "string")
-        data.setLegendY(0, "west")
-        data.setLegendY(1, "east").alternativeAxis(is2)
+        data.setLegendY(0, m.xtr("label_west"))
+        data.setLegendY(1, m.xtr("label_east")).alternativeAxis(is2)
 
         data.add("2016", 4001, 7000)
         data.add("2017", 5000, 6000)
@@ -109,18 +94,19 @@ class ChartManager(val m: Demo1) {
     }
 
     @Description("Prepares JSON for Sales by country chart")
-    fun getChartSalesByCountry(): ChartData<*, *> {
+    fun getChartSalesByCountry(filter: String): ChartData<*, *> {
         data class OrderData(val period: String, val country: String, val sum: BigDecimal)
 
         val customers = m.selectMap(Customer.fId, "")
         val countries = m.selectMap(Country.fId, "")
         val ct = mutableListOf<String>()
-        val ordersAggr = m.selectMap(Shipping_Order.fId, "").values
+        val f = Formula.parse(filter, Shipping_Order.T)
+        val ordersAggr = m.selectMap(Shipping_Order.fId, f).values
             .mapNotNull { o ->
                 val d = o.date_Order_Paid
                 if (d != null) {
                     val p = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
-                    val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
+                    val c = countries[customers[o.customer]?.country]?.name ?: m.xtr("label_unknown_country")
                     if (c !in ct) ct.add(c)
                     val s = o.total ?: ZERO
                     OrderData(period = p, country = c, sum = s)
@@ -159,7 +145,7 @@ class ChartManager(val m: Demo1) {
                 val d = o.date_Order_Paid
                 if (d != null) {
                     val p = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
-                    val c = countries[customers[o.customer]?.country]?.name ?: "unknown"
+                    val c = countries[customers[o.customer]?.country]?.name ?: m.xtr("label_unknown_country")
                     if (c !in ct) ct.add(c)
                     val s = o.total ?: ZERO
                     OrderData(period = p, country = c, sum = s)

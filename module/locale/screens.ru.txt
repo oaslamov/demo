@@ -93,6 +93,7 @@ Analyze=Выполнить анализ
 "Donut Chart"=Круговая диаграмма
 "Spline Chart"=Сглаженная линейная диаграмма
 "Stacked Bar Chart"=Диаграмма с накоплением
+"two Y axes"=Две оси Y
 
 //-- sc_choose_customer:scr@demo1_prvt --
 "Choose customer"=Выбор заказчика

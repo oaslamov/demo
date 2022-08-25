@@ -233,12 +233,26 @@
     },
     {
       "code":"ds_chart3",
-      "type":"chart",
+      "table_name":"Demo1_Prvt.Shipping_Order",
+      "type":"table",
+      "fields":[
+        {
+          "code":"date_order_paid",
+          "label":"$l{f:7ef07d008009}l",
+          "type":"plaindate",
+          "hint":"$l{f:7ef07d008009:d}l"
+        }
+      ],
       "operations":{
         "select":{
           "request":{
             "data":{
-              "action":"demo1_prvt.getChartSalesByCountry"
+              "action":"demo1_prvt.getChartSalesByCountry",
+              "args":{
+                "filter":[
+                  "${@user_filter}"
+                ]
+              }
             }
           }
         }
@@ -450,6 +464,11 @@
               },
               "data_source":{
                 "code":"ds_chart3",
+                "fields":[
+                  {
+                    "code":"date_order_paid"
+                  }
+                ],
                 "operations":[
                   "select"
                 ]

@@ -100,8 +100,9 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     @Description("Prepares JSON for Sales by country chart")
-    fun getChartSalesByCountry(): ChartData<*, *> {
-        return ChartManager(this).getChartSalesByCountry()
+    @Parameters("filter: filter type(filter)")
+    fun getChartSalesByCountry(filter: String): ChartData<*, *> {
+        return ChartManager(this).getChartSalesByCountry(filter)
     }
 
     @Description("Prepares JSON for Percentage of sales by country chart")
