@@ -99,6 +99,7 @@ Analyze=Analyze
 
 //-- sc_chart:scr@demo1_prvt --
 "Bar Chart"=Bar Chart
+Date=Date
 "Donut Chart"=Donut Chart
 "Line Chart"=Line Chart
 "Spline Chart"=Spline Chart
