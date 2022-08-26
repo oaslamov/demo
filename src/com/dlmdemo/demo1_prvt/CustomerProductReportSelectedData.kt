@@ -106,8 +106,8 @@ class CustomerProductReportSelectedData: SelectedData<Customer_Product_Report> {
         // Проверяем, что обе даты указаны
         var dateLimit=f.getLimit(Customer_Product_Report.fOrder_Date)
         if(dateLimit!=null){
-            dateFrom=dateLimit.min as OffsetDateTime
-            dateTo = dateLimit.max as OffsetDateTime
+            dateFrom=dateLimit.min as OffsetDateTime?
+            dateTo = dateLimit.max as OffsetDateTime?
         }
         if(dateFrom==null || dateTo==null){
             // Формируем ошибку, в нее подставятся имена полей на языке клиента, если есть переводы на другой язык
@@ -200,8 +200,8 @@ class CustomerProductReportSelectedData: SelectedData<Customer_Product_Report> {
             while (shippingOrdersIterator!!.hasNext()) {
 
                 val shippingOrder = shippingOrdersIterator!!.next()
-                if (currentCustomerId == null) { // это первая строка для клиента
-                    currentCustomerId = shippingOrder.customer
+                val newCustomer =  shippingOrder.customer
+                if (currentCustomerId == null || currentCustomerId!!.equals(newCustomer)) {
                     processShippingOrder(shippingOrder)
                 } else {
                     // Клиент изменился. Запоминаем Shipping_Order - обработаем его на следующем вызове как первый для нового клиента
@@ -221,6 +221,9 @@ class CustomerProductReportSelectedData: SelectedData<Customer_Product_Report> {
     }
 
     private fun processShippingOrder(shippingOrder: Shipping_Order){
+        if(currentCustomerId==null){
+            currentCustomerId=shippingOrder.customer
+        }
         if(productId_to_productSum==null){
             productId_to_productSum=HashMap(1000)
             /* Заметка.
@@ -239,16 +242,18 @@ class CustomerProductReportSelectedData: SelectedData<Customer_Product_Report> {
         module.iterate(Shipping_Order_Product::class.java, queryHelper.toString()).use { shippingOrderProductData ->
             shippingOrderProductData.forEach { shippingOrderProduct ->
                 // суммируем позицию заказа в HashMap
-                val productId=shippingOrderProduct.id
-                var productSum=productId_to_productSum!![productId]
-                if(productSum==null){
-                    productSum=ProductSum()
-                    productId_to_productSum!![productId]=productSum
-                }
-                productSum.count+=shippingOrderProduct.quantity
-                val sum=shippingOrderProduct.sum
-                if(sum!=null){
-                    productSum.sum+=sum
+                val productId=shippingOrderProduct.product
+                if(productId!=null) {
+                    var productSum = productId_to_productSum!![productId]
+                    if (productSum == null) {
+                        productSum = ProductSum()
+                        productId_to_productSum!![productId] = productSum
+                    }
+                    productSum.count += shippingOrderProduct.quantity
+                    val sum = shippingOrderProduct.sum
+                    if (sum != null) {
+                        productSum.sum += sum
+                    }
                 }
             }
         }
