@@ -86,6 +86,19 @@ f:7ef07d025006=Parent category
 --  Name
 f:7ef07d025008=Name
 
+// table Customer Product Report
+t:7ef07d026000=Customer Product Report
+--  Customer
+f:7ef07d026006=Customer
+--  Product
+f:7ef07d026007=Product
+--  Count
+f:7ef07d026008=Count
+--  Value
+f:7ef07d026009=Value
+--  Order Date
+f:7ef07d02600a=Order Date
+
 // table Decor Test Card
 t:7ef07d023000=Decor Test Card
 --  Style

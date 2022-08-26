@@ -187,5 +187,9 @@ open class Demo1 : Demo1_PrvtModuleBase() {
             return com.dolmen.serv.Module.start(Demo1::class.java)
         }
     }
+
+    override fun s_iterateCustomer_Product_Report(f: Formula): SelectedData<Customer_Product_Report> {
+        return CustomerProductReportSelectedData(f, this)
+    }
 }
 

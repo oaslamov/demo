@@ -93,6 +93,19 @@ f:7ef07d025006=Категория-родитель
 --  Name
 f:7ef07d025008=Наименование
 
+// table Customer Product Report
+t:7ef07d026000=Товарный отчет по заказчикам
+--  Customer
+f:7ef07d026006=Заказчик
+--  Product
+f:7ef07d026007=Товар
+--  Count
+f:7ef07d026008=Количество
+--  Value
+f:7ef07d026009=Сумма
+--  Order date
+f:7ef07d02600a=Дата заказа
+
 // table Product
 t:7ef07d007000=Товар
 --  Name
