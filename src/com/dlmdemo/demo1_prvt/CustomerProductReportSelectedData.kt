@@ -144,7 +144,7 @@ class CustomerProductReportSelectedData: SelectedData<Customer_Product_Report> {
         shippingOrdersIterator = demo.iterate(shippingOrderFilter).iterator() as TableIt<Shipping_Order>
 
         // Для дальнейшей оптимизации посмотрим, есть ли условие на товар. Тогда мы сможем эффективнее выбирать из таблицы Shipping_Order_Product
-        productIdFilter=FieldLimit.getEqual(f, Shipping_Order_Product.fId) as RowID?
+        productIdFilter=FieldLimit.getEqual(f, Customer_Product_Report.fProduct) as RowID?
     }
 
     // Здесь подготавливаем следующую строку отчета
