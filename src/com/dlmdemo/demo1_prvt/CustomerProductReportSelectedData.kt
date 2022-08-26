@@ -179,6 +179,7 @@ class CustomerProductReportSelectedData: SelectedData<Customer_Product_Report> {
                     }
                 }
                 рroductSumIterator=null
+                currentCustomerId=null
             }
 
             // Строк по текущему клиенту больше нет, считаем для следующего клиента
