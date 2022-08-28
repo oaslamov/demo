@@ -138,7 +138,7 @@ class CustomerProductReportSelectedData: SelectedData<Customer_Product_Report> {
 
         // Объединяем условия в общий фильтр. Получим фильтр с условие на интервал дат и условие на клиента (если оно указано), а также
         // сортировку по клиенту
-        val shippingOrderFilter=shippingOrderBuilder.filter.and(Formula.parse(dateClause, Shipping_Order.T))
+        val shippingOrderFilter=Formula.parse(dateClause, Shipping_Order.T).and(shippingOrderBuilder.filter)
 
         // Подготавливаем итератор для строк Shipping_Order
         shippingOrdersIterator = demo.iterate(shippingOrderFilter).iterator() as TableIt<Shipping_Order>
