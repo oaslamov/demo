@@ -2,6 +2,7 @@ package com.dlmdemo.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.CONST
+import com.dolmen.serv.ENV
 import com.dolmen.serv.Txt
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
@@ -179,7 +180,7 @@ class Populate(val m: Demo1) {
                 m.insert(this)
                 genItems(n = Random.nextInt(minItems, maxItems + 1), products, maxQuantity)
             }
-            //if ((i + 1) % 100 == 0) Txt.info("Generated ${i + 1} orders").msg()
+            if ((i + 1) % 100 == 0) ENV.commitIfNeeded()
         }
         Txt.info("Generated $n orders").msg()
     }

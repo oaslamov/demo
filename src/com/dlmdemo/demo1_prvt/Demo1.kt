@@ -65,7 +65,9 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     @Description("Generates random orders")
     @Parameters("n: Number of generated shipping orders")
     fun genOrders(n: Int) {
+        isLoadingSampleData = true
         Populate(this).genOrders(n)
+        isLoadingSampleData = false
     }
 
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
