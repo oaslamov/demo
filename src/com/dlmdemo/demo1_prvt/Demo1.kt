@@ -62,6 +62,12 @@ open class Demo1 : Demo1_PrvtModuleBase() {
         return Populate(this).loadSampleData()
     }
 
+    @Description("Generates random orders")
+    @Parameters("n: Number of generated shipping orders")
+    fun genOrders(n: Int) {
+        Populate(this).genOrders(n)
+    }
+
     override fun s_iterateView1(f: Formula): SelectedData<View1> {
         return Views(this).s_iterateView1(f)
     }
@@ -170,10 +176,6 @@ open class Demo1 : Demo1_PrvtModuleBase() {
             "richtext_popup:scr@demo1_prvt" -> CustomActions(this).getRichTextPopupScreen(originalScrId, scrId, args)
             else -> null
         }
-    }
-
-    override fun x_installed(modulePreviousVersionId: Int) {
-        Populate(this).loadSampleData()
     }
 
     companion object {
