@@ -50,9 +50,6 @@ class Views(val m: Demo1) {
             val MAX_FONT = 8
             val MAX_ALIGN = 4
             val MAX_ROW = MAX_COLOR * MAX_COLOR * MAX_ALIGN * MAX_FONT
-            val samples = m.selectMap(Customer.fId, "").values
-                .map { listOfNotNull(it.address_Line1, it.address_Line2, it.address_Line3).joinToString() }
-
             override fun hasNext(): Boolean {
                 if (table != null) return true
                 while (seqNum <= MAX_ROW) {
@@ -67,7 +64,7 @@ class Views(val m: Demo1) {
                     table.align = align
                     table.style =
                         "${colorCodes[fgColor]}, ${colorCodes[bgColor]}, ${fontCodes[font]}, ${alignCodes[align - 1]}"
-                    table.sample_Text = samples.random()
+                    table.sample_Text = LOREM.take(50)
 
                     val decorData = Decor_Decor_Test_Card_Formatting.newData()
                     val style = Style().apply {
