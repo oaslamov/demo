@@ -172,6 +172,14 @@ open class Demo1 : Demo1_PrvtModuleBase() {
         Txt.info("With Alt == $isAltPressed, with Ctrl == $isCtrlPressed").msg()
     }
 
+    @Description("Runs some queries")
+    @Parameters("n: Repeat count default(10)")
+    fun testQuery(n: Int) {
+        repeat(n) {
+            val q = selectMap(Shipping_Order_Product.fId, "")
+        }
+    }
+
     override fun x_getDynScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {
         return when (scrId) {
             "ref_picker:scr@demo1_prvt" -> RefLookup(this).getChooseCustomerScreen(originalScrId, scrId, args)
@@ -195,5 +203,6 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     override fun s_iterateCustomer_Product_Report(f: Formula): SelectedData<Customer_Product_Report> {
         return CustomerProductReportSelectedData(f, this)
     }
+
 }
 
