@@ -173,11 +173,15 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     }
 
     @Description("Runs some queries")
-    @Parameters("n: Repeat count default(10)")
-    fun testQuery(n: Int) {
-        repeat(n) {
-            val q = selectMap(Shipping_Order_Product.fId, "")
-        }
+    @Parameters(
+        "n: Repeat count default(10)",
+        "dbUrl: database connection url default(jdbc:postgresql://127.0.0.1:5432/postgres)",
+        "dbUser: database user default(postgres)",
+        "dbPass: database password",
+        "dbSchema: database Schema default(dolmen)"
+    )
+    fun testQuery(n: Int, dbUrl: String, dbUser: String, dbPass: String, dbSchema: String) {
+        TestPerf(this).testQuery(n, dbUrl, dbUser, dbPass, dbSchema)
     }
 
     override fun x_getDynScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {
