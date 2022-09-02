@@ -178,10 +178,11 @@ open class Demo1 : Demo1_PrvtModuleBase() {
         "dbUrl: database connection url default(jdbc:postgresql://127.0.0.1:5432/postgres)",
         "dbUser: database user default(postgres)",
         "dbPass: database password",
-        "dbSchema: database Schema default(dolmen)"
+        "dbSchema: database Schema default(dolmen)",
+        "fetchSize: default(0)"
     )
-    fun testQuery(n: Int, dbUrl: String, dbUser: String, dbPass: String, dbSchema: String) {
-        TestPerf(this).testQuery(n, dbUrl, dbUser, dbPass, dbSchema)
+    fun testQuery(n: Int, dbUrl: String, dbUser: String, dbPass: String, dbSchema: String, fetchSize: Int) {
+        TestPerf(this).testQuery(n, dbUrl, dbUser, dbPass, dbSchema, fetchSize)
     }
 
     override fun x_getDynScreen(originalScrId: String?, scrId: String?, args: Array<out String>?): String? {
