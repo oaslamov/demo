@@ -31,7 +31,7 @@ class TestPerf(val m: Demo1) {
 
     private fun runJdbc(n: Int, dbUrl: String, dbUser: String, dbPass: String, dbSchema: String) {
         val dbTable = "shipping_order_product__demo1_prvt"
-        val q = "SELECT t.id, t.ver, sum(t.ver), t.sver, t.data FROM $dbSchema.$dbTable t order by t.id;"
+        val q = "SELECT t.id, t.ver, t.sver, t.data FROM $dbSchema.$dbTable t order by t.id;"
         try {
             val connection = DriverManager.getConnection(dbUrl, dbUser, dbPass)
             val query = connection.prepareStatement(q)
