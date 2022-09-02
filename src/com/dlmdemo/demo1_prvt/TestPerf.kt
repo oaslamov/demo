@@ -3,6 +3,7 @@ package com.dlmdemo.demo1_prvt
 import com.dolmen.md.demo1_prvt.Shipping_Order_Product
 import com.dolmen.md.demo1_prvt.iterate
 import com.dolmen.serv.Txt
+import com.dolmen.serv.exp.Formula
 import java.sql.Connection
 import java.sql.DriverManager
 import kotlin.system.measureTimeMillis
@@ -11,8 +12,8 @@ class TestPerf(val m: Demo1) {
     fun testQuery(n: Int, dbUrl: String, dbUser: String, dbPass: String, dbSchema: String, fetchSize: Int) {
 
         val t0 = measureTimeMillis { runJdbc(n, dbUrl, dbUser, dbPass, dbSchema, fetchSize) }
-        val t1 = measureTimeMillis { runSelectMap(n) }
-        val t2 = measureTimeMillis { runIterate(n) }
+        val t1 = measureTimeMillis { runSelectMap(n, fetchSize) }
+        val t2 = measureTimeMillis { runIterate(n, fetchSize) }
         val tMin = minOf(t0, t1, t2).coerceAtLeast(1)
 
         val report = "$0 (executed $n times): $1ms, $2%"
@@ -22,9 +23,11 @@ class TestPerf(val m: Demo1) {
         Txt.info(report, "iterate", t2, t2 * 100 / tMin).msg()
     }
 
-    private fun runIterate(n: Int) {
+    private fun runIterate(n: Int, fetchSize: Int) {
         repeat(n) {
-            m.iterate<Shipping_Order_Product>("") {
+            val f = Formula.parse("", Shipping_Order_Product.T)
+            f.expectedRows = fetchSize
+            m.iterate<Shipping_Order_Product>(f) {
                 val noop = null //breakpoint
             }
         }
@@ -65,9 +68,11 @@ class TestPerf(val m: Demo1) {
 
     }
 
-    fun runSelectMap(n: Int) {
+    fun runSelectMap(n: Int, fetchSize: Int) {
+        val f = Formula.parse("", Shipping_Order_Product.T)
+        f.expectedRows = fetchSize
         repeat(n) {
-            m.selectMap(Shipping_Order_Product.fId, "")
+            m.selectMap(Shipping_Order_Product.fId, f)
         }
     }
 }

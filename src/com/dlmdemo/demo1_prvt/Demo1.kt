@@ -179,7 +179,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
         "dbUser: database user default(postgres)",
         "dbPass: database password",
         "dbSchema: database Schema default(dolmen)",
-        "fetchSize: default(0)"
+        "fetchSize: default(1000)"
     )
     fun testQuery(n: Int, dbUrl: String, dbUser: String, dbPass: String, dbSchema: String, fetchSize: Int) {
         TestPerf(this).testQuery(n, dbUrl, dbUser, dbPass, dbSchema, fetchSize)
