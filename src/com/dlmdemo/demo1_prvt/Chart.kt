@@ -13,6 +13,7 @@ import java.math.RoundingMode
 import java.time.temporal.IsoFields
 
 class ChartManager(val m: Demo1) {
+    val fetchSize = 200
     fun getChartExample2(filter: String): ChartData<*, *> {
         val f = Formula.parse(filter, com.dolmen.md.std.Parameters.T)
         val isShowy2 = true == FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck)
@@ -97,11 +98,19 @@ class ChartManager(val m: Demo1) {
     fun getChartSalesByCountry(filter: String): ChartData<*, *> {
         data class OrderData(val period: String, val country: String, val sum: BigDecimal)
 
-        val customers = m.selectMap(Customer.fId, "")
-        val countries = m.selectMap(Country.fId, "")
+        val customerFilter = Formula.parse("", Customer.T)
+        customerFilter.expectedRows = fetchSize
+        val customers = m.selectMap(Customer.fId, customerFilter)
+
+        val countryFilter = Formula.parse("", Country.T)
+        countryFilter.expectedRows = fetchSize
+        val countries = m.selectMap(Country.fId, countryFilter)
+
         val ct = mutableListOf<String>()
-        val f = Formula.parse(filter, Shipping_Order.T)
-        val ordersAggr = m.selectMap(Shipping_Order.fId, f).values
+        val shippingOrderFilter = Formula.parse(filter, Shipping_Order.T)
+        shippingOrderFilter.expectedRows = fetchSize
+
+        val ordersAggr = m.selectMap(Shipping_Order.fId, shippingOrderFilter).values
             .mapNotNull { o ->
                 val d = o.date_Order_Paid
                 if (d != null) {
@@ -137,10 +146,18 @@ class ChartManager(val m: Demo1) {
     fun getChartSalesPercentageByCountry(): ChartData<*, *> {
         data class OrderData(val period: String, val country: String, val sum: BigDecimal)
 
-        val customers = m.selectMap(Customer.fId, "")
-        val countries = m.selectMap(Country.fId, "")
+        val customerFilter = Formula.parse("", Customer.T)
+        customerFilter.expectedRows = fetchSize
+        val customers = m.selectMap(Customer.fId, customerFilter)
+
+        val countryFilter = Formula.parse("", Country.T)
+        countryFilter.expectedRows = fetchSize
+        val countries = m.selectMap(Country.fId, countryFilter)
+
         val ct = mutableListOf<String>()
-        val ordersAggr = m.selectMap(Shipping_Order.fId, "").values
+        val shippingOrderFilter = Formula.parse("", Shipping_Order.T)
+        shippingOrderFilter.expectedRows = fetchSize
+        val ordersAggr = m.selectMap(Shipping_Order.fId, shippingOrderFilter).values
             .mapNotNull { o ->
                 val d = o.date_Order_Paid
                 if (d != null) {
