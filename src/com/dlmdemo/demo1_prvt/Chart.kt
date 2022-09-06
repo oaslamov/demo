@@ -47,9 +47,14 @@ class ChartManager(val m: Demo1) {
         data.setLegendY(0, m.xtr("label_p_revenue"), "number")
         data.setLegendY(1, m.xtr("label_c_revenue"), "number")
 
-        val products = m.selectMap(Product_Abc.fId, "").values.sortedByDescending { it.sum }
+        val productFilter = Formula.parse(QueryHelper.c().orderBy(Product_Abc.fSum, true).toString(), Product_Abc.T)
+        productFilter.expectedRows = fetchSize
+        val products = m.selectMap(Product_Abc.fId, productFilter).values.toList()
         val maxProduct = products.size
-        val customers = m.selectMap(Customer_Abc.fId, "").values.sortedByDescending { it.sum }
+
+        val customerFilter = Formula.parse(QueryHelper.c().orderBy(Customer_Abc.fSum, true).toString(), Customer_Abc.T)
+        customerFilter.expectedRows = fetchSize
+        val customers = m.selectMap(Customer_Abc.fId, customerFilter).values.toList()
         val maxCustomer = customers.size
 
         data.add(0, ZERO, ZERO)
