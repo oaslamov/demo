@@ -7,6 +7,7 @@ import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.exp.FieldLimit
 import com.dolmen.serv.exp.Formula
+import com.dolmen.serv.exp.QueryHelper
 import com.dolmen.ui.screen.ChartData
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
@@ -64,8 +65,8 @@ class ChartManager(val m: Demo1) {
     @Description("Prepares JSON for Order totals chart")
     @Parameters("points: Groups limits")
     fun getChartOrderTotals(points: String): ChartData<*, *> {
-        fun countOrders(filter: String): Long =
-            (m.aggregates(Formula.parse(filter, Shipping_Order.T), Count())[0].result as Number).toLong()
+        fun countOrders(filter: QueryHelper): Long =
+            (m.aggregates(Formula.parse(filter.toString(), Shipping_Order.T), Count())[0].result as Number).toLong()
 
         val data = ChartData<String, Long>()
         if (points.isBlank()) return data
@@ -81,16 +82,19 @@ class ChartManager(val m: Demo1) {
             var y: Long
             when {
                 i == 0 -> {
-                    x = "≤${limits[0]}.00"
-                    y = countOrders("total<=${limits[0]}")
+                    x = "≤${limits.first()}.00"
+                    y = countOrders(QueryHelper.c().and(Shipping_Order.fTotal, "<=", limits.first()))
                 }
                 i < limitsSize -> {
                     x = "${limits[i - 1]}.01-${limits[i]}.00"
-                    y = countOrders("total>${limits[i - 1]} and total<=${limits[i]}")
+                    y = countOrders(
+                        QueryHelper.c().and(Shipping_Order.fTotal, ">", limits[i - 1])
+                            .and(Shipping_Order.fTotal, "<=", limits[i])
+                    )
                 }
                 else -> {
                     x = ">${limits.last()}.00"
-                    y = countOrders("total>${limits.last()}")
+                    y = countOrders(QueryHelper.c().and(Shipping_Order.fTotal, ">", limits.last()))
                 }
             }
             data.add(x, y)
