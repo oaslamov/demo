@@ -2,6 +2,7 @@ package com.dlmdemo.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.CONST.MAX_SCALE
+import com.dolmen.serv.aggregate.Count
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.exp.FieldLimit
@@ -63,6 +64,9 @@ class ChartManager(val m: Demo1) {
     @Description("Prepares JSON for Order totals chart")
     @Parameters("points: Groups limits")
     fun getChartOrderTotals(points: String): ChartData<*, *> {
+        fun countOrders(filter: String): Long =
+            (m.aggregates(Formula.parse(filter, Shipping_Order.T), Count())[0].result as Number).toLong()
+
         val data = ChartData<String, Long>()
         if (points.isBlank()) return data
         val limits = points.split(",").map { it.trim().toInt() }.distinct().sorted()
@@ -77,16 +81,16 @@ class ChartManager(val m: Demo1) {
             var y: Long
             when {
                 i == 0 -> {
-                    x = "<${limits[0]}.00"
-                    y = m.count(Shipping_Order::class, "total<${limits[0]}")
+                    x = "≤${limits[0]}.00"
+                    y = countOrders("total<=${limits[0]}")
                 }
                 i < limitsSize -> {
-                    x = "${limits[i - 1]}.00-${limits[i]}.00"
-                    y = m.count(Shipping_Order::class, "total>=${limits[i - 1]} and total<${limits[i]}")
+                    x = "${limits[i - 1]}.01-${limits[i]}.00"
+                    y = countOrders("total>${limits[i - 1]} and total<=${limits[i]}")
                 }
                 else -> {
                     x = ">${limits.last()}.00"
-                    y = m.count(Shipping_Order::class, "total>=${limits.last()}")
+                    y = countOrders("total>${limits.last()}")
                 }
             }
             data.add(x, y)
