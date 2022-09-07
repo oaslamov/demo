@@ -53,6 +53,11 @@
       "fields":[
         "shipment_date"
       ]
+    },
+    {
+      "fields":[
+        "date_order_paid"
+      ]
     }
   ],
   "@":"8",

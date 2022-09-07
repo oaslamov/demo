@@ -120,23 +120,24 @@ class ChartManager(val m: Demo1) {
         val countries = m.selectMap(Country.fId, countryFilter)
 
         val ct = mutableListOf<String>()
+
         val shippingOrderFilter = Formula.parse(filter, Shipping_Order.T)
         shippingOrderFilter.expectedRows = fetchSize
 
-        val ordersAggr = m.selectMap(Shipping_Order.fId, shippingOrderFilter).values
-            .mapNotNull { o ->
-                val d = o.date_Order_Paid
-                if (d != null) {
-                    val p = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
-                    val c = countries[customers[o.customer]?.country]?.name ?: m.xtr("label_unknown_country")
-                    if (c !in ct) ct.add(c)
-                    val s = o.total ?: ZERO
-                    OrderData(period = p, country = c, sum = s)
-                } else null
+        val ordersAggr = sortedMapOf<String, MutableMap<String, BigDecimal>>()
+
+        m.iterate<Shipping_Order>(shippingOrderFilter) { o ->
+            val d = o.date_Order_Paid
+            if (d != null) {
+                val p = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
+                val c = countries[customers[o.customer]?.country]?.name ?: m.xtr("label_unknown_country")
+                if (c !in ct) ct.add(c)
+                val s = o.total ?: ZERO
+                if (ordersAggr[p] == null) ordersAggr[p] = sortedMapOf()
+                val acc = ordersAggr[p]?.get(c) ?: ZERO
+                ordersAggr[p]?.set(c, acc + s)
             }
-            .groupBy { it.period }
-            .mapValues { it.value.groupingBy { it.country }.fold(ZERO) { acc, e -> acc + e.sum }.toSortedMap() }
-            .toSortedMap()
+        }
 
         val data = ChartData<String, BigDecimal>()
         data.setLegendX(m.xtr("label_period"), "string")
@@ -144,10 +145,10 @@ class ChartManager(val m: Demo1) {
         ct.forEachIndexed { i, c ->
             data.setLegendY(i, c, "number")
         }
-        ordersAggr.forEach { p, c ->
+        ordersAggr.forEach { (p, c) ->
             var y = arrayOf<BigDecimal>()
-            ct.forEach { cName ->
-                y += c[cName] ?: ZERO
+            ct.forEach { countryName ->
+                y += c[countryName] ?: ZERO
             }
             data.add(p, *y)
         }
