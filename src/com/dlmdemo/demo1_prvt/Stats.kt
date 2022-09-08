@@ -13,16 +13,52 @@ class Stats(val m: Demo1) {
     //val fetchSize = 200
 
     fun makeStats(start: LocalDate? = null, finish: LocalDate? = null, abLimit: Int, bcLimit: Int) {
-        val itemFilter = Formula.parse("", Shipping_Order_Product.T)
-        //itemFilter.expectedRows = fetchSize
-        val itemQuery: Map<RowID, Shipping_Order_Product> = m.selectMap(Shipping_Order_Product.fId, itemFilter)
-        makeProductStats(start, finish, abLimit, bcLimit, itemQuery)
-        makeCustomerStats(start, finish, abLimit, bcLimit, itemQuery)
+        makeProductStats(start, finish, abLimit, bcLimit)
         Txt.info(m.MID("analysis_done")).msg()
     }
 
+    fun makeProductStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int) {
+        data class ProductAcc(var name: String = "", var quantity: Int = 0, var sum: BigDecimal = ZERO)
 
-    fun makeProductStats(
+        val productsAbc = mutableMapOf<RowID?, ProductAcc?>()
+        var grandTotal = ZERO
+        m.iterate<Shipping_Order_Product>("") { item ->
+            val productId = item.product
+            if (productsAbc[productId] == null) productsAbc[productId] = ProductAcc()
+            val productSum = productsAbc[productId]?.sum ?: ZERO
+            productsAbc[productId]?.sum = productSum + (item.sum ?: ZERO)
+            val productQnty = productsAbc[productId]?.quantity ?: 0
+            productsAbc[productId]?.quantity = productQnty + item.quantity
+            grandTotal += item.sum ?: ZERO
+        }
+
+        m.iterate<Product>("") { p ->
+            if (productsAbc[p.id] != null) productsAbc[p.id]?.name = p.name ?: ""
+        }
+
+        m.deleteList(Product_Abc.TABLE_ID, "")
+        var cuSum = ZERO
+        productsAbc.values.sortedByDescending { it?.sum }
+            .forEach { agg ->
+                if (agg != null) {
+                    Product_Abc().apply {
+                        product = id
+                        name = agg.name
+                        quantity = agg.quantity
+                        sum = agg.sum
+                        avg_Price = agg.sum / agg.quantity.toBigDecimal()
+                        cuSum += agg.sum
+                        cusum = cuSum
+                        val cuPerc = percentage(cuSum, grandTotal)
+                        cuperc = cuPerc
+                        abc_Class = abcClass(cuPerc, abLimit, bcLimit)
+                        m.insert(this)
+                    }
+                }
+            }
+    }
+
+    fun makeProductStatsOld(
         start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int,
         itemQuery: Map<RowID, Shipping_Order_Product>
     ) {
