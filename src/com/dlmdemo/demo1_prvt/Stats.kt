@@ -10,11 +10,11 @@ import java.math.RoundingMode
 import java.time.LocalDate
 
 class Stats(val m: Demo1) {
-    val fetchSize = 200
+    //val fetchSize = 200
 
     fun makeStats(start: LocalDate? = null, finish: LocalDate? = null, abLimit: Int, bcLimit: Int) {
         val itemFilter = Formula.parse("", Shipping_Order_Product.T)
-        itemFilter.expectedRows = fetchSize
+        //itemFilter.expectedRows = fetchSize
         val itemQuery: Map<RowID, Shipping_Order_Product> = m.selectMap(Shipping_Order_Product.fId, itemFilter)
         makeProductStats(start, finish, abLimit, bcLimit, itemQuery)
         makeCustomerStats(start, finish, abLimit, bcLimit, itemQuery)
@@ -30,7 +30,7 @@ class Stats(val m: Demo1) {
         m.deleteList(Product_Abc.TABLE_ID, "")
 
         val productFilter = Formula.parse("", Product.T)
-        productFilter.expectedRows = fetchSize
+        //productFilter.expectedRows = fetchSize
         val products = m.selectMap(Product.fId, productFilter)
 
         val items = itemQuery
@@ -66,11 +66,11 @@ class Stats(val m: Demo1) {
         m.deleteList(Customer_Abc.TABLE_ID, "")
 
         val customerFilter = Formula.parse("", Customer.T)
-        customerFilter.expectedRows = fetchSize
+        //customerFilter.expectedRows = fetchSize
         val customers = m.selectMap(Customer.fId, customerFilter)
 
         val orderFilter = Formula.parse("", Shipping_Order.T)
-        orderFilter.expectedRows = fetchSize
+        //orderFilter.expectedRows = fetchSize
         val orders = m.selectMap(Shipping_Order.fId, orderFilter)
 
         val items = itemQuery

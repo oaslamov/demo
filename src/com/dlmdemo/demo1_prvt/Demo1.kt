@@ -175,11 +175,11 @@ open class Demo1 : Demo1_PrvtModuleBase() {
     @Description("Runs some queries")
     @Parameters(
         "n: Repeat count default(10)",
-        "dbUrl: database connection url default(jdbc:postgresql://127.0.0.1:5432/postgres)",
+        "dbUrl: database connection url default(jdbc:postgresql://127.0.0.1:5432/postgres?maxResultBuffer=10p&defaultRowFetchSize=20&adaptiveFetchMaximum=1000&adaptiveFetch=true)",
         "dbUser: database user default(postgres)",
         "dbPass: database password",
         "dbSchema: database Schema default(dolmen)",
-        "fetchSize: default(1000)"
+        "fetchSize: default(20)"
     )
     fun testQuery(n: Int, dbUrl: String, dbUser: String, dbPass: String, dbSchema: String, fetchSize: Int) {
         TestPerf(this).testQuery(n, dbUrl, dbUser, dbPass, dbSchema, fetchSize)

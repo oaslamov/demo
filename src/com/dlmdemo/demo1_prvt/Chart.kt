@@ -15,7 +15,7 @@ import java.math.RoundingMode
 import java.time.temporal.IsoFields
 
 class ChartManager(val m: Demo1) {
-    val fetchSize = 200
+    //val fetchSize = 200
     fun getChartExample2(filter: String): ChartData<*, *> {
         val f = Formula.parse(filter, com.dolmen.md.std.Parameters.T)
         val isShowy2 = true == FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck)
@@ -48,12 +48,12 @@ class ChartManager(val m: Demo1) {
         data.setLegendY(1, m.xtr("label_c_revenue"), "number")
 
         val productFilter = Formula.parse(QueryHelper.c().orderBy(Product_Abc.fSum, true).toString(), Product_Abc.T)
-        productFilter.expectedRows = fetchSize
+        //productFilter.expectedRows = fetchSize
         val products = m.selectMap(Product_Abc.fId, productFilter).values.toList()
         val maxProduct = products.size
 
         val customerFilter = Formula.parse(QueryHelper.c().orderBy(Customer_Abc.fSum, true).toString(), Customer_Abc.T)
-        customerFilter.expectedRows = fetchSize
+        //customerFilter.expectedRows = fetchSize
         val customers = m.selectMap(Customer_Abc.fId, customerFilter).values.toList()
         val maxCustomer = customers.size
 
@@ -109,20 +109,18 @@ class ChartManager(val m: Demo1) {
 
     @Description("Prepares JSON for Sales by country chart")
     fun getChartSalesByCountry(filter: String): ChartData<*, *> {
-        data class OrderData(val period: String, val country: String, val sum: BigDecimal)
-
         val customerFilter = Formula.parse("", Customer.T)
-        customerFilter.expectedRows = fetchSize
+        //customerFilter.expectedRows = fetchSize
         val customers = m.selectMap(Customer.fId, customerFilter)
 
         val countryFilter = Formula.parse("", Country.T)
-        countryFilter.expectedRows = fetchSize
+        //countryFilter.expectedRows = fetchSize
         val countries = m.selectMap(Country.fId, countryFilter)
 
         val ct = mutableListOf<String>()
 
         val shippingOrderFilter = Formula.parse(filter, Shipping_Order.T)
-        shippingOrderFilter.expectedRows = fetchSize
+        //shippingOrderFilter.expectedRows = fetchSize
 
         val ordersAggr = sortedMapOf<String, MutableMap<String, BigDecimal>>()
 
@@ -158,20 +156,18 @@ class ChartManager(val m: Demo1) {
 
     @Description("Prepares JSON for Percentage of sales by country chart")
     fun getChartSalesPercentageByCountry(): ChartData<*, *> {
-        data class OrderData(val period: String, val country: String, val sum: BigDecimal)
-
         val customerFilter = Formula.parse("", Customer.T)
-        customerFilter.expectedRows = fetchSize
+        //customerFilter.expectedRows = fetchSize
         val customers = m.selectMap(Customer.fId, customerFilter)
 
         val countryFilter = Formula.parse("", Country.T)
-        countryFilter.expectedRows = fetchSize
+        //countryFilter.expectedRows = fetchSize
         val countries = m.selectMap(Country.fId, countryFilter)
 
         val ct = mutableListOf<String>()
 
         val shippingOrderFilter = Formula.parse("", Shipping_Order.T)
-        shippingOrderFilter.expectedRows = fetchSize
+        //shippingOrderFilter.expectedRows = fetchSize
 
         val ordersAggr = sortedMapOf<String, MutableMap<String, BigDecimal>>()
 
