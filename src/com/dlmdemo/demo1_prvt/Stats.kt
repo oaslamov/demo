@@ -19,17 +19,38 @@ class Stats(val m: Demo1) {
 
     fun makeProductStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int) {
         data class ProductAcc(var name: String = "", var quantity: Int = 0, var sum: BigDecimal = ZERO)
+        data class CustomerAcc(var name: String = "", var sum: BigDecimal = ZERO)
+
+        val orderCustomer = mutableMapOf<RowID, RowID?>()
+        m.iterate<Shipping_Order>("") { o ->
+            if (o.customer != null) orderCustomer[o.id] = o.customer
+        }
 
         val productsAbc = mutableMapOf<RowID?, ProductAcc?>()
-        var grandTotal = ZERO
+        var productsTotal = ZERO
+        val customerAbc = mutableMapOf<RowID?, CustomerAcc?>()
+        var customersTotal = ZERO
         m.iterate<Shipping_Order_Product>("") { item ->
             val productId = item.product
-            if (productsAbc[productId] == null) productsAbc[productId] = ProductAcc()
-            val productSum = productsAbc[productId]?.sum ?: ZERO
-            productsAbc[productId]?.sum = productSum + (item.sum ?: ZERO)
-            val productQnty = productsAbc[productId]?.quantity ?: 0
-            productsAbc[productId]?.quantity = productQnty + item.quantity
-            grandTotal += item.sum ?: ZERO
+            if (productId != null) {
+                if (productsAbc[productId] == null) productsAbc[productId] = ProductAcc()
+                val productSum = productsAbc[productId]?.sum ?: ZERO
+                productsAbc[productId]?.sum = productSum + (item.sum ?: ZERO)
+                val productQnty = productsAbc[productId]?.quantity ?: 0
+                productsAbc[productId]?.quantity = productQnty + item.quantity
+                productsTotal += item.sum ?: ZERO
+            }
+            val orderId = item.shipping_Order
+            if (orderId!=null){
+                val customerId = orderCustomer[orderId]
+                if (customerId!=null){
+                    if (customerAbc[customerId]==null) customerAbc[customerId]=CustomerAcc()
+                    val customerSum = customerAbc[customerId]?.sum ?: ZERO
+                    customerAbc[customerId]?.sum = customerSum + (item.sum ?: ZERO)
+                    customersTotal += item.sum ?: ZERO
+                }
+            }
+
         }
 
         m.iterate<Product>("") { p ->
@@ -42,14 +63,31 @@ class Stats(val m: Demo1) {
             .forEach { agg ->
                 if (agg != null) {
                     Product_Abc().apply {
-                        product = id
+                        product = id ///    check this
                         name = agg.name
                         quantity = agg.quantity
                         sum = agg.sum
                         avg_Price = agg.sum / agg.quantity.toBigDecimal()
                         cuSum += agg.sum
                         cusum = cuSum
-                        val cuPerc = percentage(cuSum, grandTotal)
+                        val cuPerc = percentage(cuSum, productsTotal)
+                        cuperc = cuPerc
+                        abc_Class = abcClass(cuPerc, abLimit, bcLimit)
+                        m.insert(this)
+                    }
+                }
+            }
+
+        m.deleteList(Customer_Abc.TABLE_ID, "")
+        cuSum = ZERO
+        customerAbc.values.sortedByDescending { it?.sum }
+            .forEach { agg->
+                if (agg!=null){
+                    Customer_Abc().apply{
+                        sum = agg.sum
+                        cuSum +=agg.sum
+                        cusum = cuSum
+                        val cuPerc = percentage(cuSum, customersTotal)
                         cuperc = cuPerc
                         abc_Class = abcClass(cuPerc, abLimit, bcLimit)
                         m.insert(this)
