@@ -59,9 +59,15 @@ class ChartManager(val m: Demo1) {
 
         data.add(0, ZERO, ZERO)
         for (x in 5..100 step 5) {
-            val iProduct = (x * maxProduct / 100 - 1).coerceIn(0, maxProduct - 1)
-            val iCustomer = (x * maxCustomer / 100 - 1).coerceIn(0, maxCustomer - 1)
-            data.add(x, products[iProduct].cuperc, customers[iCustomer].cuperc)
+            val y1 = if (maxProduct > 0) {
+                val iProduct = (x * maxProduct / 100 - 1).coerceIn(0, maxProduct - 1)
+                products[iProduct].cuperc
+            } else ZERO
+            val y2 = if (maxCustomer > 0) {
+                val iCustomer = (x * maxCustomer / 100 - 1).coerceIn(0, maxCustomer - 1)
+                customers[iCustomer].cuperc
+            } else ZERO
+            data.add(x, y1, y2)
         }
 
         return data
