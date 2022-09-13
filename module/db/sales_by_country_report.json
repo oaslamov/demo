@@ -1,0 +1,20 @@
+{
+  "code":"sales_by_country_report",
+  "fields":[
+    {
+      "code":"period",
+      "@":"6"
+    },
+    {
+      "code":"country_name",
+      "@":"7"
+    },
+    {
+      "code":"sum",
+      "type":"number",
+      "@":"8"
+    }
+  ],
+  "@":"42",
+  "@e":"2kat_dd:3;6period:1;7country_name:1;8sum:6"
+}

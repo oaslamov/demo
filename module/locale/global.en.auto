@@ -161,6 +161,15 @@ f:7ef07d024006=Product
 --  Shipping From
 f:7ef07d024008=Shipping From
 
+// table Sales By Country Report
+t:7ef07d02a000=Sales By Country Report
+--  Period
+f:7ef07d02a006=Period
+--  Country Name
+f:7ef07d02a007=Country Name
+--  Sum
+f:7ef07d02a008=Sum
+
 // table Shipping Order
 t:7ef07d008000=Shipping Order
 --  Customer
