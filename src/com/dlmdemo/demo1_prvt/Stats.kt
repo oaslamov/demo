@@ -3,6 +3,9 @@ package com.dlmdemo.demo1_prvt
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.CONST
 import com.dolmen.serv.Txt
+import com.dolmen.serv.conn.TableIt
+import com.dolmen.serv.exp.Formula
+import com.dolmen.serv.exp.QueryHelper
 import com.dolmen.serv.table.RowID
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
@@ -12,7 +15,7 @@ import java.time.temporal.IsoFields
 import java.util.*
 
 class Stats(val m: Demo1) {
-    //val fetchSize = 200
+    data class CustomerData(val id: RowID, val name: String, val countryName: String)
 
     fun makeStats(start: LocalDate? = null, finish: LocalDate? = null, abLimit: Int, bcLimit: Int) {
         makeAbcStats(start, finish, abLimit, bcLimit)
@@ -26,14 +29,13 @@ class Stats(val m: Demo1) {
         val orderCustomer = mutableMapOf<RowID, RowID?>()
         val ordersAgg = sortedMapOf<String, SortedMap<String, BigDecimal>>()
         val periodsAgg = mutableMapOf<String, BigDecimal>()
-        val countries = m.selectMap(Country.fId, "")
-        val customers = m.selectMap(Customer.fId, "")
+        val customers = readCustomersFromDb()
         m.iterate<Shipping_Order>("") { o ->
             if (o.customer != null) orderCustomer[o.id] = o.customer
             val d = o.date_Order_Paid
             if (d != null) {
                 val period = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
-                val country = countries[customers[o.customer]?.country]?.name ?: "-"
+                val country = customers[o.customer]?.countryName ?: "-"
                 val s = o.total ?: ZERO
                 if (ordersAgg[period] == null) ordersAgg[period] = sortedMapOf()
                 val acc = ordersAgg[period]?.get(country) ?: ZERO
@@ -89,21 +91,20 @@ class Stats(val m: Demo1) {
                     if (customerAbc[customerId] == null) customerAbc[customerId] = CustomerAcc(id = customerId)
                     val customerSum = customerAbc[customerId]?.sum ?: ZERO
                     customerAbc[customerId]?.sum = customerSum + (item.sum ?: ZERO)
+                    customerAbc[customerId]?.name = customers[customerId]?.name ?: "-"
                     customersTotal += item.sum ?: ZERO
                 }
             }
 
         }
 
-        m.iterate<Product>("")
-        { p ->
+        m.iterate<Product>("") { p ->
             if (productsAbc[p.id] != null) productsAbc[p.id]?.name = p.name ?: ""
         }
 
-        m.iterate<Customer>("")
-        { c ->
-            if (customerAbc[c.id] != null) customerAbc[c.id]?.name = c.name ?: ""
-        }
+        //m.iterate<Customer>("") { c ->
+        //    if (customerAbc[c.id] != null) customerAbc[c.id]?.name = c.name ?: ""
+        //}
 
         m.deleteList(Product_Abc.TABLE_ID, "")
         var cuSum = ZERO
@@ -142,6 +143,31 @@ class Stats(val m: Demo1) {
                 }
             }
         }
+    }
+
+    private fun readCustomersFromDb(): MutableMap<RowID, CustomerData> {
+        val countryFilter = Formula.parse(QueryHelper.c().orderBy(Country.fName, false).toString(), Country.T)
+        val countriesIterator = m.iterate(countryFilter).iterator() as TableIt<Country>
+        while (countriesIterator.hasNext()) {
+            val country = countriesIterator.next()
+            val noop = null
+        }
+
+
+        val countries = m.selectMap(Country.fId, "")
+        val customers = mutableMapOf<RowID, CustomerData>()
+        val customerFilter = Formula.parse(QueryHelper.c().orderBy(Customer.fCountry, false).toString(), Customer.T)
+        var countryId0: RowID? = null
+        m.iterate<Customer>(customerFilter) { row ->
+            val countryId = row.country
+            if (countryId0 != countryId) {
+                countryId0 = countryId
+            }
+            val countryName = countries[row.country]?.name ?: "-"
+            customers[row.id] = CustomerData(row.id, row.name ?: "-", countryName)
+            val noop = null
+        }
+        return customers
     }
 
     private fun percentage(
