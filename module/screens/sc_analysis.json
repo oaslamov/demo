@@ -132,6 +132,14 @@
             {
               "code":"ds_chart1",
               "type":"all_rows"
+            },
+            {
+              "code":"ds_chart3",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_chart4",
+              "type":"all_rows"
             }
           ]
         }

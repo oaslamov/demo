@@ -147,31 +147,16 @@ class ChartManager(val m: Demo1) {
 
     @Description("Prepares JSON for Percentage of sales by country chart")
     fun getChartSalesPercentageByCountry(): ChartData<*, *> {
-        val customerFilter = Formula.parse("", Customer.T)
-        //customerFilter.expectedRows = fetchSize
-        val customers = m.selectMap(Customer.fId, customerFilter)
-
-        val countryFilter = Formula.parse("", Country.T)
-        //countryFilter.expectedRows = fetchSize
-        val countries = m.selectMap(Country.fId, countryFilter)
-
         val ct = mutableListOf<String>()
-
-        val shippingOrderFilter = Formula.parse("", Shipping_Order.T)
-        //shippingOrderFilter.expectedRows = fetchSize
-
-        val ordersAggr = sortedMapOf<String, MutableMap<String, BigDecimal>>()
-
-        m.iterate<Shipping_Order>(shippingOrderFilter) { o ->
-            val d = o.date_Order_Paid
-            if (d != null) {
-                val p = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
-                val c = countries[customers[o.customer]?.country]?.name ?: m.xtr("label_unknown_country")
+        val ordersAgg = sortedMapOf<String, MutableMap<String, BigDecimal>>()
+        m.iterate<Sales_By_Country_Report>("") { row ->
+            val p = row.period
+            if (p != null) {
+                val cn = row.country_Name ?: "-"
+                val c = if (cn == "-") m.xtr("label_unknown_country") else cn
                 if (c !in ct) ct.add(c)
-                val s = o.total ?: ZERO
-                if (ordersAggr[p] == null) ordersAggr[p] = sortedMapOf()
-                val acc = ordersAggr[p]?.get(c) ?: ZERO
-                ordersAggr[p]?.set(c, acc + s)
+                if (ordersAgg[p] == null) ordersAgg[p] = sortedMapOf()
+                ordersAgg[p]?.set(c, row.sum ?: ZERO)
             }
         }
 
@@ -182,7 +167,7 @@ class ChartManager(val m: Demo1) {
             data.setLegendY(i, c, "number")
         }
 
-        ordersAggr.forEach { o ->
+        ordersAgg.forEach { o ->
             val x = o.value
             var sum = BigDecimal("100").setScale(MAX_SCALE) // Distribute 100 percents proportionally
             var q = x.values.sumOf { it } // Sales total for this period
