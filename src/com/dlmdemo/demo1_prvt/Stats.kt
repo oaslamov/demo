@@ -30,7 +30,7 @@ class Stats(val m: Demo1) {
             val d = o.date_Order_Paid
             if (d != null) {
                 val period = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
-                val country = countries[customers[o.customer]?.country]?.name ?: m.xtr("label_unknown_country")
+                val country = countries[customers[o.customer]?.country]?.name ?: "-"
                 val s = o.total ?: ZERO
                 if (ordersAggr[period] == null) ordersAggr[period] = sortedMapOf()
                 val acc = ordersAggr[period]?.get(country) ?: ZERO
@@ -38,6 +38,7 @@ class Stats(val m: Demo1) {
             }
         }
 
+        m.deleteList(Sales_By_Country_Report.TABLE_ID,"")
         ordersAggr.forEach { (period, countriesSums) ->
             countriesSums.forEach { (countryName, sum) ->
                 val row = Sales_By_Country_Report()

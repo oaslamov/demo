@@ -115,31 +115,16 @@ class ChartManager(val m: Demo1) {
 
     @Description("Prepares JSON for Sales by country chart")
     fun getChartSalesByCountry(filter: String): ChartData<*, *> {
-        val customerFilter = Formula.parse("", Customer.T)
-        //customerFilter.expectedRows = fetchSize
-        val customers = m.selectMap(Customer.fId, customerFilter)
-
-        val countryFilter = Formula.parse("", Country.T)
-        //countryFilter.expectedRows = fetchSize
-        val countries = m.selectMap(Country.fId, countryFilter)
-
         val ct = mutableListOf<String>()
-
-        val shippingOrderFilter = Formula.parse(filter, Shipping_Order.T)
-        //shippingOrderFilter.expectedRows = fetchSize
-
-        val ordersAggr = sortedMapOf<String, MutableMap<String, BigDecimal>>()
-
-        m.iterate<Shipping_Order>(shippingOrderFilter) { o ->
-            val d = o.date_Order_Paid
-            if (d != null) {
-                val p = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
-                val c = countries[customers[o.customer]?.country]?.name ?: m.xtr("label_unknown_country")
+        val ordersAgg = sortedMapOf<String, MutableMap<String, BigDecimal>>()
+        m.iterate<Sales_By_Country_Report>("") { row ->
+            val p = row.period
+            if (p != null) {
+                val cn = row.country_Name ?: "-"
+                val c = if (cn == "-") m.xtr("label_unknown_country") else cn
                 if (c !in ct) ct.add(c)
-                val s = o.total ?: ZERO
-                if (ordersAggr[p] == null) ordersAggr[p] = sortedMapOf()
-                val acc = ordersAggr[p]?.get(c) ?: ZERO
-                ordersAggr[p]?.set(c, acc + s)
+                if (ordersAgg[p] == null) ordersAgg[p] = sortedMapOf()
+                ordersAgg[p]?.set(c, row.sum ?: ZERO)
             }
         }
 
@@ -149,7 +134,7 @@ class ChartManager(val m: Demo1) {
         ct.forEachIndexed { i, c ->
             data.setLegendY(i, c, "number")
         }
-        ordersAggr.forEach { (p, c) ->
+        ordersAgg.forEach { (p, c) ->
             var y = arrayOf<BigDecimal>()
             ct.forEach { countryName ->
                 y += c[countryName] ?: ZERO
