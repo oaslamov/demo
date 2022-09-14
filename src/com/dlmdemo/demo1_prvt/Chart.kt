@@ -1,7 +1,6 @@
 package com.dlmdemo.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
-import com.dolmen.serv.CONST.MAX_SCALE
 import com.dolmen.serv.aggregate.Count
 import com.dolmen.serv.anno.Description
 import com.dolmen.serv.anno.Parameters
@@ -11,8 +10,7 @@ import com.dolmen.serv.exp.QueryHelper
 import com.dolmen.ui.screen.ChartData
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
-import java.math.RoundingMode
-import java.time.temporal.IsoFields
+import java.util.*
 
 class ChartManager(val m: Demo1) {
     //val fetchSize = 200
@@ -115,29 +113,16 @@ class ChartManager(val m: Demo1) {
 
     @Description("Prepares JSON for Sales by country chart")
     fun getChartSalesByCountry(filter: String): ChartData<*, *> {
-        val ct = mutableListOf<String>()
-        val ordersAgg = sortedMapOf<String, MutableMap<String, BigDecimal>>()
-        m.iterate<Sales_By_Country_Report>("") { row ->
-            val p = row.period
-            if (p != null) {
-                val cn = row.country_Name ?: "-"
-                val c = if (cn == "-") m.xtr("label_unknown_country") else cn
-                if (c !in ct) ct.add(c)
-                if (ordersAgg[p] == null) ordersAgg[p] = sortedMapOf()
-                ordersAgg[p]?.set(c, row.sum ?: ZERO)
-            }
-        }
-
+        val (ct, ordersAgg) = readReportFromDb()
         val data = ChartData<String, BigDecimal>()
         data.setLegendX(m.xtr("label_period"), "string")
-        ct.sort()
         ct.forEachIndexed { i, c ->
             data.setLegendY(i, c, "number")
         }
         ordersAgg.forEach { (p, c) ->
             var y = arrayOf<BigDecimal>()
             ct.forEach { countryName ->
-                y += c[countryName] ?: ZERO
+                y += c[countryName]?.first ?: ZERO
             }
             data.add(p, *y)
         }
@@ -147,8 +132,28 @@ class ChartManager(val m: Demo1) {
 
     @Description("Prepares JSON for Percentage of sales by country chart")
     fun getChartSalesPercentageByCountry(): ChartData<*, *> {
+        val (ct, ordersAgg) = readReportFromDb()
+        val data = ChartData<String, BigDecimal>()
+        data.setLegendX(m.xtr("label_period"), "string")
+        ct.forEachIndexed { i, c ->
+            data.setLegendY(i, c, "number")
+        }
+
+        ordersAgg.forEach { (p, c) ->
+            var y = arrayOf<BigDecimal>()
+            ct.forEach { countryName ->
+                y += c[countryName]?.second ?: ZERO
+            }
+            data.add(p, *y)
+        }
+
+        return data
+    }
+
+
+    private fun readReportFromDb(): Pair<MutableList<String>, SortedMap<String, MutableMap<String, Pair<BigDecimal, BigDecimal>>>> {
         val ct = mutableListOf<String>()
-        val ordersAgg = sortedMapOf<String, MutableMap<String, BigDecimal>>()
+        val ordersAgg = sortedMapOf<String, MutableMap<String, Pair<BigDecimal, BigDecimal>>>()
         m.iterate<Sales_By_Country_Report>("") { row ->
             val p = row.period
             if (p != null) {
@@ -156,37 +161,10 @@ class ChartManager(val m: Demo1) {
                 val c = if (cn == "-") m.xtr("label_unknown_country") else cn
                 if (c !in ct) ct.add(c)
                 if (ordersAgg[p] == null) ordersAgg[p] = sortedMapOf()
-                ordersAgg[p]?.set(c, row.sum ?: ZERO)
+                ordersAgg[p]?.set(c, Pair(row.sum ?: ZERO, row.percentage ?: ZERO))
             }
         }
-
-        val data = ChartData<String, BigDecimal>()
-        data.setLegendX(m.xtr("label_period"), "string")
         ct.sort()
-        ct.forEachIndexed { i, c ->
-            data.setLegendY(i, c, "number")
-        }
-
-        ordersAgg.forEach { o ->
-            val x = o.value
-            var sum = BigDecimal("100").setScale(MAX_SCALE) // Distribute 100 percents proportionally
-            var q = x.values.sumOf { it } // Sales total for this period
-            val roundTo = BigDecimal("0.1")
-            var y = arrayOf<BigDecimal>()
-            ct.forEach { c ->
-                if (q.signum() > 0) {
-                    val v = x[c] ?: ZERO
-                    val w = sum / q
-                    val result = roundTo * (w * v / roundTo).setScale(0, RoundingMode.HALF_UP)
-                    y += result
-                    sum -= result
-                    q -= v
-                } else y += ZERO
-            }
-            data.add(o.key, *y)
-        }
-
-        return data
+        return Pair(ct, ordersAgg)
     }
-
 }
