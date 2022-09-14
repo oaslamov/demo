@@ -13,8 +13,13 @@
       "code":"sum",
       "type":"number",
       "@":"8"
+    },
+    {
+      "code":"percentage",
+      "type":"number",
+      "@":"9"
     }
   ],
   "@":"42",
-  "@e":"2kat_dd:3;6period:1;7country_name:1;8sum:6"
+  "@e":"2kat_dd:3;6period:1;7country_name:1;8sum:6;9percentage:6"
 }

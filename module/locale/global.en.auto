@@ -169,6 +169,8 @@ f:7ef07d02a006=Period
 f:7ef07d02a007=Country Name
 --  Sum
 f:7ef07d02a008=Sum
+--  Percentage
+f:7ef07d02a009=Percentage
 
 // table Shipping Order
 t:7ef07d008000=Shipping Order

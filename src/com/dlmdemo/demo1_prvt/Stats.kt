@@ -1,6 +1,7 @@
 package com.dlmdemo.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.serv.CONST
 import com.dolmen.serv.Txt
 import com.dolmen.serv.table.RowID
 import java.math.BigDecimal
@@ -8,6 +9,7 @@ import java.math.BigDecimal.ZERO
 import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.temporal.IsoFields
+import java.util.*
 
 class Stats(val m: Demo1) {
     //val fetchSize = 200
@@ -22,7 +24,8 @@ class Stats(val m: Demo1) {
         data class CustomerAcc(var id: RowID, var name: String = "", var sum: BigDecimal = ZERO)
 
         val orderCustomer = mutableMapOf<RowID, RowID?>()
-        val ordersAggr = sortedMapOf<String, MutableMap<String, BigDecimal>>()
+        val ordersAgg = sortedMapOf<String, SortedMap<String, BigDecimal>>()
+        val periodsAgg = mutableMapOf<String, BigDecimal>()
         val countries = m.selectMap(Country.fId, "")
         val customers = m.selectMap(Customer.fId, "")
         m.iterate<Shipping_Order>("") { o ->
@@ -32,19 +35,33 @@ class Stats(val m: Demo1) {
                 val period = "${d.year} Q${d.get(IsoFields.QUARTER_OF_YEAR)}"
                 val country = countries[customers[o.customer]?.country]?.name ?: "-"
                 val s = o.total ?: ZERO
-                if (ordersAggr[period] == null) ordersAggr[period] = sortedMapOf()
-                val acc = ordersAggr[period]?.get(country) ?: ZERO
-                ordersAggr[period]?.set(country, acc + s)
+                if (ordersAgg[period] == null) ordersAgg[period] = sortedMapOf()
+                val acc = ordersAgg[period]?.get(country) ?: ZERO
+                ordersAgg[period]?.set(country, acc + s)
+                if (periodsAgg[period] == null) periodsAgg[period] = ZERO
+                val periodAcc = periodsAgg[period] ?: ZERO
+                periodsAgg[period] = periodAcc + s
             }
         }
 
-        m.deleteList(Sales_By_Country_Report.TABLE_ID,"")
-        ordersAggr.forEach { (period, countriesSums) ->
-            countriesSums.forEach { (countryName, sum) ->
+        m.deleteList(Sales_By_Country_Report.TABLE_ID, "")
+        val roundTo = BigDecimal("0.1")
+        ordersAgg.forEach { (period, countriesSums) ->
+            var sum = BigDecimal("100").setScale(CONST.MAX_SCALE) // Distribute 100 percents proportionally
+            var q = periodsAgg[period] ?: ZERO // Sales total for this period
+            countriesSums.forEach { (countryName, countrySum) ->
+                var percentage = ZERO
+                if (q.signum() > 0) {
+                    val w = sum / q
+                    percentage = roundTo * (w * countrySum / roundTo).setScale(0, RoundingMode.HALF_UP)
+                    sum -= percentage
+                    q -= countrySum
+                }
                 val row = Sales_By_Country_Report()
                 row.period = period
                 row.country_Name = countryName
-                row.sum = sum
+                row.sum = countrySum
+                row.percentage = percentage
                 m.insert(row)
             }
         }
