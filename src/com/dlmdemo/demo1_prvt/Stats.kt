@@ -15,11 +15,6 @@ class Stats(val m: Demo1) {
     data class CustomerData(val id: RowID, val name: String, val countryName: String)
 
     fun makeStats(start: LocalDate? = null, finish: LocalDate? = null, abLimit: Int, bcLimit: Int) {
-        makeAbcStats(start, finish, abLimit, bcLimit)
-        Txt.info(m.MID("analysis_done")).msg()
-    }
-
-    fun makeAbcStats(start: LocalDate?, finish: LocalDate?, abLimit: Int, bcLimit: Int) {
         data class ProductAcc(var id: RowID, var name: String = "", var quantity: Int = 0, var sum: BigDecimal = ZERO)
         data class CustomerAcc(var id: RowID, var name: String = "", var sum: BigDecimal = ZERO)
 
@@ -136,6 +131,7 @@ class Stats(val m: Demo1) {
                 }
             }
         }
+        Txt.info(m.MID("analysis_done")).msg()
     }
 
     private fun readCustomersFromDb(): MutableMap<RowID, CustomerData> {
