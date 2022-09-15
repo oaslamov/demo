@@ -3,9 +3,6 @@ package com.dlmdemo.demo1_prvt
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.CONST
 import com.dolmen.serv.Txt
-import com.dolmen.serv.conn.TableIt
-import com.dolmen.serv.exp.Formula
-import com.dolmen.serv.exp.QueryHelper
 import com.dolmen.serv.table.RowID
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
@@ -102,10 +99,6 @@ class Stats(val m: Demo1) {
             if (productsAbc[p.id] != null) productsAbc[p.id]?.name = p.name ?: ""
         }
 
-        //m.iterate<Customer>("") { c ->
-        //    if (customerAbc[c.id] != null) customerAbc[c.id]?.name = c.name ?: ""
-        //}
-
         m.deleteList(Product_Abc.TABLE_ID, "")
         var cuSum = ZERO
         productsAbc.values.sortedByDescending { it?.sum }.forEach { agg ->
@@ -146,26 +139,11 @@ class Stats(val m: Demo1) {
     }
 
     private fun readCustomersFromDb(): MutableMap<RowID, CustomerData> {
-        val countryFilter = Formula.parse(QueryHelper.c().orderBy(Country.fName, false).toString(), Country.T)
-        val countriesIterator = m.iterate(countryFilter).iterator() as TableIt<Country>
-        while (countriesIterator.hasNext()) {
-            val country = countriesIterator.next()
-            val noop = null
-        }
-
-
         val countries = m.selectMap(Country.fId, "")
         val customers = mutableMapOf<RowID, CustomerData>()
-        val customerFilter = Formula.parse(QueryHelper.c().orderBy(Customer.fCountry, false).toString(), Customer.T)
-        var countryId0: RowID? = null
-        m.iterate<Customer>(customerFilter) { row ->
-            val countryId = row.country
-            if (countryId0 != countryId) {
-                countryId0 = countryId
-            }
+        m.iterate<Customer>("") { row ->
             val countryName = countries[row.country]?.name ?: "-"
             customers[row.id] = CustomerData(row.id, row.name ?: "-", countryName)
-            val noop = null
         }
         return customers
     }
