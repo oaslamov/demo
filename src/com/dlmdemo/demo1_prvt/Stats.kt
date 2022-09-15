@@ -8,6 +8,7 @@ import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
 import java.math.RoundingMode
 import java.time.LocalDate
+import java.time.OffsetDateTime
 import java.time.temporal.IsoFields
 import java.util.*
 
@@ -131,6 +132,14 @@ class Stats(val m: Demo1) {
                 }
             }
         }
+
+        var report = m.selectFirst(Report.fReport_Type, Report.REPORT_TYPE.DATA_ANALYSIS)
+        val isNewReport = report == null
+        if (isNewReport) report = Report()
+        report?.report_Type = Report.REPORT_TYPE.DATA_ANALYSIS
+        report?.report_Date = OffsetDateTime.now()
+        if (isNewReport) m.insert(report) else m.update(report)
+
         Txt.info(m.MID("analysis_done")).msg()
     }
 

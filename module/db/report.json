@@ -1,0 +1,22 @@
+{
+  "code":"report",
+  "fields":[
+    {
+      "code":"report_type",
+      "enum":[
+        {
+          "label":"Data analysis",
+          "value":"data_analysis"
+        }
+      ],
+      "@":"6"
+    },
+    {
+      "code":"report_date",
+      "type":"datetime",
+      "@":"7"
+    }
+  ],
+  "@":"44",
+  "@e":"2kat_dd:3;6report_type:1;7report_date:7"
+}
