@@ -112,7 +112,7 @@ class ChartManager(val m: Demo1) {
     }
 
     @Description("Prepares JSON for Sales by country chart")
-    fun getChartSalesByCountry(filter: String): ChartData<*, *> {
+    fun getChartSalesByCountry(): ChartData<*, *> {
         val (ct, ordersAgg) = readReportFromDb()
         val data = ChartData<String, BigDecimal>()
         data.setLegendX(m.xtr("label_period"), "string")
