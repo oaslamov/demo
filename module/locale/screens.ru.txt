@@ -85,6 +85,7 @@ Analyze=Выполнить анализ
 "Number of shipping orders by order totals"=Количество заказов по суммам заказа
 "Percentage of sales by country"=Доля продаж по странам
 "Products ABC"=Товары ABC
+"Report generated"=Отчет сформирован
 "Sales by country"=Продажи по странам
 
 //-- sc_chart:scr@demo1_prvt --

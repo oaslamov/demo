@@ -9,7 +9,7 @@
     "rows":16
   },
   "actions":[
-    "ds_p.makeStats"
+    "ds_r.makeStats"
   ],
   "data_sources":[
     {
@@ -103,47 +103,7 @@
             }
           }
         }
-      },
-      "actions":[
-        {
-          "code":"makeStats",
-          "label":"$l{Analyze}l",
-          "data_scope":"none",
-          "request":{
-            "data":{
-              "action":"demo1_prvt.makeStats",
-              "args":{
-                "start":"",
-                "bcLimit":"90",
-                "finish":"",
-                "abLimit":"65"
-              }
-            }
-          },
-          "freshen":[
-            {
-              "code":"ds_p",
-              "type":"all_rows"
-            },
-            {
-              "code":"ds_c",
-              "type":"all_rows"
-            },
-            {
-              "code":"ds_chart1",
-              "type":"all_rows"
-            },
-            {
-              "code":"ds_chart3",
-              "type":"all_rows"
-            },
-            {
-              "code":"ds_chart4",
-              "type":"all_rows"
-            }
-          ]
-        }
-      ]
+      }
     },
     {
       "code":"ds_c",
@@ -266,6 +226,98 @@
           }
         }
       }
+    },
+    {
+      "code":"ds_r",
+      "table_name":"Demo1_Prvt.Report",
+      "type":"table",
+      "fields":[
+        {
+          "code":"id",
+          "type":"string"
+        },
+        {
+          "code":"report_date",
+          "label":"$l{Report generated}l",
+          "type":"datetime",
+          "hint":"$l{f:7ef07d02c007:d}l"
+        },
+        {
+          "code":"report_type",
+          "label":"$l{f:7ef07d02c006}l",
+          "type":"enum",
+          "enum":[
+            {
+              "label":"$l{e:7ef07d02c006.data_analysis}l",
+              "value":"data_analysis"
+            }
+          ],
+          "hint":"$l{f:7ef07d02c006:d}l"
+        }
+      ],
+      "operations":{
+        "select":{
+          "request":{
+            "data":{
+              "action":"demo1_prvt.selectList",
+              "args":{
+                "filter":[
+                  "report_type='data_analysis'"
+                ],
+                "tableName":"demo1_prvt.report"
+              }
+            }
+          }
+        }
+      },
+      "actions":[
+        {
+          "code":"makeStats",
+          "label":"$l{Analyze}l",
+          "data_scope":"none",
+          "request":{
+            "data":{
+              "action":"demo1_prvt.makeStats",
+              "args":{
+                "start":"",
+                "bcLimit":"90",
+                "finish":"",
+                "abLimit":"65"
+              }
+            }
+          },
+          "freshen":[
+            {
+              "code":"ds_p",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_c",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_chart1",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_chart3",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_chart4",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_chart2",
+              "type":"all_rows"
+            },
+            {
+              "code":"ds_r",
+              "type":"current_row"
+            }
+          ]
+        }
+      ]
     }
   ],
   "parts":[
@@ -380,15 +432,13 @@
         {
           "code":"c11",
           "label":"$l{Products ABC}l",
-          "type":"table",
+          "type":"container",
           "border_type":"none",
           "position":{
             "from_col":1,
             "to_col":16,
             "from_row":1,
             "to_row":16
-          },
-          "data_source":{
           },
           "sub_parts":[
             {
@@ -492,6 +542,28 @@
           ]
         }
       ]
+    },
+    {
+      "code":"t2",
+      "type":"form",
+      "border_type":"none",
+      "position":{
+        "from_col":1,
+        "to_col":16,
+        "from_row":16,
+        "to_row":16
+      },
+      "data_source":{
+        "code":"ds_r",
+        "fields":[
+          {
+            "code":"report_date"
+          }
+        ],
+        "operations":[
+          "select"
+        ]
+      }
     }
   ]
 }
