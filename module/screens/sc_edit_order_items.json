@@ -211,7 +211,13 @@
                   "order by name"
                 ],
                 "tablename":"demo1_prvt.product"
-              }
+              },
+              "fields":[
+                "id",
+                "name",
+                "price",
+                "product_type"
+              ]
             }
           }
         }
@@ -438,27 +444,27 @@
         "fields":[
           {
             "code":"product",
-            "query":false
+            "filter_view":1
           },
           {
             "code":"quantity",
-            "query":false
+            "filter_view":1
           },
           {
             "code":"price",
-            "query":false
+            "filter_view":1
           },
           {
             "code":"sum",
-            "query":false
+            "filter_view":1
           },
           {
             "code":"comment",
-            "query":false
+            "filter_view":1
           },
           {
             "code":"item_order",
-            "query":false,
+            "filter_view":1,
             "view_condition":"false"
           }
         ],
