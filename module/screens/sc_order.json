@@ -91,7 +91,8 @@
               "args":{
                 "filter":[
                   "${@user_filter}",
-                  "${@screen.filter}"
+                  "${@screen.filter}",
+                  "order by datetime_order_placed"
                 ],
                 "tablename":"demo1_prvt.shipping_order"
               }
@@ -809,7 +810,7 @@
           },
           {
             "code":"item_order",
-            "query":false,
+            "filter_view":1,
             "view_condition":"false"
           }
         ],

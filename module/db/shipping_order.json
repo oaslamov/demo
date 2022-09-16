@@ -58,6 +58,11 @@
       "fields":[
         "date_order_paid"
       ]
+    },
+    {
+      "fields":[
+        "datetime_order_placed"
+      ]
     }
   ],
   "@":"8",
