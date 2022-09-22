@@ -157,6 +157,12 @@ class Populate(val m: Demo1) {
     @Description("Generates random orders")
     @Parameters("n: Int")
     fun genOrders(n: Int) {
+        val hasData = m.exists<Country>("") && m.exists<Subcountry>("") && m.exists<City>("")
+                && m.exists<Product>("") && m.exists<Customer>("")
+        if (!hasData) {
+            Txt.info(m.MID("no_sample_data")).msg()
+            return
+        }
         val maxPeriod = 3L * 365L * 24L * 60L // Three years in minutes
         val maxPaidAfter = 30L
         val maxShipmentAfter = 45L

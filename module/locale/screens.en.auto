@@ -13,7 +13,7 @@ Charts=Charts
 "Customer details"=Customer details
 // screens: demo1_customer:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_order:scr@demo1_prvt sc_customer_category:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 Customer=Customer
-// screens: customerproductreport:scr@demo1_prvt sc_analysis:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_city:scr@demo1_prvt sc_new_order_item:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt sc_decor_test_card:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt sc_recent_orders:scr@demo1_prvt sc_customer_category:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
+// screens: customerproductreport:scr@demo1_prvt sc_analysis:scr@demo1_prvt sc_sample_data:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_city:scr@demo1_prvt sc_new_order_item:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt sc_decor_test_card:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt sc_recent_orders:scr@demo1_prvt sc_customer_category:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 Demo1=Demo1
 // screens: sc_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
 Down=Down
@@ -124,3 +124,9 @@ Details=Details
 
 //-- sc_recent_orders:scr@demo1_prvt --
 "Recent orders"=Recent orders
+
+//-- sc_sample_data:scr@demo1_prvt --
+"Generate orders"=Generate orders
+"Load sample data"=Load sample data
+"Number of orders to generate"=Number of orders to generate
+"Sample data generation"=Sample data generation

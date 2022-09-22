@@ -132,3 +132,9 @@ Up=Вверх
 
 //-- sc_recent_orders:scr@demo1_prvt --
 "Recent orders"=Недавние заказы
+
+//-- sc_sample_data:scr@demo1_prvt --
+"Generate orders"=Генерировать заказы
+"Load sample data"=Загрузить демо данные
+"Number of orders to generate"=Сколько заказов сгенерировать
+"Sample data generation"=Генерация данных
