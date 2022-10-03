@@ -4,15 +4,14 @@ import com.dlmdemo.demo1_prvt.filler.CityFiller
 import com.dlmdemo.demo1_prvt.filler.ProductFiller
 import com.dolmen.md.demo1_prvt.*
 import com.dolmen.serv.Action
+import com.dolmen.serv.Action.ListResult
+import com.dolmen.serv.GLOB_ID
 import com.dolmen.serv.Txt
-import com.dolmen.serv.anno.ActionType
-import com.dolmen.serv.anno.Description
-import com.dolmen.serv.anno.Parameters
-import com.dolmen.serv.anno.Priv
+import com.dolmen.serv.anno.*
 import com.dolmen.serv.conn.SelectedData
 import com.dolmen.serv.exp.Formula
-import com.dolmen.serv.table.ITopTable
-import com.dolmen.serv.table.RowID
+import com.dolmen.serv.exp.QueryHelper
+import com.dolmen.serv.table.*
 import com.dolmen.ui.screen.ChartData
 import com.dolmen.util.Text
 import java.time.LocalDate
@@ -199,6 +198,12 @@ open class Demo1 : Demo1_PrvtModuleBase() {
             T.registerFieldFiller(Product.IProduct::class.java, ProductFiller::class.java)
         }
 
+        @DolmenSafeField
+        val EF_tableTypes = HashMap<TableType, EF2TabMapper>()
+
+        private class EFRutimeData(val formula: Formula, val mapper: EF2TabMapper) {
+        }
+
         fun start(): Demo1 {
             return com.dolmen.serv.Module.start(Demo1::class.java)
         }
@@ -208,5 +213,87 @@ open class Demo1 : Demo1_PrvtModuleBase() {
         return CustomerProductReportSelectedData(f, this)
     }
 
+    @Parameters(
+        "filter: filter (for shipping_order_filter table) default(null) type(filter)",
+        "startFrom: start from row number default(0)",
+        "count: number of rows to return default(1000)"
+    )
+    fun filterShippingOrders(filter: String?, startFrom: Int, count: Int): List<ITable> {
+        val ef_formula = Formula.parse(filter, Shipping_Order_Filter.T)
+
+        if (EF_tableTypes.size == 0) {
+            initEF()
+        }
+        var mainIt: SelectedData<*>? = null
+        var efRuntimeDatas = mutableListOf<EFRutimeData>()
+        EF_tableTypes.values.forEach { mapper ->
+            val formula = EF_tableTypes[mapper.T]!!.getFormula(ef_formula)
+            if (Shipping_Order.T == mapper.T) {
+                mainIt = iterate(formula)
+            } else if (!formula.isAlwaysTrueExpression) {
+                efRuntimeDatas.add(EFRutimeData(formula, mapper))
+            }
+        }
+
+        var skip = startFrom
+        val lst: ListResult<ITable> = ListResult(count)
+        try {
+            val main_it = mainIt!!.iterator()
+
+            while (main_it.hasNext()) {
+                val expert = main_it.next()
+                val expertId = expert.id
+                var isFail = false
+                efRuntimeDatas.forEach l_check_refs@{ efRuntimeData ->
+                    val mapper = efRuntimeData.mapper
+                    val refField = mapper.ref2EField
+                    if (refField == null) {
+                        // skip error. Message printed already
+
+                    } else {
+                        val idClause = Formula.parse(QueryHelper.c().and(refField, expertId).toString(), mapper.T)
+                        var runtimeFormula = Formula.copy(efRuntimeData.formula, null)
+                        runtimeFormula.and(idClause)
+                        if (!exists(runtimeFormula)) {
+                            isFail = true
+                            return@l_check_refs
+                        }
+                    }
+                }
+                if (!isFail) {
+                    if (skip > 0) {
+                        skip--
+                    } else {
+                        lst.add(expert)
+                        if (lst.size >= count) {
+                            lst.setIncompleteData(true)
+                            break
+                        }
+                    }
+                }
+            }
+        } finally {
+            mainIt!!.close()
+        }
+        return lst
+    }
+
+    private fun initEF() {
+        Shipping_Order_Filter.T.fields().forEach { ef_field ->
+            val linkedFieldName = ef_field.getEtcString("linkedField")
+            if (linkedFieldName != null) {
+                val tabField = GLOB_ID.getIRegisteredGIDByName(linkedFieldName, false)
+                if (tabField is Field<*, *>) {
+                    val tabType = tabField.tableType
+                    var efMapper = EF_tableTypes.get(tabType)
+                    if (efMapper == null) {
+                        efMapper = EF2TabMapper(tabType)
+                        EF_tableTypes[tabType] = efMapper
+                    }
+                    efMapper.ef_field2tab_field[ef_field] = tabField
+                }
+            }
+        }
+    }
 }
 

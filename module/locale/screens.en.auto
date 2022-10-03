@@ -3,31 +3,59 @@
 // -- for installed system: "locale" dir in Workspace (including subpath for global files or locale/<module>/ folder for module files)
 // -- for module developer project: "locale" dir in the Dolmen SDK project
 
-// screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt sc_choose_customer:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Add item"=Add item
+// screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt sc_choose_customer:scr@demo1_prvt
 Address=Address
-// screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Auto calculate"=Auto calculate
+// screens: demo1_customer:scr@demo1_prvt sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
 Billing=Billing
 // screens: sc_analysis:scr@demo1_prvt sc_chart:scr@demo1_prvt
 Charts=Charts
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+Comment=Comment
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+Contacts=Contacts
 // screens: demo1_c_details:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 "Customer details"=Customer details
-// screens: demo1_customer:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_order:scr@demo1_prvt sc_customer_category:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
+// screens: demo1_customer:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt sc_customer_category:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 Customer=Customer
-// screens: customerproductreport:scr@demo1_prvt sc_analysis:scr@demo1_prvt sc_sample_data:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_city:scr@demo1_prvt sc_new_order_item:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt sc_decor_test_card:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt sc_recent_orders:scr@demo1_prvt sc_customer_category:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
+// screens: customerproductreport:scr@demo1_prvt sc_analysis:scr@demo1_prvt sc_sample_data:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_city:scr@demo1_prvt sc_new_order_item:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt sc_decor_test_card:scr@demo1_prvt redirect_demo1_c_details_1001:scr@demo1_prvt demo1_customer:scr@demo1_prvt demo1_product:scr@demo1_prvt demo1_customer_html:scr@demo1_prvt sc_chart:scr@demo1_prvt sc_order:scr@demo1_prvt demo1_c_details:scr@demo1_prvt sc_order2:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt sc_recent_orders:scr@demo1_prvt sc_customer_category:scr@demo1_prvt redirect_demo1_c_details_234:scr@demo1_prvt
 Demo1=Demo1
-// screens: sc_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+Details=Details
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
 Down=Down
-// screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Edit comment"=Edit comment
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Edit items"=Edit items
+// screens: demo1_customer_html:scr@demo1_prvt sc_order2:scr@demo1_prvt
+Filter=Filter
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Get price from Product table if blank"=Get price from Product table if blank
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 Id=Id
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt
 "Open link"=Open link
-// screens: sc_order:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Opens in a popup window"=Opens in a popup window
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt
 "Order items"=Order items
-// screens: sc_order:scr@demo1_prvt sc_new_order_item:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt sc_recent_orders:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Order list"=Order list
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Order summary"=Order summary
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt sc_new_order_item:scr@demo1_prvt demo1_shipping_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt sc_recent_orders:scr@demo1_prvt
 Order=Order
 // screens: demo1_product:scr@demo1_prvt demo1_product_ext:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
 Product=Product
-// screens: sc_order:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Search in Google"=Search in Google
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt
+"Show on Google Maps"=Show on Google Maps
+// screens: sc_order:scr@demo1_prvt sc_order2:scr@demo1_prvt sc_edit_order_items:scr@demo1_prvt
 Up=Up
 
 //-- customerproductreport:scr@demo1_prvt --
@@ -42,7 +70,6 @@ Summary=Summary
 "Customer (HTML)"=Customer (HTML)
 "Customer Details"=Customer Details
 "Delete Customer"=Delete Customer
-Filter=Filter
 Mobile=Mobile
 New=New
 Phone=Phone
@@ -107,20 +134,8 @@ Cancel=Cancel
 "New item"=New item
 Save=Save
 
-//-- sc_order:scr@demo1_prvt --
-"Add item"=Add item
-"Auto calculate"=Auto calculate
-Comment=Comment
-Contacts=Contacts
-Details=Details
-"Edit comment"=Edit comment
-"Edit items"=Edit items
-"Get price from Product table if blank"=Get price from Product table if blank
-"Opens in a popup window"=Opens in a popup window
-"Order list"=Order list
-"Order summary"=Order summary
-"Search in Google"=Search in Google
-"Show on Google Maps"=Show on Google Maps
+//-- sc_order2:scr@demo1_prvt --
+"Order 2"=Order 2
 
 //-- sc_recent_orders:scr@demo1_prvt --
 "Recent orders"=Recent orders

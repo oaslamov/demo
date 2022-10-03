@@ -197,6 +197,17 @@ f:7ef07d00800e=Total
 --  Comment
 f:7ef07d00800a=Comment
 
+// table Shipping Order Filter
+t:7ef07d02e000=Shipping Order Filter
+--  $l{f:7ef07d008008}l
+f:7ef07d02e00a=$l{f:7ef07d008008}l
+--  $l{f:7ef07d008006}l
+f:7ef07d02e007=$l{f:7ef07d008006}l
+--  $l{f:7ef07d00800e}l
+f:7ef07d02e00b=$l{f:7ef07d00800e}l
+--  $l{f:7ef07d009008}l
+f:7ef07d02e009=$l{f:7ef07d009008}l
+
 // table Shipping Order Product
 t:7ef07d009000=Shipping Order Product
 --  Shipping Order
