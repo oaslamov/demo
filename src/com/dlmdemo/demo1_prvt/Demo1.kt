@@ -241,8 +241,8 @@ open class Demo1 : Demo1_PrvtModuleBase() {
             val main_it = mainIt!!.iterator()
 
             while (main_it.hasNext()) {
-                val expert = main_it.next()
-                val expertId = expert.id
+                val shippingOrder = main_it.next()
+                val shippingOrderId = shippingOrder.id
                 var isFail = false
                 efRuntimeDatas.forEach l_check_refs@{ efRuntimeData ->
                     val mapper = efRuntimeData.mapper
@@ -251,7 +251,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
                         // skip error. Message printed already
 
                     } else {
-                        val idClause = Formula.parse(QueryHelper.c().and(refField, expertId).toString(), mapper.T)
+                        val idClause = Formula.parse(QueryHelper.c().and(refField, shippingOrderId).toString(), mapper.T)
                         var runtimeFormula = Formula.copy(efRuntimeData.formula, null)
                         runtimeFormula.and(idClause)
                         if (!exists(runtimeFormula)) {
@@ -264,7 +264,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
                     if (skip > 0) {
                         skip--
                     } else {
-                        lst.add(expert)
+                        lst.add(shippingOrder)
                         if (lst.size >= count) {
                             lst.setIncompleteData(true)
                             break
