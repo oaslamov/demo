@@ -804,7 +804,8 @@
           "new",
           "insert",
           "update",
-          "delete"
+          "delete",
+          "select"
         ]
       }
     },
