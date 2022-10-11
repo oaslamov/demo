@@ -156,6 +156,13 @@
       "code":"ds_product",
       "table_name":"Demo1_Prvt.Product",
       "type":"table",
+      "rowMarker":{
+        "type":"strikethrough",
+        "foreignDs":"ds_item_list",
+        "columnMap":{
+          "id":"product"
+        }
+      },
       "fields":[
         {
           "code":"id",
