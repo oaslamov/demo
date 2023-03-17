@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<project name="demo1">
+<!--    <property environment="env"/>-->
+<!--    <property name="dolmen_home" value="${env.DOLMEN_HOME}"/>-->
+    <property file="build.properties"/>
+    <property name="workspace" value="${basedir}/../../.."/>
+    <property name="build" location="${basedir}/out/production/${ant.project.name}"/>
+    <!--    <property environment="env"/>-->
+    <!--    <property name="dolmen_home" value="${env.DOLMEN_HOME}"/>-->
+    <!--    <property name="workspace" value="${env.DOLMEN_WORKSPACE}"/>-->
+    <property name="builder_conf" location="${workspace}/dev/builder.conf"/>
+    <condition property="dolmen_script" value="${dolmen_home}/rt/dolmen.bat"
+               else="${dolmen_home}/rt/dolmen.sh">
+        <os family="windows"/>
+    </condition>
+
+    <path id="module.production.classpath">
+        <fileset dir="${workspace}/webserver/webapps/dolmen/WEB-INF/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+        <fileset dir="${basedir}/lib">
+            <patternset refid="library.patterns"/>
+        </fileset>
+        <fileset dir="${workspace}/webserver/webapps/dolmen/modules/mail">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+    <path id="module.sourcepath">
+        <dirset dir="${basedir}">
+            <include name="src_generated"/>
+            <include name="src"/>
+            <include name="src_includes"/>
+        </dirset>
+    </path>
+
+    <property name="kotlin.lib" location="${workspace}/dev/.var/plugins/Kotlin/kotlinc/lib"/>
+    <typedef resource="org/jetbrains/kotlin/ant/antlib.xml" classpath="${kotlin.lib}/kotlin-ant.jar"/>
+
+    <target name="compile">
+        <exec executable="${dolmen_script}">
+            <arg line="${builder_conf} module module.conf gen"/>
+        </exec>
+
+        <delete dir="${build}"/>
+        <mkdir dir="${build}"/>
+        <javac destdir="${build}" includeantruntime="false">
+            <withKotlin/>
+            <src refid="module.sourcepath"/>
+            <classpath refid="module.production.classpath"/>
+        </javac>
+
+        <copy todir="${build}">
+            <fileset dir="${basedir}/src_generated">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+            <fileset dir="${basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+            <fileset dir="${basedir}/src_includes">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+            <fileset dir="${basedir}/resources">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+
+        <move file="${build}/META-INF/compile.kotlin_module"
+              tofile="${build}/META-INF/${ant.project.name}.kotlin_module"/>
+
+        <exec executable="${dolmen_script}">
+            <arg line="${builder_conf} module module.conf makeBundle"/>
+        </exec>
+    </target>
+
+    <patternset id="library.patterns">
+        <include name="*.apk"/>
+        <include name="*.egg"/>
+        <include name="*.zip"/>
+        <include name="*.war"/>
+        <include name="*.swc"/>
+        <include name="*.ear"/>
+        <include name="*.jar"/>
+        <include name="*.klib"/>
+        <include name="*.ane"/>
+    </patternset>
+    <patternset id="compiler.resources">
+        <exclude name="**/?*.java"/>
+        <exclude name="**/?*.form"/>
+        <exclude name="**/?*.class"/>
+        <exclude name="**/?*.groovy"/>
+        <exclude name="**/?*.scala"/>
+        <exclude name="**/?*.flex"/>
+        <exclude name="**/?*.kt"/>
+        <exclude name="**/?*.clj"/>
+        <exclude name="**/?*.aj"/>
+    </patternset>
+</project>
