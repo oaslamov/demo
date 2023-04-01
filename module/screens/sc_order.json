@@ -92,7 +92,7 @@
                 "filter":[
                   "${@user_filter}",
                   "${@screen.filter}",
-                  "order by datetime_order_placed"
+                  "order by datetime_order_placed desc"
                 ],
                 "tablename":"demo1_prvt.shipping_order"
               }
