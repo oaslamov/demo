@@ -63,6 +63,7 @@ Up=Up
 "Товарный отчет по заказчикам"=Товарный отчет по заказчикам
 
 //-- demo1_customer:scr@demo1_prvt --
+"Get customer orders summary"=Get customer orders summary
 Phones=Phones
 Summary=Summary
 

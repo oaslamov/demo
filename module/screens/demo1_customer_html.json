@@ -161,8 +161,7 @@
           "code":"delete_customer",
           "label":"$l{Delete Customer}l",
           "type":"delete",
-          "data_scope":"row",
-          "confirm":true,
+          "confirm":"$l{true}l",
           "request":{
             "data":{
               "action":"demo1_prvt.deleteById",
