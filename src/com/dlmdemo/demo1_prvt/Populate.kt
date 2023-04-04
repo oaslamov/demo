@@ -1,6 +1,7 @@
 package com.dlmdemo.demo1_prvt
 
 import com.dolmen.md.demo1_prvt.*
+import com.dolmen.mod.AuthModule
 import com.dolmen.serv.CONST
 import com.dolmen.serv.ENV
 import com.dolmen.serv.Txt
@@ -9,6 +10,7 @@ import com.dolmen.serv.anno.Parameters
 import com.dolmen.serv.table.RowID
 import java.math.BigDecimal.ZERO
 import java.math.RoundingMode
+import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import kotlin.random.Random
 
@@ -22,7 +24,7 @@ class Populate(val m: Demo1) {
             Txt.info(m.MID("skip_loading_sample_data")).msg()
         } else {
             m.isLoadingSampleData = true
-            Txt.info(m.MID("loading_sample_data")).msg()
+            sendProgress(Txt.info(m.MID("loading_sample_data")))
             createCities()
             createCustomerCategories()
             createCustomers()
@@ -35,6 +37,7 @@ class Populate(val m: Demo1) {
 
     @Description("Creates products")
     fun createProducts() {
+        sendProgress(Txt.info("Creating products"))
         val maxShippingFrom = 4
         val maxPrice = 30
         val pathIn = "product.csv"
@@ -55,11 +58,12 @@ class Populate(val m: Demo1) {
                     }
             }
         }
-        Txt.info("Created ${lines.size} products").msg()
+        sendProgress(Txt.info("Created ${lines.size} products"))
     }
 
     @Description("Creates customers")
     fun createCustomers() {
+        sendProgress(Txt.info("Creating customers"))
         val pathIn = "customer.csv"
         val customersPerCountry = 500
         val countries = m.selectMap(
@@ -89,7 +93,7 @@ class Populate(val m: Demo1) {
                 m.insert(this)
             }
         }
-        Txt.info("Created ${lines.size} customers").msg()
+        sendProgress(Txt.info("Created ${lines.size} customers"))
     }
 
     @Description("Creates customer categories")
@@ -110,7 +114,7 @@ class Populate(val m: Demo1) {
     @Description("Creates countries, subcountries and cities")
     fun createCities() {
         data class Rec(val city: String, val country: String, val subcountry: String, val geonameid: String)
-
+        sendProgress(Txt.info("Creating cities"))
         val pathIn = "world-cities.csv"
         val recs = readLines(pathIn)
             .map { l ->
@@ -129,7 +133,7 @@ class Populate(val m: Demo1) {
             val countryId = Country().run { // Create a country and get its Id
                 name = countryMap.key
                 m.insert(this)
-                //Txt.info("Loading ${name}").msg()
+                sendProgress(Txt.info("Loading ${name}"), "city_progress")
                 id
             }
             countryMap.value.forEach { subcountryMap ->
@@ -151,7 +155,7 @@ class Populate(val m: Demo1) {
                 }
             }
         }
-        Txt.info("Created $n cities").msg()
+        sendProgress(Txt.info("Created $n cities"))
     }
 
     @Description("Generates random orders")
@@ -169,6 +173,7 @@ class Populate(val m: Demo1) {
         val minItems = 3
         val maxItems = 7
         val maxQuantity = 20
+        sendProgress(Txt.info("Generating orders"))
         val customers = m.selectMap(Customer.fId, "").values.toList().shuffled()
         val products = m.selectMap(Product.fId, "").values.toList().shuffled()
         val maxCustomer = customers.size
@@ -186,9 +191,13 @@ class Populate(val m: Demo1) {
                 m.insert(this)
                 genItems(n = Random.nextInt(minItems, maxItems + 1), products, maxQuantity)
             }
-            if ((i + 1) % 100 == 0) ENV.commitIfNeeded()
+            if ((i + 1) % 100 == 0) {
+                if (n - i - 1 > 0)
+                    sendProgress(Txt.info("Generated $0 orders ($1 to go)", i + 1, n - i - 1), "order_progress")
+                ENV.commitIfNeeded()
+            }
         }
-        Txt.info("Generated $n orders").msg()
+        sendProgress(Txt.info("Generated $0 orders", n))
     }
 
     private fun Shipping_Order.genItems(n: Int, products: List<Product>, maxQuantity: Int) {
@@ -279,6 +288,20 @@ class Populate(val m: Demo1) {
         else
             return r.readText().lines().filterNot { it.isEmpty() }
     }
+
+    private data class ProgressStamp(var showTime: LocalDateTime? = null, var msgId: String? = null)
+
+    private var progressStamp = ProgressStamp()
+    private fun sendProgress(s: Txt, id: String? = null) {
+        val delay = 2L // not too talkative
+        val now = LocalDateTime.now()
+        if (id == null || (progressStamp.showTime ?: now) <= now) {
+            if (id != null) {
+                progressStamp.showTime = now.plusSeconds(delay)
+                progressStamp.msgId = id
+            }
+            AuthModule.sendOnlineMessage(ENV.getLogin(), if (id == null) s.toMsg() else s.toMsg().id(id), null)
+            s.log(m.l())
+        }
+    }
 }
-
-
