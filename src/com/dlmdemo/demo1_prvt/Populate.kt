@@ -114,7 +114,7 @@ class Populate(val m: Demo1) {
     @Description("Creates countries, subcountries and cities")
     fun createCities() {
         data class Rec(val city: String, val country: String, val subcountry: String, val geonameid: String)
-        sendProgress(Txt.info("Creating cities"))
+        sendProgress(Txt.info(m.MID("creating_cities")))
         val pathIn = "world-cities.csv"
         val recs = readLines(pathIn)
             .map { l ->
