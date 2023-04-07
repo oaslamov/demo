@@ -18,3 +18,5 @@ no_sample_data=Please generate sample data first...
 analysis_done=Performed data analysis
 
 creating_cities=Creating cities
+creating_customers=Creating customers
+creating_products=Creating products

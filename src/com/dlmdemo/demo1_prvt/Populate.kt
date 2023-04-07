@@ -37,7 +37,7 @@ class Populate(val m: Demo1) {
 
     @Description("Creates products")
     fun createProducts() {
-        sendProgress(Txt.info("Creating products"))
+        sendProgress(Txt.info(m.MID("creating_products")))
         val maxShippingFrom = 4
         val maxPrice = 30
         val pathIn = "product.csv"
@@ -63,7 +63,7 @@ class Populate(val m: Demo1) {
 
     @Description("Creates customers")
     fun createCustomers() {
-        sendProgress(Txt.info("Creating customers"))
+        sendProgress(Txt.info(m.MID("creating_customers")))
         val pathIn = "customer.csv"
         val customersPerCountry = 500
         val countries = m.selectMap(
