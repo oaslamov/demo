@@ -1,10 +1,10 @@
 package com.dlmdemo.demo1_prvt.filler
 
 import com.dlmdemo.demo1_prvt.Demo1
-import com.dolmen.md.demo1_prvt.City
-import com.dolmen.md.demo1_prvt.Country
-import com.dolmen.md.demo1_prvt.Subcountry
-import com.dolmen.serv.table.ITableFieldFiller
+import com.roofstone.md.demo1_prvt.City
+import com.roofstone.md.demo1_prvt.Country
+import com.roofstone.md.demo1_prvt.Subcountry
+import com.roofstone.serv.table.ITableFieldFiller
 
 class CityFiller : City.ICity {
     private val db by lazy { Demo1.start() }

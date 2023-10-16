@@ -2,18 +2,18 @@ package com.dlmdemo.demo1_prvt
 
 import com.dlmdemo.demo1_prvt.filler.CityFiller
 import com.dlmdemo.demo1_prvt.filler.ProductFiller
-import com.dolmen.md.demo1_prvt.*
-import com.dolmen.serv.Action
-import com.dolmen.serv.Action.ListResult
-import com.dolmen.serv.GLOB_ID
-import com.dolmen.serv.Txt
-import com.dolmen.serv.anno.*
-import com.dolmen.serv.conn.SelectedData
-import com.dolmen.serv.exp.Formula
-import com.dolmen.serv.exp.QueryHelper
-import com.dolmen.serv.table.*
-import com.dolmen.ui.screen.ChartData
-import com.dolmen.util.Text
+import com.roofstone.md.demo1_prvt.*
+import com.roofstone.serv.Action
+import com.roofstone.serv.Action.ListResult
+import com.roofstone.serv.GLOB_ID
+import com.roofstone.serv.Txt
+import com.roofstone.serv.anno.*
+import com.roofstone.serv.conn.SelectedData
+import com.roofstone.serv.exp.Formula
+import com.roofstone.serv.exp.QueryHelper
+import com.roofstone.serv.table.*
+import com.roofstone.ui.screen.ChartData
+import com.roofstone.util.Text
 import java.time.LocalDate
 
 
@@ -198,14 +198,14 @@ open class Demo1 : Demo1_PrvtModuleBase() {
             T.registerFieldFiller(Product.IProduct::class.java, ProductFiller::class.java)
         }
 
-        @DolmenSafeField
+        @RoofstoneSafeField
         val EF_tableTypes = HashMap<TableType, EF2TabMapper>()
 
         private class EFRutimeData(val formula: Formula, val mapper: EF2TabMapper) {
         }
 
         fun start(): Demo1 {
-            return com.dolmen.serv.Module.start(Demo1::class.java)
+            return com.roofstone.serv.Module.start(Demo1::class.java)
         }
     }
 

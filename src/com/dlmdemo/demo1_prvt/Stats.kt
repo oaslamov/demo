@@ -1,9 +1,9 @@
 package com.dlmdemo.demo1_prvt
 
-import com.dolmen.md.demo1_prvt.*
-import com.dolmen.serv.CONST
-import com.dolmen.serv.Txt
-import com.dolmen.serv.table.RowID
+import com.roofstone.md.demo1_prvt.*
+import com.roofstone.serv.CONST
+import com.roofstone.serv.Txt
+import com.roofstone.serv.table.RowID
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
 import java.math.RoundingMode

@@ -1,8 +1,8 @@
 package com.dlmdemo.demo1_prvt
 
-import com.dolmen.md.demo1_prvt.*
-import com.dolmen.serv.table.ITopTable
-import com.dolmen.serv.table.RowID
+import com.roofstone.md.demo1_prvt.*
+import com.roofstone.serv.table.ITopTable
+import com.roofstone.serv.table.RowID
 import java.math.BigDecimal.ZERO
 
 class RefreshTable(val m: Demo1) {

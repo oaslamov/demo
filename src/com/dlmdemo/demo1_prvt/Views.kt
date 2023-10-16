@@ -1,11 +1,11 @@
 package com.dlmdemo.demo1_prvt
 
-import com.dolmen.md.demo1_prvt.*
-import com.dolmen.serv.conn.SelectedData
-import com.dolmen.serv.exp.Formula
-import com.dolmen.serv.table.RowID
-import com.dolmen.serv.table.RowIDLong
-import com.dolmen.ui.rowstyling.Style
+import com.roofstone.md.demo1_prvt.*
+import com.roofstone.serv.conn.SelectedData
+import com.roofstone.serv.exp.Formula
+import com.roofstone.serv.table.RowID
+import com.roofstone.serv.table.RowIDLong
+import com.roofstone.ui.rowstyling.Style
 
 
 class Views(val m: Demo1) {

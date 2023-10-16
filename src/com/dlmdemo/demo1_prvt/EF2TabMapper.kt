@@ -1,12 +1,12 @@
 package com.dlmdemo.demo1_prvt
 
-import com.dolmen.md.demo1_prvt.Shipping_Order
-import com.dolmen.serv.ENV
-import com.dolmen.serv.exp.Formula
-import com.dolmen.serv.exp.FormulaBuilder
-import com.dolmen.serv.table.Field
-import com.dolmen.serv.table.FieldRef
-import com.dolmen.serv.table.TableType
+import com.roofstone.md.demo1_prvt.Shipping_Order
+import com.roofstone.serv.ENV
+import com.roofstone.serv.exp.Formula
+import com.roofstone.serv.exp.FormulaBuilder
+import com.roofstone.serv.table.Field
+import com.roofstone.serv.table.FieldRef
+import com.roofstone.serv.table.TableType
 
 class EF2TabMapper(val T: TableType) {
 

@@ -1,7 +1,7 @@
 package com.dlmdemo.demo1_prvt
 
-import com.dolmen.ui.Resource
-import com.dolmen.ui.screen.*
+import com.roofstone.ui.Resource
+import com.roofstone.ui.screen.*
 import kotlin.collections.set
 
 class RefLookup(val m: Demo1) {

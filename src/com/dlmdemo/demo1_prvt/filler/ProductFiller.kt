@@ -1,9 +1,9 @@
 package com.dlmdemo.demo1_prvt.filler
 
-import com.dolmen.md.demo1_prvt.Decor_Product_Decor
-import com.dolmen.md.demo1_prvt.Product
-import com.dolmen.ui.rowstyling.DecorData
-import com.dolmen.ui.rowstyling.Style
+import com.roofstone.md.demo1_prvt.Decor_Product_Decor
+import com.roofstone.md.demo1_prvt.Product
+import com.roofstone.ui.rowstyling.DecorData
+import com.roofstone.ui.rowstyling.Style
 import java.math.BigDecimal
 
 class ProductFiller : Product.IProduct {

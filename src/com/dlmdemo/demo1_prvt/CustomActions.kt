@@ -1,18 +1,18 @@
 package com.dlmdemo.demo1_prvt
 
-import com.dolmen.ex.BaseException
-import com.dolmen.md.demo1_prvt.*
-import com.dolmen.serv.Msg
-import com.dolmen.serv.TableBinaryDataProvider
-import com.dolmen.serv.Txt
-import com.dolmen.serv.anno.Description
-import com.dolmen.serv.anno.Parameters
-import com.dolmen.serv.table.ITopTable
-import com.dolmen.serv.table.RowID
-import com.dolmen.serv.table.Table
-import com.dolmen.ui.Resource
-import com.dolmen.ui.screen.*
-import com.dolmenmod.mail.Mail
+import com.roofstone.ex.BaseException
+import com.roofstone.md.demo1_prvt.*
+import com.roofstone.serv.Msg
+import com.roofstone.serv.TableBinaryDataProvider
+import com.roofstone.serv.Txt
+import com.roofstone.serv.anno.Description
+import com.roofstone.serv.anno.Parameters
+import com.roofstone.serv.table.ITopTable
+import com.roofstone.serv.table.RowID
+import com.roofstone.serv.table.Table
+import com.roofstone.ui.Resource
+import com.roofstone.ui.screen.*
+import com.roofstonemod.mail.Mail
 import kotlin.collections.set
 
 

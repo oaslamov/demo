@@ -1,9 +1,9 @@
 package com.dlmdemo.demo1_prvt
 
-import com.dolmen.call.ActionBase
-import com.dolmen.call.Http
-import com.dolmen.call.JSONManagerBase
-import com.dolmen.serv.anno.Description
+import com.roofstone.call.ActionBase
+import com.roofstone.call.Http
+import com.roofstone.call.JSONManagerBase
+import com.roofstone.serv.anno.Description
 import org.mpru.security.KerberosPrefs
 
 class Caller(val m: Demo1) {

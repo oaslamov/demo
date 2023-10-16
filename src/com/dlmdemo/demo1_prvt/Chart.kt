@@ -1,13 +1,13 @@
 package com.dlmdemo.demo1_prvt
 
-import com.dolmen.md.demo1_prvt.*
-import com.dolmen.serv.aggregate.Count
-import com.dolmen.serv.anno.Description
-import com.dolmen.serv.anno.Parameters
-import com.dolmen.serv.exp.FieldLimit
-import com.dolmen.serv.exp.Formula
-import com.dolmen.serv.exp.QueryHelper
-import com.dolmen.ui.screen.ChartData
+import com.roofstone.md.demo1_prvt.*
+import com.roofstone.serv.aggregate.Count
+import com.roofstone.serv.anno.Description
+import com.roofstone.serv.anno.Parameters
+import com.roofstone.serv.exp.FieldLimit
+import com.roofstone.serv.exp.Formula
+import com.roofstone.serv.exp.QueryHelper
+import com.roofstone.ui.screen.ChartData
 import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
 import java.util.*
@@ -15,8 +15,8 @@ import java.util.*
 class ChartManager(val m: Demo1) {
     //val fetchSize = 200
     fun getChartExample2(filter: String): ChartData<*, *> {
-        val f = Formula.parse(filter, com.dolmen.md.std.Parameters.T)
-        val isShowy2 = true == FieldLimit.getEqual(f, com.dolmen.md.std.Parameters.fCheck)
+        val f = Formula.parse(filter, com.roofstone.md.std.Parameters.T)
+        val isShowy2 = true == FieldLimit.getEqual(f, com.roofstone.md.std.Parameters.fCheck)
         return getChartExample(isShowy2)
     }
 
