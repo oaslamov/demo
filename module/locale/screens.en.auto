@@ -63,6 +63,7 @@ Up=Up
 "Товарный отчет по заказчикам"=Товарный отчет по заказчикам
 
 //-- demo1_customer:scr@demo1_prvt --
+"Get customer orders summary"=Get customer orders summary
 Phones=Phones
 Summary=Summary
 
@@ -99,6 +100,7 @@ Analyze=Analyze
 
 //-- sc_chart:scr@demo1_prvt --
 "Bar Chart"=Bar Chart
+Date=Date
 "Donut Chart"=Donut Chart
 "Line Chart"=Line Chart
 "Spline Chart"=Spline Chart

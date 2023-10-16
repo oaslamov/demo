@@ -90,6 +90,7 @@ Analyze=Выполнить анализ
 
 //-- sc_chart:scr@demo1_prvt --
 "Bar Chart"=Столбчатая диаграмма
+Date=Дата
 "Line Chart"=Линейная диаграмма
 "Donut Chart"=Круговая диаграмма
 "Spline Chart"=Сглаженная линейная диаграмма

@@ -204,7 +204,7 @@
         {
           "code":"act1",
           "label":"$l{Summary}l",
-          "confirm":true,
+          "confirm":"$l{Get customer orders summary}l",
           "request":{
             "data":{
               "action":"demo1_prvt.action1",
