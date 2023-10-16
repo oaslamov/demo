@@ -7,17 +7,17 @@ import com.roofstone.serv.anno.Description
 import org.mpru.security.KerberosPrefs
 
 class Caller(val m: Demo1) {
-    @Description("Calls dolmen server (JSON)")
-    fun callDolmenJson(): String {
+    @Description("Calls server (JSON)")
+    fun callServerJson(): String {
         var res = ""
-        val url = "https://dolmensystem.corp.example.com/dolmen"
+        val url = "https://system.corp.example.com/mainsrv"
         val spn = url.toSpn()
         val http = Http(url)
         val kerbPrefs = KerberosPrefs()
         //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")        // Kerberos Username and Password
         //kerbPrefs.setPassword("Pass123456")                   // Kerberos Username and Password
         kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")         // Kerberos Principal and Keytab
-        kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab") // Kerberos Principal and Keytab
+        kerbPrefs.setKtab("C:/roofstone/Workspace/webserver/webapps/mainsrv/mainsrv.ktab") // Kerberos Principal and Keytab
         kerbPrefs.setSpn(spn)
         http.setKerberosClient(kerbPrefs)
         http.setLog(m.l())
@@ -34,27 +34,27 @@ class Caller(val m: Demo1) {
         return res
     }
 
-    @Description("Calls dolmen server (XML)")
-    fun callDolmenXml(): String {
-        val url = "https://dolmensystem.corp.example.com/dolmen"
+    @Description("Calls server (XML)")
+    fun callServerXml(): String {
+        val url = "https://system.corp.example.com/mainsrv"
         val http = Http(url)
         val spn = url.toSpn()
         val kerbPrefs = KerberosPrefs()
         //kerbPrefs.setUsername("dora@CORP.EXAMPLE.COM")    // Kerberos Username and Password
         //kerbPrefs.setPassword("Pass123456")               // Kerberos Username and Password
         kerbPrefs.setPrincipal("HTTP/dlm2.corp.example.com@CORP.EXAMPLE.COM")         // Kerberos Principal and Keytab
-        kerbPrefs.setKtab("C:/dolmen/Workspace/webserver/webapps/dolmen/dolmen.ktab") // Kerberos Principal and Keytab
+        kerbPrefs.setKtab("C:/roofstone/Workspace/webserver/webapps/mainsrv/mainsrv.ktab") // Kerberos Principal and Keytab
         kerbPrefs.setSpn(spn)
         http.setKerberosClient(kerbPrefs)
         http.setLog(m.l())
         var res = http.sendPost(
             """
             <?xml version="1.0" encoding="UTF-8"?>
-            <dolmen version="1">
+            <roofstone version="1">
             <a a="demo1_prvt.action1">
                 <arg name="customerFilter">name like '%val%'</arg>
             </a>
-            </dolmen>
+            </roofstone>
         """.trimIndent()
         )
         res += "\nRC == ${http.rc()}\n"

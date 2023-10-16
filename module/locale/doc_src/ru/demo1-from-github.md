@@ -1,14 +1,14 @@
-<!--dolmen
+<!--roofstone
 label=Установка демо-модуля 
 -->
 
 - Создать новый проект для сборки Демо-модуля и получить исходый код с *GitHub*
-    - запустить `c:/dolmen/workspace/idea.bat`
-    - новый проект **User Defined | dolmen module | project name: demo1**
+    - запустить `c:/roofstone/workspace/idea.bat`
+    - новый проект **User Defined | roofstone module | project name: demo1**
     - **View | Tool windows | Project**
     - **View | Appearance | Toolbar**
     - Подождать, когда закончится  Indexing JDK 12
-    - **Build | Configure dolmen project**
+    - **Build | Configure roofstone project**
     - удалить `module/module_mymodule.json`
     - удалить `src/com/mycompany/mymodule`
     - удалить `module.conf`
@@ -20,9 +20,9 @@ label=Установка демо-модуля
     - **VCS(Git) | Branches | Remote branches | origin/master | checkout**
 
 - Собрать модуль и запустить сервер
-    - **Dolmen-deploy**
+    - **Roofstone-deploy**
     - Подождать, когда закончится сборка
-    - **Dolmen-tomcat**
+    - **Roofstone-tomcat**
 
 - Установить модуль
     - зайти в веб-интерфейс

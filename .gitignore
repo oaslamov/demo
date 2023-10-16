@@ -2,7 +2,7 @@
 *.class
 *.iml
 *.local.conf
-dolmen-module-*.zip
+roofstone-module-*.zip
 /classes/
 /out/
 /bin/

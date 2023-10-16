@@ -128,14 +128,14 @@ open class Demo1 : Demo1_PrvtModuleBase() {
         RefreshTable(this).refreshTable(t)
     }
 
-    @Description("Calls dolmen server (JSON)")
-    fun callDolmenJson(): String {
-        return Caller(this).callDolmenJson()
+    @Description("Calls server (JSON)")
+    fun callServerJson(): String {
+        return Caller(this).callServerJson()
     }
 
-    @Description("Calls dolmen server (XML)")
-    fun callDolmenXml(): String {
-        return Caller(this).callDolmenXml()
+    @Description("Calls server (XML)")
+    fun callServerXml(): String {
+        return Caller(this).callServerXml()
     }
 
     @Description("Sends a test mail message")
@@ -176,7 +176,7 @@ open class Demo1 : Demo1_PrvtModuleBase() {
         "dbUrl: database connection url default(jdbc:postgresql://127.0.0.1:5432/postgres?maxResultBuffer=10p&defaultRowFetchSize=20&adaptiveFetchMaximum=1000&adaptiveFetch=true)",
         "dbUser: database user default(postgres)",
         "dbPass: database password",
-        "dbSchema: database Schema default(dolmen)",
+        "dbSchema: database Schema default(roofstone)",
         "fetchSize: default(20)"
     )
     fun testQuery(n: Int, dbUrl: String, dbUser: String, dbPass: String, dbSchema: String, fetchSize: Int) {
