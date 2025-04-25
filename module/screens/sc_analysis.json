@@ -32,28 +32,28 @@
       "fields":[
         {
           "code":"abc_class",
-          "label":"$l{f:7ef07d01e00e}l",
+          "label":"$l{f:7efd8901e00e}l",
           "type":"string",
-          "hint":"$l{f:7ef07d01e00e:d}l"
+          "hint":"$l{f:7efd8901e00e:d}l"
         },
         {
           "code":"avg_price",
-          "label":"$l{f:7ef07d01e007}l",
+          "label":"$l{f:7efd8901e007}l",
           "type":"number",
-          "hint":"$l{f:7ef07d01e007:d}l"
+          "hint":"$l{f:7efd8901e007:d}l"
         },
         {
           "code":"cuperc",
-          "label":"$l{f:7ef07d01e00d}l",
+          "label":"$l{f:7efd8901e00d}l",
           "type":"number",
           "format":"#0.0",
-          "hint":"$l{f:7ef07d01e00d:d}l"
+          "hint":"$l{f:7efd8901e00d:d}l"
         },
         {
           "code":"cusum",
-          "label":"$l{f:7ef07d01e00c}l",
+          "label":"$l{f:7efd8901e00c}l",
           "type":"number",
-          "hint":"$l{f:7ef07d01e00c:d}l"
+          "hint":"$l{f:7efd8901e00c:d}l"
         },
         {
           "code":"id",
@@ -61,21 +61,21 @@
         },
         {
           "code":"name",
-          "label":"$l{f:7ef07d01e006}l",
+          "label":"$l{f:7efd8901e006}l",
           "type":"string",
-          "hint":"$l{f:7ef07d01e006:d}l"
+          "hint":"$l{f:7efd8901e006:d}l"
         },
         {
           "code":"quantity",
-          "label":"$l{f:7ef07d01e008}l",
+          "label":"$l{f:7efd8901e008}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d01e008:d}l"
+          "hint":"$l{f:7efd8901e008:d}l"
         },
         {
           "code":"sum",
-          "label":"$l{f:7ef07d01e009}l",
+          "label":"$l{f:7efd8901e009}l",
           "type":"number",
-          "hint":"$l{f:7ef07d01e009:d}l"
+          "hint":"$l{f:7efd8901e009:d}l"
         }
       ],
       "operations":{
@@ -112,22 +112,22 @@
       "fields":[
         {
           "code":"abc_class",
-          "label":"$l{f:7ef07d01f00c}l",
+          "label":"$l{f:7efd8901f00c}l",
           "type":"string",
-          "hint":"$l{f:7ef07d01f00c:d}l"
+          "hint":"$l{f:7efd8901f00c:d}l"
         },
         {
           "code":"cuperc",
-          "label":"$l{f:7ef07d01f00b}l",
+          "label":"$l{f:7efd8901f00b}l",
           "type":"number",
           "format":"#0.0",
-          "hint":"$l{f:7ef07d01f00b:d}l"
+          "hint":"$l{f:7efd8901f00b:d}l"
         },
         {
           "code":"cusum",
-          "label":"$l{f:7ef07d01f00a}l",
+          "label":"$l{f:7efd8901f00a}l",
           "type":"number",
-          "hint":"$l{f:7ef07d01f00a:d}l"
+          "hint":"$l{f:7efd8901f00a:d}l"
         },
         {
           "code":"id",
@@ -135,15 +135,15 @@
         },
         {
           "code":"name",
-          "label":"$l{f:7ef07d01f008}l",
+          "label":"$l{f:7efd8901f008}l",
           "type":"string",
-          "hint":"$l{f:7ef07d01f008:d}l"
+          "hint":"$l{f:7efd8901f008:d}l"
         },
         {
           "code":"sum",
-          "label":"$l{f:7ef07d01f009}l",
+          "label":"$l{f:7efd8901f009}l",
           "type":"number",
-          "hint":"$l{f:7ef07d01f009:d}l"
+          "hint":"$l{f:7efd8901f009:d}l"
         }
       ],
       "operations":{
@@ -226,19 +226,19 @@
           "code":"report_date",
           "label":"$l{Report generated}l",
           "type":"datetime",
-          "hint":"$l{f:7ef07d02c007:d}l"
+          "hint":"$l{f:7efd8902c007:d}l"
         },
         {
           "code":"report_type",
-          "label":"$l{f:7ef07d02c006}l",
+          "label":"$l{f:7efd8902c006}l",
           "type":"enum",
           "enum":[
             {
-              "label":"$l{e:7ef07d02c006.data_analysis}l",
+              "label":"$l{e:7efd8902c006.data_analysis}l",
               "value":"data_analysis"
             }
           ],
-          "hint":"$l{f:7ef07d02c006:d}l"
+          "hint":"$l{f:7efd8902c006:d}l"
         }
       ],
       "operations":{

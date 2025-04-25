@@ -16,13 +16,13 @@
       "fields":[
         {
           "code":"count",
-          "label":"$l{f:7ef07d026008}l",
+          "label":"$l{f:7efd89026008}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d026008:d}l"
+          "hint":"$l{f:7efd89026008:d}l"
         },
         {
           "code":"customer",
-          "label":"$l{f:7ef07d026006}l",
+          "label":"$l{f:7efd89026006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -39,13 +39,13 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d026006:d}l"
+          "hint":"$l{f:7efd89026006:d}l"
         },
         {
           "code":"order_date",
-          "label":"$l{f:7ef07d02600a}l",
+          "label":"$l{f:7efd8902600a}l",
           "type":"date",
-          "hint":"$l{f:7ef07d02600a:d}l"
+          "hint":"$l{f:7efd8902600a:d}l"
         },
         {
           "code":"id",
@@ -53,7 +53,7 @@
         },
         {
           "code":"product",
-          "label":"$l{f:7ef07d026007}l",
+          "label":"$l{f:7efd89026007}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -70,13 +70,13 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d026007:d}l"
+          "hint":"$l{f:7efd89026007:d}l"
         },
         {
           "code":"value",
-          "label":"$l{f:7ef07d026009}l",
+          "label":"$l{f:7efd89026009}l",
           "type":"number",
-          "hint":"$l{f:7ef07d026009:d}l"
+          "hint":"$l{f:7efd89026009:d}l"
         }
       ],
       "operations":{

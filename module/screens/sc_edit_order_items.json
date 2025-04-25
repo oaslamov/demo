@@ -22,9 +22,9 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef07d00900b}l",
+          "label":"$l{f:7efd8900900b}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00900b:d}l"
+          "hint":"$l{f:7efd8900900b:d}l"
         },
         {
           "code":"id",
@@ -32,14 +32,14 @@
         },
         {
           "code":"price",
-          "label":"$l{f:7ef07d009011}l",
+          "label":"$l{f:7efd89009011}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009011:d}l"
+          "hint":"$l{f:7efd89009011:d}l"
         },
         {
           "code":"product",
-          "label":"$l{f:7ef07d009008}l",
+          "label":"$l{f:7efd89009008}l",
           "type":"ref",
           "mandatory":true,
           "ref":{
@@ -58,17 +58,17 @@
             }
           },
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009008:d}l"
+          "hint":"$l{f:7efd89009008:d}l"
         },
         {
           "code":"quantity",
-          "label":"$l{f:7ef07d00900a}l",
+          "label":"$l{f:7efd8900900a}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d00900a:d}l"
+          "hint":"$l{f:7efd8900900a:d}l"
         },
         {
           "code":"shipping_order",
-          "label":"$l{f:7ef07d009006}l",
+          "label":"$l{f:7efd89009006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -86,14 +86,14 @@
             }
           },
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009006:d}l"
+          "hint":"$l{f:7efd89009006:d}l"
         },
         {
           "code":"sum",
-          "label":"$l{f:7ef07d009012}l",
+          "label":"$l{f:7efd89009012}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009012:d}l"
+          "hint":"$l{f:7efd89009012:d}l"
         }
       ],
       "operations":{
@@ -170,41 +170,41 @@
         },
         {
           "code":"name",
-          "label":"$l{f:7ef07d007006}l",
+          "label":"$l{f:7efd89007006}l",
           "type":"string",
-          "hint":"$l{f:7ef07d007006:d}l"
+          "hint":"$l{f:7efd89007006:d}l"
         },
         {
           "code":"price",
-          "label":"$l{f:7ef07d007009}l",
+          "label":"$l{f:7efd89007009}l",
           "type":"number",
-          "hint":"$l{f:7ef07d007009:d}l"
+          "hint":"$l{f:7efd89007009:d}l"
         },
         {
           "code":"product_type",
-          "label":"$l{f:7ef07d007008}l",
+          "label":"$l{f:7efd89007008}l",
           "type":"enum",
           "enum":[
             {
-              "label":"$l{e:7ef07d007008.T}l",
+              "label":"$l{e:7efd89007008.T}l",
               "value":"T"
             },
             {
-              "label":"$l{e:7ef07d007008.B}l",
+              "label":"$l{e:7efd89007008.B}l",
               "value":"B"
             },
             {
-              "label":"$l{e:7ef07d007008.G}l",
+              "label":"$l{e:7efd89007008.G}l",
               "value":"G"
             }
           ],
-          "hint":"$l{f:7ef07d007008:d}l"
+          "hint":"$l{f:7efd89007008:d}l"
         },
         {
           "code":"url",
-          "label":"$l{f:7ef07d00700a}l",
+          "label":"$l{f:7efd8900700a}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00700a:d}l"
+          "hint":"$l{f:7efd8900700a:d}l"
         }
       ],
       "operations":{
@@ -237,9 +237,9 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef07d00900b}l",
+          "label":"$l{f:7efd8900900b}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00900b:d}l"
+          "hint":"$l{f:7efd8900900b:d}l"
         },
         {
           "code":"id",
@@ -247,14 +247,14 @@
         },
         {
           "code":"price",
-          "label":"$l{f:7ef07d009011}l",
+          "label":"$l{f:7efd89009011}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009011:d}l"
+          "hint":"$l{f:7efd89009011:d}l"
         },
         {
           "code":"product",
-          "label":"$l{f:7ef07d009008}l",
+          "label":"$l{f:7efd89009008}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -272,17 +272,17 @@
             }
           },
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009008:d}l"
+          "hint":"$l{f:7efd89009008:d}l"
         },
         {
           "code":"quantity",
-          "label":"$l{f:7ef07d00900a}l",
+          "label":"$l{f:7efd8900900a}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d00900a:d}l"
+          "hint":"$l{f:7efd8900900a:d}l"
         },
         {
           "code":"shipping_order",
-          "label":"$l{f:7ef07d009006}l",
+          "label":"$l{f:7efd89009006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -299,21 +299,21 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d009006:d}l"
+          "hint":"$l{f:7efd89009006:d}l"
         },
         {
           "code":"sum",
-          "label":"$l{f:7ef07d009012}l",
+          "label":"$l{f:7efd89009012}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009012:d}l"
+          "hint":"$l{f:7efd89009012:d}l"
         },
         {
           "code":"item_order",
-          "label":"$l{f:7ef07d009013}l",
+          "label":"$l{f:7efd89009013}l",
           "type":"float64",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009013:d}l"
+          "hint":"$l{f:7efd89009013:d}l"
         }
       ],
       "operations":{

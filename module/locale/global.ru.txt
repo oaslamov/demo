@@ -1,188 +1,188 @@
-m:7ef07d000000=Demo module #1
+m:7efd89000000=Demo module #1
 
 // table Att File
-t:7ef07d021000=Att File
+t:7efd89021000=Att File
 --  Name
-f:7ef07d021006=Name
+f:7efd89021006=Name
 --  File Date
-f:7ef07d021007=Дата файла
+f:7efd89021007=Дата файла
 --  Reference ID
-f:7ef07d021008=Reference ID
+f:7efd89021008=Reference ID
 --  Reference code
-f:7ef07d021009=Reference code
+f:7efd89021009=Reference code
 
 // table Att File Data
-t:7ef07d022000=Att File Data
+t:7efd89022000=Att File Data
 --  Att File
-f:7ef07d022006=Att File
+f:7efd89022006=Att File
 --  Data
-f:7ef07d022008=Data
+f:7efd89022008=Data
 
 // table City
-t:7ef07d00c000=Город
+t:7efd8900c000=Город
 --  Country
-f:7ef07d00c006=Страна
+f:7efd8900c006=Страна
 --  Subcountry
-f:7ef07d00c008=Регион
+f:7efd8900c008=Регион
 --  Name
-f:7ef07d00c00a=Наименование
+f:7efd8900c00a=Наименование
 --  Geonameid
-f:7ef07d00c00b=Geonameid
+f:7efd8900c00b=Geonameid
 --  List Name
-f:7ef07d00c00c=List Name
+f:7efd8900c00c=List Name
 
 // table Country
-t:7ef07d00d000=Страна
+t:7efd8900d000=Страна
 --  Name
-f:7ef07d00d006=Наименование
+f:7efd8900d006=Наименование
 
 // table Customer
-t:7ef07d006000=Заказчик
+t:7efd89006000=Заказчик
 --  Name
-f:7ef07d006006=ФИО
+f:7efd89006006=ФИО
 --  First Name
-f:7ef07d006013=Имя
+f:7efd89006013=Имя
 --  Last Name
-f:7ef07d006014=Фамилия
+f:7efd89006014=Фамилия
 --  Phone
-f:7ef07d006007=Телефон
+f:7efd89006007=Телефон
 --  Mobile
-f:7ef07d00600b=Моб.тел.
+f:7efd8900600b=Моб.тел.
 --  Address Line1
-f:7ef07d006008=Адрес, строка 1
+f:7efd89006008=Адрес, строка 1
 --  Address Line2
-f:7ef07d006009=Адрес, строка 2
+f:7efd89006009=Адрес, строка 2
 --  Address Line3
-f:7ef07d00600a=Адрес, строка 3
+f:7efd8900600a=Адрес, строка 3
 --  Country
-f:7ef07d00600c=Страна
+f:7efd8900600c=Страна
 --  Subcountry
-f:7ef07d00600e=Регион
+f:7efd8900600e=Регион
 --  City
-f:7ef07d006010=Город
+f:7efd89006010=Город
 --  Category
-f:7ef07d006016=Категория
+f:7efd89006016=Категория
 --  Mailing Label
-f:7ef07d006015=Почтовый ярлык
+f:7efd89006015=Почтовый ярлык
 
 // table Customer Abc
-t:7ef07d01f000=Заказчик Abc
+t:7efd8901f000=Заказчик Abc
 --  Customer
-f:7ef07d01f006=Заказчик
+f:7efd8901f006=Заказчик
 --  Name
-f:7ef07d01f008=Имя
+f:7efd8901f008=Имя
 --  Sum
-f:7ef07d01f009=Сумма
+f:7efd8901f009=Сумма
 --  Cumulative sum
-f:7ef07d01f00a=Накопленная сумма
+f:7efd8901f00a=Накопленная сумма
 --  Cumulative percentage
-f:7ef07d01f00b=Накопленный процент
+f:7efd8901f00b=Накопленный процент
 --  ABC class
-f:7ef07d01f00c=Класс ABC
+f:7efd8901f00c=Класс ABC
 
 
 // table Customer Category
-t:7ef07d025000=Категория заказчика
+t:7efd89025000=Категория заказчика
 --  Parent category
-f:7ef07d025006=Категория-родитель
+f:7efd89025006=Категория-родитель
 --  Name
-f:7ef07d025008=Наименование
+f:7efd89025008=Наименование
 
 // table Customer Product Report
-t:7ef07d026000=Товарный отчет по заказчикам
+t:7efd89026000=Товарный отчет по заказчикам
 --  Customer
-f:7ef07d026006=Заказчик
+f:7efd89026006=Заказчик
 --  Product
-f:7ef07d026007=Товар
+f:7efd89026007=Товар
 --  Count
-f:7ef07d026008=Количество
+f:7efd89026008=Количество
 --  Value
-f:7ef07d026009=Сумма
+f:7efd89026009=Сумма
 --  Order date
-f:7ef07d02600a=Дата заказа
+f:7efd8902600a=Дата заказа
 
 // table Product
-t:7ef07d007000=Товар
+t:7efd89007000=Товар
 --  Name
-f:7ef07d007006=Наименование
+f:7efd89007006=Наименование
 --  Price
-f:7ef07d007009=Цена
+f:7efd89007009=Цена
 --  Product Type
-f:7ef07d007008=Тип товара
-e:7ef07d007008.T=Игрушка
-e:7ef07d007008.B=Книга
-e:7ef07d007008.G=Продовольствие
+f:7efd89007008=Тип товара
+e:7efd89007008.T=Игрушка
+e:7efd89007008.B=Книга
+e:7efd89007008.G=Продовольствие
 --  Url
-f:7ef07d00700a=Url
+f:7efd8900700a=Url
 --  Shipping From
-f:7ef07d00700c=Доставка из
-f:7ef07d00700c:d=Отгрузка со склада в этих странах
+f:7efd8900700c=Доставка из
+f:7efd8900700c:d=Отгрузка со склада в этих странах
 
 // table Product Abc
-t:7ef07d01e000=Товары Abc
+t:7efd8901e000=Товары Abc
 --  Product
-f:7ef07d01e00a=Товар
+f:7efd8901e00a=Товар
 --  Name
-f:7ef07d01e006=Наименование
+f:7efd8901e006=Наименование
 --  Average price
-f:7ef07d01e007=Средняя цена
+f:7efd8901e007=Средняя цена
 --  Quantity
-f:7ef07d01e008=Количество
+f:7efd8901e008=Количество
 --  Sum
-f:7ef07d01e009=Сумма
+f:7efd8901e009=Сумма
 --  Cumulative sum
-f:7ef07d01e00c=Накопленная сумма
+f:7efd8901e00c=Накопленная сумма
 --  Cumulative percentage
-f:7ef07d01e00d=Накопленный процент
+f:7efd8901e00d=Накопленный процент
 --  ABC class
-f:7ef07d01e00e=Класс ABC
+f:7efd8901e00e=Класс ABC
 
 // table Shipping Order
-t:7ef07d008000=Заказ
+t:7efd89008000=Заказ
 --  Customer
-f:7ef07d008006=Заказчик
+f:7efd89008006=Заказчик
 --  Order placed at
-f:7ef07d008008=Дата создания
-f:7ef07d008008:d=Ваше местное время
+f:7efd89008008=Дата создания
+f:7efd89008008:d=Ваше местное время
 --  Order paid at
-f:7ef07d008009=Дата оплаты
+f:7efd89008009=Дата оплаты
 --  Shipment Date
-f:7ef07d00800b=Дата отгрузки
-f:7ef07d00800b:d=Дата отгрузки со склада
+f:7efd8900800b=Дата отгрузки
+f:7efd8900800b:d=Дата отгрузки со склада
 --  Total
-f:7ef07d00800e=Итого
+f:7efd8900800e=Итого
 --  Comment
-f:7ef07d00800a=Комментарий
+f:7efd8900800a=Комментарий
 
 // table Shipping Order Product
-t:7ef07d009000=Строка заказа
+t:7efd89009000=Строка заказа
 --  Shipping Order
-f:7ef07d009006=Заказ
+f:7efd89009006=Заказ
 --  Product
-f:7ef07d009008=Товар
+f:7efd89009008=Товар
 --  Qnty
-f:7ef07d00900a=Количество
+f:7efd8900900a=Количество
 --  Price
-f:7ef07d009011=Цена
+f:7efd89009011=Цена
 --  Sum
-f:7ef07d009012=Сумма
+f:7efd89009012=Сумма
 --  Comment
-f:7ef07d00900b=Комментарий
+f:7efd8900900b=Комментарий
 
 // table Subcountry
-t:7ef07d00e000=Регион
+t:7efd8900e000=Регион
 --  Country
-f:7ef07d00e006=Страна
+f:7efd8900e006=Страна
 --  Name
-f:7ef07d00e008=Наименование
+f:7efd8900e008=Наименование
 
 // table View1
-t:7ef07d017000=View1
+t:7efd89017000=View1
 --  Customer name
-f:7ef07d01700c=Имя заказчика
+f:7efd8901700c=Имя заказчика
 --  Customer phone
-f:7ef07d01700d=Телефон заказчика
+f:7efd8901700d=Телефон заказчика
 --  Customer mobile
-f:7ef07d01700e=Моб. тел. заказчика
+f:7efd8901700e=Моб. тел. заказчика
 --  Customer address
-f:7ef07d01700f=Адрес заказчика
+f:7efd8901700f=Адрес заказчика

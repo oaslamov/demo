@@ -20,46 +20,46 @@
         },
         {
           "code":"name",
-          "label":"$l{f:7ef07d007006}l",
+          "label":"$l{f:7efd89007006}l",
           "type":"string",
-          "hint":"$l{f:7ef07d007006:d}l"
+          "hint":"$l{f:7efd89007006:d}l"
         },
         {
           "code":"price",
-          "label":"$l{f:7ef07d007009}l",
+          "label":"$l{f:7efd89007009}l",
           "type":"number",
-          "hint":"$l{f:7ef07d007009:d}l"
+          "hint":"$l{f:7efd89007009:d}l"
         },
         {
           "code":"product_type",
-          "label":"$l{f:7ef07d007008}l",
+          "label":"$l{f:7efd89007008}l",
           "type":"enum",
           "enum":[
             {
-              "label":"$l{e:7ef07d007008.T}l",
+              "label":"$l{e:7efd89007008.T}l",
               "value":"T"
             },
             {
-              "label":"$l{e:7ef07d007008.B}l",
+              "label":"$l{e:7efd89007008.B}l",
               "value":"B"
             },
             {
-              "label":"$l{e:7ef07d007008.G}l",
+              "label":"$l{e:7efd89007008.G}l",
               "value":"G"
             }
           ],
-          "hint":"$l{f:7ef07d007008:d}l"
+          "hint":"$l{f:7efd89007008:d}l"
         },
         {
           "code":"url",
-          "label":"$l{f:7ef07d00700a}l",
+          "label":"$l{f:7efd8900700a}l",
           "type":"string",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d00700a:d}l"
+          "hint":"$l{f:7efd8900700a:d}l"
         },
         {
           "code":"shipping_from",
-          "label":"$l{f:7ef07d00700c}l",
+          "label":"$l{f:7efd8900700c}l",
           "type":"id_list",
           "ref":{
             "data":{
@@ -76,7 +76,7 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d00700c:d}l"
+          "hint":"$l{f:7efd8900700c:d}l"
         }
       ],
       "operations":{

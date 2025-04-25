@@ -3,7 +3,7 @@
   "label":"Demo module #1",
   "desc":"Roofstone Platform. Introduction",
   "mainClass":"com.dlmdemo.demo1_prvt.Demo1",
-  "privateIID":8319101,
+  "privateIID":8322441,
   "lang":"en",
   "version":2,
   "required":{
@@ -13,12 +13,11 @@
     "company":"Roofstone",
     "category":"test"
   },
-  "@v":"2+295",
-  "@e":"6customer;7product;8shipping_order;9shipping_order_product;12city;13country;14subcountry;23view1:50;30product_abc;31customer_abc;33att_file;34att_file_data;35decor_test_card:50;36product_shipping_from;37customer_category;38customer_product_report:50;42sales_by_country_report;44report;46shipping_order_filter:50",
-  "@d":"40dm1;26v_dm7:50;32product_det;16flt;29product_abc:50;28product_abc:50;27product_abc:50;25v_dm6:50;24v_dm5:50;15view3:50;22v_dm4:50;21v_dm4:50;18v_dm1:50;19v_dm2:50;20v_dm3:50;17view4:50;11view2:50",
-  "@sh":"c10e39575",
+  "@v":"2+296",
+  "@e":"33att_file;34att_file_data;12city;13country;6customer;31customer_abc;37customer_category;38customer_product_report:50;35decor_test_card:50;7product;30product_abc;36product_shipping_from;44report;42sales_by_country_report;8shipping_order;46shipping_order_filter:50;9shipping_order_product;14subcountry;23view1:50",
+  "@sh":"d75228c83",
   "@hist":{
-    "2294":"2023-04-03",
-    "2295":"2023-10-16"
+    "2295":"2023-10-16",
+    "2296":"2025-04-25"
   }
 }

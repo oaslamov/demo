@@ -17,14 +17,14 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef07d00800a}l",
+          "label":"$l{f:7efd8900800a}l",
           "type":"text",
-          "hint":"$l{f:7ef07d00800a:d}l",
+          "hint":"$l{f:7efd8900800a:d}l",
           "edit_condition":"false"
         },
         {
           "code":"customer",
-          "label":"$l{f:7ef07d008006}l",
+          "label":"$l{f:7efd89008006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -41,19 +41,19 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d008006:d}l"
+          "hint":"$l{f:7efd89008006:d}l"
         },
         {
           "code":"date_order_paid",
-          "label":"$l{f:7ef07d008009}l",
+          "label":"$l{f:7efd89008009}l",
           "type":"plaindate",
-          "hint":"$l{f:7ef07d008009:d}l"
+          "hint":"$l{f:7efd89008009:d}l"
         },
         {
           "code":"datetime_order_placed",
-          "label":"$l{f:7ef07d008008}l",
+          "label":"$l{f:7efd89008008}l",
           "type":"datetime",
-          "hint":"$l{f:7ef07d008008:d}l"
+          "hint":"$l{f:7efd89008008:d}l"
         },
         {
           "code":"id",
@@ -127,9 +127,9 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef07d00900b}l",
+          "label":"$l{f:7efd8900900b}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00900b:d}l"
+          "hint":"$l{f:7efd8900900b:d}l"
         },
         {
           "code":"id",
@@ -137,7 +137,7 @@
         },
         {
           "code":"product",
-          "label":"$l{f:7ef07d009008}l",
+          "label":"$l{f:7efd89009008}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -154,17 +154,17 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d009008:d}l"
+          "hint":"$l{f:7efd89009008:d}l"
         },
         {
           "code":"quantity",
-          "label":"$l{f:7ef07d00900a}l",
+          "label":"$l{f:7efd8900900a}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d00900a:d}l"
+          "hint":"$l{f:7efd8900900a:d}l"
         },
         {
           "code":"shipping_order",
-          "label":"$l{f:7ef07d009006}l",
+          "label":"$l{f:7efd89009006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -181,7 +181,7 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d009006:d}l"
+          "hint":"$l{f:7efd89009006:d}l"
         }
       ],
       "operations":{

@@ -16,7 +16,7 @@
       "fields":[
         {
           "code":"category",
-          "label":"$l{f:7ef07d025006}l",
+          "label":"$l{f:7efd89025006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -34,7 +34,7 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d025006:d}l"
+          "hint":"$l{f:7efd89025006:d}l"
         },
         {
           "code":"id",
@@ -42,10 +42,10 @@
         },
         {
           "code":"name",
-          "label":"$l{f:7ef07d025008}l",
+          "label":"$l{f:7efd89025008}l",
           "type":"string",
           "tree_node_type":"name",
-          "hint":"$l{f:7ef07d025008:d}l"
+          "hint":"$l{f:7efd89025008:d}l"
         }
       ],
       "operations":{

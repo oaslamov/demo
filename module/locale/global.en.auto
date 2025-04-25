@@ -3,242 +3,242 @@
 // -- for installed system: "locale" dir in Workspace (including subpath for global files or locale/<module>/ folder for module files)
 // -- for module developer project: "locale" dir in the Roofstone project
 
-m:7ef07d000000=Demo module #1
+m:7efd89000000=Demo module #1
 
 // table Att File
-t:7ef07d021000=Att File
+t:7efd89021000=Att File
 --  Name
-f:7ef07d021006=Name
+f:7efd89021006=Name
 --  File Date
-f:7ef07d021007=File Date
+f:7efd89021007=File Date
 --  Reference ID
-f:7ef07d021008=Reference ID
+f:7efd89021008=Reference ID
 --  Reference code
-f:7ef07d021009=Reference code
+f:7efd89021009=Reference code
 
 // table Att File Data
-t:7ef07d022000=Att File Data
+t:7efd89022000=Att File Data
 --  Att File (ref)
---f:7ef07d022006=Att File
+--f:7efd89022006=Att File
 --  Data
-f:7ef07d022008=Data
+f:7efd89022008=Data
 
 // table City
-t:7ef07d00c000=City
+t:7efd8900c000=City
 --  Country (ref)
-f:7ef07d00c006=Country
+f:7efd8900c006=Country
 --  Subcountry (ref)
-f:7ef07d00c008=Subcountry
+f:7efd8900c008=Subcountry
 --  Name
-f:7ef07d00c00a=Name
+f:7efd8900c00a=Name
 --  Geonameid
-f:7ef07d00c00b=Geonameid
+f:7efd8900c00b=Geonameid
 --  List Name
-f:7ef07d00c00c=List Name
+f:7efd8900c00c=List Name
 
 // table Country
-t:7ef07d00d000=Country
+t:7efd8900d000=Country
 --  Name
-f:7ef07d00d006=Name
+f:7efd8900d006=Name
 
 // table Customer
-t:7ef07d006000=Customer
+t:7efd89006000=Customer
 --  Name
-f:7ef07d006006=Name
+f:7efd89006006=Name
 --  Phone
-f:7ef07d006007=Phone
+f:7efd89006007=Phone
 --  Mobile
-f:7ef07d00600b=Mobile
+f:7efd8900600b=Mobile
 --  Address Line1
-f:7ef07d006008=Address Line1
+f:7efd89006008=Address Line1
 --  Address Line2
-f:7ef07d006009=Address Line2
+f:7efd89006009=Address Line2
 --  Address Line3
-f:7ef07d00600a=Address Line3
+f:7efd8900600a=Address Line3
 --  Country (ref)
---f:7ef07d00600c=Country
+--f:7efd8900600c=Country
 --  Subcountry (ref)
---f:7ef07d00600e=Subcountry
+--f:7efd8900600e=Subcountry
 --  City (ref)
---f:7ef07d006010=City
+--f:7efd89006010=City
 --  Category (ref)
-f:7ef07d006016=Category
+f:7efd89006016=Category
 
 // table Customer Abc
-t:7ef07d01f000=Customer Abc
+t:7efd8901f000=Customer Abc
 --  Customer (ref)
---f:7ef07d01f006=Customer
+--f:7efd8901f006=Customer
 --  Name
-f:7ef07d01f008=Name
+f:7efd8901f008=Name
 --  Sum
-f:7ef07d01f009=Sum
+f:7efd8901f009=Sum
 --  Cumulative sum
-f:7ef07d01f00a=Cumulative sum
+f:7efd8901f00a=Cumulative sum
 --  Cumulative percentage
-f:7ef07d01f00b=Cumulative percentage
+f:7efd8901f00b=Cumulative percentage
 --  ABC class
-f:7ef07d01f00c=ABC class
+f:7efd8901f00c=ABC class
 
 // table Customer Category
-t:7ef07d025000=Customer Category
+t:7efd89025000=Customer Category
 --  Parent category (ref)
-f:7ef07d025006=Parent category
+f:7efd89025006=Parent category
 --  Name
-f:7ef07d025008=Name
+f:7efd89025008=Name
 
 // table Customer Product Report
-t:7ef07d026000=Customer Product Report
+t:7efd89026000=Customer Product Report
 --  Customer (ref)
---f:7ef07d026006=Customer
+--f:7efd89026006=Customer
 --  Product (ref)
---f:7ef07d026007=Product
+--f:7efd89026007=Product
 --  Count
-f:7ef07d026008=Count
+f:7efd89026008=Count
 --  Value
-f:7ef07d026009=Value
+f:7efd89026009=Value
 --  Order Date
-f:7ef07d02600a=Order Date
+f:7efd8902600a=Order Date
 
 // table Decor Test Card
-t:7ef07d023000=Decor Test Card
+t:7efd89023000=Decor Test Card
 --  Style
-f:7ef07d023006=Style
+f:7efd89023006=Style
 --  Sample Text
-f:7ef07d02300c=Sample Text
+f:7efd8902300c=Sample Text
 --  Fg Color
-f:7ef07d023007=Fg Color
+f:7efd89023007=Fg Color
 --  Bg Color
-f:7ef07d023008=Bg Color
+f:7efd89023008=Bg Color
 --  Font
-f:7ef07d023009=Font
+f:7efd89023009=Font
 --  Align
-f:7ef07d02300a=Align
+f:7efd8902300a=Align
 --  Formatting
-f:7ef07d02300b=Formatting
+f:7efd8902300b=Formatting
 
 // table Product
-t:7ef07d007000=Product
+t:7efd89007000=Product
 --  Name
-f:7ef07d007006=Name
+f:7efd89007006=Name
 --  Price
-f:7ef07d007009=Price
+f:7efd89007009=Price
 --  Product Type
-f:7ef07d007008=Product Type
-e:7ef07d007008.T=Toy
-e:7ef07d007008.B=Book
-e:7ef07d007008.G=Grocery
+f:7efd89007008=Product Type
+e:7efd89007008.T=Toy
+e:7efd89007008.B=Book
+e:7efd89007008.G=Grocery
 --  Url
-f:7ef07d00700a=Url
+f:7efd8900700a=Url
 --  Decor
-f:7ef07d00700b=Decor
+f:7efd8900700b=Decor
 --  Shipping From
-f:7ef07d00700c=Shipping From
-f:7ef07d00700c:d=Can be shipped from these countries
+f:7efd8900700c=Shipping From
+f:7efd8900700c:d=Can be shipped from these countries
 
 // table Product Abc
-t:7ef07d01e000=Product Abc
+t:7efd8901e000=Product Abc
 --  Product (ref)
---f:7ef07d01e00a=Product
+--f:7efd8901e00a=Product
 --  Name
-f:7ef07d01e006=Name
+f:7efd8901e006=Name
 --  Average price
-f:7ef07d01e007=Average price
+f:7efd8901e007=Average price
 --  Quantity
-f:7ef07d01e008=Quantity
+f:7efd8901e008=Quantity
 --  Sum
-f:7ef07d01e009=Sum
+f:7efd8901e009=Sum
 --  Cumulative sum
-f:7ef07d01e00c=Cumulative sum
+f:7efd8901e00c=Cumulative sum
 --  Cumulative percentage
-f:7ef07d01e00d=Cumulative percentage
+f:7efd8901e00d=Cumulative percentage
 --  ABC class
-f:7ef07d01e00e=ABC class
+f:7efd8901e00e=ABC class
 
 // table Product Shipping From
-t:7ef07d024000=Product Shipping From
+t:7efd89024000=Product Shipping From
 --  Product (ref)
---f:7ef07d024006=Product
+--f:7efd89024006=Product
 --  Shipping From (ref)
-f:7ef07d024008=Shipping From
+f:7efd89024008=Shipping From
 
 // table Report
-t:7ef07d02c000=Report
+t:7efd8902c000=Report
 --  Report Type
-f:7ef07d02c006=Report Type
-e:7ef07d02c006.data_analysis=Data analysis
+f:7efd8902c006=Report Type
+e:7efd8902c006.data_analysis=Data analysis
 --  Report Date
-f:7ef07d02c007=Report Date
+f:7efd8902c007=Report Date
 
 // table Sales By Country Report
-t:7ef07d02a000=Sales By Country Report
+t:7efd8902a000=Sales By Country Report
 --  Period
-f:7ef07d02a006=Period
+f:7efd8902a006=Period
 --  Country Name
-f:7ef07d02a007=Country Name
+f:7efd8902a007=Country Name
 --  Sum
-f:7ef07d02a008=Sum
+f:7efd8902a008=Sum
 --  Percentage
-f:7ef07d02a009=Percentage
+f:7efd8902a009=Percentage
 
 // table Shipping Order
-t:7ef07d008000=Shipping Order
+t:7efd89008000=Shipping Order
 --  Customer (ref)
---f:7ef07d008006=Customer
+--f:7efd89008006=Customer
 --  Order placed at
-f:7ef07d008008=Order placed at
-f:7ef07d008008:d=Your local time
+f:7efd89008008=Order placed at
+f:7efd89008008:d=Your local time
 --  Order paid at
-f:7ef07d008009=Order paid at
+f:7efd89008009=Order paid at
 --  Shipment Date
-f:7ef07d00800b=Shipment Date
-f:7ef07d00800b:d=From the warehouse
+f:7efd8900800b=Shipment Date
+f:7efd8900800b:d=From the warehouse
 --  Total
-f:7ef07d00800e=Total
+f:7efd8900800e=Total
 --  Comment
-f:7ef07d00800a=Comment
+f:7efd8900800a=Comment
 
 // table Shipping Order Filter
-t:7ef07d02e000=Shipping Order Filter
---  $l{f:7ef07d008008}l
-f:7ef07d02e00a=$l{f:7ef07d008008}l
---  $l{f:7ef07d008006}l (ref)
-f:7ef07d02e007=$l{f:7ef07d008006}l
---  $l{f:7ef07d00800e}l
-f:7ef07d02e00b=$l{f:7ef07d00800e}l
---  $l{f:7ef07d009008}l (ref)
-f:7ef07d02e009=$l{f:7ef07d009008}l
+t:7efd8902e000=Shipping Order Filter
+--  $l{f:7efd89008008}l
+f:7efd8902e00a=$l{f:7efd89008008}l
+--  $l{f:7efd89008006}l (ref)
+f:7efd8902e007=$l{f:7efd89008006}l
+--  $l{f:7efd8900800e}l
+f:7efd8902e00b=$l{f:7efd8900800e}l
+--  $l{f:7efd89009008}l (ref)
+f:7efd8902e009=$l{f:7efd89009008}l
 
 // table Shipping Order Product
-t:7ef07d009000=Shipping Order Product
+t:7efd89009000=Shipping Order Product
 --  Shipping Order (ref)
---f:7ef07d009006=Shipping Order
+--f:7efd89009006=Shipping Order
 --  Product (ref)
---f:7ef07d009008=Product
+--f:7efd89009008=Product
 --  Qnty
-f:7ef07d00900a=Qnty
+f:7efd8900900a=Qnty
 --  Price
-f:7ef07d009011=Price
+f:7efd89009011=Price
 --  Sum
-f:7ef07d009012=Sum
+f:7efd89009012=Sum
 --  Comment
-f:7ef07d00900b=Comment
+f:7efd8900900b=Comment
 --  Item Order
-f:7ef07d009013=Item Order
+f:7efd89009013=Item Order
 
 // table Subcountry
-t:7ef07d00e000=Subcountry
+t:7efd8900e000=Subcountry
 --  Country (ref)
-f:7ef07d00e006=Country
+f:7efd8900e006=Country
 --  Name
-f:7ef07d00e008=Name
+f:7efd8900e008=Name
 
 // table View1
-t:7ef07d017000=View1
+t:7efd89017000=View1
 --  Customer name
-f:7ef07d01700c=Customer name
+f:7efd8901700c=Customer name
 --  Customer phone
-f:7ef07d01700d=Customer phone
+f:7efd8901700d=Customer phone
 --  Customer mobile
-f:7ef07d01700e=Customer mobile
+f:7efd8901700e=Customer mobile
 --  Customer address
-f:7ef07d01700f=Customer address
+f:7efd8901700f=Customer address

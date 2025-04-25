@@ -5,7 +5,7 @@
   "fields":[
     {
       "code":"datetime_order_placed",
-      "label":"$l{f:7ef07d008008}l",
+      "label":"$l{f:7efd89008008}l",
       "type":"datetime",
       "etc":{
         "linkedField":"Demo1_Prvt.Shipping_Order.datetime_order_placed"
@@ -14,7 +14,7 @@
     },
     {
       "code":"customer",
-      "label":"$l{f:7ef07d008006}l",
+      "label":"$l{f:7efd89008006}l",
       "ref":"Demo1_Prvt.Customer",
       "etc":{
         "linkedField":"Demo1_Prvt.Shipping_Order.customer"
@@ -23,7 +23,7 @@
     },
     {
       "code":"total",
-      "label":"$l{f:7ef07d00800e}l",
+      "label":"$l{f:7efd8900800e}l",
       "type":"number",
       "etc":{
         "linkedField":"Demo1_Prvt.Shipping_Order.total"
@@ -32,7 +32,7 @@
     },
     {
       "code":"product",
-      "label":"$l{f:7ef07d009008}l",
+      "label":"$l{f:7efd89009008}l",
       "ref":"demo1_prvt.product",
       "etc":{
         "linkedField":"demo1_prvt.shipping_order_product.product"

@@ -17,14 +17,14 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef07d00800a}l",
+          "label":"$l{f:7efd8900800a}l",
           "type":"text",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d00800a:d}l"
+          "hint":"$l{f:7efd8900800a:d}l"
         },
         {
           "code":"customer",
-          "label":"$l{f:7ef07d008006}l",
+          "label":"$l{f:7efd89008006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -41,19 +41,19 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d008006:d}l"
+          "hint":"$l{f:7efd89008006:d}l"
         },
         {
           "code":"date_order_paid",
-          "label":"$l{f:7ef07d008009}l",
+          "label":"$l{f:7efd89008009}l",
           "type":"plaindate",
-          "hint":"$l{f:7ef07d008009:d}l"
+          "hint":"$l{f:7efd89008009:d}l"
         },
         {
           "code":"datetime_order_placed",
-          "label":"$l{f:7ef07d008008}l",
+          "label":"$l{f:7efd89008008}l",
           "type":"datetime",
-          "hint":"$l{f:7ef07d008008:d}l"
+          "hint":"$l{f:7efd89008008:d}l"
         },
         {
           "code":"id",
@@ -61,16 +61,16 @@
         },
         {
           "code":"shipment_date",
-          "label":"$l{f:7ef07d00800b}l",
+          "label":"$l{f:7efd8900800b}l",
           "type":"plaindate",
-          "hint":"$l{f:7ef07d00800b:d}l"
+          "hint":"$l{f:7efd8900800b:d}l"
         },
         {
           "code":"total",
-          "label":"$l{f:7ef07d00800e}l",
+          "label":"$l{f:7efd8900800e}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d00800e:d}l"
+          "hint":"$l{f:7efd8900800e:d}l"
         }
       ],
       "operations":{
@@ -232,9 +232,9 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef07d00900b}l",
+          "label":"$l{f:7efd8900900b}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00900b:d}l"
+          "hint":"$l{f:7efd8900900b:d}l"
         },
         {
           "code":"id",
@@ -244,7 +244,7 @@
         },
         {
           "code":"product",
-          "label":"$l{f:7ef07d009008}l",
+          "label":"$l{f:7efd89009008}l",
           "type":"ref",
           "mandatory":true,
           "ref":{
@@ -262,18 +262,18 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d009008:d}l"
+          "hint":"$l{f:7efd89009008:d}l"
         },
         {
           "code":"quantity",
-          "label":"$l{f:7ef07d00900a}l",
+          "label":"$l{f:7efd8900900a}l",
           "type":"integer",
           "mandatory":true,
-          "hint":"$l{f:7ef07d00900a:d}l"
+          "hint":"$l{f:7efd8900900a:d}l"
         },
         {
           "code":"shipping_order",
-          "label":"$l{f:7ef07d009006}l",
+          "label":"$l{f:7efd89009006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -290,30 +290,30 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d009006:d}l"
+          "hint":"$l{f:7efd89009006:d}l"
         },
         {
           "code":"price",
-          "label":"$l{f:7ef07d009011}l",
+          "label":"$l{f:7efd89009011}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009011:d}l",
+          "hint":"$l{f:7efd89009011:d}l",
           "placeholder":"$l{Get price from Product table if blank}l"
         },
         {
           "code":"sum",
-          "label":"$l{f:7ef07d009012}l",
+          "label":"$l{f:7efd89009012}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009012:d}l",
+          "hint":"$l{f:7efd89009012:d}l",
           "placeholder":"$l{Auto calculate}l"
         },
         {
           "code":"item_order",
-          "label":"$l{f:7ef07d009013}l",
+          "label":"$l{f:7efd89009013}l",
           "type":"float64",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009013:d}l"
+          "hint":"$l{f:7efd89009013:d}l"
         }
       ],
       "operations":{
@@ -519,21 +519,21 @@
       "fields":[
         {
           "code":"address_line1",
-          "label":"$l{f:7ef07d006008}l",
+          "label":"$l{f:7efd89006008}l",
           "type":"string",
-          "hint":"$l{f:7ef07d006008:d}l"
+          "hint":"$l{f:7efd89006008:d}l"
         },
         {
           "code":"address_line2",
-          "label":"$l{f:7ef07d006009}l",
+          "label":"$l{f:7efd89006009}l",
           "type":"string",
-          "hint":"$l{f:7ef07d006009:d}l"
+          "hint":"$l{f:7efd89006009:d}l"
         },
         {
           "code":"address_line3",
-          "label":"$l{f:7ef07d00600a}l",
+          "label":"$l{f:7efd8900600a}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00600a:d}l"
+          "hint":"$l{f:7efd8900600a:d}l"
         },
         {
           "code":"id",
@@ -541,25 +541,25 @@
         },
         {
           "code":"mobile",
-          "label":"$l{f:7ef07d00600b}l",
+          "label":"$l{f:7efd8900600b}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00600b:d}l"
+          "hint":"$l{f:7efd8900600b:d}l"
         },
         {
           "code":"name",
-          "label":"$l{f:7ef07d006006}l",
+          "label":"$l{f:7efd89006006}l",
           "type":"string",
-          "hint":"$l{f:7ef07d006006:d}l"
+          "hint":"$l{f:7efd89006006:d}l"
         },
         {
           "code":"phone",
-          "label":"$l{f:7ef07d006007}l",
+          "label":"$l{f:7efd89006007}l",
           "type":"string",
-          "hint":"$l{f:7ef07d006007:d}l"
+          "hint":"$l{f:7efd89006007:d}l"
         },
         {
           "code":"city",
-          "label":"$l{f:7ef07d006010}l",
+          "label":"$l{f:7efd89006010}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -576,11 +576,11 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d006010:d}l"
+          "hint":"$l{f:7efd89006010:d}l"
         },
         {
           "code":"country",
-          "label":"$l{f:7ef07d00600c}l",
+          "label":"$l{f:7efd8900600c}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -597,11 +597,11 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d00600c:d}l"
+          "hint":"$l{f:7efd8900600c:d}l"
         },
         {
           "code":"subcountry",
-          "label":"$l{f:7ef07d00600e}l",
+          "label":"$l{f:7efd8900600e}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -618,7 +618,7 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d00600e:d}l"
+          "hint":"$l{f:7efd8900600e:d}l"
         }
       ],
       "operations":{

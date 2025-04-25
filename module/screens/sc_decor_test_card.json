@@ -16,33 +16,33 @@
       "fields":[
         {
           "code":"align",
-          "label":"$l{f:7ef07d02300a}l",
+          "label":"$l{f:7efd8902300a}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d02300a:d}l"
+          "hint":"$l{f:7efd8902300a:d}l"
         },
         {
           "code":"bg_color",
-          "label":"$l{f:7ef07d023008}l",
+          "label":"$l{f:7efd89023008}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d023008:d}l"
+          "hint":"$l{f:7efd89023008:d}l"
         },
         {
           "code":"fg_color",
-          "label":"$l{f:7ef07d023007}l",
+          "label":"$l{f:7efd89023007}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d023007:d}l"
+          "hint":"$l{f:7efd89023007:d}l"
         },
         {
           "code":"font",
-          "label":"$l{f:7ef07d023009}l",
+          "label":"$l{f:7efd89023009}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d023009:d}l"
+          "hint":"$l{f:7efd89023009:d}l"
         },
         {
           "code":"formatting",
-          "label":"$l{f:7ef07d02300b}l",
+          "label":"$l{f:7efd8902300b}l",
           "type":"decor",
-          "hint":"$l{f:7ef07d02300b:d}l"
+          "hint":"$l{f:7efd8902300b:d}l"
         },
         {
           "code":"id",
@@ -50,15 +50,15 @@
         },
         {
           "code":"style",
-          "label":"$l{f:7ef07d023006}l",
+          "label":"$l{f:7efd89023006}l",
           "type":"string",
-          "hint":"$l{f:7ef07d023006:d}l"
+          "hint":"$l{f:7efd89023006:d}l"
         },
         {
           "code":"sample_text",
-          "label":"$l{f:7ef07d02300c}l",
+          "label":"$l{f:7efd8902300c}l",
           "type":"string",
-          "hint":"$l{f:7ef07d02300c:d}l"
+          "hint":"$l{f:7efd8902300c:d}l"
         }
       ],
       "operations":{

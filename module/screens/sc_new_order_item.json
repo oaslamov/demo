@@ -27,9 +27,9 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef07d00900b}l",
+          "label":"$l{f:7efd8900900b}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00900b:d}l"
+          "hint":"$l{f:7efd8900900b:d}l"
         },
         {
           "code":"id",
@@ -37,14 +37,14 @@
         },
         {
           "code":"price",
-          "label":"$l{f:7ef07d009011}l",
+          "label":"$l{f:7efd89009011}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009011:d}l"
+          "hint":"$l{f:7efd89009011:d}l"
         },
         {
           "code":"product",
-          "label":"$l{f:7ef07d009008}l",
+          "label":"$l{f:7efd89009008}l",
           "type":"ref",
           "mandatory":true,
           "ref":{
@@ -62,17 +62,17 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d009008:d}l"
+          "hint":"$l{f:7efd89009008:d}l"
         },
         {
           "code":"quantity",
-          "label":"$l{f:7ef07d00900a}l",
+          "label":"$l{f:7efd8900900a}l",
           "type":"integer",
-          "hint":"$l{f:7ef07d00900a:d}l"
+          "hint":"$l{f:7efd8900900a:d}l"
         },
         {
           "code":"shipping_order",
-          "label":"$l{f:7ef07d009006}l",
+          "label":"$l{f:7efd89009006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -90,14 +90,14 @@
             }
           },
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009006:d}l"
+          "hint":"$l{f:7efd89009006:d}l"
         },
         {
           "code":"sum",
-          "label":"$l{f:7ef07d009012}l",
+          "label":"$l{f:7efd89009012}l",
           "type":"number",
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d009012:d}l"
+          "hint":"$l{f:7efd89009012:d}l"
         }
       ],
       "operations":{
@@ -155,13 +155,13 @@
       "fields":[
         {
           "code":"comment",
-          "label":"$l{f:7ef07d00800a}l",
+          "label":"$l{f:7efd8900800a}l",
           "type":"text",
-          "hint":"$l{f:7ef07d00800a:d}l"
+          "hint":"$l{f:7efd8900800a:d}l"
         },
         {
           "code":"customer",
-          "label":"$l{f:7ef07d008006}l",
+          "label":"$l{f:7efd89008006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -178,19 +178,19 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d008006:d}l"
+          "hint":"$l{f:7efd89008006:d}l"
         },
         {
           "code":"date_order_paid",
-          "label":"$l{f:7ef07d008009}l",
+          "label":"$l{f:7efd89008009}l",
           "type":"plaindate",
-          "hint":"$l{f:7ef07d008009:d}l"
+          "hint":"$l{f:7efd89008009:d}l"
         },
         {
           "code":"datetime_order_placed",
-          "label":"$l{f:7ef07d008008}l",
+          "label":"$l{f:7efd89008008}l",
           "type":"datetime",
-          "hint":"$l{f:7ef07d008008:d}l"
+          "hint":"$l{f:7efd89008008:d}l"
         },
         {
           "code":"id",
@@ -198,15 +198,15 @@
         },
         {
           "code":"shipment_date",
-          "label":"$l{f:7ef07d00800b}l",
+          "label":"$l{f:7efd8900800b}l",
           "type":"plaindate",
-          "hint":"$l{f:7ef07d00800b:d}l"
+          "hint":"$l{f:7efd8900800b:d}l"
         },
         {
           "code":"total",
-          "label":"$l{f:7ef07d00800e}l",
+          "label":"$l{f:7efd8900800e}l",
           "type":"number",
-          "hint":"$l{f:7ef07d00800e:d}l"
+          "hint":"$l{f:7efd8900800e:d}l"
         }
       ],
       "operations":{

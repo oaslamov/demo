@@ -24,11 +24,11 @@
         },
         {
           "code":"name",
-          "label":"$l{f:7ef07d00d006}l",
+          "label":"$l{f:7efd8900d006}l",
           "type":"string",
           "tree_node_type":"name",
           "mandatory":true,
-          "hint":"$l{f:7ef07d00d006:d}l"
+          "hint":"$l{f:7efd8900d006:d}l"
         }
       ],
       "tree_operations":[
@@ -110,7 +110,7 @@
       "fields":[
         {
           "code":"country",
-          "label":"$l{f:7ef07d00e006}l",
+          "label":"$l{f:7efd8900e006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -127,7 +127,7 @@
               ]
             }
           },
-          "hint":"$l{f:7ef07d00e006:d}l"
+          "hint":"$l{f:7efd8900e006:d}l"
         },
         {
           "code":"id",
@@ -135,11 +135,11 @@
         },
         {
           "code":"name",
-          "label":"$l{f:7ef07d00e008}l",
+          "label":"$l{f:7efd8900e008}l",
           "type":"string",
           "tree_node_type":"name",
           "mandatory":true,
-          "hint":"$l{f:7ef07d00e008:d}l"
+          "hint":"$l{f:7efd8900e008:d}l"
         }
       ],
       "tree_operations":[
@@ -224,7 +224,7 @@
       "fields":[
         {
           "code":"country",
-          "label":"$l{f:7ef07d00c006}l",
+          "label":"$l{f:7efd8900c006}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -242,13 +242,13 @@
             }
           },
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d00c006:d}l"
+          "hint":"$l{f:7efd8900c006:d}l"
         },
         {
           "code":"geonameid",
-          "label":"$l{f:7ef07d00c00b}l",
+          "label":"$l{f:7efd8900c00b}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00c00b:d}l"
+          "hint":"$l{f:7efd8900c00b:d}l"
         },
         {
           "code":"id",
@@ -256,19 +256,19 @@
         },
         {
           "code":"list_nm",
-          "label":"$l{f:7ef07d00c00c}l",
+          "label":"$l{f:7efd8900c00c}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00c00c:d}l"
+          "hint":"$l{f:7efd8900c00c:d}l"
         },
         {
           "code":"name",
-          "label":"$l{f:7ef07d00c00a}l",
+          "label":"$l{f:7efd8900c00a}l",
           "type":"string",
-          "hint":"$l{f:7ef07d00c00a:d}l"
+          "hint":"$l{f:7efd8900c00a:d}l"
         },
         {
           "code":"subcountry",
-          "label":"$l{f:7ef07d00c008}l",
+          "label":"$l{f:7efd8900c008}l",
           "type":"ref",
           "ref":{
             "data":{
@@ -286,7 +286,7 @@
             }
           },
           "edit_condition":"false",
-          "hint":"$l{f:7ef07d00c008:d}l"
+          "hint":"$l{f:7efd8900c008:d}l"
         }
       ],
       "operations":{
